@@ -1,0 +1,10 @@
+ShiWenHua
+	Arduino板一个
+	Arduino扩展底板一个
+	电源底板一个
+	9v电池电源转接接口一个
+ChenRuiQiang
+	DHT11,1个
+	GY-30,1个
+	土壤湿度传感器和转接板各1个
+	Arduino扩展底板一个

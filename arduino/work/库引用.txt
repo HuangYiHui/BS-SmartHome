@@ -1,0 +1,6 @@
+DHT
+	https://github.com/adafruit/DHT-sensor-library
+Adafruit_Sensor
+	https://github.com/adafruit/Adafruit_Sensor
+LiquidCrystal_I2C
+	https://github.com/marcoschwartz/LiquidCrystal_I2C
