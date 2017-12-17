@@ -1,4 +1,7 @@
 
+//SCL-A5
+//SDA-A4
+//ADO-Пе
 
 #include <bh1750xtra.h>
 #include <Wire.h>

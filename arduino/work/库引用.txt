@@ -4,3 +4,5 @@ Adafruit_Sensor
 	https://github.com/adafruit/Adafruit_Sensor
 LiquidCrystal_I2C
 	https://github.com/marcoschwartz/LiquidCrystal_I2C
+bh1750xtra
+	https://github.com/tuxcell/bh1750xtra/
