@@ -1,0 +1,10 @@
+本demo用于通过串口对Arduino进行更新.hex固件
+用串口把Arduino连接到电脑
+把要更新的固件放到本目录下
+在cmd窗口执行命令：
+	avrdude.exe avrdude.conf -v -v -v -v -patmega328p -carduino -P\\.\COM3 -b115200 -D -Uflash:w:myFile.hex:i
+命令说明
+	COM3为端口名
+	115200波特率
+	myFile.hex为固件文件
+在Arduino的12号IO口串联一个led和电阻到GND，可以看到led间隔闪烁，说明更新固件成功
