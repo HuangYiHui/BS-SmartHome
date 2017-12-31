@@ -8,7 +8,7 @@
 
 #include "DHT.h"
 
-#define DHTPIN 2
+#define DHTPIN 13
 #define DHTTYPE DHT11   // DHT 11
 //#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
@@ -16,7 +16,7 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("DHTxx test!");
 
   dht.begin();

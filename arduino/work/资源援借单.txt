@@ -8,3 +8,4 @@ ChenRuiQiang
 	GY-30,1个
 	土壤湿度传感器和转接板各1个
 	Arduino扩展底板一个
+	雨滴传感器一个

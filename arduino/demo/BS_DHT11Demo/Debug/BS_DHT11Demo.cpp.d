@@ -11,4 +11,4 @@ D:\software\Temp\VMBuilds\BS_DHT11Demo\uno\Debug\BS_DHT11Demo.cpp.o: \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/USBAPI.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard/pins_arduino.h \
- D:\software1\arduino-1.8.5\libraries\DHT_sensor_library/DHT.h
+ D:\software1\arduino-1.8.5\libraries\DHT_sensor/DHT.h
