@@ -12,8 +12,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C5F80730-F44F-4478-BDAE-6634EFC2CA88}</ProjectGuid>
-    <RootNamespace>BS_Nokia5110_Demo</RootNamespace>
-    <ProjectName>BS_Nokia5110_Demo</ProjectName>
+    <RootNamespace>BS_Nokia5110_Demo0</RootNamespace>
+    <ProjectName>BS_Nokia5110_Demo0</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -47,8 +47,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\BS_Nokia5110_Demo;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ProjectDir)__vm\.BS_Nokia5110_Demo.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\BS_Nokia5110_Demo0;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.BS_Nokia5110_Demo0.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=10805;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -77,14 +77,19 @@
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="BS_Nokia5110_Demo.ino">
+    <None Include="BS_Nokia5110_Demo0.ino">
       <FileType>CppCode</FileType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="__vm\.BS_Nokia5110_Demo.vsarduino.h" />
+    <ClInclude Include="__vm\.BS_Nokia5110_Demo0.vsarduino.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties arduino.upload.port="COM6" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

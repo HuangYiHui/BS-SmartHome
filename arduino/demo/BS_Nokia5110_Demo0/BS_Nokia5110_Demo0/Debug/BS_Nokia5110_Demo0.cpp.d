@@ -1,5 +1,5 @@
-D:\software\Temp\VMBuilds\BS_Nokia5110_Demo\uno\Debug\BS_Nokia5110_Demo.cpp.o: \
- D:\software\Temp\VMBuilds\BS_Nokia5110_Demo\uno\Debug\BS_Nokia5110_Demo.cpp \
+D:\software\Temp\VMBuilds\BS_Nokia5110_Demo0\uno\Debug\BS_Nokia5110_Demo0.cpp.o: \
+ D:\software\Temp\VMBuilds\BS_Nokia5110_Demo0\uno\Debug\BS_Nokia5110_Demo0.cpp \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/binary.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/WCharacter.h \

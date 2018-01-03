@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="BS_Nokia5110_Demo.ino" />
+    <None Include="BS_Nokia5110_Demo0.ino" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="__vm\.BS_Nokia5110_Demo.vsarduino.h">
+    <ClInclude Include="__vm\.BS_Nokia5110_Demo0.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,8 @@
-#define PIN_SCE   7  
-#define PIN_RESET 6  
+//本demo用于显示16*16的中文字和8*5的英文
+//16*16中文字符的显示点阵数据由一个java程序生成，在other文件夹
+
+#define PIN_RESET 7
+#define PIN_SCE   6    
 #define PIN_DC    5  
 #define PIN_SDIN  4  
 #define PIN_SCLK  3  
@@ -149,7 +152,7 @@ void LcdInitialise(void)
   LcdWrite(LCD_CMD, 0x04);  // Set Temp coefficent. //0x04  
   LcdWrite(LCD_CMD, 0x10);  // LCD bias mode 1:48. //0x13  
   LcdWrite(LCD_CMD, 0x0C);  // LCD in normal mode. 0x0d for inverse  
-  LcdWrite(LCD_C, 0x20);  
+  LcdWrite(LCD_C, 0x20); //20为垂直寻址，21为水平寻址 
   LcdWrite(LCD_C, 0x0C);  
 }  
    
@@ -227,22 +230,74 @@ void Scroll(String message)
     scrollPosition = -10;  
   }  
 }  
+
+void LcdWord(byte bs[])  
+{  
+  LcdWrite(LCD_D, 0x00);
+  for (int index = 0; index < 16; index++)  
+  {
+    LcdWrite(LCD_D, bs[index]);  
+  }  
+  LcdWrite(LCD_D, 0x00);  
+}
+
    
 void setup(void)  
 {  
   LcdInitialise();  
-  LcdClear();  
+  LcdClear(); 
+
+  
   drawBox();  
-   
+   /*
   gotoXY(7,1);  
   LcdString("HELP ME!!!");  
   gotoXY(4,2);  
-  LcdString("Heavy Rain");  
+  LcdString("Heavy Rain");  */
 }  
    
+byte bs0[] = {0x08,0x8a,0x4a,0x2a,0xfe,0x29,0x49,0x90,0x48,0x27,0x1c,0x44,0x84,0x7e,0x04,0x00};
+byte bs1[] = {0x08,0x08,0x04,0x44,0x2a,0x12,0x81,0xfc,0x01,0x12,0x2a,0x64,0x04,0x0c,0x04,0x00};
 void loop(void)  
 {  
-  gotoXY(4,4);  
-  LcdString("MOONCAKE in 709");  
+  gotoXY(0,0);
+  LcdWord(bs0);
+  gotoXY(0,1);
+  LcdWord(bs1);
+
+  gotoXY(16,0);
+  LcdWord(bs0);
+  gotoXY(16,1);
+  LcdWord(bs1);
+
+  gotoXY(32,0);
+  LcdWord(bs0);
+  gotoXY(32,1);
+  LcdWord(bs1);
+
+  gotoXY(48,0);
+  LcdWord(bs0);
+  gotoXY(48,1);
+  LcdWord(bs1);
+
+  gotoXY(64,0);
+  LcdWord(bs0);
+  gotoXY(64,1);
+  LcdWord(bs1);
+
+  gotoXY(0,2);
+  LcdWord(bs0);
+  gotoXY(0,3);
+  LcdWord(bs1);
+
+
+  gotoXY(0,4);
+  LcdWord(bs0);
+  gotoXY(0,5);
+  LcdWord(bs1);
+
+  gotoXY(32,4);
+  LcdString("HELLO");
+
   delay(200);  
 }    
