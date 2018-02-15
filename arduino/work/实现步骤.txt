@@ -1,0 +1,33 @@
+各个器件的驱动单独在arduino调试通过
+	土壤湿度传感器(fc28)
+	光强传感器(GY30)
+	灯光(4个)
+	门铃触摸传感器(touch sensor)
+	喇叭
+	温湿度传感器(DHT11)
+	PM2.5传感器(GP2Y1014AUOF)
+	*LCD
+	*烟雾报警器
+	火焰传感器
+	
+	
+各个器件在arduino上集成调试通过
+实现arduino协调控制程序
+通信协议设计
+实现arduino协调控制程序调试接口
+实现zigbee间通信
+实现arduino与zigbee通信
+	zigbee信息解析
+	通过zigbee通信方式控制arduino
+
+用java实现树莓派的串口通信
+树莓派与zigbee模块通信
+树莓派与arduino组网通信
+实现系统功能协调和调优
+树莓派与服务器通信
+树莓派协调控制程序编写
+树莓派集成zigbee+arduino网络
+树莓派集成服务器通信
+树莓派总体集成
+
+调整修改小细节

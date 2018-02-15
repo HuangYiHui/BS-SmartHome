@@ -1,0 +1,19 @@
+﻿生成启动时间为 2018/2/14 20:37:02。
+     1>项目“D:\Documents\GitHub\BS-SmartHome\arduino\demo\BS_ArduinoOut_Demo\BS_ArduinoOut_Demo\BS_ArduinoOut_Demo.vcxproj”在节点 2 上(Build 个目标)。
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB4018: “VCMessage”任务意外失败。
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB4018: System.FormatException: 索引(从零开始)必须大于或等于零，且小于参数列表的大小。
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB4018:    在 System.Text.StringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ParamsArray args)
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB4018:    在 System.String.FormatHelper(IFormatProvider provider, String format, ParamsArray args)
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB4018:    在 System.String.Format(IFormatProvider provider, String format, Object[] args)
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB4018:    在 Microsoft.Build.Shared.ResourceUtilities.FormatString(String unformatted, Object[] args)
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB4018:    在 Microsoft.Build.Utilities.TaskLoggingHelper.FormatString(String unformatted, Object[] args)
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB4018:    在 Microsoft.Build.Utilities.TaskLoggingHelper.FormatResourceString(String resourceName, Object[] args)
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB4018:    在 Microsoft.Build.Utilities.TaskLoggingHelper.LogErrorWithCodeFromResources(String messageResourceName, Object[] messageArgs)
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB4018:    在 Microsoft.Build.CPPTasks.VCMessage.Execute()
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB4018:    在 Microsoft.Build.BackEnd.TaskExecutionHost.Microsoft.Build.BackEnd.ITaskExecutionHost.Execute()
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB4018:    在 Microsoft.Build.BackEnd.TaskBuilder.<ExecuteInstantiatedTask>d__26.MoveNext()
+     1>已完成生成项目“D:\Documents\GitHub\BS-SmartHome\arduino\demo\BS_ArduinoOut_Demo\BS_ArduinoOut_Demo\BS_ArduinoOut_Demo.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:01.11
