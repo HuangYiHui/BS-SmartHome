@@ -13,13 +13,13 @@ D:\software\Temp\VMBuilds\BS_ArduinoOut_Demo\uno\Debug\BS_ArduinoOut_Demo.cpp.o:
  D:\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard/pins_arduino.h \
  D:\software\Temp\VMBuilds\BS_ArduinoOut_Demo\uno\Debug\dht11Task.h \
  D:\software\Temp\VMBuilds\BS_ArduinoOut_Demo\uno\Debug\cfg.h \
- D:\software1\arduino-1.8.5\libraries\DHT_sensor/DHT.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-timer.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-sem.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
+ D:\software1\arduino-1.8.5\libraries\DHT_sensor/DHT.h \
  D:\software\Temp\VMBuilds\BS_ArduinoOut_Demo\uno\Debug\doorbellTask.h \
  D:\software\Temp\VMBuilds\BS_ArduinoOut_Demo\uno\Debug\pm25Task.h \
  D:\software\Temp\VMBuilds\BS_ArduinoOut_Demo\uno\Debug\fc28Task.h \

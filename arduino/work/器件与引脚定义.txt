@@ -46,7 +46,7 @@ a4,a5(I2C)
 2	室内温湿度传感器DATA脚
 3*	nokia5110_PIN_SCLK
 4	nokia5110_PIN_SDIN
-5*	nokia5110_PIN_SDIN
+5*	nokia5110_PIN_SDIN 
 6*	nokia5110_PIN_RESET
 7	nokia5110_PIN_SCE
 8	智能插座3
@@ -68,3 +68,7 @@ a4,a5(I2C)
 	zigbee通信
 	通信格式设计和解析
 	各个器件工作的协调
+
+缺
+	烟雾传感器
+	GY30

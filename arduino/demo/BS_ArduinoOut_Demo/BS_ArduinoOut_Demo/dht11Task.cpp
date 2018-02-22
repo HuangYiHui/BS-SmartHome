@@ -26,27 +26,28 @@ static int run()
 
 		// Check if any reads failed and exit early (to try again).
 		if (isnan(h) || isnan(t)) {
-		Serial.println("读取失败");
-		return;
+			Serial.println("读取失败");
 		}
+		else{
 
-		// 计算热指数(isFahreheit = false)
-		float hic = dht11.computeHeatIndex(t, h, false);
+			// 计算热指数(isFahreheit = false)
+			float hic = dht11.computeHeatIndex(t, h, false);
 
-		Serial.print("Humidity: ");
-		Serial.print(h);
-		Serial.print(" %");
-		Serial.println();
+			Serial.print("Humidity: ");
+			Serial.print(h);
+			Serial.print(" %");
+			Serial.println();
 
-		Serial.print("Temperature: ");
-		Serial.print(t);
-		Serial.print(" *C");
-		Serial.println();
+			Serial.print("Temperature: ");
+			Serial.print(t);
+			Serial.print(" *C");
+			Serial.println();
  
-		Serial.print("Heat index: ");
-		Serial.print(hic);
-		Serial.println();
-		Serial.println();
+			Serial.print("Heat index: ");
+			Serial.print(hic);
+			Serial.println();
+			Serial.println();
+		}
 	}
 	PT_END(&pt);
 }

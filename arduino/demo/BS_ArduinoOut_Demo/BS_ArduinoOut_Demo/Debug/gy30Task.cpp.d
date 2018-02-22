@@ -1,8 +1,6 @@
 D:\software\Temp\VMBuilds\BS_ArduinoOut_Demo\uno\Debug\gy30Task.cpp.o: \
  D:\software\Temp\VMBuilds\BS_ArduinoOut_Demo\uno\Debug\gy30Task.cpp \
  D:\software\Temp\VMBuilds\BS_ArduinoOut_Demo\uno\Debug\gy30Task.h \
- D:\software\Temp\VMBuilds\BS_ArduinoOut_Demo\uno\Debug\cfg.h \
- D:\software1\arduino-1.8.5\libraries\DHT_sensor/DHT.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/binary.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -14,6 +12,7 @@ D:\software\Temp\VMBuilds\BS_ArduinoOut_Demo\uno\Debug\gy30Task.cpp.o: \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/USBAPI.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard/pins_arduino.h \
+ D:\software\Temp\VMBuilds\BS_ArduinoOut_Demo\uno\Debug\cfg.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \

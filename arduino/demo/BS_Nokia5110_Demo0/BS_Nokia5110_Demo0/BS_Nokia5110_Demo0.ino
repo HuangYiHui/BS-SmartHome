@@ -1,6 +1,9 @@
 //本demo用于显示16*16的中文字和8*5的英文
 //16*16中文字符的显示点阵数据由一个java程序生成，在other文件夹
 
+//vcc	5v
+//BL	高电平打开背光
+//GND	接地
 #define PIN_RESET 7
 #define PIN_SCE   6    
 #define PIN_DC    5  

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="app">
+      <UniqueIdentifier>{92925777-f975-419a-9760-65ba099c3f4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="driver">
+      <UniqueIdentifier>{94d5b2f0-d736-472d-9ee7-c91f3ae88f43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="system">
+      <UniqueIdentifier>{8e7fb10a-956b-4972-aec6-44c49f3a3449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{0247a377-9b04-4f53-8c92-9ea825b815e7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BS_ArduinoIn_Demo.ino" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MQ2App.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="IDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="MQ2Device.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="AlarmDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="IApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="WithCommandApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="LCDDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="DHT11Device.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="FireSensorDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="DHT11App.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="FireSensorApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="IRRemoteDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="IRRemoteApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="__vm\.BS_ArduinoIn_Demo.vsarduino.h" />
+    <ClInclude Include="cfg.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="outPinDef.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="pinDef.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MQ2App.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="AlarmDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="MQ2Device.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="WithCommandApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="LCDDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="DHT11Device.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="FireSensorDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="DHT11App.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="FireSensorApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="IRRemoteDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="IRRemoteApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
