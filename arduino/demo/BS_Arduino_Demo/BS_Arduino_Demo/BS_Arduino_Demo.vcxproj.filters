@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="BS_Arduino_Demo.ino" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="__vm\.BS_Arduino_Demo.vsarduino.h" />
+    <ClInclude Include="ISystem.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleSystem.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="AlarmDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="IDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="FireSensorDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="DHT11Device.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="LCDDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="MQ2Device.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="IApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="IRRemoteApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="FireSensorApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="WithCommandApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="MQ2App.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="DHT11App.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="inPinDef.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemIn.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemOut.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="outPinDef.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorbellApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="TouchSensorDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeakerDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="IRRemoteDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="FC28Device.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="FC28App.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="GY30Device.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="LightAdjustApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="LedDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="PM25Device.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="PM25App.h">
+      <Filter>app</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="driver">
+      <UniqueIdentifier>{7d5bbbe0-fce8-4a73-b2ed-7765bc0f4ff4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="system">
+      <UniqueIdentifier>{4369a23b-2c87-44c3-b642-883201439e56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="app">
+      <UniqueIdentifier>{818b453f-e454-4500-90bb-af182a290bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{7c7b7b01-fb5f-4a7c-b841-26b42e143ecf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SampleSystem.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="FireSensorDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="AlarmDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="DHT11Device.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="MQ2Device.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="WithCommandApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="DHT11App.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="IRRemoteApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="FireSensorApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="MQ2App.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="LCDDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemIn.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemOut.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorbellApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="TouchSensorDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="SpeakerDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="FC28Device.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="IRRemoteDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="FC28App.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="GY30Device.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="LightAdjustApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="LEDDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="PM25Device.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="PM25App.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

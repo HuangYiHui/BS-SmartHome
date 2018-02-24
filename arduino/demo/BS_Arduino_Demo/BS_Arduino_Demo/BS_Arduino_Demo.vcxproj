@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C5F80730-F44F-4478-BDAE-6634EFC2CA88}</ProjectGuid>
+    <RootNamespace>BS_Arduino_Demo</RootNamespace>
+    <ProjectName>BS_Arduino_Demo</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>
+    </PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>
+    </PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\BS_Arduino_Demo;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\DHT_sensor;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\TonePlayer;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\BH1750xtra;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\ProtoThreads;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\LinkedList;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\Adafruit_Sensor;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.BS_Arduino_Demo.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=10805;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\BS_Arduino_Demo;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\DHT_sensor;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\ProtoThreads;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\LinkedList;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\Adafruit_Sensor;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\TonePlayer;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.BS_Arduino_Demo.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=10805;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="VisualMicro" />
+  </ItemGroup>
+  <PropertyGroup>
+    <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="BS_Arduino_Demo.ino">
+      <FileType>CppCode</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AlarmDevice.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="DHT11App.h" />
+    <ClInclude Include="DHT11Device.h" />
+    <ClInclude Include="DoorbellApp.h" />
+    <ClInclude Include="FC28App.h" />
+    <ClInclude Include="FC28Device.h" />
+    <ClInclude Include="LedDevice.h" />
+    <ClInclude Include="LightAdjustApp.h" />
+    <ClInclude Include="GY30Device.h" />
+    <ClInclude Include="IRRemoteApp.h" />
+    <ClInclude Include="IRRemoteDevice.h" />
+    <ClInclude Include="PM25App.h" />
+    <ClInclude Include="PM25Device.h" />
+    <ClInclude Include="SpeakerDevice.h" />
+    <ClInclude Include="SystemIn.h" />
+    <ClInclude Include="TouchSensorDevice.h" />
+    <ClInclude Include="FireSensorApp.h" />
+    <ClInclude Include="FireSensorDevice.h" />
+    <ClInclude Include="IApp.h" />
+    <ClInclude Include="IDevice.h" />
+    <ClInclude Include="ISystem.h" />
+    <ClInclude Include="LCDDevice.h" />
+    <ClInclude Include="MQ2App.h" />
+    <ClInclude Include="MQ2Device.h" />
+    <ClInclude Include="inPinDef.h" />
+    <ClInclude Include="outPinDef.h" />
+    <ClInclude Include="SampleApp.h" />
+    <ClInclude Include="SampleDevice.h" />
+    <ClInclude Include="SampleSystem.h" />
+    <ClInclude Include="SystemOut.h" />
+    <ClInclude Include="WithCommandApp.h" />
+    <ClInclude Include="__vm\.BS_Arduino_Demo.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AlarmDevice.cpp" />
+    <ClCompile Include="DHT11App.cpp" />
+    <ClCompile Include="DHT11Device.cpp" />
+    <ClCompile Include="DoorbellApp.cpp" />
+    <ClCompile Include="FC28App.cpp" />
+    <ClCompile Include="FC28Device.cpp" />
+    <ClCompile Include="LEDDevice.cpp" />
+    <ClCompile Include="LightAdjustApp.cpp" />
+    <ClCompile Include="GY30Device.cpp" />
+    <ClCompile Include="IRRemoteApp.cpp" />
+    <ClCompile Include="IRRemoteDevice.cpp" />
+    <ClCompile Include="PM25App.cpp" />
+    <ClCompile Include="PM25Device.cpp" />
+    <ClCompile Include="SpeakerDevice.cpp" />
+    <ClCompile Include="SystemIn.cpp" />
+    <ClCompile Include="TouchSensorDevice.cpp" />
+    <ClCompile Include="FireSensorApp.cpp" />
+    <ClCompile Include="FireSensorDevice.cpp" />
+    <ClCompile Include="LCDDevice.cpp" />
+    <ClCompile Include="MQ2App.cpp" />
+    <ClCompile Include="MQ2Device.cpp" />
+    <ClCompile Include="SampleApp.cpp" />
+    <ClCompile Include="SampleDevice.cpp" />
+    <ClCompile Include="SampleSystem.cpp" />
+    <ClCompile Include="SystemOut.cpp" />
+    <ClCompile Include="WithCommandApp.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties arduino.upload.port="COM6" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
