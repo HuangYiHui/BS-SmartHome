@@ -1,3 +1,4 @@
+#include "cfg.h"
 
 //因为IRremote库与Tone库冲突，这里选择性编译
 #ifdef CUR_SYSTEM_IN
@@ -6,7 +7,6 @@
 #define _BS_SYSTEM_IN_H_
 
 #include "SampleSystem.h"
-#include "cfg.h"
 #include "inPinDef.h"
 
 #include "LCDDevice.h"

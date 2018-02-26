@@ -11,10 +11,10 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\BS_Arduino_Demo.cpp.o: \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/USBAPI.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard/pins_arduino.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\cfg.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOut.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleSystem.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ISystem.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\cfg.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\outPinDef.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\DHT11Device.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleDevice.h \

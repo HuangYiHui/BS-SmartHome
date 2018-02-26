@@ -1,8 +1,7 @@
+#include "SystemIn.h"
 
 //因为IRremote库与Tone库冲突，这里选择性编译
 #ifdef CUR_SYSTEM_IN
-
-#include "SystemIn.h"
 
 MQ2Device SystemIn :: mq2(PIN_MQ2_DO);
 LCDDevice SystemIn :: lcd(PIN_NOKIA5110_RST, PIN_NOKIA5110_CE, PIN_NOKIA5110_DC, PIN_NOKIA5110_DIN, PIN_NOKIA5110_CLK);

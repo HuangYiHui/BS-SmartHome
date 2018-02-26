@@ -16,6 +16,7 @@ typedef unsigned char devicePin;
 
 class IDevice
 {
+public:
 	virtual void open() = 0;	//开启，关闭状态 -> 未准备状态
 	virtual void init() = 0;	//初始化，未准备状态 -> 已准备状态
 	virtual void start() = 0;	//启动，已准备状态 -> 工作状态

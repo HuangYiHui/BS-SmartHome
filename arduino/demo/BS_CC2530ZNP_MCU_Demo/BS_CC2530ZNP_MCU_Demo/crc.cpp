@@ -1,0 +1,19 @@
+
+
+unsigned char calcFCS(unsigned char *pMsg, unsigned char len)
+{
+	unsigned char result = 0;
+	while (len--)
+	{
+		result ^= *pMsg++;
+	}
+	return result;
+}
+
+/*
+void main()
+{
+	unsigned char cs[17] = {0x0f, 0x24, 0x01, 0x27, 0xc0, 0x08, 0x08, 0x34, 0x12, 0x00, 0x80, 0x0f, 0x05, 0x00, 0x02, 0x00, 0x00, 0x00};
+	byte b = calcFCS(cs, 17);
+	printf("%b", b);
+}*/

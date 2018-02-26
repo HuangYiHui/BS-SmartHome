@@ -9,6 +9,7 @@ typedef unsigned char appState;
 
 class IApp
 {
+public:
 	virtual void init() = 0;
 	virtual void run() = 0;
 	virtual void stop() = 0;

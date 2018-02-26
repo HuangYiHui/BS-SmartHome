@@ -1,0 +1,25 @@
+#ifndef _CFG_H_
+
+#define _CFG_H_
+
+#define ZB_CHANNEL {0x00, 0x08, 0x00, 0x00}
+#define ZB_PANID {0x34, 0x12}
+
+#define ZB_DEVICE_TYPE_COORDINATOR 0x00
+#define ZB_DEVICE_TYPE_ROUTE 0x01
+#define ZB_DEVICE_TYPE_ENDPOINT 0x02
+
+#define ZB_DEVICE_TYPE ZB_DEVICE_TYPE_COORDINATOR
+
+#define ZB_DEVICEID0 0x00
+#define ZB_DEVICEID1 0x00
+
+#define ZB_APP_PROFID0 0x00
+#define ZB_APP_PROFID1 0x00
+
+#define ZB_END_DEVICE_VERSION 0x00
+
+#define ZB_ENDPOINT 0x01
+
+#define ZB_LATENCY_REQUEST 0x00
+#endif

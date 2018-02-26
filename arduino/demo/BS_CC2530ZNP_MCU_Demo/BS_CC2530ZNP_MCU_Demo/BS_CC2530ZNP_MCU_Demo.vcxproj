@@ -47,10 +47,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\BS_CC2530ZNP_MCU_Demo;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\LiquidCrystal_I2C;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard;C:\Users\ahui\Desktop\test\test\test;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\BS_CC2530ZNP_MCU_Demo;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\LiquidCrystal_I2C;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.BS_CC2530ZNP_MCU_Demo.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=10805;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=10805;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -82,15 +82,24 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\ahui\Desktop\test\test\test\Cfg.h" />
-    <ClInclude Include="C:\Users\ahui\Desktop\test\test\test\ZBC.h" />
+    <ClInclude Include="ZigbeeApp.h" />
+    <ClInclude Include="cfg.h" />
+    <ClInclude Include="ZBC.h" />
+    <ClInclude Include="ZigbeeDevice.h" />
     <ClInclude Include="__vm\.BS_CC2530ZNP_MCU_Demo.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\ahui\Desktop\test\test\test\crc.cpp" />
-    <ClCompile Include="C:\Users\ahui\Desktop\test\test\test\ZBC.cpp" />
+    <ClCompile Include="crc.cpp" />
+    <ClCompile Include="ZBC.cpp" />
+    <ClCompile Include="ZigbeeApp.cpp" />
+    <ClCompile Include="ZigbeeDevice.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties arduino.upload.port="COM3" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

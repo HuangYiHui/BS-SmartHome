@@ -101,6 +101,9 @@
     <ClInclude Include="PM25App.h">
       <Filter>app</Filter>
     </ClInclude>
+    <ClInclude Include="cfg.h">
+      <Filter>system</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="driver">

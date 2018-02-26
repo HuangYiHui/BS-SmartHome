@@ -1,8 +1,7 @@
+#include "IRRemoteApp.h"
 
 //因为IRremote库与Tone库冲突，这里选择性编译
 #ifdef CUR_SYSTEM_IN
-
-#include "IRRemoteApp.h"
 
 IRRemoteApp::IRRemoteApp(IRRemoteDevice& irRemote) : irRemote(irRemote)
 {
@@ -39,20 +38,24 @@ void IRRemoteApp::exeCmd()
 
 int IRRemoteApp::exeTask()
 {
-	PT_BEGIN(&pt);
-	while(true)
+	if(irRemote.getState() == DEVICE_STATE_WORKING)
 	{
-		PT_WAIT_UNTIL(&pt, irRemote.getState() == DEVICE_STATE_WORKING);
-		PT_TIMER_DELAY(&pt,1000);
+		PT_BEGIN(&pt);
+		while(true)
+		{
+			decode_results results;
+			PT_WAIT_UNTIL(&pt, irRemote.decode(&results));
+			irRemote.resume();
+			Serial.print("irRemote : ");
+			Serial.println(results.value);
 
-		decode_results results;
-		PT_WAIT_UNTIL(&pt, irRemote.decode(&results));
-		Serial.print("irRemote : ");
-		Serial.println(results.value);
-
-		PT_YIELD(&pt);
+			PT_YIELD(&pt);
+		}
+		PT_END(&pt);
 	}
-	PT_END(&pt);
+	else{
+		return 2;
+	}
 }
 
 #endif

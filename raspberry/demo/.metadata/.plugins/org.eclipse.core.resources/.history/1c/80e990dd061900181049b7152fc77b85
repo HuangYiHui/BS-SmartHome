@@ -1,0 +1,39 @@
+package com.test;
+
+import java.io.IOException;
+import java.util.HashMap;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
+
+import com.sun.javafx.collections.MappingChange.Map;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		HttpClient client = HttpClients.createDefault();
+		String url = "http://119.29.36.20/dgutlink/api/device/21/sensor/13/datapoint";
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.addHeader("APIKEY", "6000000620879617");
+		HashMap<String, String> pMap = new HashMap<String,String>();
+		pMap.put("value", "123");
+		HttpParams params = nul;
+		
+		httpPost.setP
+		try {
+			HttpResponse response =  client.execute(httpPost);
+			System.out.println(response.getAllHeaders());
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

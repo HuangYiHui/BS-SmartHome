@@ -9,6 +9,7 @@
 CUR_SYSTEM_IN	- 表示当前系统为室内的
 CUR_SYSTEM_OUT	- 表示当前系统为室外的
 */
+#include "cfg.h"
 
 #ifdef CUR_SYSTEM_IN
 

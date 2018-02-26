@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlarmDevice.h" />
+    <ClInclude Include="cfg.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="DHT11App.h" />
     <ClInclude Include="DHT11Device.h" />

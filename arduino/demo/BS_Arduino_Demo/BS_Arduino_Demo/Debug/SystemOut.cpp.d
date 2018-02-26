@@ -1,9 +1,9 @@
 D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOut.cpp.o: \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOut.cpp \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOut.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\cfg.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleSystem.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ISystem.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\cfg.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\outPinDef.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\DHT11Device.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleDevice.h \

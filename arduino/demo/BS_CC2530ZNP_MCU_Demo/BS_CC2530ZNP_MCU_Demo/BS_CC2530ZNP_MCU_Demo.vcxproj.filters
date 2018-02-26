@@ -18,21 +18,31 @@
     <None Include="BS_CC2530ZNP_MCU_Demo.ino" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="__vm\.BS_CC2530ZNP_MCU_Demo.vsarduino.h">
+    <ClInclude Include="ZBC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ahui\Desktop\test\test\test\Cfg.h">
+    <ClInclude Include="__vm\.BS_CC2530ZNP_MCU_Demo.vsarduino.h" />
+    <ClInclude Include="cfg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\ahui\Desktop\test\test\test\ZBC.h">
+    <ClInclude Include="ZigbeeApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZigbeeDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\ahui\Desktop\test\test\test\ZBC.cpp">
+    <ClCompile Include="ZBC.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\ahui\Desktop\test\test\test\crc.cpp">
+    <ClCompile Include="crc.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZigbeeApp.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZigbeeDevice.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>

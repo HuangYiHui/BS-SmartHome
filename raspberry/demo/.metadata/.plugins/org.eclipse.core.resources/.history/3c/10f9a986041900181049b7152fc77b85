@@ -1,0 +1,17 @@
+package com.test;
+
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		HttpClient client = HttpClients.createDefault();
+		HttpPost httpPost = new HttpPost("www.baodu.com");
+		HttpResponse httpresponse = null;
+	//	HttpResponse response =  client.execute(httpPost);
+	}
+
+}

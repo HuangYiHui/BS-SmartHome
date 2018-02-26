@@ -1,6 +1,7 @@
-
-
 #include "SystemOut.h"
+
+//因为IRremote库与Tone库冲突，这里选择性编译
+#ifndef CUR_SYSTEM_IN
 
 DHT11Device SystemOut::dht11(PIN_DHT11_DATA);
 TouchSensorDevice SystemOut::touchSensor(PIN_TOUCH_SENSOR_IN);
@@ -65,3 +66,5 @@ void SystemOut::reset()
 
 	state = SYSTEM_STATE_UNREADY;
 }
+
+#endif

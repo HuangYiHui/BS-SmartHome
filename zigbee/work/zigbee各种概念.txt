@@ -1,0 +1,6 @@
+PANID
+	网络地址
+	14位
+	如果ZDAPP_CONFIG_PAN_ID被定义为0xFFFF，那么协调器将根据自身的IEEE地址建立一个随机的PANID（0～0x3FFF）
+Clusters
+	表示一类应用，比如开关类型的应用，灯泡，风扇等

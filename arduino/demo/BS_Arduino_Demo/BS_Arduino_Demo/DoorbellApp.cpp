@@ -1,5 +1,8 @@
 #include "DoorbellApp.h"
 
+//因为IRremote库与Tone库冲突，这里选择性编译
+#ifndef CUR_SYSTEM_IN
+
 DoorbellApp::DoorbellApp(TouchSensorDevice& touchSensor, SpeakerDevice& speaker) : touchSensor(touchSensor), speaker(speaker)
 {
 	state = DEVICE_STATE_CLOSED;
@@ -73,3 +76,5 @@ int DoorbellApp::exeTask()
 	}
 	PT_END(&pt);
 }
+
+#endif
