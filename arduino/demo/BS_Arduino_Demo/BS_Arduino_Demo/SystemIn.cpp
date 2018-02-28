@@ -9,9 +9,24 @@ AlarmDevice SystemIn::alarm(PIN_ALARM_OUT);
 DHT11Device SystemIn::dht11(PIN_DHT11_DATA);
 FireSensorDevice SystemIn::fireSensor(PIN_FIRE_SENSOR_DO);
 IRRemoteDevice SystemIn::irRemote(PIN_IR_REMOTE_OUT);
+ZigbeeDevice SystemIn::zigbee;
 
-SystemIn::SystemIn() : mq2App(mq2), dht11App(dht11), fireSensorApp(fireSensor), irRemoteApp(irRemote)
+SystemIn::SystemIn() : SampleSystem(SYSTEM_ADDR)
 {
+	/*
+	installApp(new MQ2App(mq2));
+	installApp(new DHT11App(dht11));
+	installApp(new FireSensorApp(fireSensor));
+	installApp(new IRRemoteApp(irRemote));
+	installApp(new MQ2App(mq2));
+*/
+	zigbee.setZDType(ZB_DEVICE_TYPE_COORDINATOR);
+	installApp(new ZigbeeApp(zigbee));
+	
+
+	//installApp(new Test1App());
+	installApp(new Test2App());
+
 	state = SYSTEM_STATE_UNREADY;
 }
 
@@ -22,50 +37,12 @@ void SystemIn::init()
 	lcd.ready();
 	alarm.ready();
 
-	//应用初始化
-	mq2App.init();
-	dht11App.init();
-	fireSensorApp.init();
-	irRemoteApp.init();
+	SampleSystem::init();
 
 	//其他
-	lcd.print("Hi there");
-    lcd.println(":D");
-    lcd.setCursor(0, 5);
-    lcd.println("1 2 3 ...");
-
-	state = SYSTEM_STATE_READY;
-}
-
-void SystemIn::start()
-{
-	state = SYSTEM_STATE_WORKING;
-	while(true)
-	{
-		mq2App.run();
-		dht11App.run();
-		fireSensorApp.run();
-		irRemoteApp.run();
-	}
-}
-void SystemIn::stop()
-{
-	mq2App.stop();
-	dht11App.stop();
-	fireSensorApp.stop();
-	irRemoteApp.stop();
-
-	state = SYSTEM_STATE_READY;
-}
-
-void SystemIn::reset()
-{
-	mq2App.reset();
-	dht11App.reset();
-	fireSensorApp.reset();
-	irRemoteApp.reset();
-
-	state = SYSTEM_STATE_UNREADY;
+	//pinMode(13, OUTPUT);
+	//zigbee.setZDType(ZB_DEVICE_TYPE_COORDINATOR);
+	//state = SYSTEM_STATE_READY;
 }
 
 #endif

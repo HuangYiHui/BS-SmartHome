@@ -15,7 +15,6 @@ class WithCommandApp : public SampleApp
 {
 public:
 	void run();
-
 	void addCommand(Command Command);
 	bool hasNextCommand();
 	Command nextCommand();

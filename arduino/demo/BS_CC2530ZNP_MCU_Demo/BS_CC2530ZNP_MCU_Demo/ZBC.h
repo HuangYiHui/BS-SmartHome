@@ -1,10 +1,18 @@
-#ifndef _ZBC_H_
+#ifndef _BS_ZBC_H_
+#define _BS_ZBC_H_
 
-#define _ZBC_H_
+#include "string.h"
 
-#include<string.h>
+//zigbee设备类型
+#define ZB_DEVICE_TYPE_COORDINATOR	0x00
+#define ZB_DEVICE_TYPE_ROUTE		0x01
+#define ZB_DEVICE_TYPE_ENDPOINT		0x02
 
-struct ZBCmd
+//zigbee消息开始标识符
+#define SOF 0xfe
+
+//zigbee命令，存放原始字节zigbee命令
+typedef struct ZBCmd
 {
 	unsigned char* cmd;
 	unsigned char len;
@@ -12,8 +20,9 @@ struct ZBCmd
 	{
 		delete[] cmd;
 	}
-};
+}ZBCmd;
 
+//应用注册信息结构体
 typedef struct ZBAppReg
 {
 	unsigned char endPoint;
@@ -56,6 +65,7 @@ typedef struct ZBAppReg
 	}
 }ZBAppReg;
 
+//zigbee用于发送的信息包
 typedef struct ZBPacketSend
 {
 	unsigned char dstAddr[2];
@@ -75,34 +85,36 @@ typedef struct ZBPacketSend
 
 }ZBPacketSend;
 
+//zigbee命令类
+//命令的定义参考zigbee协议栈中的“CC2530ZNP Interface Specification”文档
 class ZBC
 {
 public:
-	//CRC校验和计算
-	static unsigned char calcFCS(const unsigned char *pMsg, unsigned char len);
-
 	/********** SYS_RESET_REQ ************/
 	//设备重启
-	const static struct ZBCmd CMD_DEVICE_RESET;
+	const static ZBCmd CMD_DEVICE_RESET;
 	
 	//串口bootloader重启
-	const static struct ZBCmd CMD_BOOTLOADDER_RESET;
+	const static ZBCmd CMD_BOOTLOADDER_RESET;
 
 	/********** ZB_WRITE_CONFIGURATION -> ZCD_NV_STARTUP_OPTION ************/
 	//使用上次的状态启动
-	const static struct ZBCmd CMD_STARTUP_WITH_LAST_STATE;
+	const static ZBCmd CMD_STARTUP_WITH_LAST_STATE;
+
 	//不使用上次的状态启动，该命令会回复NV设置，采用默认配置启动
-	const static struct ZBCmd CMD_STARTUP_WITHOUT_LAST_STATE;
+	const static ZBCmd CMD_STARTUP_WITHOUT_LAST_STATE;
+
 	//信道设置
 	static void chanlistCfg(unsigned char channel[4], ZBCmd* zbCmd);
+
 	//网络号设置
 	static void PANIDCfg(unsigned char panid[2], ZBCmd* zbCmd);
+
 	//设置设备类型 协调器-0，路由器-1，终端-2
 	static void deviceTypeCfg(unsigned char type, ZBCmd* zbCmd);
 
 	/********** AF_REGISTER ************/
 	//应用注册
-	//返回值为命令的长度
 	static void appRegister(ZBAppReg& reg, ZBCmd* zbCmd);
 
 	/********** ZDO_STARTUP_FROM_APP ************/
@@ -111,7 +123,6 @@ public:
 
 	/********** AF_DATA_REQUEST ************/
 	//数据发送
-	//返回值为命令的长度
 	static void packetSend(ZBPacketSend& packet, ZBCmd* zbCmd);
 
 private:
@@ -125,5 +136,8 @@ private:
 	const static unsigned char STARTUP_WITHOUT_LAST_STATE[8];
 	//启动应用，如果是协调器则建立网络，如何是路由器或终端则去连接网络
 	const static unsigned char STARTUP_FROM_APP[6];
+
+	//CRC校验和计算
+	static unsigned char calCrc(const unsigned char *pMsg, unsigned char len);
 };
 #endif

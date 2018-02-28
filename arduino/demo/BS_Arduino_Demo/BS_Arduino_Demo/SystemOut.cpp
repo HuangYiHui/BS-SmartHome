@@ -11,8 +11,15 @@ GY30Device SystemOut::gy30;
 LEDDevice SystemOut::led1(PIN_LED1_OUT);
 LEDDevice SystemOut::led2(PIN_LED2_OUT);
 PM25Device SystemOut::pm25(PIN_PM25_LED, PIN_PM25_VO);
+ZigbeeDevice SystemOut::zigbee;
 
-SystemOut::SystemOut() : dht11App(dht11), doorbellApp(touchSensor, speaker), fc28App(fc28), lightAdjustApp(gy30, led1, led2), pm25App(pm25)
+SystemOut::SystemOut() : 
+	dht11App(dht11), 
+	doorbellApp(touchSensor, speaker), 
+	fc28App(fc28), 
+	lightAdjustApp(gy30, led1, led2), 
+	pm25App(pm25),
+	zigbeeApp(zigbee)
 {
 	state = SYSTEM_STATE_UNREADY;
 }
@@ -28,6 +35,7 @@ void SystemOut::init()
 	fc28App.init();
 	lightAdjustApp.init();
 	pm25App.init();
+	zigbeeApp.init();
 
 	//ÆäËû
 	state = SYSTEM_STATE_READY;
@@ -38,11 +46,14 @@ void SystemOut::start()
 	state = SYSTEM_STATE_WORKING;
 	while(true)
 	{
+		/*
 		dht11App.run();
 		doorbellApp.run();
 		fc28App.run();
 		lightAdjustApp.run();
-		pm25App.run();
+		pm25App.run();*/
+		zigbeeApp.run();
+		//zigbee.test1();
 	}
 }
 void SystemOut::stop()
@@ -52,6 +63,7 @@ void SystemOut::stop()
 	fc28App.stop();
 	lightAdjustApp.stop();
 	pm25.stop();
+	zigbeeApp.stop();
 
 	state = SYSTEM_STATE_READY;
 }
@@ -63,6 +75,7 @@ void SystemOut::reset()
 	fc28App.reset();
 	lightAdjustApp.reset();
 	pm25.reset();
+	zigbeeApp.reset();
 
 	state = SYSTEM_STATE_UNREADY;
 }

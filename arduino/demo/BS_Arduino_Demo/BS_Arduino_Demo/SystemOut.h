@@ -16,12 +16,14 @@
 #include "GY30Device.h"
 #include "LEDDevice.h"
 #include "PM25Device.h"
+#include "ZigbeeDevice.h"
 
 #include "DHT11App.h"
 #include "DoorbellApp.h"
 #include "FC28App.h"
 #include "LightAdjustApp.h"
 #include "PM25App.h"
+#include "ZigbeeApp.h"
 
 class SystemOut : public SampleSystem
 {
@@ -41,13 +43,14 @@ public:
 	static LEDDevice led1;
 	static LEDDevice led2;
 	static PM25Device pm25;
-
+	static ZigbeeDevice zigbee;
 private:
 	DHT11App dht11App;
 	DoorbellApp doorbellApp;
 	FC28App fc28App;
 	LightAdjustApp lightAdjustApp;
 	PM25App pm25App;
+	ZigbeeApp zigbeeApp;
 };
 
 #endif

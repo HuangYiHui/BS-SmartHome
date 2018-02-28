@@ -1,6 +1,9 @@
 #ifndef _BS_IAPP_H_
 #define _BS_IAPP_H_
 
+#include "AppMsg.h"
+//#include "CurSystem.h"
+
 typedef unsigned char appState;
 
 #define APP_STATE_UNREADY	0x31
@@ -15,6 +18,8 @@ public:
 	virtual void stop() = 0;
 	virtual void reset() = 0;
 	virtual appState getState() = 0;
+	virtual unsigned int getAppID();
+	virtual void receiveMsg(AppMsg& appMsg);
 };
 
 #endif

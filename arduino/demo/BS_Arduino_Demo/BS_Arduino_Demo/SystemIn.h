@@ -15,20 +15,24 @@
 #include "DHT11Device.h"
 #include "FireSensorDevice.h"
 #include "IRRemoteDevice.h"
+#include "ZigbeeDevice.h"
 
+/*
 #include "MQ2App.h"
 #include "DHT11App.h"
 #include "FireSensorApp.h"
-#include "IRRemoteApp.h"
+#include "IRRemoteApp.h"*/
+#include "ZigbeeApp.h"
+
+
+//#include "Test1App.h"
+#include "Test2App.h"
 
 class SystemIn : public SampleSystem
 {
 public:
 	SystemIn();
 	void init();
-	void start();
-	void stop();
-	void reset();
 
 	//系统设备
 	static LCDDevice lcd;
@@ -37,12 +41,7 @@ public:
 	static DHT11Device dht11;
 	static FireSensorDevice fireSensor;
 	static IRRemoteDevice irRemote;
-
-private:
-	MQ2App mq2App;
-	DHT11App dht11App;
-	FireSensorApp fireSensorApp;
-	IRRemoteApp irRemoteApp;
+	static ZigbeeDevice zigbee;
 };
 
 #endif

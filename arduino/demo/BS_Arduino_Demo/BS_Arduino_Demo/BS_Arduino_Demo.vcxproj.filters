@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <None Include="BS_Arduino_Demo.ino" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.BS_Arduino_Demo.vsarduino.h" />
@@ -44,9 +45,6 @@
     <ClInclude Include="FireSensorApp.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="WithCommandApp.h">
-      <Filter>app</Filter>
-    </ClInclude>
     <ClInclude Include="MQ2App.h">
       <Filter>app</Filter>
     </ClInclude>
@@ -54,7 +52,7 @@
       <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">
-      <Filter>data</Filter>
+      <Filter>assist</Filter>
     </ClInclude>
     <ClInclude Include="inPinDef.h">
       <Filter>driver</Filter>
@@ -104,6 +102,33 @@
     <ClInclude Include="cfg.h">
       <Filter>system</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\BS_CC2530ZNP_MCU_Demo\BS_CC2530ZNP_MCU_Demo\ZBC.h">
+      <Filter>assist</Filter>
+    </ClInclude>
+    <ClInclude Include="ZigbeeDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="ZigbeeApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="WithCommandApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="Test1App.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemAPI.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="CurSystem.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="Test2App.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="AppMsg.h">
+      <Filter>app</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="driver">
@@ -115,7 +140,7 @@
     <Filter Include="app">
       <UniqueIdentifier>{818b453f-e454-4500-90bb-af182a290bef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="data">
+    <Filter Include="assist">
       <UniqueIdentifier>{7c7b7b01-fb5f-4a7c-b841-26b42e143ecf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -196,6 +221,24 @@
       <Filter>driver</Filter>
     </ClCompile>
     <ClCompile Include="PM25App.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\BS_CC2530ZNP_MCU_Demo\BS_CC2530ZNP_MCU_Demo\ZBC.cpp">
+      <Filter>assist</Filter>
+    </ClCompile>
+    <ClCompile Include="ZigbeeDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="ZigbeeApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="Test1App.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemAPI.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="Test2App.cpp">
       <Filter>app</Filter>
     </ClCompile>
   </ItemGroup>

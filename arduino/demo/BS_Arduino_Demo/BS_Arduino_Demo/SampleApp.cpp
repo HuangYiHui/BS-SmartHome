@@ -1,8 +1,19 @@
 #include "SampleApp.h"
 
-SampleApp::SampleApp()
+unsigned int SampleApp::appIDSeed = 0;
+
+SampleApp::SampleApp() : appID(SampleApp::getOneAppID())
 {
 	state = APP_STATE_UNREADY;
+}
+
+SampleApp::~SampleApp()
+{
+	while(msgList.size()>0)
+	{
+		AppMsg* msg = msgList.remove(0);
+		delete msg;
+	}
 }
 
 void SampleApp::init()
@@ -28,4 +39,24 @@ void SampleApp::reset()
 appState SampleApp::getState()
 {
 	return state;
+}
+
+unsigned int SampleApp::getAppID()
+{
+	return appID;
+}
+
+unsigned int SampleApp::getOneAppID()
+{
+	return ++appIDSeed;
+}
+
+void SampleApp::sendMsg(AppMsg& msg)
+{
+	API.sendAppMsg(msg, appID);
+}
+
+void SampleApp::receiveMsg(AppMsg& msg)
+{
+	msgList.add(new AppMsg(msg));
 }

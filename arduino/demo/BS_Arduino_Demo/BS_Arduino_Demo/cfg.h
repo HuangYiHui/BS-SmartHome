@@ -1,10 +1,10 @@
 #ifndef _BS_CFG_H_
 #define _BS_CFG_H_
 
-#define CUR_SYSTEM_OUT
+#define CUR_SYSTEM_IN
 
-#define SYSTEM_ADDR 0x00031
+#define SYSTEM_ADDR 0x1234
 
-#define SERAIL_BAUD_RATE	9600	//串口波特率
+#define SERAIL_BAUD_RATE	19200	//串口波特率
 
 #endif
