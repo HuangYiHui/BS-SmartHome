@@ -1,6 +1,6 @@
 #include "FireSensorApp.h"
 
-FireSensorApp::FireSensorApp(FireSensorDevice& fireSensor) : fireSensor(fireSensor)
+FireSensorApp::FireSensorApp(unsigned int appID, FireSensorDevice& fireSensor) : SampleApp(appID), fireSensor(fireSensor)
 {
 	state = APP_STATE_UNREADY;
 }
@@ -15,25 +15,12 @@ void FireSensorApp::init()
 	state = APP_STATE_READY;
 }
 
-void FireSensorApp::exeCmd()
+void FireSensorApp::run()
 {
-	if(hasNextCommand()){
-		Command command = nextCommand();
-		if(command.cmd == CMD_OPEN_DEVICE){
-			fireSensor.open();
-		}else if(command.cmd == CMD_INIT_DEVICE){
-			fireSensor.init();
-		}else if(command.cmd == CMD_START_DEVICE){
-			fireSensor.start();
-		}else if(command.cmd == CMD_STOP_DEVICE){
-			fireSensor.stop();
-		}else if(command.cmd == CMD_CLASE_DEVICE){
-			fireSensor.close();
-		}
-	}
+	runTask();
 }
 
-int FireSensorApp::exeTask()
+int FireSensorApp::runTask()
 {
 	PT_BEGIN(&pt);
 	while(true)

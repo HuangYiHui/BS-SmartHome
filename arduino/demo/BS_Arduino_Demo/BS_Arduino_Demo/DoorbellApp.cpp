@@ -3,7 +3,10 @@
 //因为IRremote库与Tone库冲突，这里选择性编译
 #ifndef CUR_SYSTEM_IN
 
-DoorbellApp::DoorbellApp(TouchSensorDevice& touchSensor, SpeakerDevice& speaker) : touchSensor(touchSensor), speaker(speaker)
+DoorbellApp::DoorbellApp(unsigned int appID, TouchSensorDevice& touchSensor, SpeakerDevice& speaker) : 
+	SampleApp(appID), 
+	touchSensor(touchSensor), 
+	speaker(speaker)
 {
 	state = DEVICE_STATE_CLOSED;
 }
@@ -19,30 +22,12 @@ void DoorbellApp::init()
 	state = APP_STATE_READY;
 }
 
-void DoorbellApp::exeCmd()
+void DoorbellApp::run()
 {
-	if(hasNextCommand()){
-		Command command = nextCommand();
-		if(command.cmd == CMD_OPEN_DEVICE){
-			touchSensor.open();
-			speaker.open();
-		}else if(command.cmd == CMD_INIT_DEVICE){
-			touchSensor.init();
-			speaker.init();
-		}else if(command.cmd == CMD_START_DEVICE){
-			touchSensor.start();
-			speaker.start();
-		}else if(command.cmd == CMD_STOP_DEVICE){
-			touchSensor.stop();
-			speaker.stop();
-		}else if(command.cmd == CMD_CLASE_DEVICE){
-			touchSensor.close();
-			speaker.close();
-		}
-	}
+	runTask();
 }
-	
-int DoorbellApp::exeTask()
+
+int DoorbellApp::runTask()
 {
 	if(touchSensor.isTouching()){
 		PT_INIT(&pt);

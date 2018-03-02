@@ -11,7 +11,7 @@ class SystemAPI
 {
 public:
 	SystemAPI(ISystem* curSystem);
-	void sendAppMsg(AppMsg& appMsg, unsigned char appID);
+	void sendAppMsg(AppMsgSend& appMsg);
 	unsigned int getSystemID();
 private:
 	ISystem* curSystem;

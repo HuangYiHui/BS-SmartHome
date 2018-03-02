@@ -2,6 +2,7 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IRRemoteDevice.cpp.o: \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IRRemoteDevice.cpp \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IRRemoteDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\cfg.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/binary.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/WCharacter.h \

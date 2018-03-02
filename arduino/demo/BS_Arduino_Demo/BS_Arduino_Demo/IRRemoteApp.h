@@ -7,18 +7,18 @@
 #ifndef _BS_IRREMOTE_APP_H_
 #define _BS_IRREMOTE_APP_H_
 
-#include "WithCommandApp.h"
+#include "SampleApp.h"
 #include "pt.h"
 #include "IRRemoteDevice.h"
 
-class IRRemoteApp : public WithCommandApp
+class IRRemoteApp : public SampleApp
 {
 public:
-	IRRemoteApp(IRRemoteDevice& irRemote);
+	IRRemoteApp(unsigned int appID, IRRemoteDevice& irRemote);
 	void init();
+	void run();
 private:
-	void exeCmd();
-	int exeTask();
+	int runTask();
 	IRRemoteDevice& irRemote;
 	struct pt pt;
 };

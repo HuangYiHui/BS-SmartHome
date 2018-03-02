@@ -2,17 +2,17 @@
 #define _BS_FC28_APP_H_
 
 #include "pt.h"
-#include "WithCommandApp.h"
+#include "SampleApp.h"
 #include "FC28Device.h"
 
-class FC28App : public WithCommandApp
+class FC28App : public SampleApp
 {
 public:
-	FC28App(FC28Device& fc28);
+	FC28App(unsigned int appID, FC28Device& fc28);
 	void init();
+	void run();
 private:
-	void exeCmd();
-	int exeTask();
+	int runTask();
 	FC28Device& fc28;
 	struct pt pt;
 };

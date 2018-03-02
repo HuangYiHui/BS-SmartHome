@@ -1,6 +1,10 @@
 #include "LightAdjustApp.h"
 
-LightAdjustApp::LightAdjustApp(GY30Device& gy30, LEDDevice& led1, LEDDevice& led2) : gy30(gy30), led1(led1), led2(led2)
+LightAdjustApp::LightAdjustApp(unsigned int appID, GY30Device& gy30, LEDDevice& led1, LEDDevice& led2) : 
+	SampleApp(appID), 
+	gy30(gy30), 
+	led1(led1), 
+	led2(led2)
 {
 	state = DEVICE_STATE_CLOSED;
 }
@@ -19,35 +23,12 @@ void LightAdjustApp::init()
 	state = APP_STATE_READY;
 }
 
-void LightAdjustApp::exeCmd()
+void LightAdjustApp::run()
 {
-	if(hasNextCommand()){
-		Command command = nextCommand();
-		if(command.cmd == CMD_OPEN_DEVICE){
-			gy30.open();
-			led1.open();
-			led2.open();
-		}else if(command.cmd == CMD_INIT_DEVICE){
-			gy30.init();
-			led1.init();
-			led2.init();
-		}else if(command.cmd == CMD_START_DEVICE){
-			gy30.start();
-			led1.start();
-			led2.start();
-		}else if(command.cmd == CMD_STOP_DEVICE){
-			gy30.stop();
-			led1.stop();
-			led2.stop();
-		}else if(command.cmd == CMD_CLASE_DEVICE){
-			gy30.close();
-			led1.close();
-			led2.close();
-		}
-	}
+	runTask();
 }
 
-int LightAdjustApp::exeTask()
+int LightAdjustApp::runTask()
 {
 	PT_BEGIN(&pt);
 	while(true)

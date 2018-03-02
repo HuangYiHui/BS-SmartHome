@@ -20,7 +20,7 @@ public:
 	virtual	systemState getState();
 	virtual void installApp(IApp* app);
 	virtual void unInstallApp(unsigned int appID);
-	virtual void sendAppMsg(AppMsg& msg, unsigned char appID);
+	virtual void sendAppMsg(AppMsgSend& msg);
 
 protected:
 	systemState state;

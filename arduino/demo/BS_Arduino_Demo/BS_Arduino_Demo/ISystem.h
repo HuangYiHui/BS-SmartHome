@@ -13,6 +13,7 @@ typedef unsigned char systemState;
 class ISystem
 {
 public:
+	virtual ~ISystem(){}
 	virtual void init() = 0;
 	virtual void start() = 0;
 	virtual void stop() = 0;
@@ -21,6 +22,6 @@ public:
 	virtual unsigned int getSystemID();
 	virtual void installApp(IApp* app);
 	virtual void unInstallApp(unsigned int appID);
-	virtual void sendAppMsg(AppMsg& msg, unsigned char appID);
+	virtual void sendAppMsg(AppMsgSend& msg);
 };
 #endif

@@ -2,7 +2,7 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FireSensorApp.cpp.o: \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FireSensorApp.cpp \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FireSensorApp.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\cfg.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\WithCommandApp.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleApp.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IApp.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\AppMsg.h \
@@ -20,7 +20,6 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FireSensorApp.cpp.o: \
  D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemAPI.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ISystem.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Command.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \

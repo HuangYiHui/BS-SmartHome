@@ -1,6 +1,6 @@
 #include "MQ2App.h"
 
-MQ2App::MQ2App(MQ2Device& mq2) : mq2(mq2)
+MQ2App::MQ2App(unsigned int appID, MQ2Device& mq2) : SampleApp(appID), mq2(mq2)
 {
 	state = APP_STATE_UNREADY;
 }
@@ -15,25 +15,12 @@ void MQ2App::init()
 	state = APP_STATE_READY;
 }
 
-void MQ2App::exeCmd()
+void MQ2App::run()
 {
-	if(hasNextCommand()){
-		Command command = nextCommand();
-		if(command.cmd == CMD_OPEN_DEVICE){
-			mq2.open();
-		}else if(command.cmd == CMD_INIT_DEVICE){
-			mq2.init();
-		}else if(command.cmd == CMD_START_DEVICE){
-			mq2.start();
-		}else if(command.cmd == CMD_STOP_DEVICE){
-			mq2.stop();
-		}else if(command.cmd == CMD_CLASE_DEVICE){
-			mq2.close();
-		}
-	}
+	runTask();
 }
 
-int MQ2App::exeTask()
+int MQ2App::runTask()
 {
 	PT_BEGIN(&pt);
 	while(true)

@@ -2,17 +2,17 @@
 #define _BS_PM25_APP_H_
 
 #include "pt.h"
-#include "WithCommandApp.h"
+#include "SampleApp.h"
 #include "PM25Device.h"
 
-class PM25App : public WithCommandApp
+class PM25App : public SampleApp
 {
 public:
-	PM25App(PM25Device& pm25);
+	PM25App(unsigned int appID, PM25Device& pm25);
 	void init();
+	void run();
 private:
-	void exeCmd();
-	int exeTask();
+	int runTask();
 	PM25Device& pm25;
 	struct pt pt;
 };

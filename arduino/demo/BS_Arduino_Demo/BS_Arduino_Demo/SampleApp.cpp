@@ -1,8 +1,6 @@
 #include "SampleApp.h"
 
-unsigned int SampleApp::appIDSeed = 0;
-
-SampleApp::SampleApp() : appID(SampleApp::getOneAppID())
+SampleApp::SampleApp(unsigned int appID) : appID(appID)
 {
 	state = APP_STATE_UNREADY;
 }
@@ -11,7 +9,7 @@ SampleApp::~SampleApp()
 {
 	while(msgList.size()>0)
 	{
-		AppMsg* msg = msgList.remove(0);
+		AppMsgReceive* msg = msgList.remove(0);
 		delete msg;
 	}
 }
@@ -46,17 +44,12 @@ unsigned int SampleApp::getAppID()
 	return appID;
 }
 
-unsigned int SampleApp::getOneAppID()
+void SampleApp::sendMsg(AppMsgSend& msg)
 {
-	return ++appIDSeed;
+	API.sendAppMsg(msg);
 }
 
-void SampleApp::sendMsg(AppMsg& msg)
+void SampleApp::receiveMsg(AppMsgReceive& msg)
 {
-	API.sendAppMsg(msg, appID);
-}
-
-void SampleApp::receiveMsg(AppMsg& msg)
-{
-	msgList.add(new AppMsg(msg));
+	msgList.add(new AppMsgReceive(msg));
 }

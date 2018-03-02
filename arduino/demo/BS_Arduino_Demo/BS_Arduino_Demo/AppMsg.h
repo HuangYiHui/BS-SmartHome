@@ -3,41 +3,43 @@
 
 #include "Arduino.h"
 
-//应用消息结构体
-//app接收到的消息或发送的消息都用本结构体
-//作发送时，addr表示目标地址，endpoint表示目标端点
-//作接收时，addr表示源地址，endpoint表示源端点
-typedef struct AppMsg
+
+//用于app消息发送
+typedef struct AppMsgSend
 {
-	unsigned int addr;
-	unsigned char endpoint;
+	unsigned int srcAddr;
+	unsigned char srcEndpoint;
+	unsigned int dstAddr;
+	unsigned char dstEndpoint;
 	unsigned int len;
 	unsigned char* data;
 
-	AppMsg()
+	AppMsgSend()
 	{
 		len = 0;
 		data = NULL;
 	}
 
-	AppMsg(AppMsg& msg)
+	AppMsgSend(AppMsgSend& msg)
 	{
 		clone(msg);
 	}
 
-	~AppMsg()
+	~AppMsgSend()
 	{
 		delete[] data;
 	}
 
-	void clone(AppMsg& msg)
+	void clone(AppMsgSend& msg)
 	{
-		addr = msg.addr;
-		endpoint = msg.endpoint;
+		srcAddr = msg.srcAddr;
+		srcEndpoint = msg.srcEndpoint;
+		dstAddr = msg.dstAddr;
+		dstEndpoint = msg.dstEndpoint;
 		cloneData(msg);
 	}
 
-	void cloneData(AppMsg& msg)
+	void cloneData(AppMsgSend& msg)
 	{
 		len = msg.len;
 		data = new unsigned char[len];
@@ -46,6 +48,59 @@ typedef struct AppMsg
 			data[i] = msg.data[i];
 	}
 
-}AppMsg;
+}AppMsgSend;
+
+//用于app消息接收
+typedef struct AppMsgReceive
+{
+	unsigned int srcAddr;
+	unsigned char srcEndpoint;
+	unsigned int len;
+	unsigned char* data;
+
+	AppMsgReceive()
+	{
+		len = 0;
+		data = NULL;
+	}
+
+	AppMsgReceive(AppMsgSend& msgSend)
+	{
+		srcAddr = msgSend.srcAddr;
+		srcEndpoint = msgSend.srcEndpoint;
+		len = msgSend.len;
+		data = new unsigned char[len];
+		for(unsigned int i=0;i<len;i++)
+			data[i] = msgSend.data[i];
+	}
+
+	AppMsgReceive(AppMsgReceive& msg)
+	{
+		clone(msg);
+	}
+
+	~AppMsgReceive()
+	{
+		delete[] data;
+	}
+
+	void clone(AppMsgReceive& msg)
+	{
+		srcAddr = msg.srcAddr;
+		srcEndpoint = msg.srcEndpoint;
+		cloneData(msg);
+	}
+
+	void cloneData(AppMsgReceive& msg)
+	{
+		len = msg.len;
+		data = new unsigned char[len];
+		
+		for(unsigned int i=0;i<len;i++)
+			data[i] = msg.data[i];
+	}
+
+}AppMsgReceive;
+
 
 #endif

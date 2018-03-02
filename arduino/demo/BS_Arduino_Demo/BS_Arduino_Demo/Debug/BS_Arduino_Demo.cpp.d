@@ -13,13 +13,13 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\BS_Arduino_Demo.cpp.o: \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard/pins_arduino.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\CurSystem.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\cfg.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemAPI.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleSystem.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ISystem.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IApp.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\AppMsg.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemIn.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleSystem.h \
  D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemAPI.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\inPinDef.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\LCDDevice.h \
  D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Nokia_5110.h \
@@ -38,8 +38,7 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\BS_Arduino_Demo.cpp.o: \
  D:\software1\arduino-1.8.5\libraries\IRremote/IRremoteInt.h \
  D:\software1\arduino-1.8.5\libraries\IRremote/boarddefs.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeDevice.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Test1App.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\MQ2App.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleApp.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
@@ -47,4 +46,16 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\BS_Arduino_Demo.cpp.o: \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-timer.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-sem.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Test2App.h
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\DHT11App.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FireSensorApp.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IRRemoteApp.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeApp.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Debuger.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Test1App.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Test2App.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src/Wire.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Stream.h \
+ D:\software1\arduino-1.8.5\libraries\LiquidCrystal_I2C/LiquidCrystal_I2C.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Print.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Test3App.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemInCfg.h

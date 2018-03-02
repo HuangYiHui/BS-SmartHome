@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test1", "test1\test1.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BlinkWithoutDelay", "..\..\..\..\..\..\software1\arduino-1.8.5\libraries\My Examples\131643540246711789\BlinkWithoutDelay\BlinkWithoutDelay.vcxproj", "{711B9D6E-D767-4DEE-B881-1AA774EAF596}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|Win32.Build.0 = Debug|Win32
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|Win32.ActiveCfg = Release|Win32
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|Win32.Build.0 = Release|Win32
+		{711B9D6E-D767-4DEE-B881-1AA774EAF596}.Debug|Win32.ActiveCfg = Debug|Win32
+		{711B9D6E-D767-4DEE-B881-1AA774EAF596}.Debug|Win32.Build.0 = Debug|Win32
+		{711B9D6E-D767-4DEE-B881-1AA774EAF596}.Release|Win32.ActiveCfg = Release|Win32
+		{711B9D6E-D767-4DEE-B881-1AA774EAF596}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,7 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\LCDDevice.cpp.o: \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\LCDDevice.cpp \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\LCDDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\cfg.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
  D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Nokia_5110.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/binary.h \

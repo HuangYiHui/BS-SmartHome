@@ -2,6 +2,10 @@
 #define _BS_ZIGBEE_DEVICE_H
 
 /*
+用ZBAppReg注册过的endpoint，才能接收到目标是对应endpoint的其他zigbee的信息包，否则zigbee会丢弃该数据包
+*/
+
+/*
 数据格式：SOF - lenght - cmd1 - cmd2 - data - FCS
 SOF为开始标识，一个字节，恒定为0xfe
 lenght表示后续数据data长度，一个字节
@@ -87,7 +91,8 @@ typedef struct ZBPacketReceive
 		fcs ^= cmd2;
 		for(unsigned char i=0;i<len;i++)
 			fcs ^= data[i];
-
+		//Serial.print("fcs:");
+		//Serial.print(fcs, HEX);
 		if(cFcs == fcs)
 			return true;
 		else
@@ -111,9 +116,8 @@ public:
 	void init();
 	void start();
 	bool isDataComing();
-	ZBPacketReceive receivePacket();
-	void receive(ZBPacketReceive* packet);
-	void sendPacket(ZBPacketSend& packet);
+	void receive(ZBPacketReceive& packet);
+	void send(ZBPacketSend& packet);
 
 private:
 	unsigned int receiveTimeout;

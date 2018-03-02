@@ -2,17 +2,18 @@
 #define _BS_DHT11_APP_H_
 
 #include "pt.h"
-#include "WithCommandApp.h"
+#include "SampleApp.h"
 #include "DHT11Device.h"
 
-class DHT11App : public WithCommandApp
+class DHT11App : public SampleApp
 {
 public:
-	DHT11App(DHT11Device& dht11);
+	DHT11App(unsigned int appID, DHT11Device& dht11);
 	void init();
+	void run();
 private:
-	void exeCmd();
-	int exeTask();
+	void prcMsg();
+	int runTask();
 	DHT11Device& dht11;
 	struct pt pt;
 };

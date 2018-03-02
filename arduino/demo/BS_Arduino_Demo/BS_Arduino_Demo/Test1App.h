@@ -8,6 +8,7 @@
 class Test1App : public SampleApp
 {
 public:
+	Test1App(unsigned int appID);
 	void init();
 	void run();
 private:

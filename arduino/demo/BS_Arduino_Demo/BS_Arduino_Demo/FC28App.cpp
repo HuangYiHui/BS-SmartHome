@@ -1,6 +1,6 @@
 #include "FC28App.h"
 
-FC28App::FC28App(FC28Device& fc28) : fc28(fc28)
+FC28App::FC28App(unsigned int appID, FC28Device& fc28) : SampleApp(appID), fc28(fc28)
 {
 	state = APP_STATE_UNREADY;
 }
@@ -14,25 +14,12 @@ void FC28App::init()
 	state = APP_STATE_READY;
 }
 
-void FC28App::exeCmd()
+void FC28App::run()
 {
-	if(hasNextCommand()){
-		Command command = nextCommand();
-		if(command.cmd == CMD_OPEN_DEVICE){
-			fc28.open();
-		}else if(command.cmd == CMD_INIT_DEVICE){
-			fc28.init();
-		}else if(command.cmd == CMD_START_DEVICE){
-			fc28.start();
-		}else if(command.cmd == CMD_STOP_DEVICE){
-			fc28.stop();
-		}else if(command.cmd == CMD_CLASE_DEVICE){
-			fc28.close();
-		}
-	}
+	runTask();
 }
-	
-int FC28App::exeTask()
+
+int FC28App::runTask()
 {
 	PT_BEGIN(&pt);
 	while(true)

@@ -1,6 +1,6 @@
 srcAddr: 1234
 srcEndpoint: 56
-destEndpoint: 78
+destEndpoint: 02
 dataLen: 03
 data:01 02 03
-FE 14 44 81 00 01 00 02 34 12 56 78 00 00 00 12 34 56 78 00 03 01 02 03 D1
+FE 14 44 81 00 01 00 02 34 12 56 02 00 00 00 12 34 56 78 00 03 01 02 03 ab

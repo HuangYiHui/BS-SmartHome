@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <None Include="BS_Arduino_Demo.ino" />
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.BS_Arduino_Demo.vsarduino.h" />
@@ -51,17 +50,8 @@
     <ClInclude Include="DHT11App.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>assist</Filter>
-    </ClInclude>
     <ClInclude Include="inPinDef.h">
       <Filter>driver</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemIn.h">
-      <Filter>system</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemOut.h">
-      <Filter>system</Filter>
     </ClInclude>
     <ClInclude Include="outPinDef.h">
       <Filter>driver</Filter>
@@ -111,23 +101,32 @@
     <ClInclude Include="ZigbeeApp.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="WithCommandApp.h">
-      <Filter>app</Filter>
-    </ClInclude>
-    <ClInclude Include="Test1App.h">
-      <Filter>app</Filter>
-    </ClInclude>
     <ClInclude Include="SystemAPI.h">
       <Filter>system</Filter>
     </ClInclude>
     <ClInclude Include="CurSystem.h">
       <Filter>system</Filter>
     </ClInclude>
-    <ClInclude Include="Test2App.h">
-      <Filter>app</Filter>
-    </ClInclude>
     <ClInclude Include="AppMsg.h">
       <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="Debuger.h">
+      <Filter>assist</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemOutCfg.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemInCfg.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="Test3App.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="Test1App.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="Test2App.h">
+      <Filter>test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +141,9 @@
     </Filter>
     <Filter Include="assist">
       <UniqueIdentifier>{7c7b7b01-fb5f-4a7c-b841-26b42e143ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{969dea27-c631-4b18-9a76-1d579561a71a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -163,9 +165,6 @@
     <ClCompile Include="MQ2Device.cpp">
       <Filter>driver</Filter>
     </ClCompile>
-    <ClCompile Include="WithCommandApp.cpp">
-      <Filter>app</Filter>
-    </ClCompile>
     <ClCompile Include="DHT11App.cpp">
       <Filter>app</Filter>
     </ClCompile>
@@ -183,12 +182,6 @@
     </ClCompile>
     <ClCompile Include="LCDDevice.cpp">
       <Filter>driver</Filter>
-    </ClCompile>
-    <ClCompile Include="SystemIn.cpp">
-      <Filter>system</Filter>
-    </ClCompile>
-    <ClCompile Include="SystemOut.cpp">
-      <Filter>system</Filter>
     </ClCompile>
     <ClCompile Include="DoorbellApp.cpp">
       <Filter>app</Filter>
@@ -232,14 +225,20 @@
     <ClCompile Include="ZigbeeApp.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="Test1App.cpp">
-      <Filter>app</Filter>
-    </ClCompile>
     <ClCompile Include="SystemAPI.cpp">
       <Filter>system</Filter>
     </ClCompile>
+    <ClCompile Include="Debuger.cpp">
+      <Filter>assist</Filter>
+    </ClCompile>
+    <ClCompile Include="Test3App.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="Test1App.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
     <ClCompile Include="Test2App.cpp">
-      <Filter>app</Filter>
+      <Filter>test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

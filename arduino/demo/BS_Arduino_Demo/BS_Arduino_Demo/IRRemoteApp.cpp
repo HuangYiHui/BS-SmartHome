@@ -3,7 +3,7 @@
 //因为IRremote库与Tone库冲突，这里选择性编译
 #ifdef CUR_SYSTEM_IN
 
-IRRemoteApp::IRRemoteApp(IRRemoteDevice& irRemote) : irRemote(irRemote)
+IRRemoteApp::IRRemoteApp(unsigned int appID, IRRemoteDevice& irRemote) : SampleApp(appID), irRemote(irRemote)
 {
 	state = APP_STATE_UNREADY;
 }
@@ -18,25 +18,12 @@ void IRRemoteApp::init()
 	state = APP_STATE_READY;
 }
 
-void IRRemoteApp::exeCmd()
+void IRRemoteApp::run()
 {
-	if(hasNextCommand()){
-		Command command = nextCommand();
-		if(command.cmd == CMD_OPEN_DEVICE){
-			irRemote.open();
-		}else if(command.cmd == CMD_INIT_DEVICE){
-			irRemote.init();
-		}else if(command.cmd == CMD_START_DEVICE){
-			irRemote.start();
-		}else if(command.cmd == CMD_STOP_DEVICE){
-			irRemote.stop();
-		}else if(command.cmd == CMD_CLASE_DEVICE){
-			irRemote.close();
-		}
-	}
+	runTask();
 }
 
-int IRRemoteApp::exeTask()
+int IRRemoteApp::runTask()
 {
 	if(irRemote.getState() == DEVICE_STATE_WORKING)
 	{

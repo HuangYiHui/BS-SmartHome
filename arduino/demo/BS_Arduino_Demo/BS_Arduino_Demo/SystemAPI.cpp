@@ -5,12 +5,13 @@ SystemAPI::SystemAPI(ISystem* curSystem)
 	this->curSystem = curSystem;
 }
 
-void SystemAPI::sendAppMsg(AppMsg& appMsg, unsigned char appID)
+void SystemAPI::sendAppMsg(AppMsgSend& appMsg)
 {
-	curSystem->sendAppMsg(appMsg, appID);
+	curSystem->sendAppMsg(appMsg);
 }
 
 unsigned int SystemAPI::getSystemID()
 {
 	return curSystem->getSystemID();
 }
+

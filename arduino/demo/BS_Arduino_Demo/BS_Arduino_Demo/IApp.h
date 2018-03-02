@@ -13,13 +13,14 @@ typedef unsigned char appState;
 class IApp
 {
 public:
+	virtual ~IApp(){}
 	virtual void init() = 0;
 	virtual void run() = 0;
 	virtual void stop() = 0;
 	virtual void reset() = 0;
 	virtual appState getState() = 0;
 	virtual unsigned int getAppID();
-	virtual void receiveMsg(AppMsg& appMsg);
+	virtual void receiveMsg(AppMsgReceive& msg);
 };
 
 #endif

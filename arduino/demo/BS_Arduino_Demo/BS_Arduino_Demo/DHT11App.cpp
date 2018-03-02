@@ -1,6 +1,6 @@
 #include "DHT11App.h"
 
-DHT11App::DHT11App(DHT11Device& dht11) : dht11(dht11)
+DHT11App::DHT11App(unsigned int appID, DHT11Device& dht11) : SampleApp(appID), dht11(dht11)
 {
 	state = APP_STATE_UNREADY;
 }
@@ -14,25 +14,16 @@ void DHT11App::init()
 	state = APP_STATE_READY;
 }
 
-void DHT11App::exeCmd()
+void DHT11App::run()
 {
-	if(hasNextCommand()){
-		Command command = nextCommand();
-		if(command.cmd == CMD_OPEN_DEVICE){
-			dht11.open();
-		}else if(command.cmd == CMD_INIT_DEVICE){
-			dht11.init();
-		}else if(command.cmd == CMD_START_DEVICE){
-			dht11.start();
-		}else if(command.cmd == CMD_STOP_DEVICE){
-			dht11.stop();
-		}else if(command.cmd == CMD_CLASE_DEVICE){
-			dht11.close();
-		}
-	}
+	runTask();
+}
+
+void DHT11App::prcMsg()
+{
 }
 	
-int DHT11App::exeTask()
+int DHT11App::runTask()
 {
 	PT_BEGIN(&pt);
 	while(true)

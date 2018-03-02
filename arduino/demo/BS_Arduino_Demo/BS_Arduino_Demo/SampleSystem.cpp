@@ -25,8 +25,9 @@ void SampleSystem::start()
 
 	while(true)
 	{
-		for(int i=0;i<appList.size();i++)
+		for(int i=0;i<appList.size();i++){
 			(appList.get(i))->run();
+		}
 	}
 }
 
@@ -66,32 +67,30 @@ void SampleSystem::unInstallApp(unsigned int appID)
 	for(int i=0; i<appList.size(); i++)
 	{
 		IApp* app = appList.get(i);
-		if((app->getAppID() == appID))
+		if((app->getAppID() == appID)){
 			appList.remove(i);
+			delete app;
+		}
 	}
 }
 
-void SampleSystem::sendAppMsg(AppMsg& msg, unsigned char srcEndpoint)
+void SampleSystem::sendAppMsg(AppMsgSend& msgSend)
 {
-	AppMsg appMsg;
-	appMsg.addr = systemID;
-	appMsg.endpoint = srcEndpoint;
-	appMsg.cloneData(msg);
+	AppMsgReceive msgReceive(msgSend);
 	
 	//不是发到本地的信息，由zigbee发送出去
 	//否则直接发送到本地app
-	if(msg.addr != systemID){
+	if(msgSend.dstAddr != systemID){
 		//zigbee发送
 		//Serial.println("zigbee send");
 	}
 	else{
-		
 		IApp* app = NULL;
 		for(int i=0;i<appList.size();i++)
 		{
 			app = appList.get(i);
-			if(app->getAppID() == msg.endpoint){
-				app->receiveMsg(appMsg);
+			if(app->getAppID() == msgSend.dstEndpoint){
+				app->receiveMsg(msgReceive);
 			}
 		}
 	}

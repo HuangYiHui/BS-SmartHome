@@ -5,23 +5,25 @@
 #ifndef _BS_DOORBELL_APP_H_
 #define _BS_DOORBELL_APP_H_
 
-#include "WithCommandApp.h"
+#include "SampleApp.h"
 #include "TouchSensorDevice.h"
 #include "SpeakerDevice.h"
 #include "pt.h"
 
-class DoorbellApp : public WithCommandApp
+class DoorbellApp : public SampleApp
 {
 public:
-	DoorbellApp(TouchSensorDevice& touchSensor, SpeakerDevice& speakerDevice);
+	DoorbellApp(unsigned int appID, TouchSensorDevice& touchSensor, SpeakerDevice& speakerDevice);
 	void init();
+	void run();
 private:
-	void exeCmd();
-	int exeTask();
 	TouchSensorDevice& touchSensor;
 	SpeakerDevice& speaker;
 	struct pt pt;
+
+	int runTask();
 };
+
 
 #endif
 #endif

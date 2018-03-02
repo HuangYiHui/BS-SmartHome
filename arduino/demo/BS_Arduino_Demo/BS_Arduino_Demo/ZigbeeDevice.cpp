@@ -72,13 +72,9 @@ void ZigbeeDevice::setAppRegs(ZBAppReg* appRegs, unsigned int count)
 
 void ZigbeeDevice::init()
 {
-	Serial.begin(19200);
-
-//	Serial.println("------init--------");
-
-	//重启
+	//重启，时间太短不行，比如1000
 	Serial.write((byte*)ZBC::CMD_DEVICE_RESET.cmd, ZBC::CMD_DEVICE_RESET.len);
-	delay(1500);
+	delay(1800);
 	//rec(1500);
 
 	//设置不从上次状态启动
@@ -88,7 +84,7 @@ void ZigbeeDevice::init()
 
 	//重启
 	Serial.write((byte*)ZBC::CMD_DEVICE_RESET.cmd, ZBC::CMD_DEVICE_RESET.len);
-	delay(1500);
+	delay(1800);
 	//rec(1500);
 	
 	//设置0x00000800信道，默认也是0x00000800信道
@@ -132,7 +128,7 @@ void ZigbeeDevice::start()
 	//建立网络或者连接网络
 	Serial.write((byte*)ZBC::CMD_STARTUP_FROM_APP.cmd, ZBC::CMD_STARTUP_FROM_APP.len);
 	//rec(2500);
-	delay(2500);
+	delay(2000);
 
 	state = DEVICE_STATE_WORKING;
 }
@@ -159,7 +155,7 @@ bool ZigbeeDevice::isDataComing()
 	return false;
 }
 
-void ZigbeeDevice::receive(ZBPacketReceive* packet)
+void ZigbeeDevice::receive(ZBPacketReceive& packet)
 {
 	//判断信息包是否开始
 	//返回默认msg，表示读取到了无效的dataPacket（len=0）
@@ -176,7 +172,7 @@ void ZigbeeDevice::receive(ZBPacketReceive* packet)
 
 	if( ! isBegin)
 	{
-		packet->reset();
+		packet.reset();
 		return;
 	}
 
@@ -185,92 +181,47 @@ void ZigbeeDevice::receive(ZBPacketReceive* packet)
 	//等于-1表示在规定时间内没读到后续字节
 	//当前数据传输有问题，终止当前传输
 	if(temp == -1){
-		packet->reset();
+		packet.reset();
 		return;
 	}
 	else{
-		packet->len = temp;
+		packet.len = temp;
 	}
 
 	temp = readByte();
 	if(temp == -1){
-		packet->reset();
+		packet.reset();
 		return;
 	}else{
-		packet->cmd1 = temp;
+		packet.cmd1 = temp;
 	}
 
 	temp = readByte();
 	if(temp == -1){
-		packet->reset();
+		packet.reset();
 		return;
 	}else{
-		packet->cmd2 = temp;
+		packet.cmd2 = temp;
 	}
-
-	packet->data = new unsigned char[packet->len];
-	unsigned char readLen = Serial.readBytes((char *)packet->data, packet->len);
-
-	//读取的数据长度表示在制定时间内没有足够的数据传过来，认为此次通信有问题
-	if(readLen != packet->len)
-	{
-		packet->reset();
-		return;
-	}
-
-	if( ! packet->validate(readByte()))
-	{
-		packet->reset();
-		return;
-	}
-}
-ZBPacketReceive ZigbeeDevice::receivePacket()
-{
-	ZBPacketReceive packet;
-
-	//判断信息包是否开始
-	//返回默认msg，表示读取到了无效的dataPacket（len=0）
-	bool isBegin = false;
-	unsigned long cTime = millis();
-	while(Serial.available() > 0 && (millis() - cTime)<receiveTimeout)
-	{
-		if(Serial.read() == SOF)
-		{
-			isBegin = true;
-			break;
-		}
-	}
-	if( ! isBegin)
-		return ZBPacketReceive();
-
-	packet.len = readByte();
-	//等于-1表示在规定时间内没读到后续字节
-	//当前数据传输有问题，终止当前传输
-	if(packet.len == -1)
-		return ZBPacketReceive();
-
-	packet.cmd1 = readByte();
-	if(packet.cmd1 == -1)
-		return ZBPacketReceive();
-
-	packet.cmd2 = readByte();
-	if(packet.cmd2 == -1)
-		return ZBPacketReceive();
 
 	packet.data = new unsigned char[packet.len];
 	unsigned char readLen = Serial.readBytes((char *)packet.data, packet.len);
 
 	//读取的数据长度表示在制定时间内没有足够的数据传过来，认为此次通信有问题
 	if(readLen != packet.len)
-		return ZBPacketReceive();
+	{
+		packet.reset();
+		return;
+	}
 
 	if( ! packet.validate(readByte()))
-		return ZBPacketReceive();
-
-	return packet;
+	{
+		packet.reset();
+		return;
+	}
 }
 
-void ZigbeeDevice::sendPacket(ZBPacketSend& packet)
+void ZigbeeDevice::send(ZBPacketSend& packet)
 {
 	ZBCmd packetSendCmd;
 	ZBC::packetSend(packet, &packetSendCmd);

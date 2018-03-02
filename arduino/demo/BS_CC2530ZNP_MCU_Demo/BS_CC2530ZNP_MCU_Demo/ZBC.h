@@ -66,6 +66,8 @@ typedef struct ZBAppReg
 }ZBAppReg;
 
 //zigbee用于发送的信息包
+//srcEndpoint一定得是用ZBAppReg注册过的endpoint，才能从这个endpoint发送消息出去，否则zigbee会丢弃这个数据包
+
 typedef struct ZBPacketSend
 {
 	unsigned char dstAddr[2];

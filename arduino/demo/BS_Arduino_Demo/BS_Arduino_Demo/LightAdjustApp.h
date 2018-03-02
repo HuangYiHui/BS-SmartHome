@@ -2,18 +2,18 @@
 #define _BS_LIGHT_ADJUST_APP_H_
 
 #include "pt.h"
-#include "WithCommandApp.h"
+#include "SampleApp.h"
 #include "GY30Device.h"
 #include "LEDDevice.h"
 
-class LightAdjustApp : public WithCommandApp
+class LightAdjustApp : public SampleApp
 {
 public:
-	LightAdjustApp(GY30Device& gy30, LEDDevice& led1, LEDDevice& led2);
+	LightAdjustApp(unsigned int appID, GY30Device& gy30, LEDDevice& led1, LEDDevice& led2);
 	void init();
+	void run();
 private:
-	void exeCmd();
-	int exeTask();
+	int runTask();
 	GY30Device& gy30;
 	LEDDevice& led1;
 	LEDDevice& led2;

@@ -1,9 +1,10 @@
 #ifndef _BS_CFG_H_
 #define _BS_CFG_H_
 
-#define CUR_SYSTEM_IN
+#include "ZBC.h"
 
-#define SYSTEM_ADDR 0x1234
+#define CUR_SYSTEM_IN
+//#define CUR_SYSTEM_OUT
 
 #define SERAIL_BAUD_RATE	19200	//´®¿Ú²¨ÌØÂÊ
 

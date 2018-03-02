@@ -2,18 +2,18 @@
 #define _BS_FIRE_SENSOR_APP_H_
 
 #include "cfg.h"
-#include "WithCommandApp.h"
+#include "SampleApp.h"
 #include "pt.h"
 #include "FireSensorDevice.h"
 
-class FireSensorApp : public WithCommandApp
+class FireSensorApp : public SampleApp
 {
 public:
-	FireSensorApp(FireSensorDevice& fireSensor);
+	FireSensorApp(unsigned int appID, FireSensorDevice& fireSensor);
 	void init();
+	void run();
 private:
-	void exeCmd();
-	int exeTask();
+	int runTask();
 	FireSensorDevice& fireSensor;
 	struct pt pt;
 };
