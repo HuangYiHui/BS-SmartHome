@@ -1,0 +1,13 @@
+package com.demo;
+
+public class ZBAppReg {
+	private byte endPoint;
+	private byte appProfID[2];
+	private byte appDeviceID[2];
+	private byte endDevVer;
+	private byte latencyReq;
+	private byte appNumInClusters;
+	private byte appInClusterList[32];
+	private byte appNumOutClusters;
+	private byte appOutClusterList[32];
+}

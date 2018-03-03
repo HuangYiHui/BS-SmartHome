@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Sat Mar 03 11:24:06 CST 2018
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=rz2.jar
+manifest.mergeall=true
+manifest.mainclass=com.demo.Main
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=

@@ -1,10 +1,6 @@
-package port;
+package com.demo;
 import java.io.IOException;
 import java.io.InputStream;
-
-import main.Message;
-import main.MessageReceiveCallBack;
-import main.MessageReceiver;
 
 /*
  * port客户端消息接收器

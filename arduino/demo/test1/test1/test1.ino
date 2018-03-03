@@ -4,24 +4,21 @@
  Author:	ahui
 */
 
+unsigned long cTime;
 // the setup function runs once when you press reset or power the board
 void setup() {
-	pinMode(13, OUTPUT);
-	delay(2000);
 	Serial.begin(19200);
+	cTime = millis();
 }
 
-// the loop function runs over and over again until power down or reset
+// the loop function runs oer and over again until power down or reset
 void loop() {
-  
-	int i=1;
-	int j=0;
-	int k = i/j;
-	Serial.println(k);
-	while(true){
-		digitalWrite(13, HIGH);
-		delay(200);
-		digitalWrite(13, LOW);
-		delay(200);
+	if(millis()-cTime>2500){
+		Serial.println();
+		Serial.println("arduino run");
+		Serial.println();
+		cTime = millis();
 	}
+	if(Serial.available()>0)
+		Serial.print(Serial.read());
 }

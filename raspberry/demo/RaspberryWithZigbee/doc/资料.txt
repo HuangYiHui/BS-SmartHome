@@ -1,0 +1,2 @@
+RXTX for JAVA 串口编程实例(RXTX本身支持的Linux串口搜索只限制为/dev/ttyS*等，)
+	http://blog.csdn.net/cheng157507947/article/details/43764623

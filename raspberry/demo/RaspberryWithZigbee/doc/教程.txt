@@ -1,0 +1,53 @@
+使能raspberry的硬件串口(可能有其他做法)
+	树莓派的串行通讯的方式主要有两种：一种是通过树莓派GPIO口、一种是通过USB口
+	一定要注意串口通信电平，避免烧坏CPU
+	树莓派的串口默认为一个控制台，用于SSH调试使用，若要使用串口需要修改两处文件
+	sudo nano /boot/cmdline.txt
+		修改以下内容
+		dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4elevator=deadline rootwait
+		最终变为
+		dwc_otg.lpm_enable=0 console=tty1root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait  
+	sudo nano /etc/inittab
+		注释最后一行内容
+		#T0:23:respawn:/sbin/getty -LttyAMA0 115200 vt100  
+	sudo reboot
+硬件连接
+	编写Arduino串口发送和回显程序，并且少写到Arduino
+		unsigned long cTime;
+		void setup() {
+			Serial.begin(19200);
+			cTime = millis();
+		}
+		void loop() {
+			if(millis()-cTime>2500){
+				Serial.println();
+				Serial.println("arduino run");
+				Serial.println();
+				cTime = millis();
+			}
+			if(Serial.available()>0)
+				Serial.print(Serial.read());
+		}
+	按“树莓派 40Pin 引脚对照表.png”连接串口TX和RX和GND引脚到Arduino
+测试串口是否能正常工作(可略过)
+	安装串口调试工具
+		sudo apt-get install minicom
+	接通Arduino电源
+	启动串口调试
+		 minicom -b 19200 -o -D /dev/ttyAMA0
+		 ttyAMA0为串口名
+	可以看到minicom能间隔时间显示“arduino run”，键盘输入发送到Arduino的信息也能回显到minicom，说明测试成功
+把本项目用Fat jar打包(为了把依赖的RXTXComm一起打包进来)成可运行的jar,我的是rz.jar
+把rz.jar和portOption.properties(串口配置文件)拷贝到raspberry
+安装raspberry下的java串口库
+	sudo apt-get update
+	sudo apt-get install librxtx-java
+	可以在/usr/lib/jni下看到安装好的库文件，我们会用到librxtxSerial.so
+串口映射(因为RXTX本身支持的Linux串口搜索只限制为/dev/ttyS*等，其他名称的并不能支持，而raspberrypi中的串口名称为/dev/ttyAMA*，故无法找到系统串口，需要映射)
+	sudo ln -s /dev/ttyAMA0 /dev/ttyS33
+修改portOption.properties配置
+	串口名为：ttyS33
+	波特率为：19200
+测试程序	
+	按上面说的接好Arduino，接通电源
+	java –Djava.library.path=/usr/lib/jni –jar rz.jar

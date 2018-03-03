@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Fri Mar 02 23:24:08 CST 2018
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=RaspberryWithZigbee_fat.jar
+manifest.mergeall=true
+manifest.mainclass=
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=

@@ -1,0 +1,20 @@
+package com.demo;
+
+public class ZBAppReg {
+	private byte endPoint;
+	private byte[] appProfID;
+	private byte[] appDeviceID;
+	private byte endDevVer;
+	private byte latencyReq;
+	private byte appNumInClusters;
+	private byte[] appInClusterList;
+	private byte appNumOutClusters;
+	private byte[] appOutClusterList;
+	
+	public ZBAppReg()
+	{
+		appProfID = new byte[2];
+		appDeviceID = new byte[2];
+	}
+	}
+}

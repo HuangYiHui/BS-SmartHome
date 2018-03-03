@@ -7,12 +7,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import main.Message;
-import main.MessageClient;
-import main.MessageReceiveCallBack;
-import main.MessageReceiver;
-import main.MessageSender;
-
 /*
  * port客户端，用户接收和发送串口消息
  */
@@ -82,27 +76,22 @@ public class MyPortClient implements MessageClient{
         }
     }
 	
-	@Override
 	public void setReceiveCallBack(MessageReceiveCallBack callBack) {
 		// TODO Auto-generated method stub
 		receiver.setReceiveCallBack(callBack);
 	}
-
-	@Override
+	
 	public void startReceive() {
 		// TODO Auto-generated method stub
 		receiver.start();
 	}
 
-	@Override
 	public void stopReceive() {
 		// TODO Auto-generated method stub
 		receiver.stop();
 	}
 
-	@Override
 	public boolean send(Message message) {
-		// TODO Auto-generated method stub
 		return sender.send(message);
 	}
     

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 2 elements to &apos;RaspberryWithZigbee/src/com.zigbeee&apos;&#x0D;&#x0A;- Original project: &apos;RaspberryWithZigbee&apos;&#x0D;&#x0A;- Destination element: &apos;RaspberryWithZigbee/src/com.zigbeee&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     com.demo.ZBAppReg.java&#x0D;&#x0A;     com.demo.ZBC.java&#x0D;&#x0A;- Update references to refactored element" description="Move compilation units" destination="/src&lt;com.zigbeee" element1="/src&lt;com.demo{ZBAppReg.java" element2="/src&lt;com.demo{ZBC.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1520000540050" units="2" version="1.0"/>
+</session>
