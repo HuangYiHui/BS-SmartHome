@@ -1,0 +1,44 @@
+package com.demo;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import com.port.Message;
+import com.port.MessageReceiveCallBack;
+import com.port.MyPortClient;
+import com.zigbeee.Zigbee;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Zigbee zigbee = new Zigbee();
+		MyPortClient client = new MyPortClient();
+		client.setReceiveCallBack(new MessageReceiveCallBack() {
+			@Override
+			public void received(Message msg) {
+				// TODO Auto-generated method stub
+				if(msg.getCmd0() == 0x44 && msg.getCmd1() == 0x81){
+					int value = msg.getData()[17];
+					Uploader.uplaod(""+value);
+				}
+			}
+		});
+		zigbee.setPortClient(client);
+		zigbee.init();
+		zigbee.start();
+	}
+}

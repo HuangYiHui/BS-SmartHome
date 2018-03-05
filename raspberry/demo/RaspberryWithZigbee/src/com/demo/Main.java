@@ -20,8 +20,7 @@ public class Main {
 					System.out.printf("%x\n", msg.getCmd1());
 					System.out.print("data : ");
 					for(byte b : msg.getData()){
-						System.out.printf("%x\n", b);
-						System.out.print(",");
+						System.out.printf("%x,", b);
 					}
 					System.out.println();
 					System.out.println("----msg----");

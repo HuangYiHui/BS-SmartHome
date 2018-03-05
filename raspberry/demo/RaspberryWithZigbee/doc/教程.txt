@@ -43,6 +43,8 @@
 	sudo apt-get update
 	sudo apt-get install librxtx-java
 	可以在/usr/lib/jni下看到安装好的库文件，我们会用到librxtxSerial.so
+	将java.library.path复制到/usr/lib，让java能搜到库文件
+	sudo mv /usr/lib/jni/librxtxSerial.so /usr/lib
 串口映射(因为RXTX本身支持的Linux串口搜索只限制为/dev/ttyS*等，其他名称的并不能支持，而raspberrypi中的串口名称为/dev/ttyAMA*，故无法找到系统串口，需要映射)
 	sudo ln -s /dev/ttyAMA0 /dev/ttyS33
 修改portOption.properties配置
@@ -50,4 +52,4 @@
 	波特率为：19200
 测试程序	
 	按上面说的接好Arduino，接通电源
-	java –Djava.library.path=/usr/lib/jni –jar rz.jar
+	java –jar rz.jar
