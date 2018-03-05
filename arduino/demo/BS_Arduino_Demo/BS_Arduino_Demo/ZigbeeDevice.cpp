@@ -70,28 +70,33 @@ void ZigbeeDevice::setAppRegs(ZBAppReg* appRegs, unsigned int count)
 	}
 }
 
+void ZigbeeDevice::setReceiveTimeout(unsigned int timeout)
+{
+	this->receiveTimeout = timeout;
+}
+
 void ZigbeeDevice::init()
 {
 	//重启，时间太短不行，比如1000
 	Serial.write((byte*)ZBC::CMD_DEVICE_RESET.cmd, ZBC::CMD_DEVICE_RESET.len);
-	delay(1800);
+	delay(2000);
 	//rec(1500);
 
 	//设置不从上次状态启动
 	Serial.write((byte*)ZBC::CMD_STARTUP_WITHOUT_LAST_STATE.cmd, ZBC::CMD_STARTUP_WITHOUT_LAST_STATE.len);
-	delay(300);
+	delay(500);
 	//rec(300);
 
 	//重启
 	Serial.write((byte*)ZBC::CMD_DEVICE_RESET.cmd, ZBC::CMD_DEVICE_RESET.len);
-	delay(1800);
+	delay(2000);
 	//rec(1500);
 	
 	//设置0x00000800信道，默认也是0x00000800信道
 	ZBCmd chanelCfgCmd;
 	ZBC::chanlistCfg(cfg.channel, &chanelCfgCmd);
 	Serial.write((byte*)chanelCfgCmd.cmd, chanelCfgCmd.len);
-	delay(300);
+	delay(500);
 	//rec(300);
 	
 
@@ -99,23 +104,29 @@ void ZigbeeDevice::init()
 	ZBCmd PANIDCfgCmd;
 	ZBC::PANIDCfg(cfg.panID, &PANIDCfgCmd);
 	Serial.write((byte*)PANIDCfgCmd.cmd, PANIDCfgCmd.len);
-	delay(300);
+	delay(500);
 	//rec(300);
 
 	//设置zigbee设备类型（协调器/路由器/终端）
 	ZBCmd deviceTypeCfgCmd;
 	ZBC::deviceTypeCfg(cfg.zdType, &deviceTypeCfgCmd);
 	Serial.write((byte*)deviceTypeCfgCmd.cmd, deviceTypeCfgCmd.len);
-	delay(300);
+	delay(500);
 	//rec(300);
 
+	//打开设备mac地址或网络地址查寻回显开关
+	Serial.write((byte*)ZBC::CMD_ZDO_DIRECT_CB.cmd, ZBC::CMD_ZDO_DIRECT_CB.len);
+	delay(500);
+	//rec(300);
+
+	//注册应用
 	for(unsigned int i=0;i<appRegCount;i++)
 	{
 		//Serial.println("------register--------");
 		ZBCmd registerAppCmd;
 		ZBC::appRegister(appRegs[i], &registerAppCmd);
 		Serial.write((byte*)registerAppCmd.cmd, registerAppCmd.len);
-		delay(300);
+		delay(500);
 	}
 	//rec(300);
 

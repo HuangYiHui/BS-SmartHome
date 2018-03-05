@@ -1,0 +1,19 @@
+package com.zigbeee;
+
+import java.util.Arrays;
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+		int[] bs = new int[4];
+		bs[0] = 1;
+		bs[1] = 2;
+		bs[2] = 3;
+		bs[3] = 4;
+		int[] xs = Arrays.copyOfRange(bs, 1, bs.length);
+		for(int n:xs)
+			System.out.println(n);
+	}
+
+}

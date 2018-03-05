@@ -3,8 +3,8 @@
 
 #include "ZBC.h"
 
-#define CUR_SYSTEM_IN
-//#define CUR_SYSTEM_OUT
+//#define CUR_SYSTEM_IN
+#define CUR_SYSTEM_OUT
 
 #define SERAIL_BAUD_RATE	19200	//´®¿Ú²¨ÌØÂÊ
 

@@ -20,42 +20,40 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\BS_Arduino_Demo.cpp.o: \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\AppMsg.h \
  D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemAPI.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\inPinDef.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\outPinDef.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\DHT11Device.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleDevice.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IDevice.h \
+ D:\software1\arduino-1.8.5\libraries\DHT_sensor/DHT.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\TouchSensorDevice.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SpeakerDevice.h \
+ D:\software1\arduino-1.8.5\libraries\TonePlayer/TonePlayer.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FC28Device.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\GY30Device.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src/Wire.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Stream.h \
+ D:\software1\arduino-1.8.5\libraries\BH1750xtra/BH1750xtra.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\LEDDevice.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\PM25Device.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\LCDDevice.h \
  D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Nokia_5110.h \
  D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Display_Mode.h \
  D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Mux_Rate.h \
  D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Cursor.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleDevice.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IDevice.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\AlarmDevice.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\MQ2Device.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\DHT11Device.h \
- D:\software1\arduino-1.8.5\libraries\DHT_sensor/DHT.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FireSensorDevice.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IRRemoteDevice.h \
- D:\software1\arduino-1.8.5\libraries\IRremote/IRremote.h \
- D:\software1\arduino-1.8.5\libraries\IRremote/IRremoteInt.h \
- D:\software1\arduino-1.8.5\libraries\IRremote/boarddefs.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeDevice.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\MQ2App.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleApp.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\DHT11App.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-timer.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-sem.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\DHT11App.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FireSensorApp.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IRRemoteApp.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleApp.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\DoorbellApp.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FC28App.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\LightAdjustApp.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\PM25App.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeApp.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Debuger.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Test1App.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Test2App.h \
- D:\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src/Wire.h \
- D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Stream.h \
- D:\software1\arduino-1.8.5\libraries\LiquidCrystal_I2C/LiquidCrystal_I2C.h \
- D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Print.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Test3App.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemInCfg.h
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOutCfg.h

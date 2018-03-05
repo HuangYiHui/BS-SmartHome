@@ -14,8 +14,6 @@ void ZigbeeApp::init()
 	ZBAppReg appRegs[1];
 	appRegs[0] = ZBAppReg();
 	appRegs[0].endPoint = 0x78;
-	appRegs[0].appDeviceID[0] = 0x12;
-	appRegs[0].appDeviceID[1] = 0x34;
 	zigbee.setAppRegs(appRegs, 1);
 
 	zigbee.ready();
@@ -36,8 +34,8 @@ int ZigbeeApp::exeTask()
 	{
 		PT_TIMER_DELAY(&pt, 2000);
 		ZBPacketSend packet;
-		packet.dstAddr[0] = 0x12;
-		packet.dstAddr[1] = 0x34;
+		packet.dstAddr[0] = 0xff;
+		packet.dstAddr[1] = 0xff;
 		packet.dstEndpoint = 0x78;
 		packet.srcEndpoint = 0x78;
 		packet.len = 3;
@@ -49,7 +47,7 @@ int ZigbeeApp::exeTask()
 		packet.clusterID[1] = 0x00;
 		packet.options = 0x00;
 		packet.radius = 0x00;
-		packet.transID = 0x01;
+		packet.transID = 0x00;
 		zigbee.send(packet);
 		//Serial.println("zigbeeApp run...");
 	}
@@ -59,8 +57,8 @@ int ZigbeeApp::exeTask()
 
 void ZigbeeApp::run()
 {
-//	exeTask();
-//	return;
+	exeTask();
+	return;
 
 	if( ! zigbee.isDataComing())
 		return;

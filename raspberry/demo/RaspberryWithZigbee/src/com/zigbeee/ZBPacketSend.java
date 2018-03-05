@@ -2,20 +2,14 @@ package com.zigbeee;
 
 public class ZBPacketSend {
 
-	private byte[] dstAddr;
+	private byte[] dstAddr = new byte[2];
 	private byte dstEndpoint;
 	private byte srcEndpoint;
-	private byte[] clusterID;
+	private byte[] clusterID = new byte[2];
 	private byte transID;
 	private byte options;
 	private byte radius;
-	private byte len;
-	private byte[] data;
-	
-	ZBPacketSend(){
-		dstAddr = new byte[2];
-		clusterID = new byte[2];
-	}
+	private byte[] data = new byte[0];
 
 	public byte[] getDstAddr() {
 		return dstAddr;
@@ -73,14 +67,6 @@ public class ZBPacketSend {
 		this.radius = radius;
 	}
 
-	public byte getLen() {
-		return len;
-	}
-
-	public void setLen(byte len) {
-		this.len = len;
-	}
-
 	public byte[] getData() {
 		return data;
 	}
@@ -88,6 +74,4 @@ public class ZBPacketSend {
 	public void setData(byte[] data) {
 		this.data = data.clone();
 	}
-	
-	
 }

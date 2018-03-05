@@ -1,0 +1,14 @@
+package com.zigbeee;
+
+import java.util.Arrays;
+
+public class Test {
+
+	public static void main(String[] args) {
+		for(byte b : ZBCG.CMD_BOOTLOADDER_RESET){
+			System.out.print("%x", b);
+		}
+		
+	}
+
+}

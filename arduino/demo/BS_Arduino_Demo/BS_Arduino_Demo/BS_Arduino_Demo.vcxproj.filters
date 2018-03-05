@@ -92,9 +92,6 @@
     <ClInclude Include="cfg.h">
       <Filter>system</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\BS_CC2530ZNP_MCU_Demo\BS_CC2530ZNP_MCU_Demo\ZBC.h">
-      <Filter>assist</Filter>
-    </ClInclude>
     <ClInclude Include="ZigbeeDevice.h">
       <Filter>driver</Filter>
     </ClInclude>
@@ -127,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="Test2App.h">
       <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="ZBC.h">
+      <Filter>assist</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -216,9 +216,6 @@
     <ClCompile Include="PM25App.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\BS_CC2530ZNP_MCU_Demo\BS_CC2530ZNP_MCU_Demo\ZBC.cpp">
-      <Filter>assist</Filter>
-    </ClCompile>
     <ClCompile Include="ZigbeeDevice.cpp">
       <Filter>driver</Filter>
     </ClCompile>
@@ -239,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="Test2App.cpp">
       <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="ZBC.cpp">
+      <Filter>assist</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

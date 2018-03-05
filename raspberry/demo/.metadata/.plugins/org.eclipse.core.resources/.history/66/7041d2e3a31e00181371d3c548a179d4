@@ -1,0 +1,40 @@
+package com.zigbeee;
+
+import java.util.ArrayList;
+
+public class Zigbee {
+	
+	private int receiveTimeou = 300;
+	private ZBCfg cfg;
+	private ArrayList<ZBAppReg> appRegList;
+	
+	public Zigbee(ZBCfg cfg){
+		this.cfg = new ZBCfg(cfg);
+	}
+	
+	public Zigbee(ArrayList<ZBAppReg> appRegList){
+		
+		this.appRegList = new ArrayList();
+		for(int i=0; i<appRegList.size(); i++){
+			this.appRegList.add(new ZBAppReg(appRegList.get(i)));
+		}
+	}
+	ZigbeeDevice(ZBCfg& cfg, ZBAppReg* appRegs, unsigned int appRegCount);
+	~ZigbeeDevice();
+	void setChannel(unsigned char channel[4]);
+	void setPANID(unsigned char panID[2]);
+	void setZDType(unsigned char zdType);	//设置zigbee设备类型，设备类型在↑用宏定义
+	void setAppRegs(ZBAppReg* appRegs, unsigned int count);	//设置应用注册信息
+	void sendReceiveTimeout(unsigned int timeout);	//设置接收数据包超时时间，单位为ms
+	void init();
+	void start();
+	bool isDataComing();
+	void receive(ZBPacketReceive& packet);
+	void send(ZBPacketSend& packet);
+
+	
+	ZBAppReg* appRegs;
+	unsigned int appRegCount;
+	unsigned char calCrc(unsigned char beginValue, unsigned char *pMsg, unsigned char len);
+	int readByte();*/
+}

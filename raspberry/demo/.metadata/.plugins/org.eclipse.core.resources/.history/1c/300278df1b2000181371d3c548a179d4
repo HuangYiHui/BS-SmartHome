@@ -1,0 +1,25 @@
+package com.demo;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MyPortClient portClient;
+		try {
+			portClient = new MyPortClient();
+			portClient.connect();
+			portClient.setReceiveCallBack(new MessageReceiveCallBack() {
+				
+				@Override
+				public void received(Message msg) {
+					// TODO Auto-generated method stub
+				}
+			});
+			portClient.startReceive();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

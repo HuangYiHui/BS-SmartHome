@@ -17,5 +17,14 @@
   <ItemGroup>
     <None Include="test1.ino" />
   </ItemGroup>
- 
+  <ItemGroup>
+    <ClCompile Include="ZBC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ZBC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

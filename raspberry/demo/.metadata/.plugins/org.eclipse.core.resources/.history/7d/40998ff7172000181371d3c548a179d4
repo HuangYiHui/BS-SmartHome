@@ -1,0 +1,111 @@
+package com.demo;
+import java.io.IOException;
+import java.io.InputStream;
+
+/*
+ * port客户端消息接收器/
+ */
+
+public class PortReceiver implements MessageReceiver {
+
+	private MessageReceiveCallBack callBack;
+	private Thread thread;
+	private boolean isStart;
+	
+	public PortReceiver(final InputStream inputStream){
+		isStart = false;
+		thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					if(callBack != null){
+						byte[] buffer = new byte[1024];
+			            int len = -1;
+			            while(true){
+				            if ( isStart && (( len = inputStream.read(buffer)) > -1 ))
+			                {
+				            	Message msg = new Message();
+				            	msg.setMsg(new String(buffer,0,len));
+				            	callBack.received(msg);
+				            	thread.currentThread().sleep(30);
+			                }
+			            }
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	@Override
+	public void setReceiveCallBack(MessageReceiveCallBack callBack) {
+		// TODO Auto-generated method stub
+		this.callBack = callBack;
+	}
+
+	@Override
+	public void start() {
+		isStart = true;
+		thread.start();
+	}
+
+	@Override
+	public void stop() {
+		isStart = false;
+	}
+	
+	public Message reveive(InputStream iStream){
+		//判断信息包是否开始
+		
+		if( inputStream.read() == 0xfe)
+		{
+			packet.reset();
+			return;
+		}
+
+		int temp = readByte();
+
+		//等于-1表示在规定时间内没读到后续字节
+		//当前数据传输有问题，终止当前传输
+		if(temp == -1){
+			packet.reset();
+			return;
+		}
+		else{
+			packet.len = temp;
+		}
+
+		temp = readByte();
+		if(temp == -1){
+			packet.reset();
+			return;
+		}else{
+			packet.cmd1 = temp;
+		}
+
+		temp = readByte();
+		if(temp == -1){
+			packet.reset();
+			return;
+		}else{
+			packet.cmd2 = temp;
+		}
+
+		packet.data = new unsigned char[packet.len];
+		unsigned char readLen = Serial.readBytes((char *)packet.data, packet.len);
+
+		//读取的数据长度表示在制定时间内没有足够的数据传过来，认为此次通信有问题
+		if(readLen != packet.len)
+		{
+			packet.reset();
+			return;
+		}
+
+		if( ! packet.validate(readByte()))
+		{
+			packet.reset();
+			return;
+		}
+	}
+}

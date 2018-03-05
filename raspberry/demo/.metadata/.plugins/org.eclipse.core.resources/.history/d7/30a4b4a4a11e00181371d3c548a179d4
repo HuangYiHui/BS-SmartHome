@@ -1,0 +1,54 @@
+package com.zigbeee;
+
+public class ZBCfg {
+	
+	private byte[] channel = new byte[4];	//信道
+	private byte[] panID = new byte[2];		//网络号
+	private ZBDeviceType zdType;		//zigbee设备类型
+	
+	public ZBCfg()
+	{
+		//设置0x00000800信道，默认也是0x00000800信道
+		channel[0] = 0x00;
+		channel[1] = 0x08;
+		channel[2] = 0x00;
+		channel[3] = 0x00;
+
+		//设置默认网络号为1234
+		panID[0] = 0x34;
+		panID[1] = 0x12;
+
+		//设置默认设备类型为路由器
+		zdType = ZBDeviceType.ZB_DEVICE_TYPE_ROUTE;
+	}
+
+	public ZBCfg copy(){
+		ZBCfg cfg = new ZBCfg();
+		cfg.setChannel(channel.clone());
+		panID = cfg.getPanID().clone();
+		zdType = cfg.getZdType();
+		return cfg;
+	}
+	
+	public byte[] getChannel() {
+		return channel;
+	}
+	public void setChannel(byte[] channel) {
+		this.channel = channel;
+	}
+	public byte[] getPanID() {
+		return panID;
+	}
+	public void setPanID(byte[] panID) {
+		this.panID = panID;
+	}
+
+	public ZBDeviceType getZdType() {
+		return zdType;
+	}
+
+	public void setZdType(ZBDeviceType zdType) {
+		this.zdType = zdType;
+	}
+	
+}

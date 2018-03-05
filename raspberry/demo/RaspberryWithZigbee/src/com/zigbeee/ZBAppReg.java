@@ -1,40 +1,42 @@
 package com.zigbeee;
 
 public class ZBAppReg {
-	private byte endPoint;
-	private byte[] appProfID;
-	private byte[] appDeviceID;
+	
+	private byte endpoint;
+	private byte[] appProfID = new byte[2];
+	private byte[] appDeviceID = new byte[2];
 	private byte endDevVer;
 	private byte latencyReq;
 	private byte appNumInClusters;
-	private byte[] appInClusterList;
+	private byte[] appInClusterList = new byte[0];
 	private byte appNumOutClusters;
-	private byte[] appOutClusterList;
+	private byte[] appOutClusterList = new byte[0];
 	
 	public ZBAppReg()
+	{	
+		endpoint = (byte) 0xff;
+	}
+	
+	public ZBAppReg(ZBAppReg reg)
 	{
-		appProfID = new byte[2];
-		appDeviceID = new byte[2];
-		appInClusterList = new byte[32];
-		appOutClusterList = new byte[32];
-		
-		endPoint = (byte) 0xff;
-		appProfID[0] = 0x00;
-		appProfID[1] = 0x00;
-		appDeviceID[0] = 0x00;
-		appDeviceID[0] = 0x00;
-		endDevVer = 0x00;
-		latencyReq = 0x00;
-		appNumInClusters = 0x00;
-		appNumOutClusters = 0x00;
+		endpoint = reg.getEndpoint();
+		setAppProfID(reg.getAppProfID());
+		setAppDeviceID(reg.getAppDeviceID());
+		endDevVer = reg.getEndDevVer();
+		latencyReq = reg.getLatencyReq();
+		appNumInClusters = reg.getAppNumInClusters();
+		setAppInClusterList(reg.getAppInClusterList());
+		appNumOutClusters = reg.getAppNumOutClusters();
+		setAppOutClusterList(reg.getAppOutClusterList());
+	}
+	
+	
+	public byte getEndpoint() {
+		return endpoint;
 	}
 
-	public byte getEndPoint() {
-		return endPoint;
-	}
-
-	public void setEndPoint(byte endPoint) {
-		this.endPoint = endPoint;
+	public void setEndpoint(byte endpoint) {
+		this.endpoint = endpoint;
 	}
 
 	public byte[] getAppProfID() {
@@ -75,6 +77,7 @@ public class ZBAppReg {
 
 	public void setAppNumInClusters(byte appNumInClusters) {
 		this.appNumInClusters = appNumInClusters;
+		appInClusterList = new byte[appNumInClusters];
 	}
 
 	public byte[] getAppInClusterList() {
@@ -82,7 +85,8 @@ public class ZBAppReg {
 	}
 
 	public void setAppInClusterList(byte[] appInClusterList) {
-		this.appInClusterList = appInClusterList;
+		this.appInClusterList = appInClusterList.clone();
+		appOutClusterList = new byte[appNumOutClusters];
 	}
 
 	public byte getAppNumOutClusters() {

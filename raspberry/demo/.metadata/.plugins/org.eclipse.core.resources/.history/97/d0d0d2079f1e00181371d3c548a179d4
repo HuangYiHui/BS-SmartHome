@@ -1,0 +1,7 @@
+package com.zigbeee;
+
+public enum ZBDeviceType {
+	ZB_DEVICE_TYPE_COORDINATOR(1),
+	ZB_DEVICE_TYPE_ROUTE(2),
+	ZB_DEVICE_TYPE_ENDPOINT(3)
+}

@@ -7,7 +7,7 @@ import java.io.OutputStream;
  * port客户端发送接收器
  */
 
-public class PortSender implements MessageSender {
+public class PortSender{
 
 	private OutputStream outputStream;
 	
@@ -15,10 +15,9 @@ public class PortSender implements MessageSender {
 		this.outputStream = outputStream;
 	}
 	
-	@Override
-	public boolean send(final Message message){
+	public boolean send(final byte[] bs){
 		try {
-			outputStream.write(message.getMsg().getBytes());
+			outputStream.write(bs);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;

@@ -10,14 +10,14 @@ import java.util.Properties;
 /*
  * port客户端，用户接收和发送串口消息
  */
-public class MyPortClient implements MessageClient{
+public class MyPortClient{
 	
 	//配置文件相对路径
 	private static final String OPTION_FILE_PATH = System.getProperty("file.separator")+"portOption.properties";
 	private PortOption option;
 	private SerialPort serialPort;
-	private MessageReceiver receiver;
-	private MessageSender sender;
+	private PortReceiver receiver;
+	private PortSender sender;
 	
 	public MyPortClient(){
 		this.option = loadOption();
@@ -91,8 +91,8 @@ public class MyPortClient implements MessageClient{
 		receiver.stop();
 	}
 
-	public boolean send(Message message) {
-		return sender.send(message);
+	public boolean send(byte[] bs) {
+		return sender.send(bs);
 	}
     
 }

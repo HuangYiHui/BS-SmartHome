@@ -4,25 +4,30 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		MessageClient portClient;
+		MyPortClient portClient;
 		try {
 			portClient = new MyPortClient();
 			portClient.connect();
 			portClient.setReceiveCallBack(new MessageReceiveCallBack() {
 				
 				@Override
-				public void received(Message message) {
+				public void received(Message msg) {
 					// TODO Auto-generated method stub
-					System.out.println(message.getMsg());
+					System.out.println("----msg----");
+					System.out.print("cmd0 : ");
+					System.out.printf("%x\n", msg.getCmd0());
+					System.out.print("cmd1 : ");
+					System.out.printf("%x\n", msg.getCmd1());
+					System.out.print("data : ");
+					for(byte b : msg.getData()){
+						System.out.printf("%x\n", b);
+						System.out.print(",");
+					}
+					System.out.println();
+					System.out.println("----msg----");
 				}
 			});
 			portClient.startReceive();
-			while(true){
-				Message message  =new Message();
-				message.setMsg("1234567890");
-				portClient.send(message);
-				Thread.currentThread().sleep(500);
-			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

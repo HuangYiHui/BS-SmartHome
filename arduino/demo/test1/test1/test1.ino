@@ -4,21 +4,75 @@
  Author:	ahui
 */
 
-unsigned long cTime;
-// the setup function runs once when you press reset or power the board
-void setup() {
-	Serial.begin(19200);
-	cTime = millis();
+#include "ZBC.h"
+
+void printCmd(ZBCmd& cmd)
+{
+	for(int i=0;i<cmd.len;i++)
+	{
+		Serial.print(cmd.cmd[i], HEX);
+		Serial.print(",");
+	}
+	Serial.println();
 }
 
-// the loop function runs oer and over again until power down or reset
-void loop() {
-	if(millis()-cTime>2500){
-		Serial.println();
-		Serial.println("arduino run");
-		Serial.println();
-		cTime = millis();
-	}
-	if(Serial.available()>0)
-		Serial.print(Serial.read());
+void test()
+{
+	ZBCfg cfg;
+
+	ZBCmd cmd1;
+	ZBC::chanlistCfg(cfg.channel, &cmd1);
+	Serial.print("chanlistCfg : ");
+	printCmd(cmd1);
+
+	ZBCmd cmd2;
+	ZBC::PANIDCfg(cfg.panID, &cmd2);
+	Serial.print("PANIDCfg : ");
+	printCmd(cmd2);
+
+	ZBCmd cmd3;
+	ZBC::deviceTypeCfg(0x00, &cmd3);
+	Serial.print("deviceTypeCfg : ");
+	printCmd(cmd3);
+
+	ZBCmd cmd4;
+	ZBAppReg reg;
+	reg.endPoint = 0x78;
+	ZBC::appRegister(reg, &cmd4);
+	Serial.print("appRegister : ");
+	printCmd(cmd4);
+
+	ZBCmd cmd5;
+	ZBPacketSend packet;
+	packet.dstAddr[0] = 0x01;
+	packet.dstAddr[1] = 0x02;
+	packet.dstEndpoint = 0x03;
+	packet.srcEndpoint = 0x04;
+	packet.clusterID[0] = 0x05;
+	packet.clusterID[1] = 0x06;
+	packet.options = 0x07;
+	packet.radius = 0x08;
+	packet.transID = 0x09;
+	packet.len = 0x03;
+	packet.data = new unsigned char[3];
+	packet.data[0] = 0x01;
+	packet.data[1] = 0x02;
+	packet.data[2] = 0x03;
+	ZBC::packetSend(packet, &cmd5);
+	Serial.print("packetSend : ");
+	printCmd(cmd5);
+
+	while(true);
 }
+
+unsigned long cTime;
+void setup() {
+	Serial.begin(19200);
+//	test();
+	cTime = millis();
+}
+void loop() {
+	Serial.write((byte*)ZBC::CMD_STARTUP_WITH_LAST_STATE.cmd, ZBC::CMD_STARTUP_WITH_LAST_STATE.len);
+	delay(1500);
+}
+

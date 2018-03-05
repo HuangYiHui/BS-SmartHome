@@ -1,0 +1,20 @@
+package com.zigbeee;
+
+import java.util.Arrays;
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+		int[] bs = new int[4];
+		bs[0] = 1;
+		bs[1] = 2;
+		bs[2] = 3;
+		bs[3] = 4;
+		int[] xs = new int[2];
+		System.arraycopy(bs, 1, xs, 0, 2);
+		for(int n:xs)
+			System.out.println(n);
+	}
+
+}
