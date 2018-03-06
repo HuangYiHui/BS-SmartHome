@@ -67,6 +67,7 @@ SampleSystem curSystem(SYSTEM_ADDR_IN);
 #include "LightAdjustApp.h"
 #include "PM25App.h"
 #include "ZigbeeApp.h"
+#include "Test2App.h"
 #include "Test3App.h"
 
 #include "SystemOutCfg.h"
@@ -82,6 +83,7 @@ PM25Device pm25(PIN_PM25_LED, PIN_PM25_VO);
 ZigbeeDevice zigbee;
 
 ZigbeeApp zigbeeApp(ZIGBEE_APP_ID, zigbee);
+Test2App test2App(0x78);
 Test3App test3App(TEST3_APP_ID);
 
 SampleSystem curSystem(SYSTEM_ADDR_OUT);

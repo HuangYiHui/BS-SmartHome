@@ -57,8 +57,8 @@ int ZigbeeApp::exeTask()
 
 void ZigbeeApp::run()
 {
-	exeTask();
-	return;
+//	exeTask();
+//	return;
 
 	if( ! zigbee.isDataComing())
 		return;

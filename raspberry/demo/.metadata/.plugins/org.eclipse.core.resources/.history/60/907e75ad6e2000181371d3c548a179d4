@@ -1,0 +1,28 @@
+package com.demo;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+public class HttpCmdGetter {
+	
+	private String url;
+	private String apiKey;
+	public String[] getHttpCmd(){
+		try{
+			HttpGet httpPost = new HttpGet(url);
+			httpPost.addHeader("APIKEY", apiKey);
+			
+			//执行请求
+			HttpClient client = HttpClients.createDefault();
+			HttpResponse response =  client.execute(httpPost);
+			//打印结果
+			System.out.println(EntityUtils.toString(response.getEntity()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

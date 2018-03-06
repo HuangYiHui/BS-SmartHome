@@ -38,6 +38,27 @@ int Test2App::exeTask()
 			lcd->clear();
 			lcd->print("data:");
 			//Serial.println("data:");
+
+			bool isRight = true;
+			if(msg->len == 5){
+				for(int i=0;i<5;i++){
+					if(msg->data[i]!=0x56){
+						isRight = false;
+					}
+				}
+			}else{
+				isRight = false;
+			}
+
+			if(isRight){
+				for(int i=0;i<20;i++){
+				digitalWrite(13, HIGH);
+				delay(50);
+				digitalWrite(13, LOW);
+				delay(50);
+		}
+			}
+
 			for(unsigned int i=0;i<msg->len;i++)
 			{
 				lcd->print(msg->data[i], HEX);

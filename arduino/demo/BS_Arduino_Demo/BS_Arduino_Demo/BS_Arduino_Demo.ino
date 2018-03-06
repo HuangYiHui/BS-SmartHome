@@ -36,7 +36,7 @@ void setup() {
 void setup() {
 
 	curSystem.installApp(&zigbeeApp);
-	//curSystem.installApp(&test3App);
+	curSystem.installApp(&test2App);
 
 	//设备初始化
 	Serial.begin(SERAIL_BAUD_RATE);

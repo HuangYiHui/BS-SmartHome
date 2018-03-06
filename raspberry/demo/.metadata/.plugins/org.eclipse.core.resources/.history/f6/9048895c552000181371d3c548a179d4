@@ -1,0 +1,39 @@
+package com.demo;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		try{
+			//url
+			String url = "http://119.29.36.20/dgutlink/api/device/21/command";
+			//post请求
+			HttpGet httpPost = new HttpGet(url);
+			//添加请求头
+			httpPost.addHeader("APIKEY", "6000000620879617");
+			
+			//执行请求
+			HttpClient client = HttpClients.createDefault();
+			HttpResponse response =  client.execute(httpPost);
+			//打印结果
+			System.out.println(EntityUtils.toString(response.getEntity()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
