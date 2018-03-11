@@ -1,0 +1,7 @@
+package bs.pi.gateway.Msg;
+
+public class UploadDataToHttpServerMsg implements Msg {
+
+	public final static String MSG_NAME = "UploadDataToHttpServerMsg";
+	
+}

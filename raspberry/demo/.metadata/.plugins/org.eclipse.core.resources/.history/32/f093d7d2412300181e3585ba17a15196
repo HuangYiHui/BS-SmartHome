@@ -1,0 +1,30 @@
+package bs.pi.gateway.main;
+
+import bs.pi.gateway.client.port.PortClient;
+import bs.pi.gateway.client.zigbee.ZigbeeClient;
+import bs.pi.gateway.converter.ZigbeeConverter;
+import bs.pi.gateway.processor.MyProcessor;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+		Gateway gateway = new Gateway();
+		
+		PortClient portClient = new PortClient();
+		portClient.setCfgPath(PortClient.DEFAULT_CFG_PATH);
+		
+		ZigbeeClient zigbeeClient = new ZigbeeClient(ZigbeeClient.DEFAULT_CFG_PATH, portClient);
+		zigbeeClient.setConverter(new ZigbeeConverter());
+		zigbeeClient.init();
+		zigbeeClient.start();
+		
+		MyProcessor processor = new MyProcessor();
+		
+		gateway.installSender(zigbeeClient.getSender());
+		gateway.installReceiver(zigbeeClient.getReceiver());
+		
+		gateway.setProcessor(processor);
+		gateway.start();
+	}
+
+}

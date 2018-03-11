@@ -1,0 +1,12 @@
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class Debugger {
+
+	public static void printHashMap(HashMap<String, Object> msg){
+		for(Map.Entry<String, Object> entry : msg){
+			System.out.println(entry.getKey()+" : "+entry.getValue());
+		}
+	}
+}

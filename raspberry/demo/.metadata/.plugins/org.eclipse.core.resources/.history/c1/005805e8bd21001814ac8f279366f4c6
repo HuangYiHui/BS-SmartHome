@@ -1,0 +1,34 @@
+package bs.app.zigbee.zigbee;
+
+import bs.app.zigbee.port.PortCfg;
+
+public class ZigbeeCfg {
+	
+	public final static byte ZIGBEE_DEVICE_TYPE_COORDINATOR = 0x00;
+	public final static byte ZIGBEE_DEVICE_TYPE_ROUTE = 0x01;
+	public final static byte ZIGBEE_DEVICE_TYPE_END_DEVICE = 0x02;
+	
+	public final static byte DEFAULT_ZIGBEE_DEVICE_TYPE = ZIGBEE_DEVICE_TYPE_ROUTE;
+	
+	private byte[] channel;	//信道
+	private byte[] panID;		//网络号
+	private byte zdType;		//zigbee设备类型
+	private PortCfg portCfg;
+	
+	public ZigbeeCfg(){
+		//设置0x00000800信道，默认也是0x00000800信道
+		channel = new byte[4];
+		channel[0] = 0x00;
+		channel[1] = 0x08;
+		channel[2] = 0x00;
+		channel[3] = 0x00;
+
+		//设置默认网络号为1234
+		panID = new byte[2];
+		panID[0] = 0x34;
+		panID[1] = 0x12;
+
+		//设置默认设备类型为路由器
+		zdType = DEFAULT_ZIGBEE_DEVICE_TYPE;
+	}
+}

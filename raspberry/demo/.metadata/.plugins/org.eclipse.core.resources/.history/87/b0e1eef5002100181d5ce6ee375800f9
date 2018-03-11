@@ -1,0 +1,59 @@
+package bs.pi.gateway.client.http;
+
+import java.util.Map;
+import java.util.Set;
+
+import net.sf.json.JSONObject;
+import bs.pi.gateway.main.MsgClient;
+import bs.pi.gateway.main.MsgReceivedCallback;
+
+public class HttpMsgClient implements MsgClient {
+
+	private HttpMsgClientCfg cfg;
+	private HttpMsgReceiver receiver;
+	
+	public HttpMsgClient(HttpMsgClientCfg cfg){
+		this.cfg = cfg;
+	}
+	
+	@Override
+	public void connect() throws Exception {
+		
+	}
+
+	@Override
+	public void setReceivedCallBack(MsgReceivedCallback callback) {
+		// TODO Auto-generated method stub
+		receiver.setReceiveCallBack(callback);
+	}
+
+	@Override
+	public void startReceive() {
+		// TODO Auto-generated method stub
+		receiver.start();
+	}
+
+	@Override
+	public void stopReceive() {
+		// TODO Auto-generated method stub
+		receiver.stop();
+	}
+
+	@Override
+	public boolean send(JSONObject msg) {
+		if(msg == null)
+			return false;
+		
+		if("SendMsgToHttpService".equals( msg.getString("CmdName") )){
+			String url = msg.getString("URI");
+			String apiKey = msg.getString("APIKEY");
+			String method = msg.getString("Method");
+			if(msg.has("Params")){
+				Set<Map.Entry<String, Object>> paramSet = msg.getJSONObject("Params").entrySet();
+			}
+			
+		}
+		return false;
+	}
+
+}

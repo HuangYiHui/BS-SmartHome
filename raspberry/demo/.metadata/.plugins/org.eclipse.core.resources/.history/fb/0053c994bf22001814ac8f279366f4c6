@@ -1,0 +1,13 @@
+package bs.pi.gateway.client;
+
+import bs.pi.gateway.receiver.IReceiver;
+import bs.pi.gateway.sender.ISender;
+
+public interface IClient {
+
+	public void init();
+	public void start();
+	public void destroy();
+	public ISender getSender();
+	public IReceiver getReceiver();
+}

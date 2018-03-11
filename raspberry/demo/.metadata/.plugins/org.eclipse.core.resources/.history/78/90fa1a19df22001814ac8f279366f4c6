@@ -1,0 +1,23 @@
+package bs.pi.gateway.receiver;
+
+public class ZIgbeeReceiver implements IReceiver {
+
+	@Override
+	public void addReceivedListenr(IReceivedListener listener) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void start() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

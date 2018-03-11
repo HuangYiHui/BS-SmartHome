@@ -1,0 +1,47 @@
+package bs.pi.gateway.client.http;
+
+import net.sf.json.JSONObject;
+import bs.pi.gateway.main.MsgClient;
+import bs.pi.gateway.main.MsgReceivedCallback;
+
+public class HttpMsgClient implements MsgClient {
+
+	private HttpMsgClientCfg cfg;
+	private HttpMsgReceiver receiver;
+	
+	public HttpMsgClient(HttpMsgClientCfg cfg){
+		this.cfg = cfg;
+	}
+	
+	@Override
+	public void connect() throws Exception {
+		
+	}
+
+	@Override
+	public void setReceivedCallBack(MsgReceivedCallback callback) {
+		// TODO Auto-generated method stub
+		receiver.setReceiveCallBack(callback);
+	}
+
+	@Override
+	public void startReceive() {
+		// TODO Auto-generated method stub
+		receiver.start();
+	}
+
+	@Override
+	public void stopReceive() {
+		// TODO Auto-generated method stub
+		receiver.stop();
+	}
+
+	@Override
+	public boolean send(JSONObject msg) {
+		// TODO Auto-generated method stub
+		//http-send-url-method-apiKey-params
+		//{protocal,cmd,params}
+		return false;
+	}
+
+}

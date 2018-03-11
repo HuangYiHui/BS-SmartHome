@@ -1,0 +1,15 @@
+消息格式
+
+消息使用json风格
+格式：
+cmdName : CMD_NAME
+	命令，指示这条消息是什么消息，怎么处理
+param1Name : param1Value
+param2Name : param2Value
+param3Name : param3Value
+...
+
+
+CmdName : UplaodSensorDataToHttpServer
+appID : id
+value : value

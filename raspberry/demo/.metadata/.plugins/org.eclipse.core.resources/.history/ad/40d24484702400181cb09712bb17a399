@@ -1,0 +1,8 @@
+package bs.pi.gateway.cmd;
+
+public class UploadDataToHttpServerCmd {
+
+	public final static String K_SENSOR_ID = "SensorID";
+	
+	public final static String V_CMD_NAME = "UploadDataToHttpServer";
+}

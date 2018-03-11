@@ -1,0 +1,37 @@
+package bs.pi.gateway.client;
+
+import bs.pi.gateway.receiver.IReceiver;
+import bs.pi.gateway.sender.ISender;
+
+public class ZigbeeClient implements IClient{
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void start() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ISender getSender() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IReceiver getReceiver() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

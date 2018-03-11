@@ -1,0 +1,14 @@
+package bs.pi.gateway.main;
+
+import bs.pi.gateway.client.http.HttpMsgClient;
+import bs.pi.gateway.client.http.HttpMsgClientCfg;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		HttpMsgClientCfg cfg = new HttpMsgClientCfg();
+		HttpMsgClient httpMsgClient = new HttpMsgClient(cfg);
+	}
+
+}

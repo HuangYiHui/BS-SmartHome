@@ -1,0 +1,13 @@
+package bs.pi.gateway.main;
+
+import bs.pi.gateway.client.zigbee.ZigbeeClient;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Gateway gateway = new Gateway();
+		
+		ZigbeeClient zigbeeClient = new ZigbeeClient();
+	}
+
+}

@@ -1,0 +1,19 @@
+package bs.main;
+
+import bs.app.zigbee.ZigbeeApp;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		ZigbeeApp zigbeeApp = new ZigbeeApp();
+		try{
+			zigbeeApp.init();
+			zigbeeApp.run();
+			Thread.currentThread().sleep(9999999);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+}

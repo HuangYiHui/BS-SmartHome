@@ -1,0 +1,101 @@
+package bs.pi.gateway.processor;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.test.Debugger;
+
+import bs.pi.gateway.Msg.IMsg;
+import bs.pi.gateway.client.http.HttpSender;
+import bs.pi.gateway.client.zigbee.ZigbeeConverter;
+import bs.pi.gateway.main.AppMsg;
+import bs.pi.gateway.main.ISender;
+
+public class MyProcessor implements IProcessor {
+
+	private ArrayList<ISender> senderList;
+	private ArrayList<IMsg> msgList;
+	private Thread processThread = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			while( ! processThread.isInterrupted()){
+				HashMap<String, Object> msg = nextMsg();
+				if(msg != null)
+					process(msg);
+			}
+		}
+	});
+	
+	public MyProcessor(){
+		msgList = new ArrayList<HashMap<String, Object>>();
+	}
+	
+	@Override
+	public void setSenders(ArrayList<ISender> senderList) {
+		this.senderList = senderList;
+	}
+
+	@Override
+	public void handleEvent(IMsg msg) {
+		if(msg != null){
+			synchronized (msgList) {
+				msgList.add((HashMap<String, Object>) msg.clone());
+				msgList.notifyAll();
+			}
+		}
+	}
+	
+	@Override
+	public void start(){
+		processThread.start();
+	}
+	
+	@Override
+	public void stop(){
+		//ÈÃnextMsgÄÜÍË³ö
+		msgList.notifyAll();
+		
+		processThread.interrupt();
+	}
+	
+	private HashMap<String, Object> nextMsg(){
+		HashMap<String, Object> msg = null;
+		synchronized (msgList) {
+			if(msgList.size() == 0){
+				try {
+					msgList.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			if(msgList.size() > 0)
+				msg = msgList.remove(0);
+			msgList.notifyAll();
+		}
+		return msg;
+	}
+	
+	private void process(HashMap<String, Object> msg){
+		
+		Debugger.printHashMap(msg);
+		
+		if(AppMsg.V_CMD_NAME_UPLOAD_DATA_TO_HTTP_SERVER.equals(msg.get(AppMsg.K_CMD_NAME))){
+			send(ISender.V_SEND_NAME_HTTP_SNEDER, msg);
+		}else if(AppMsg.V_CMD_NAME_SEND_CMD_TO_APP.equals(msg.get(AppMsg.K_CMD_NAME))){
+			send(ISender.V_SEND_NAME_ZIGBEE_SNEDER, msg);
+		}
+	}
+	
+	private void send(String senderName, HashMap<String, Object> msg){
+		for(ISender sender : senderList){
+			if(senderName.equals(sender.getName())){
+				try {
+					sender.send(msg);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}

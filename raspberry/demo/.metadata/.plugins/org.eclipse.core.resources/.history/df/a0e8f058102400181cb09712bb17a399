@@ -1,0 +1,34 @@
+package bs.pi.gateway.main;
+
+public class AppMsg {
+	
+	/*
+	 * 
+	 * 一般命令采用HashMap<String, Object>存放， 格式：
+	 * 		Cmd : TestCmd,...
+	 * 上传传感器值到http服务器的命令格式：
+	 * 		Cmd : UploadDataToHttpServer
+	 * 		sensorID : 123(ID号，字符串，一般为整数数字字符串)
+	 * 		sensorValue : 123.456
+	 */
+	
+	public final static String KEY_CMD = "Cmd";
+	public final static String KEY_SENSOR_ID = "SensorID";
+	public final static String KEY_SENSOR_VALUE = "SensorValue";
+	public final static String KEY_HTTP_SUCESS = "success";
+	public final static String KEY_HTTP_MSG = "msg";
+	public final static String KEY_APPID = "AppID";
+	public final static String KEY_HTTP_DEVICE_CMD = "HttpDeviceCmd";
+	public final static String KEY_HTTP_DEVICE_CMD_PARAMS = "HttpDeviceCmdParams";
+	
+	public final static String CMD_UPLOAD_DATA_TO_HTTP_SERVER = "UploadDataToHttpServer";
+	public final static String CMD_UPLOAD_DATA_TO_HTTP_SERVER_RESPONSE = "UploadDataToHttpServerResponse";
+	public final static String CMD_GET_DEVICE_CMD_FROM_HTTP_SERVER = "GetDeviceCmdFromHttpServer";
+	public final static String CMD_GET_DEVICE_CMD_FROM_HTTP_SERVER_RESPONSE = "GetDeviceCmdFromHttpServerResponse";
+	public final static String CMD_HTTP_DEVICE_CMD = "HttpDeviceCmd";
+
+	public final static String VALUE_HTTP_TRUE = "true";
+	public final static String VALUE_HTTP_FALSE = "false";
+	public final static String VALUE_HTTP_EXCEPTION = "exception";
+}
+

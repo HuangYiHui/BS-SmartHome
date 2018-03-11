@@ -1,0 +1,35 @@
+package bs.pi.gateway.client.http;
+
+import java.util.HashMap;
+
+import bs.pi.gateway.main.AppMsg;
+import bs.pi.gateway.main.IConverter;
+
+public class HttpConverter implements IConverter {
+
+	private HttpClientCfg cfg;
+	
+	public void setHttpClientCfg(HttpClientCfg cfg){
+		this.cfg = cfg;
+	}
+	
+	@Override
+	public HashMap<String, Object> convertMsgReceive(HashMap<String, Object> msg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HashMap<String, Object> convertMsgSend(HashMap<String, Object> msg) {
+		if(msg == null)
+			return null;
+		if(AppMsg.CMD_UPLOAD_DATA_TO_HTTP_SERVER.equals(msg.get(AppMsg.KEY_CMD))){
+			int sensorID = (int) msg.get(AppMsg.KEY_SENSOR_ID);
+			float sensorValue = (float) msg.get(AppMsg.KEY_SENSOR_VALUE);
+			String url = "/device/"+cfg.getDeviceID()+"/sensor/"+sensorID+"/datapoint";
+ 
+		}else{
+			return null;
+		}
+	}
+}

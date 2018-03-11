@@ -1,0 +1,61 @@
+package bs.pi.gateway.client.zigbee;
+
+import java.util.HashMap;
+
+import com.sun.org.apache.bcel.internal.classfile.Code;
+
+import bs.pi.gateway.main.AppMsg;
+import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.main.ISender;
+
+public class ZigbeeSender implements ISender {
+
+	private ZigbeeClientCfg cfg;
+	private ISender portSender;
+	private IConverter converter;
+	
+	public ZigbeeSender(ISender portSender, IConverter converter, ZigbeeClientCfg cfg){
+		this.portSender = portSender;
+		this.converter = converter;
+		this.cfg = cfg;
+	}
+	
+	@Override
+	public String getName() {
+		return ISender.V_SEND_NAME_ZIGBEE_SNEDER;
+	}
+
+	@Override
+	public HashMap<String, Object> send(HashMap<String, Object> msg) {
+		if(msg != null){
+			HashMap<String, Object> msg1 = converter.convertMsgSend(msg);
+			if(IConverter.V_CONVERT_STATUS_SUCCESS.equals(msg1.get(IConverter.K_CONVERT_STATUS))){
+				byte[] dstAddr = (byte[]) msg1.get(ZigbeeMsg.K_DESTINATION_ADDRESS);
+				byte[] data = (byte[]) msg1.get(ZigbeeMsg.K_DATA);
+				if(dstAddr != null && dstAddr.length == 2 && data != null && data.length > 0){
+					ZigbeeFrameOut frame = new ZigbeeFrameOut();
+					frame.setDstAddr(dstAddr);
+					frame.setDstEndpoint(cfg.getDstEndpoint());
+					frame.setClusterID(cfg.getClusterID());
+					frame.setData(data);
+					frame.setOptions(cfg.getOptions());
+					frame.setRadius(cfg.getRadius());
+					frame.setSrcEndpoint(cfg.getSrcEndpoint());
+					frame.setTransID((byte) 0x00);
+					HashMap<String, Object> msg2 = new HashMap<String, Object>();
+					msg2.put(AppMsg.K_CMD_NAME, AppMsg.V_CMD_NAME_PORT_SEND);
+					msg2.put(AppMsg.K_PORT_DATA, CodeGenerator.packetSend(frame));
+					HashMap<String, Object> msg4 = portSender.send(msg2);
+					//·¢ËÍ³É¹¦
+					if(ISender.V_SEND_STATUS_SUCCESS.equals(msg4.get(ISender.K_SEND_STATUS))){
+						HashMap<String, Object> result = new HashMap<String, Object>();
+						result.put(ISender.K_SEND_STATUS, ISender.V_SEND_STATUS_SUCCESS);
+						return result;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+}

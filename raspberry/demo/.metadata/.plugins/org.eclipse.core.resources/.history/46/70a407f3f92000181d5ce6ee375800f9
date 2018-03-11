@@ -1,0 +1,47 @@
+package bs.pi.gateway.main;
+
+/*
+ * 消息处理器
+ */
+
+public class MsgProcessor {
+	
+	private MsgInCenter msgInCenter;
+	private Thread processThread = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			process();
+		}
+	});
+	
+	public MsgProcessor(MsgInCenter msgInCenter){
+		
+		this.msgInCenter = msgInCenter;
+	}
+	
+	//开始处理
+	//开始后，会从消息中心取消息，如果消息中心无消息会阻塞等待，等消息中心有消息后会被唤醒
+	public void start() {
+		if(processThread != null)
+			processThread.start();
+	}
+	
+	public void stop(){
+		if(processThread != null)
+			processThread.interrupt();
+	}
+	
+	//处理消息
+	public void process(){
+		
+		while( ! processThread.isInterrupted()){	//判断线程是否被关闭了
+			
+			if(msgInCenter != null){
+				Msg msg = msgInCenter.nextMsg();
+				System.out.println(msg.getMsg());
+			}
+			
+		}
+	}
+}

@@ -1,0 +1,12 @@
+package com.test;
+
+public abstract class ClassA {
+	
+	public void fun1(){
+		fun2();
+	}
+	
+	public void fun2(){
+		System.out.println("ClassA fun2 run");
+	}
+}

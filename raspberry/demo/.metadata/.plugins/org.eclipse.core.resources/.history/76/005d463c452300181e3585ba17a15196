@@ -1,0 +1,11 @@
+package bs.pi.gateway.receiver;
+
+import bs.pi.gateway.converter.IConverter;
+
+public interface IReceiver {
+
+	public void addReceivedListenr(IReceivedListener listener);
+	public void start();
+	public void stop();
+	public void flush();
+}

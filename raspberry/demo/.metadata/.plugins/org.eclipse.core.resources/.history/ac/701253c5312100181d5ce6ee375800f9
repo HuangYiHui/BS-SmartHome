@@ -1,0 +1,6 @@
+package bs.pi.gateway.main;
+
+public class Msg {
+
+	public final static String KEY_CMD_NAME "CmdName";
+}

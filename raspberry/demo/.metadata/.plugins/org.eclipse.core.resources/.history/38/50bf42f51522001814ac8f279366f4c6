@@ -1,0 +1,19 @@
+package bs.app.zigbee.zigbee;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public class PortClient {
+	private InputStream portInStream;
+	private OutputStream portOutStream;
+	
+	public boolean send(byte[] bs){
+		try{
+			portOutStream.write(bs);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+}

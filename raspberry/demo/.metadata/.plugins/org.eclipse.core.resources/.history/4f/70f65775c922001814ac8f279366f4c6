@@ -1,0 +1,6 @@
+package bs.pi.gateway.receiver;
+
+public interface IReceiver {
+
+	public void addReceivedListenr(IReceivedListener listener);
+}

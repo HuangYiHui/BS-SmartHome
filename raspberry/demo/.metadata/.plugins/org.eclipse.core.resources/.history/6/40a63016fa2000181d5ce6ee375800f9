@@ -1,0 +1,14 @@
+package bs.pi.gateway.client.http;
+
+import bs.pi.gateway.main.Msg;
+import bs.pi.gateway.main.MsgSender;
+
+public class HttpMsgSender implements MsgSender {
+
+	@Override
+	public boolean send(Msg msg) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

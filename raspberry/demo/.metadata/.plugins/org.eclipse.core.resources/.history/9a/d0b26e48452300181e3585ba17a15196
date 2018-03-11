@@ -1,0 +1,115 @@
+package bs.pi.gateway.client.zigbee;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import bs.pi.gateway.client.IClient;
+import bs.pi.gateway.client.port.PortClient;
+import bs.pi.gateway.converter.IConverter;
+import bs.pi.gateway.main.IReceiver;
+import bs.pi.gateway.main.ISender;
+
+public class ZigbeeClient implements IClient{
+
+	public static final String DEFAULT_CFG_PATH = System.getProperty("user.dir")+System.getProperty("file.separator")+"zigbeeClientCfg.properties";
+	private String cfgPath;
+	private ZigbeeClientCfg cfg;
+	private PortClient portClient;
+	private ISender portSender;
+	private ZigbeeSender zigbeeSender;
+	private ZigbeeReceiver zigbeeReceiver;
+	private IConverter converter;
+	
+	public ZigbeeClient(String cfgPath, PortClient portClient){
+		this.cfgPath = cfgPath;
+		this.portClient = portClient;
+	}
+	
+	@Override
+	public void init() throws Exception {
+		
+		if(cfgPath == null)
+			cfgPath = DEFAULT_CFG_PATH;
+		cfg = new ZigbeeClientCfg(cfgPath);
+
+		portClient.init();
+		portClient.start();
+		portSender = portClient.getSender();
+		
+		portSend(CodeGenerator.CMD_DEVICE_RESET);
+		Thread.sleep(2000);
+		portSend(CodeGenerator.CMD_STARTUP_WITHOUT_LAST_STATE);
+		Thread.sleep(500);
+		portSend(CodeGenerator.CMD_DEVICE_RESET);
+		Thread.sleep(2000);
+		portSend(CodeGenerator.chanlistCfg(cfg.getChannel()));
+		Thread.sleep(500);
+		portSend(CodeGenerator.PANIDCfg(cfg.getPanID()));
+		Thread.sleep(500);
+		portSend(CodeGenerator.deviceTypeCfg(cfg.getDeviceType()));
+		Thread.sleep(500);
+		portSend(CodeGenerator.CMD_ZDO_DIRECT_CB);
+		Thread.sleep(500);
+		
+		ArrayList<ZigbeeAppReg> appRegList = cfg.getAppRegList();
+		if( appRegList != null && appRegList.size()>0){
+			for(ZigbeeAppReg appReg : appRegList){
+				registerAppToZigbee(appReg);
+			}
+		}
+	}
+	
+	private boolean registerAppToZigbee(ZigbeeAppReg appReg){
+		HashMap<String,Object> result = null;
+		try{
+			result = portSend(CodeGenerator.appRegister(appReg));
+			Thread.sleep(500);
+		}catch(Exception e2){
+			e2.printStackTrace();
+		}
+		
+		if(result != null && ISender.KEY_SEND_RESULT_SUCCESS.equals(result.get(ISender.KEY_SEND_RESULT)))
+			return true;
+		else
+			return false;
+	}
+	
+	private HashMap<String,Object> portSend(byte[] data){
+		HashMap<String,Object> msg = new HashMap<String,Object>();
+		msg.put("data", CodeGenerator.CMD_DEVICE_RESET);
+		return portSender.send(msg);
+	}
+
+	@Override
+	public void start() throws Exception {
+		portSend(CodeGenerator.CMD_STARTUP_FROM_APP);
+		Thread.sleep(2000);
+		
+		zigbeeReceiver = new ZigbeeReceiver(portClient.getReceiver(), converter);
+		zigbeeReceiver.start();
+		
+		zigbeeSender = new ZigbeeSender(portSender, converter);
+	}
+
+	@Override
+	public void destroy() {
+		portClient.destroy();
+		zigbeeSender = null;
+		zigbeeReceiver = null;
+	}
+
+	@Override
+	public ISender getSender() {
+		return zigbeeSender;
+	}
+
+	@Override
+	public IReceiver getReceiver() {
+		return zigbeeReceiver;
+	}
+
+	@Override
+	public void setConverter(IConverter converter) {
+		this.converter = converter;
+	}
+}

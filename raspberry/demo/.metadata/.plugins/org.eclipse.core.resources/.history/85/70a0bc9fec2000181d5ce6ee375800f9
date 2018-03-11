@@ -1,0 +1,8 @@
+package com.test;
+
+public class ClassB extends ClassA {
+	
+	private void fun2(){
+		System.out.println("ClassB fun2 run");
+	}
+}

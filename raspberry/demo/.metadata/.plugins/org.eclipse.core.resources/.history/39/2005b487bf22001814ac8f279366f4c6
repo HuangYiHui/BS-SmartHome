@@ -1,0 +1,50 @@
+package bs.pi.gateway.client.zigbee;
+
+import bs.pi.gateway.client.IClient;
+import bs.pi.gateway.receiver.IReceiver;
+import bs.pi.gateway.sender.ISender;
+
+public class ZigbeeClient implements IClient{
+
+	public static final String DEFAULT_CFG_PATH = System.getProperty("user.dir")+System.getProperty("file.separator")+"zigbeeClientCfg.properties";
+	private String cfgPath;
+	private ZigbeeClientCfg cfg;
+	
+	public void setCfgPath(String path){
+		this.cfgPath = path;
+	}
+	
+	private void loadCfg() throws Exception{
+		if(cfgPath == null)
+			cfgPath = DEFAULT_CFG_PATH;
+		cfg = new ZigbeeClientCfg(cfgPath);
+	}
+	@Override
+	public void init() {
+		
+	}
+
+	@Override
+	public void start() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ISender getSender() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IReceiver getReceiver() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

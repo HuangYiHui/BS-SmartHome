@@ -1,0 +1,32 @@
+package bs.pi.gateway.client.http;
+
+import bs.pi.gateway.main.SampleMsgReceiver;
+
+public class HttpMsgReceiver extends SampleMsgReceiver {
+
+	private String url;
+	private String apiKey;
+	
+	public void receive(){
+		while( ! receiveThread.isInterrupted()){
+			
+			try{
+				//post请求
+				HttpGet httpGet = new HttpGet(url);
+				//添加请求头
+				httpGet.addHeader("APIKEY", "6000000620879617");
+				
+				//执行请求
+				HttpClient client = HttpClients.createDefault();
+				HttpResponse response =  client.execute(httpGet);
+				//打印结果
+				System.out.println(EntityUtils.toString(response.getEntity()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+
+}

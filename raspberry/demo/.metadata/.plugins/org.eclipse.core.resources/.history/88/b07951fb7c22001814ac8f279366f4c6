@@ -1,0 +1,36 @@
+package bs.app.zigbee;
+
+import bs.app.zigbee.zigbee.MsgFrameIn;
+import bs.app.zigbee.zigbee.MsgFrameReceivedCallback;
+import bs.app.zigbee.zigbee.Zigbee;
+
+public class ZigbeeApp {
+
+	private Zigbee zigbee;
+	private MsgFrameReceivedCallback callback = new MsgFrameReceivedCallback() {
+		
+		@Override
+		public void received(MsgFrameIn msg) {
+			// TODO Auto-generated method stub
+			System.out.println("----msg in-----");
+			System.out.print("cmd : ");
+			System.out.printf("%x,&x\n", msg.getCmd0(), msg.getCmd1());
+			for(byte b : msg.getData())
+				System.out.printf("%x,",b);
+			System.out.println();
+		}
+	};
+	
+	public ZigbeeApp(){
+		zigbee = new Zigbee(Zigbee.DEFAULT_CFG_PATH);
+		zigbee.setMsgFrameReceivedCallback(callback);
+	}
+	
+	public void init() throws Exception{
+		zigbee.init();
+	}
+	
+	public void run(){
+		zigbee.start();
+	}
+}

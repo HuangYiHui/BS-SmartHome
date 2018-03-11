@@ -1,0 +1,24 @@
+package bs.pi.gateway.main;
+
+import bs.pi.gateway.client.http.HttpMsgClient;
+import bs.pi.gateway.client.http.HttpMsgClientCfg;
+import bs.pi.gateway.client.port.PortMsgClient;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		MsgInCenter msgInCenter = new MsgInCenter();
+		MsgProcessor processor = new MsgProcessor(msgInCenter);
+		processor.start();
+		
+		PortMsgClient portMsgClient = new PortMsgClient();
+		
+		
+		HttpMsgClientCfg cfg = new HttpMsgClientCfg();
+		HttpMsgClient httpMsgClient = new HttpMsgClient(cfg);
+		httpMsgClient.setReceivedCallBack(msgInCenter);
+		httpMsgClient.startReceive();
+	}
+
+}

@@ -1,0 +1,65 @@
+package bs.app.zigbee.zigbee;
+
+import gnu.io.CommPort;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public class PortClient {
+	private PortCfg cfg;
+	private InputStream portInStream;
+	private OutputStream portOutStream;
+	private MsgFrameReceivedCallback callback;
+	private Thread receiveThread = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			try {
+				while( ! receiveThread.isInterrupted() &&　callback != null){
+					Message msg = reveiveMsg(inputStream);
+					if(msg != null)
+						callBack.received(msg);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	});
+	
+	public void connect() throws Exception{
+		
+		CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(cfg.getPortName());
+        if ( portIdentifier.isCurrentlyOwned() ){
+            String errorStr = ">>>MyPortClient.loadOption Error: 串口" + cfg.getPortName() +"被占用";
+            throw new Exception(errorStr);
+        }
+        else{
+            CommPort commPort = portIdentifier.open(cfg.getPortName(), 2000);
+            if ( commPort instanceof SerialPort ){
+            	SerialPort serialPort = (SerialPort) commPort;
+                serialPort.setSerialPortParams(cfg.getBaudRate(), cfg.getDataBits(), cfg.getStopBits(), cfg.getParity());
+                portInStream = serialPort.getInputStream();
+                portOutStream = serialPort.getOutputStream();
+            }
+            else{
+                String errorStr = ">>>MyPortClient.loadOption Error: "+  cfg.getPortName() +"不是串口";
+	            throw new Exception(errorStr);
+            }
+        }
+    }
+
+	public void startReceive(){
+		receiveThread = 
+	}
+
+	public boolean send(byte[] bs){
+		try{
+			portOutStream.write(bs);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+}

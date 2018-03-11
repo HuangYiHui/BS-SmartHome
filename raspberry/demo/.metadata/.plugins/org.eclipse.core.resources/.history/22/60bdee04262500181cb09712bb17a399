@@ -1,0 +1,152 @@
+package bs.pi.gateway.client.http;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import net.sf.json.JSONObject;
+import net.sf.json.util.JSONTokener;
+
+import org.apache.http.annotation.NotThreadSafe;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+
+import bs.pi.gateway.main.AppMsg;
+
+public class HttpExecuter {
+	
+	public final static int METHOD_GET = 1;
+	public final static int METHOD_POST = 2;
+	public final static int METHOD_PUT = 3;
+	public final static int METHOD_DELETE = 4;
+	
+	private String url;
+	private int method;
+	private String apiKey;
+	private UrlEncodedFormEntity params;
+	
+	HttpExecuter(String url, int method, String apiKey, UrlEncodedFormEntity params){
+		this.url = url;
+		this.method = method;
+		this.apiKey = apiKey;
+		this.params = params;
+	}
+	
+	public HttpMsgReceive execute(){
+		HttpUriRequest request = null;
+		try{
+			if(METHOD_GET == method){
+				request = getGetRequest();
+			}else if(METHOD_POST == method){
+				request = getPostRequest();
+			}else if(METHOD_POST == method){
+				request = getPutRequest();
+			}else if(METHOD_POST == method){
+				request = getDeleteRequest();
+			}else{
+				return null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		CloseableHttpResponse response = null;
+		JSONObject jsonResponse = null;
+		
+		try{
+			response = httpClient.execute(request);
+			try {
+				//jsonResponse = JSONObject.fromObject(EntityUtils.toString(response.getEntity()));
+				//≤‚ ‘”√
+				String str = "{\"success\":true,\"msg\":{\"appID\":241,\"cmd\":\"openLight\"}}";
+				jsonResponse = JSONObject.fromObject(str);
+			} finally {
+                response.close();
+            }
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}finally{
+			try {
+				httpClient.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	
+		if(jsonResponse != null){
+			HttpMsgReceive httpMsgReceive = new HttpMsgReceive();
+			httpMsgReceive.setData(jsonResponse);
+			return httpMsgReceive;
+		}else{
+			return null;
+		}
+	}
+	
+	private HttpUriRequest getGetRequest() throws Exception{
+		String paramStr = "";
+		if(params != null){
+			paramStr = EntityUtils.toString(params);
+		}
+		HttpGet httpGet = new HttpGet(url+"?"+paramStr);
+		httpGet.addHeader("APIKEY", apiKey);
+		return httpGet;
+	}
+	
+	private HttpUriRequest getPostRequest() throws Exception{
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.addHeader("APIKEY", apiKey);
+		if(params != null){
+			httpPost.setEntity(params);
+		}
+		return httpPost;
+	}
+	
+	private HttpUriRequest getPutRequest() throws Exception{
+		HttpPut httpPut = new HttpPut(url);
+		httpPut.addHeader("APIKEY", apiKey);
+		if(params != null){
+			httpPut.setEntity(params);
+		}
+		
+		return httpPut;
+	}
+	
+	private HttpUriRequest getDeleteRequest() throws Exception{
+		HttpDeleteWithBody httpDelete = new HttpDeleteWithBody(url);
+		httpDelete.addHeader("APIKEY", apiKey);
+		if(params != null){
+			httpDelete.setEntity(params);
+		}
+		return httpDelete;
+	}
+	
+	@NotThreadSafe
+	public class HttpDeleteWithBody extends HttpEntityEnclosingRequestBase {
+	    public static final String METHOD_NAME = "DELETE";
+	    public String getMethod() { return METHOD_NAME; }
+	    public HttpDeleteWithBody(final String uri) {
+	        super();
+	        setURI(URI.create(uri));
+	    }
+	    public HttpDeleteWithBody(final URI uri) {
+	        super();
+	        setURI(uri);
+	    }
+	    public HttpDeleteWithBody() { super(); }
+	}
+}

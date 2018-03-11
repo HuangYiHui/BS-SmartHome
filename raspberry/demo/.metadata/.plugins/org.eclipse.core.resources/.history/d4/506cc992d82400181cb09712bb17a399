@@ -1,0 +1,23 @@
+package bs.pi.gateway.client.zigbee;
+
+public class ZigbeeMsg {
+
+	public final static String K_DESTINATION_ADDRESS = "DestinationAddress";
+	public final static String K_DATA = "Data";
+	
+	private byte[] dstAddr;
+	private byte[] data;
+	
+	public byte[] getDstAddr() {
+		return dstAddr;
+	}
+	public void setDstAddr(byte[] dstAddr) {
+		this.dstAddr = dstAddr;
+	}
+	public byte[] getData() {
+		return data;
+	}
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+}

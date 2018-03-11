@@ -1,0 +1,46 @@
+package bs.pi.gateway.client.http;
+
+import java.util.HashMap;
+
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+
+import bs.pi.gateway.Msg.HttpSendResponseMsg;
+import bs.pi.gateway.Msg.IMsg;
+import bs.pi.gateway.Msg.ResponseMsg;
+import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.main.ISender;
+
+public class HttpSender implements ISender {
+	
+	private IConverter converter;
+	private HttpClientCfg cfg;
+	
+	public HttpSender(HttpClientCfg cfg, IConverter converter){
+		this.cfg = cfg;
+		this.converter = converter;
+	}
+	
+	@Override
+	public String getName() {
+		return ISender.V_SEND_NAME_HTTP_SNEDER;
+	}
+
+	@Override
+	public IMsg send(IMsg msg){
+		Object obj = converter.convertMsgSend(msg);
+		HttpSendResponseMsg responseMsg = new HttpSendResponseMsg();
+		if(obj != null){
+			HttpMsg msg1 = (HttpMsg)obj;
+			HttpExecuter executer = new HttpExecuter(msg1.getUrl(), msg1.getMethod(), msg1.getApiKey(), msg1.getParams());
+			HashMap<String, Object> response0 = executer.execute();
+			HashMap<String, Object> response1 = new HashMap<String, Object>();
+			if(HttpMsg.V_SEND_STATUS_SUCCESS.equals(response0.get(HttpMsg.K_SEND_STATUS))){
+				response1.put(ISender.K_SEND_STATUS, ISender.V_SEND_STATUS_SUCCESS);
+				return response1;
+			}
+		}
+		
+		responseMsg.setSendSuccess(false);
+		return responseMsg;
+	}
+}

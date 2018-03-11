@@ -1,0 +1,62 @@
+package bs.pi.gateway.client.http;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.main.IReceivedListener;
+import bs.pi.gateway.main.IReceiver;
+
+public class HttpReceiver implements IReceiver {
+
+	private ArrayList<IReceivedListener> receivedListenerList;
+	private HttpClientCfg cfg;
+	private IConverter converter;
+	private Thread rTread = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			while( ! rTread.isInterrupted()){
+				if(converter != null && receivedListenerList != null && receivedListenerList.size()>0){
+					HashMap<String, Object> msg = null;
+					try {
+						msg = converter.convertMsgReceive( receiveMsg() );
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if(msg != null){
+						for(IReceivedListener listener : receivedListenerList){
+							listener.handleEvent(msg);
+						}
+						msg = null;
+					}
+				}
+			}
+		}
+	});
+	
+	@Override
+	public void addReceivedListenr(IReceivedListener listener) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void start() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void flush() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

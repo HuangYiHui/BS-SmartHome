@@ -1,0 +1,151 @@
+package bs.pi.gateway.client.http;
+
+import java.io.IOException;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import net.sf.json.JSONObject;
+
+import org.apache.http.Consts;
+import org.apache.http.NameValuePair;
+import org.apache.http.annotation.NotThreadSafe;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+import bs.pi.gateway.client.http.HttpMsgSender.HttpDeleteWithBody;
+import bs.pi.gateway.main.AppMsg;
+import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.main.ISender;
+
+public class HttpSender implements ISender {
+
+	public final static String KEY_SUCESS = "success";
+	public final static String KEY_MSG = "msg";
+	public final static String NAME = "HttpSender";
+	
+	private IConverter converter;
+	private HttpClientCfg cfg;
+	
+	public HttpSender(HttpClientCfg cfg, IConverter converter){
+		this.cfg = cfg;
+		this.converter = converter;
+	}
+	
+	@Override
+	public String getName() {
+		return NAME;
+	}
+
+	@Override
+	public HashMap<String, Object> send(HashMap<String, Object> msg) {
+		if(msg == null)
+			return null;
+		HashMap<String, Object> msg1 = converter.convertMsgSend(msg);
+		if(msg1 == null)
+			return null;
+		
+		if(AppMsg.CMD_UPLOAD_DATA_TO_HTTP_SERVER.equals(msg1.get(AppMsg.KEY_CMD))){
+			int sensorID = (int) msg1.get(AppMsg.KEY_SENSOR_ID);
+			float sensorValue = (float) msg1.get(AppMsg.KEY_SENSOR_VALUE);
+			String url = cfg.getServiceUrl()+"/device/"+cfg.getDeviceID()+"/sensor/"+sensorID+"/datapoint";
+ 
+		}
+		return null;
+	}
+	
+	private HashMap<String, Object> execute(HttpUriRequest request) throws ClientProtocolException, IOException{
+		
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		CloseableHttpResponse response = null;
+		JSONObject result = null;
+		try{
+			response = httpClient.execute(request);
+			try {
+				result = JSONObject.fromObject(EntityUtils.toString(response.getEntity()));
+            } finally {
+                response.close();
+            }
+		}finally{
+			httpClient.close();
+		}
+		
+		HashMap<String, Object> msg = new HashMap<String, Object>();
+		if(result != null){
+			Set<Map.Entry<String, Object>> resultSet = result.entrySet();
+			for(Map.Entry<String, Object> entry : resultSet){
+				msg.put(entry.getKey(), entry.getValue());
+			}
+		}
+		
+		return msg;
+	}
+
+	private HashMap<String, Object> doGet(String url, List<NameValuePair> params) throws IOException{
+
+		String paramStr = "";
+		if(params != null && params.size() != 0){
+			paramStr = EntityUtils.toString(new UrlEncodedFormEntity(params, Consts.UTF_8));
+		}
+		HttpGet httpGet = new HttpGet(url+"?"+paramStr);
+		httpGet.addHeader("APIKEY", cfg.getApiKey());
+		return execute(httpGet);
+	}
+	
+	private HashMap<String, Object> doPost(String url, List<NameValuePair> params) throws IOException{
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.addHeader("APIKEY", cfg.getApiKey());
+		if(params != null && params.size() != 0){
+			httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+		}
+		
+		return execute(httpPost);
+	}
+
+	private HashMap<String, Object> doPut(String url, List<NameValuePair> params) throws IOException{
+		HttpPut httpPut = new HttpPut(url);
+		httpPut.addHeader("APIKEY", cfg.getApiKey());
+		if(params != null && params.size() != 0){
+			httpPut.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+		}
+		
+		return execute(httpPut);
+	}
+	
+	private HashMap<String, Object> doDelete(String url, List<NameValuePair> params) throws IOException{		
+		HttpDeleteWithBody httpDelete = new HttpDeleteWithBody(url);
+		httpDelete.addHeader("APIKEY", cfg.getApiKey());
+		if(params != null && params.size() != 0){
+			httpDelete.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+		}
+		
+		return execute(httpDelete);
+	}
+	
+	@NotThreadSafe
+	public class HttpDeleteWithBody extends HttpEntityEnclosingRequestBase {
+	    public static final String METHOD_NAME = "DELETE";
+	    public String getMethod() { return METHOD_NAME; }
+	    public HttpDeleteWithBody(final String uri) {
+	        super();
+	        setURI(URI.create(uri));
+	    }
+	    public HttpDeleteWithBody(final URI uri) {
+	        super();
+	        setURI(uri);
+	    }
+	    public HttpDeleteWithBody() { super(); }
+	}
+
+}

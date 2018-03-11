@@ -1,0 +1,9 @@
+import java.util.HashMap;
+
+
+public class Debugger {
+
+	public static void printHashMap(HashMap<String, Object> msg){
+		
+	}
+}

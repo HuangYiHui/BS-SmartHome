@@ -1,0 +1,66 @@
+package bs.app.zigbee;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
+import bs.app.zigbee.zigbee.MsgFrameIn;
+import bs.app.zigbee.zigbee.MsgFrameReceivedCallback;
+import bs.app.zigbee.zigbee.Zigbee;
+import bs.main.IApp;
+
+public class ZigbeeApp implements IApp{
+
+	public static final String DEFAULT_CFG_PATH = System.getProperty("user.dir")+System.getProperty("file.separator")+"zigbeeAppCfg.properties";	
+	private Zigbee zigbee;
+	private String cfgPath;
+	private MsgFrameReceivedCallback callback = new MsgFrameReceivedCallback() {
+		
+		@Override
+		public void received(MsgFrameIn msg) {
+			// TODO Auto-generated method stub
+			System.out.println("----msg in-----");
+			System.out.print("cmd : ");
+			System.out.printf("%x,&x\n", msg.getCmd0(), msg.getCmd1());
+			for(byte b : msg.getData())
+				System.out.printf("%x,",b);
+			System.out.println();
+		}
+	};
+	
+	public ZigbeeApp(String cfgPath){
+		this.cfgPath = cfgPath;
+	}
+	
+	public void setCfgPath(String path){
+		this.cfgPath = path;
+	}
+	
+	private void loadCfg() throws FileNotFoundException, IOException{
+		Properties cfgProperties = new Properties();
+		if(cfgPath == null)
+			cfgProperties.load(new FileInputStream(DEFAULT_CFG_PATH));
+		else
+			cfgProperties.load(new FileInputStream(cfgPath));
+	}
+	public void init() throws Exception{
+		
+		
+		
+		zigbee = new Zigbee(Zigbee.DEFAULT_CFG_PATH);
+		zigbee.setMsgFrameReceivedCallback(callback);
+		
+		zigbee.init();
+	}
+	
+	public void run(){
+		zigbee.start();
+	}
+
+	@Override
+	public void destory() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+}

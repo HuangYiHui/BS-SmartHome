@@ -1,0 +1,98 @@
+package bs.pi.gateway.client.port;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Calendar;
+
+import net.sf.json.JSONObject;
+import bs.pi.gateway.main.SampleMsgReceiver;
+
+/*
+ * port客户端消息接收器/
+ */
+
+public class PortReceiver extends SampleMsgReceiver{
+	
+	private InputStream portStream;
+	
+	public PortReceiver(final InputStream portStream){
+		this.portStream = portStream;
+	}
+	
+	private Byte readByte(InputStream iStream) throws IOException
+	{
+		int time1 = Calendar.getInstance().get(Calendar.MILLISECOND);
+		while(true){
+			int time2 = Calendar.getInstance().get(Calendar.MILLISECOND);
+			if((time2-time1)>12)
+				return null;
+			int temp = iStream.read();
+			if(temp != -1){
+				Byte result = new Byte((byte) temp);
+				return result;
+			}
+		}
+	}
+	
+	public byte[] readBytes(int len, InputStream iStream) throws IOException
+	{
+		byte[] result = new byte[len];
+		for(int i=0;i<len;i++){
+			Byte temp = readByte(iStream);
+			if(temp == null)
+				return null;
+			result[i] = temp;
+		}
+		
+		return result;
+	}
+	
+	public void receive()
+	{
+		if(callback == null)
+			return;
+		
+		//判断信息包是否开始
+		byte b;
+		boolean isBegin = false;
+		while(portStream.available()>0){
+			if(portStream.read() == 0xfe){
+				isBegin = true;
+				break;
+			}
+		}
+		if( ! isBegin)
+			return;
+		
+		Byte len = readByte(portStream);
+		if(len == null)
+			return;
+
+		JSONObject msg = new JSONObject();
+		Byte cmd0 = readByte(portStream);
+		if(cmd0 == null)
+			return;
+		msg.put("Cmd0", cmd0);
+		
+		Byte cmd1 = readByte(portStream);
+		if(cmd1 == null)
+			return;
+		msg.put("Cmd1", cmd0);
+
+		byte[] data = readBytes(len, portStream);
+		if(data == null)
+			return;
+		msg.put("data", data);
+		
+		Byte fcs = readByte(portStream);
+		if(fcs == null)
+			return;
+		
+		byte cFcs = (byte) data.length;
+		cFcs ^= cmd0;
+		cFcs ^= cmd1;
+		for(byte bt : data)
+			cFcs ^= bt;
+		if(cFcs == fcs)
+			callback.received(msg);
+	}
+}

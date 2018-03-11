@@ -32,7 +32,7 @@ public class Test {
 
 		try {
 			//url
-			String url = "http://119.29.36.20/dgutlink/api/device/21/sensor/13/datapoint";
+			String url = "http://119.29.36.20/dgutlink/api/device/21/sensor/14/datapoint";
 			//post请求
 			HttpPost httpPost = new HttpPost(url);
 			//添加请求头

@@ -1,0 +1,74 @@
+package bs.app.zigbee.zigbee;
+
+import java.io.FileInputStream;
+import java.util.Properties;
+
+import bs.app.zigbee.port.PortCfg;
+
+public class ZigbeeCfg {
+	
+	public final static String KEY_CHANNEL = "channel";
+	public final static String KEY_PANID = "PANID";
+	public final static String KEY_DEVICE_TYPE = "deviceType";
+	
+	public final static byte DEVICE_TYPE_COORDINATOR = 0x00;
+	public final static byte DEVICE_TYPE_ROUTE = 0x01;
+	public final static byte DEVICE_TYPE_END_DEVICE = 0x02;
+	
+	public final static byte[] DEFAULT_CHANNEL = {0x00, 0x08, 0x00, 0x00};
+	public final static byte[] DEFAULT_PANID = {0x34, 0x12};
+	public final static byte DEFAULT_DEVICE_TYPE = DEVICE_TYPE_ROUTE;
+	
+	private byte[] channel;	//信道
+	private byte[] panID;	//网络号
+	private byte deviceType;	//zigbee设备类型
+	private PortCfg portCfg;//串口配置
+	
+	public ZigbeeCfg(){
+		channel = DEFAULT_CHANNEL;
+		panID = DEFAULT_PANID;
+		zdType = DEFAULT_DEVICE_TYPE;
+	}
+	
+	public ZigbeeCfg(String cfgPath){
+		loadCfg(cfgPath);
+	}
+	
+	public void loadCfg(String cfgPath){
+		Properties properties = new Properties();
+		properties.load(new FileInputStream(cfgPath));
+		channel = strToBytes(properties.getProperty(KEY_CHANNEL));
+		panID = strToBytes(properties.getProperty(KEY_PANID));
+		deviceType = strToBytes(properties.getProperty(KEY_DEVICE_TYPE))[0];
+		
+		portCfg = new PortCfg();
+		portCfg.setPortName(properties.getProperty(PortCfg.KEY_PORT_NAME));
+		int baudRate = Integer.parseInt(properties.getProperty(PortCfg.KEY_BAUD_RATE));
+		int dataBits = Integer.parseInt(properties.getProperty(PortCfg.KEY_DATA_BITS));
+		int stopBits = Integer.parseInt(properties.getProperty(PortCfg.KEY_STOP_BITS));
+		int parity = Integer.parseInt(properties.getProperty(PortCfg.KEY_PARITY));
+		portCfg.setBaudRate(baudRate);
+		portCfg.setDataBits(dataBits);
+		portCfg.setStopBits(stopBits);
+		portCfg.setParity(parity);
+		
+		
+	}
+	
+	private byte[] strToBytes(String str){
+		String hexStr = "0123456789ABCDEF";
+		//hexString的长度对2取整，作为bytes的长度
+		int len = str.length()/2;
+		byte[] bytes = new byte[len];   
+		byte high = 0;//字节高四位
+		byte low = 0;//字节低四位
+
+		for(int i=0;i<len;i++){
+			//右移四位得到高位
+			high = (byte)((hexStr.indexOf(str.charAt(2*i)))<<4);
+			low = (byte)hexStr.indexOf(str.charAt(2*i+1));
+			bytes[i] = (byte) (high|low);//高地位做或运算
+		}
+		return bytes;
+	}
+}

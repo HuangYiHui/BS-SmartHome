@@ -1,0 +1,27 @@
+package bs.pi.gateway.processor;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import bs.pi.gateway.receiver.IReceivedListener;
+import bs.pi.gateway.sender.ISender;
+
+public class MyProcessor implements IProcessor, IReceivedListener {
+
+	private ArrayList<ISender> senderList;
+	private ArrayList<HashMap<String, Object>> msgList;
+	
+	public MyProcessor(){
+		msgList = new ArrayList<HashMap<String, Object>>();
+	}
+	
+	@Override
+	public void setSenders(ArrayList<ISender> senderList) {
+		this.senderList = senderList;
+	}
+
+	@Override
+	public void handleEvent(HashMap<String, Object> msg) {
+		
+	}
+}

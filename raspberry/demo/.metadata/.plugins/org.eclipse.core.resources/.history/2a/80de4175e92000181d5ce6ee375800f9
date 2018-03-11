@@ -1,0 +1,7 @@
+package bs.pi.gateway.client.http;
+
+public class HttpMsgClientCfg {
+	
+	private String url;
+	
+}

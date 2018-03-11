@@ -1,0 +1,28 @@
+package bs.pi.gateway.receiver;
+
+import java.util.ArrayList;
+
+public class ZIgbeeReceiver implements IReceiver {
+
+	private ArrayList<IReceivedListener> receivedListenerList;
+	private IReceiver portReceiver;
+	
+	@Override
+	public void addReceivedListenr(IReceivedListener listener) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void start() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

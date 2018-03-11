@@ -1,0 +1,172 @@
+package bs.pi.gateway.client.http;
+
+import java.io.IOException;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.http.Consts;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.annotation.NotThreadSafe;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import net.sf.json.JSONObject;
+import bs.pi.gateway.main.MsgSender;
+
+public class HttpMsgSender{
+
+	public final static String KEY_CMD = "CMD";
+	public final static String KEY_URL = "URL";
+	public final static String KEY_APIKEY = "APIKey";
+	public final static String KEY_METHOD = "Method";
+	public final static String KEY_PARAMS = "Params";
+	
+	public final static String METHOD_GET = "Get";
+	public final static String METHOD_POST = "Post";
+	public final static String METHOD_PUT = "Put";
+	public final static String METHOD_DELETE = "Delete";
+	
+	private String url;
+	private String apiKey;
+	private List<NameValuePair> params;
+	private String method;
+	
+	public JSONObject send(JSONObject msg) {
+		if(msg == null)
+			return null;
+		
+		try{
+			if("SendMsgToHttpService".equals( msg.getString(KEY_CMD) )){
+				url = msg.getString(KEY_URL);
+				apiKey = msg.getString(KEY_APIKEY);
+				method = msg.getString(KEY_METHOD);
+				if(msg.has(KEY_PARAMS)){
+					Set<Map.Entry<String, String>> paramSet = msg.getJSONObject(KEY_PARAMS).entrySet();
+					if(paramSet != null && paramSet.size() > 0){
+						params = new ArrayList<NameValuePair>();
+						for(Map.Entry<String, String> entry : paramSet){
+							params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+						}
+					}
+				}
+				if(METHOD_GET.equals(method)){
+					return doGet();
+				}else if(METHOD_POST.equals(method)){
+					return doPost();
+				}else if(METHOD_PUT.equals(method)){
+					return doPut();
+				}else{
+					return null;
+				}
+			}else{
+				return null;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	private JSONObject execute(HttpUriRequest request) throws ClientProtocolException, IOException{
+		
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		CloseableHttpResponse response = null;
+		JSONObject result = null;
+		try{
+			response = httpClient.execute(request);
+			try {
+				result = JSONObject.fromObject(EntityUtils.toString(response.getEntity()));
+            } finally {
+                response.close();
+            }
+		}finally{
+			httpClient.close();
+		}
+		
+		return result;
+	}
+	
+	private JSONObject doGet() throws IOException{
+		if( ! method.equals(METHOD_GET))
+			return null;
+		String paramStr = "";
+		if(params != null && params.size() != 0){
+			paramStr = EntityUtils.toString(new UrlEncodedFormEntity(params, Consts.UTF_8));
+		}
+		HttpGet httpGet = new HttpGet(url+"?"+paramStr);
+		httpGet.addHeader("APIKEY", apiKey);
+		return execute(httpGet);
+	}
+	
+	private JSONObject doPost() throws IOException{
+		if( ! method.equals(METHOD_POST))
+			return null;
+		
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.addHeader("APIKEY", apiKey);
+		if(params != null && params.size() != 0){
+			httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+		}
+		
+		return execute(httpPost);
+	}
+
+	private JSONObject doPut() throws IOException{
+		if( ! method.equals(METHOD_PUT))
+			return null;
+		
+		HttpPut httpPut = new HttpPut(url);
+		httpPut.addHeader("APIKEY", apiKey);
+		if(params != null && params.size() != 0){
+			httpPut.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+		}
+		
+		return execute(httpPut);
+	}
+	
+	private JSONObject doDelete() throws IOException{
+		if( ! method.equals(METHOD_DELETE))
+			return null;
+		
+		HttpDeleteWithBody httpDelete = new HttpDeleteWithBody(url);
+		httpDelete.addHeader("APIKEY", apiKey);
+		if(params != null && params.size() != 0){
+			httpDelete.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+		}
+		
+		return execute(httpDelete);
+	}
+	
+	@NotThreadSafe
+	public class HttpDeleteWithBody extends HttpEntityEnclosingRequestBase {
+	    public static final String METHOD_NAME = "DELETE";
+	    public String getMethod() { return METHOD_NAME; }
+	    public HttpDeleteWithBody(final String uri) {
+	        super();
+	        setURI(URI.create(uri));
+	    }
+	    public HttpDeleteWithBody(final URI uri) {
+	        super();
+	        setURI(uri);
+	    }
+	    public HttpDeleteWithBody() { super(); }
+	}
+}

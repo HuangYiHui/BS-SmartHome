@@ -1,0 +1,51 @@
+package bs.pi.gateway.main;
+
+import java.util.ArrayList;
+
+/*
+ * 消息接收中心，所有客户端接收到的消息放这里，待消息处理器处理
+ */
+
+public class MessageInCenter implements MessageReceiveCallBack {
+
+	//消息存储队列
+	private ArrayList<Message> msgList = new ArrayList<>();
+	
+	//存放一条消息，因为是多线程操作，需要同步
+	public void put(Message msg){
+		
+		synchronized (msgList) {
+			msgList.add(msg);
+			msgList.notifyAll();
+		}
+		
+	}
+
+	//取出下一条接收到的消息，一般供处理器使用，也需要同步
+	public Message nextMessage(){
+		Message msg;
+		synchronized (msgList) {
+			
+			if(msgList.size() == 0){
+				try {
+					msgList.wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			msg = msgList.remove(0);
+		}
+		
+		return msg;
+	}
+
+	//实现了消息接收接口
+	//消息接收到后存放到这里
+	@Override
+	public void received(Message message) {
+		// TODO Auto-generated method stub
+		putMessage(message);
+	}
+}

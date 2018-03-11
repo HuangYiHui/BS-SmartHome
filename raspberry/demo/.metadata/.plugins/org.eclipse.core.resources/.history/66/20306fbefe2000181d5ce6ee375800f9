@@ -1,0 +1,21 @@
+package com.test;
+
+import net.sf.json.JSONObject;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		test2();
+	}
+
+	public static void test1(){
+		ClassB classB = new ClassB();
+		classB.fun1();
+	}
+	
+	public static void test2(){
+		JSONObject jo = JSONObject.fromObject("{'name':{'name1':'value1', 'name2':'value2'}}");
+		System.out.println(jo.getJSONObject("name"));
+	}
+}

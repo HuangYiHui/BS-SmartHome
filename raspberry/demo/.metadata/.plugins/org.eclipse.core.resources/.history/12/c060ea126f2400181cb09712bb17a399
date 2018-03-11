@@ -1,0 +1,5 @@
+package bs.pi.gateway.cmd;
+
+public class UploadDataToHttpServerCmd {
+
+}

@@ -1,0 +1,43 @@
+package bs.pi.gateway.client.http;
+
+import java.util.HashMap;
+
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+
+import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.main.ISender;
+
+public class HttpSender implements ISender {
+
+	public final static String NAME = "HttpSender";
+	
+	private IConverter converter;
+	private HttpClientCfg cfg;
+	
+	public HttpSender(HttpClientCfg cfg, IConverter converter){
+		this.cfg = cfg;
+		this.converter = converter;
+	}
+	
+	@Override
+	public String getName() {
+		return NAME;
+	}
+
+	@Override
+	public HashMap<String, Object> send(HashMap<String, Object> msg) throws Exception {
+		if(msg == null)
+			return null;
+		HashMap<String, Object> msg1 = converter.convertMsgSend(msg);
+		if(msg1 == null)
+			return null;
+		 
+		String url = (String) msg1.get(HttpMsg.K_URL);
+		String apiKey = (String) msg1.get(HttpMsg.K_APIKEY);
+		UrlEncodedFormEntity params = (UrlEncodedFormEntity) msg1.get(HttpMsg.K_PARAMS);
+		String method = (String) msg1.get(HttpMsg.K_METHOD);
+
+		HttpExecuter executer = new HttpExecuter(url, method, apiKey, params);
+		return executer.execute();
+	}
+}

@@ -1,0 +1,6 @@
+package bs.pi.gateway.client.port;
+
+public class PortMsgClient {
+
+	private PortMsgClientCfg cfg;
+}

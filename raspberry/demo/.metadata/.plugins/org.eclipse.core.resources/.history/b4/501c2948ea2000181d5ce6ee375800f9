@@ -1,0 +1,30 @@
+package bs.pi.gateway.client.http;
+
+import bs.pi.gateway.main.MsgReceivedCallback;
+import bs.pi.gateway.main.MsgReceiver;
+
+public class HttpMsgReceiver implements MsgReceiver {
+
+	private Thread receiveThread = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			
+		}
+	});
+	
+	@Override
+	public void setReceiveCallBack(MsgReceivedCallback callback) {
+		callback.received(msg);
+	}
+
+	@Override
+	public void start() {
+		receiveThread.start();
+	}
+
+	@Override
+	public void stop() {
+		receiveThread.interrupt();
+	}
+
+}

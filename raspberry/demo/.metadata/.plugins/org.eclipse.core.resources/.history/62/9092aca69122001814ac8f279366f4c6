@@ -1,0 +1,25 @@
+package bs.app.http;
+
+import bs.main.IApp;
+
+public class HtppApp implements IApp {
+
+	@Override
+	public void init() throws Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void run() throws Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void destory() throws Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+}

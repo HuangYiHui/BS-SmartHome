@@ -1,0 +1,14 @@
+package bs.pi.gateway.main;
+
+import net.sf.json.JSONObject;
+
+
+/*
+ * 消息发送者，属于消息客户端内部组件
+ */
+
+public interface MsgSender {
+
+	//发送一条消息，成功返回true
+	 boolean send(JSONObject msg);
+}

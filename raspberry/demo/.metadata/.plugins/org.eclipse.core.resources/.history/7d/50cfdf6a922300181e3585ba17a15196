@@ -1,0 +1,21 @@
+package bs.pi.gateway.client.http;
+
+import java.util.HashMap;
+
+import bs.pi.gateway.main.IConverter;
+
+public class HttpConverter implements IConverter {
+
+	@Override
+	public HashMap<String, Object> convertMsgReceive(HashMap<String, Object> msg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HashMap<String, Object> convertMsgSend(HashMap<String, Object> msg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

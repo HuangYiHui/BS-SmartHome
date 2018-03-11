@@ -1,0 +1,8 @@
+package bs.pi.gateway.main;
+
+public class Msg {
+
+	public final static String KEY_CMD_NAME = "CmdName";
+	
+	public final static String CMD_SEND_TO_HTTP_SERVER = "SendToHttpServer";
+}

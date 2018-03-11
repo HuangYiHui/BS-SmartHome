@@ -1,0 +1,21 @@
+package bs.app.zigbee;
+
+import bs.app.zigbee.zigbee.Zigbee;
+
+public class ZigbeeApp {
+
+	private Zigbee zigbee;
+	
+	public ZigbeeApp(){
+		zigbee = new Zigbee(Zigbee.DEFAULT_CFG_PATH);
+	}
+	
+	public void init() throws Exception{
+		zigbee = new Zigbee(Zigbee.DEFAULT_CFG_PATH);
+		zigbee.init();
+	}
+	
+	public void run(){
+		zigbee.start();
+	}
+}

@@ -1,0 +1,11 @@
+package bs.pi.gateway.main;
+
+public class SampleMsgReceiver implements MsgReceivedCallback{
+
+	@Override
+	public void received(Msg msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

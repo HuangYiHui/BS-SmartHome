@@ -1,0 +1,129 @@
+package bs.app.zigbee.zigbee;
+
+import gnu.io.CommPort;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+
+public class Zigbee {
+	
+	private final static int STATE_UNREADY = 0;
+	private final static int STATE_READY = 1;
+	private final static int STATE_WORKING = 2;
+	
+	private String cfgPath;
+	private ZigbeeCfg cfg;
+	private int state;
+	private PortClient portClient;
+	
+	public Zigbee(){
+		cfg = new ZigbeeCfg();
+		portClient = new PortClient(cfg.getPortCfg());
+		state = STATE_UNREADY;
+	}
+	
+	public void setCfgPath(String path){
+		this.cfgPath = path;
+	}
+	
+	private void loadCfg() throws Exception{
+		if(cfgPath == null){
+			throw new Exception("cfgPaht is null");
+		}else{
+			cfg = new ZigbeeCfg(cfgPath);
+			portClient = new PortClient(cfg.getPortCfg());
+		}
+	}
+	
+	public void init() throws Exception{
+		loadCfg();
+		portClient.connect();
+		
+		portClient.send(CodeGenerator.CMD_DEVICE_RESET);
+		Thread.currentThread().sleep(2000);
+		
+		portClient.send(CodeGenerator.CMD_STARTUP_WITHOUT_LAST_STATE);
+		Thread.currentThread().sleep(500);
+		
+		portClient.send(CodeGenerator.CMD_DEVICE_RESET);
+		Thread.currentThread().sleep(2000);
+		
+		portClient.send(CodeGenerator.chanlistCfg(cfg.getChannel()));
+		Thread.currentThread().sleep(500);
+		
+		portClient.send(CodeGenerator.PANIDCfg(cfg.getPanID()));
+		Thread.currentThread().sleep(500);
+		
+		portClient.send(CodeGenerator.deviceTypeCfg(cfg.getDeviceType()));
+		Thread.currentThread().sleep(500);
+		
+		portClient.send(CodeGenerator.CMD_ZDO_DIRECT_CB);
+		Thread.currentThread().sleep(500);
+		
+		ArrayList<AppReg> appRegList = cfg.getAppRegList();
+		if( appRegList != null && appRegList.size()>0){
+			for(AppReg appReg : appRegList){
+				registerAppToZigbee(appReg);
+			}
+		}
+		
+		state = STATE_READY;
+	}
+	
+	private boolean registerAppToZigbee(AppReg appReg){
+		try{
+			portClient.send(CodeGenerator.appRegister(appReg));
+			Thread.currentThread().sleep(500);
+		}catch(InterruptedException e1){
+			e1.printStackTrace();
+		}catch(Exception e2){
+			e2.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public void registerApps(ArrayList<AppReg> appRegList){
+		if(appRegList == null || appRegList.size() == 0)
+			return;
+		
+		for(int i=0; i<appRegList.size(); i++){
+			registerApp(appRegList.get(i));
+		}
+	}
+	
+	public void registerApp(AppReg appReg){
+		if(appReg == null)
+			return;
+		cfg.addAppReg(appReg);
+		if(state != STATE_UNREADY ){
+			registerAppToZigbee(appReg);
+		}
+	}
+	
+	public void start(){
+		portClient.send(CodeGenerator.CMD_STARTUP_FROM_APP);
+		try {
+			Thread.currentThread().sleep(2000);
+			System.out.println("zigbee start");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		portClient.startReceive();
+		state = STATE_WORKING;
+	}
+	
+	public void send(MsgFrameOut msg){
+		portClient.send(CodeGenerator.packetSend(msg));
+	}
+	
+	public void setMsgFrameReceivedCallback(MsgFrameReceivedCallback callback){
+		portClient.setMsgFrameReceivedCallback(callback);
+	}
+}

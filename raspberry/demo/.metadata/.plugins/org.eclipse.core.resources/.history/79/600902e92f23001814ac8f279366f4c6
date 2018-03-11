@@ -1,0 +1,69 @@
+package bs.pi.gateway.processor;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import bs.pi.gateway.sender.ISender;
+
+public class MyProcessor implements IProcessor {
+
+	private ArrayList<ISender> senderList;
+	private ArrayList<HashMap<String, Object>> msgList;
+	private Thread processThread = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			while( ! processThread.isInterrupted()){
+				
+			}
+		}
+	});
+	
+	public MyProcessor(){
+		msgList = new ArrayList<HashMap<String, Object>>();
+	}
+	
+	@Override
+	public void setSenders(ArrayList<ISender> senderList) {
+		this.senderList = senderList;
+	}
+
+	@Override
+	public void handleEvent(HashMap<String, Object> msg) {
+		if(msg != null){
+			synchronized (msgList) {
+				msgList.add((HashMap<String, Object>) msg.clone());
+				msgList.notifyAll();
+			}
+		}
+	}
+	
+	@Override
+	public void start(){
+		processThread.start();
+	}
+	
+	@Override
+	public void stop(){
+		//ÈÃnextMsgÄÜÍË³ö
+		msgList.notifyAll();
+		
+		processThread.interrupt();
+	}
+	
+	private HashMap<String, Object> nextMsg(){
+		HashMap<String, Object> msg = null;
+		synchronized (msgList) {
+			if(msgList.size() == 0){
+				try {
+					msgList.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			if(msgList.size() > 0)
+				msg = msgList.remove(0);
+			msgList.notifyAll();
+		}
+		return msg;
+	}
+}

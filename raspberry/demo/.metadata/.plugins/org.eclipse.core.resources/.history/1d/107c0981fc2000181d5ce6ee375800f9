@@ -1,0 +1,18 @@
+package com.test;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void test1(){
+		ClassB classB = new ClassB();
+		classB.fun1();
+	}
+	
+	public static void test12(){
+		JSONObject jo = new JSONObject();
+	}
+}

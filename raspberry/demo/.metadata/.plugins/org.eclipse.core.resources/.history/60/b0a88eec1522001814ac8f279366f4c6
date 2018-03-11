@@ -1,0 +1,160 @@
+package bs.app.zigbee.zigbee;
+
+import gnu.io.CommPort;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+
+public class Zigbee {
+	
+	private final static int STATE_UNREADY = 0;
+	private final static int STATE_READY = 1;
+	private final static int STATE_WORKING = 2;
+	
+	public static final String DEFAULT_CFG_PATH = System.getProperty("file.separator")+"zigbeeCfg.properties";	
+	private ZigbeeCfg cfg;
+	private int state;
+	
+	
+	public Zigbee(){
+		cfg = new ZigbeeCfg();
+		state = STATE_UNREADY;
+	}
+	
+	public Zigbee(String cfgPath){
+		try{
+			cfg = new ZigbeeCfg(cfgPath);
+		}catch(Exception e){
+			e.printStackTrace();
+			System.err.println("zigbee配置加载出错，只能创建默认配置，加载的配置文件路径为："+cfgPath);
+			cfg = new ZigbeeCfg();
+		}
+	}
+	
+	public void registerApps(ArrayList<AppReg> appRegList){
+		if(appRegList == null || appRegList.size() == 0)
+			return;
+		
+		for(int i=0; i<appRegList.size(); i++){
+			registerApp(appRegList.get(i));
+		}
+	}
+	
+	public void registerApp(AppReg appReg){
+		if(appReg == null)
+			return;
+		cfg.addAppReg(appReg);
+		if(state != STATE_UNREADY ){
+			registerAppToZigbee(appReg);
+		}
+	}
+	
+	private boolean registerAppToZigbee(AppReg appReg){
+		try{
+			portClient.send(CodeGenerator.appRegister(appReg));
+			Thread.currentThread().sleep(500);
+		}catch(InterruptedException e1){
+			e1.printStackTrace();
+		}catch(Exception e2){
+			e2.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public void connectPort () throws Exception{
+		
+		CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(cfg.getPortCfg().getPortName());
+        if ( portIdentifier.isCurrentlyOwned() ){
+            String errorStr = ">>>MyPortClient.loadOption Error: 串口" + cfg.getPortCfg().getPortName() +"被占用";
+            throw new Exception(errorStr);
+        }
+        else{
+            CommPort commPort = portIdentifier.open(cfg.getPortCfg().getPortName(), 2000);
+            
+            if ( commPort instanceof SerialPort ){
+            	SerialPort serialPort = (SerialPort) commPort;
+                serialPort.setSerialPortParams(
+                		cfg.getPortCfg().getBaudRate(),
+                		cfg.getPortCfg().getDataBits(),
+                		cfg.getPortCfg().getStopBits(),
+                		cfg.getPortCfg().getParity());
+                
+          //      receiver = new PortMsgReceiver(serialPort.getInputStream());
+                
+                portOutStream = serialPort.getOutputStream();
+            }
+            else{
+                String errorStr = ">>>MyPortClient.loadOption Error: "+  cfg.getPortCfg().getPortName() +"不是串口";
+	            throw new Exception(errorStr);
+            }
+        }
+    }
+
+	public void init(){
+		System.out.println("zigbee begin init");
+		try{
+			
+			portClient.connect();
+			
+			portClient.send(CodeGenerator.CMD_DEVICE_RESET);
+			Thread.currentThread().sleep(2000);
+			
+			portClient.send(CodeGenerator.CMD_STARTUP_WITHOUT_LAST_STATE);
+			Thread.currentThread().sleep(500);
+			
+			portClient.send(CodeGenerator.CMD_DEVICE_RESET);
+			Thread.currentThread().sleep(2000);
+			
+			portClient.send(CodeGenerator.CMD_ZDO_DIRECT_CB);
+			Thread.currentThread().sleep(500);
+			
+			portClient.send(CodeGenerator.CMD_DEVICE_RESET);
+			Thread.currentThread().sleep(2000);
+			
+			portClient.send(CodeGenerator.chanlistCfg(CodeGenerator.DEFAULT_CHANNEL));
+			Thread.currentThread().sleep(500);
+			
+			portClient.send(CodeGenerator.PANIDCfg(CodeGenerator.DEFAULT_PANID));
+			Thread.currentThread().sleep(500);
+			
+			portClient.send(CodeGenerator.deviceTypeCfg(CodeGenerator.DEVICE_TYPE_COORDINATOR));
+			Thread.currentThread().sleep(500);
+			
+			ArrayList<AppReg> appRegList = cfg.getAppRegList();
+			if( appRegList != null && appRegList.size()>0){
+				for(AppReg appReg : appRegList){
+					registerAppToZigbee(appReg);
+				}
+			}
+			
+			System.out.println("zigbee begin has inited");
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		state = STATE_READY;
+	}
+	
+	public void start(){
+		portClient.send(CodeGenerator.CMD_STARTUP_FROM_APP);
+		try {
+			Thread.currentThread().sleep(2000);
+			System.out.println("zigbee start");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		state = STATE_WORKING;
+	}
+	
+	public void sendPacket(MsgFrameOut packet){
+		portClient.send(CodeGenerator.packetSend(packet));
+	}
+}

@@ -1,0 +1,102 @@
+package bs.app.zigbee.zigbee;
+
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.Properties;
+
+import bs.app.zigbee.port.PortCfg;
+import bs.app.zigbee.tool.Tool;
+
+public class ZigbeeCfg {
+	
+	public final static String KEY_CHANNEL = "channel";
+	public final static String KEY_PANID = "PANID";
+	public final static String KEY_DEVICE_TYPE = "deviceType";
+	
+	public final static byte DEVICE_TYPE_COORDINATOR = 0x00;
+	public final static byte DEVICE_TYPE_ROUTE = 0x01;
+	public final static byte DEVICE_TYPE_END_DEVICE = 0x02;
+	
+	public final static byte[] DEFAULT_CHANNEL = {0x00, 0x08, 0x00, 0x00};
+	public final static byte[] DEFAULT_PANID = {0x34, 0x12};
+	public final static byte DEFAULT_DEVICE_TYPE = DEVICE_TYPE_ROUTE;
+	
+	private byte[] channel;	//信道
+	private byte[] panID;	//网络号
+	private byte deviceType;	//zigbee设备类型
+	private ArrayList<ZigbeeAppReg> appRegList;
+	private PortCfg portCfg;//串口配置
+
+	public ZigbeeCfg(){
+		channel = DEFAULT_CHANNEL;
+		panID = DEFAULT_PANID;
+		deviceType = DEFAULT_DEVICE_TYPE;
+	}
+	
+	public ZigbeeCfg(String cfgPath) throws Exception{
+		loadCfg(cfgPath);
+	}
+	
+	public void loadCfg(String cfgPath) throws Exception{
+		Properties properties = new Properties();
+		properties.load(new FileInputStream(cfgPath));
+		channel = Tool.strToBytes(properties.getProperty(KEY_CHANNEL));
+		panID = Tool.strToBytes(properties.getProperty(KEY_PANID));
+		deviceType = Tool.strToBytes(properties.getProperty(KEY_DEVICE_TYPE))[0];
+		
+		if(properties.containsKey(ZigbeeAppReg.KEY_APP_COUNT)){
+			int appCount = Integer.parseInt(properties.getProperty(ZigbeeAppReg.KEY_APP_COUNT));
+			if(appCount>0){
+				appRegList = new ArrayList<>();
+				for(int i=1;i<(appCount+1);i++){
+					ZigbeeAppReg reg = new ZigbeeAppReg();
+					appRegList.add(reg);
+				}
+			}
+		}
+		
+				
+		portCfg = new PortCfg();
+		portCfg.setPortName(properties.getProperty(PortCfg.KEY_PORT_NAME));
+		int baudRate = Integer.parseInt(properties.getProperty(PortCfg.KEY_BAUD_RATE));
+		int dataBits = Integer.parseInt(properties.getProperty(PortCfg.KEY_DATA_BITS));
+		int stopBits = Integer.parseInt(properties.getProperty(PortCfg.KEY_STOP_BITS));
+		int parity = Integer.parseInt(properties.getProperty(PortCfg.KEY_PARITY));
+		portCfg.setBaudRate(baudRate);
+		portCfg.setDataBits(dataBits);
+		portCfg.setStopBits(stopBits);
+		portCfg.setParity(parity);
+	}
+	
+	public byte[] getChannel() {
+		return channel;
+	}
+
+	public void setChannel(byte[] channel) {
+		this.channel = channel;
+	}
+
+	public byte[] getPanID() {
+		return panID;
+	}
+
+	public void setPanID(byte[] panID) {
+		this.panID = panID;
+	}
+
+	public byte getDeviceType() {
+		return deviceType;
+	}
+
+	public void setDeviceType(byte deviceType) {
+		this.deviceType = deviceType;
+	}
+
+	public PortCfg getPortCfg() {
+		return portCfg;
+	}
+
+	public void setPortCfg(PortCfg portCfg) {
+		this.portCfg = portCfg;
+	}
+}

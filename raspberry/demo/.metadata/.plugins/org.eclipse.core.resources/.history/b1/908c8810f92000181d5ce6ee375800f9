@@ -1,0 +1,7 @@
+package bs.pi.gateway.main;
+
+/*
+ * 消息类，后续会定义具体格式
+ */
+public class Msg extends JSONObject{
+}

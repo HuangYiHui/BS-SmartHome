@@ -1,0 +1,46 @@
+package bs.app.http;
+
+import net.sf.json.JSONObject;
+
+public class HttpMsgClient {
+
+	private static final String DEFAULT_CFG_PATH = System.getProperty("file.separator")+"httpClient.properties";
+	private HttpMsgClientCfg cfg;
+	private HttpMsgSender sender = new HttpMsgSender();
+	
+	public HttpMsgClient() throws Exception{
+		cfg = new HttpMsgClientCfg(DEFAULT_CFG_PATH);
+	}
+	
+	public HttpMsgClient(String cfgPath) throws Exception{
+		cfg = new HttpMsgClientCfg(cfgPath);
+	}
+
+	public boolean send(JSONObject msg) {
+		if(msg == null)
+			return false;
+		
+		if(Msg.CMD_UPLOAD_SENSOR_DATA_TO_HTTP_SERVER.equals( msg.getString(Msg.KEY_CMD_NAME) )){
+			String appID = msg.getString("appID");
+			String value = msg.getString("value");
+			JSONObject jo = new JSONObject();
+			String url = cfg.getServiceUrl()+"/device/"+cfg.getDeviceID()+"/sensor/"+appID+"/datapoint";
+			jo.put(HttpMsgSender.KEY_URL, url);
+			jo.put(HttpMsgSender.KEY_APIKEY, cfg.getApiKey());
+			jo.put(HttpMsgSender.KEY_METHOD, HttpMsgSender.METHOD_POST);
+			JSONObject params = new JSONObject();
+			params.put("value",value);
+			jo.put(HttpMsgSender.KEY_PARAMS, params);
+			JSONObject response = sender.send(jo);
+			if(response != null && response.has("success") && 
+					"true".equals(response.getString("success"))){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+}

@@ -1,0 +1,20 @@
+package bs.app.zigbee;
+
+import bs.app.zigbee.port.PortClient;
+
+public class ZigbeeApp {
+	
+	private PortClient portClient;
+	
+	public void init(){
+		
+	}
+	
+	public void run(){
+		
+	}
+	
+	public void stop(){
+		
+	}
+}

@@ -1,0 +1,7 @@
+package bs.pi.gateway.client.port;
+
+public class PortMsgClient {
+
+	private static final String DEFAULT_CFG_PATH = System.getProperty("file.separator")+"portClient.properties";
+	private PortMsgClientCfg cfg;
+}

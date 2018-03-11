@@ -1,0 +1,16 @@
+package bs.pi.gateway.processor;
+
+import java.util.ArrayList;
+
+import bs.pi.gateway.sender.ISender;
+
+public class MyProcessor implements IProcessor {
+
+	@Override
+	public void setSenders(ArrayList<ISender> senders) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+}

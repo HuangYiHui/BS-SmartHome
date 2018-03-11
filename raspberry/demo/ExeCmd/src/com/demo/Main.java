@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONObject;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -28,12 +30,13 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		
-		//sendCmd();
-		//getCmd();
-		//deleteCmd();
+	//	deleteCmd();
+//		sendCmd();
+//		getCmd();
 		//String[] strs = "123456".split("-");
 		//System.out.println(strs.length);
 		
+		/*
 		Zigbee zigbee = new Zigbee();
 		MyPortClient client = new MyPortClient();
 		zigbee.setPortClient(client);
@@ -69,7 +72,7 @@ public class Main {
 			}
 			
 			Thread.currentThread().sleep(2500);
-		}
+		}*/
 	}
 	
 	public static byte[] HexStringToBinary(String hexString){
@@ -101,21 +104,16 @@ public class Main {
 			httpPost.addHeader("APIKEY", "6000000620879617");
 			
 			Map<String, Object> params = new HashMap<String, Object>();
-			String cmd = "CMD_APP_MSG-78-5656565656";
-			params.put("command", cmd);
+			JSONObject msg = new JSONObject();
+			msg.put("cmd", "openLight");
+			msg.put("appID", 0xf1);
+			params.put("command", msg.toString());
 			
-			List<NameValuePair> pairs = null;
-		    if (params != null && !params.isEmpty()) {
-		        pairs = new ArrayList<NameValuePair>(params.size());
-		        for (String key : params.keySet()) {
-		            pairs.add(new BasicNameValuePair(key, params.get(key).toString()));
-		        }
-		    }
-		    if (pairs != null && pairs.size() > 0) {
-		        httpPost.setEntity(new UrlEncodedFormEntity(pairs, "UTF-8"));
-		    }
+			List<NameValuePair> pairs = new ArrayList<NameValuePair>(1);
+			pairs.add(new BasicNameValuePair("command", msg.toString()));
+			System.out.println(msg.toString());
 			httpPost.setEntity(new UrlEncodedFormEntity(pairs, "UTF-8"));
-		
+			
 			//÷¥––«Î«Û
 			HttpClient client = HttpClients.createDefault();
 			HttpResponse response =  client.execute(httpPost);

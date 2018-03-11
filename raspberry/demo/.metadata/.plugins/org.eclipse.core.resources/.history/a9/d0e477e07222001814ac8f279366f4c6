@@ -1,0 +1,14 @@
+package bs.main;
+
+import bs.app.zigbee.ZigbeeApp;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ZigbeeApp zigbeeApp = new ZigbeeApp();
+		zigbeeApp.init();
+		zigbeeApp.run();
+	}
+
+}

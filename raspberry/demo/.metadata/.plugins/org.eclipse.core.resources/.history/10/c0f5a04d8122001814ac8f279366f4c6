@@ -1,0 +1,155 @@
+package bs.app.zigbee.zigbee;
+
+import gnu.io.CommPort;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Calendar;
+
+public class PortClient {
+	private PortCfg cfg;
+	private InputStream iStream;
+	private OutputStream oStream;
+	private MsgFrameReceivedCallback callback;
+	private Thread receiveThread = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			System.out.println("start receive");
+			while( ! receiveThread.isInterrupted()){
+				if(callback != null){
+					MsgFrameIn msg = null;
+					try {
+						msg = receiveMsgFrame();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if(msg != null)
+						callback.received(msg);
+				}else{
+				}
+			}
+		}
+	});
+	
+	public void setPortCfg(PortCfg cfg){
+		this.cfg = cfg;
+	}
+	
+	public void connect() throws Exception{
+		
+		CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(cfg.getPortName());
+        if ( portIdentifier.isCurrentlyOwned() ){
+            String errorStr = ">>>MyPortClient.loadOption Error: 串口" + cfg.getPortName() +"被占用";
+            throw new Exception(errorStr);
+        }
+        else{
+            CommPort commPort = portIdentifier.open(cfg.getPortName(), 2000);
+            if ( commPort instanceof SerialPort ){
+            	SerialPort serialPort = (SerialPort) commPort;
+                serialPort.setSerialPortParams(cfg.getBaudRate(), cfg.getDataBits(), cfg.getStopBits(), cfg.getParity());
+                iStream = serialPort.getInputStream();
+                oStream = serialPort.getOutputStream();
+            }
+            else{
+                String errorStr = ">>>MyPortClient.loadOption Error: "+  cfg.getPortName() +"不是串口";
+	            throw new Exception(errorStr);
+            }
+        }
+    }
+
+	public void setMsgFrameReceivedCallback(MsgFrameReceivedCallback callback){
+		this.callback = callback;
+	}
+	
+	public void startReceive(){
+		receiveThread.start();
+	}
+
+	public boolean send(byte[] bs){
+		if(oStream == null)
+			return false;
+		try{
+			oStream.write(bs);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public Byte readByte(InputStream iStream) throws IOException
+	{
+		int time1 = Calendar.getInstance().get(Calendar.MILLISECOND);
+		while(true){
+			int time2 = Calendar.getInstance().get(Calendar.MILLISECOND);
+			if((time2-time1)>12)
+				return null;
+			int temp = iStream.read();
+			if(temp != -1){
+				Byte result = new Byte((byte) temp);
+				return result;
+			}
+		}
+	}
+	
+	public byte[] readBytes(int len, InputStream iStream) throws IOException
+	{
+		byte[] result = new byte[len];
+		for(int i=0;i<len;i++){
+			Byte temp = readByte(iStream);
+			if(temp == null)
+				return null;
+			result[i] = temp;
+		}
+		
+		return result;
+	}
+	
+	private MsgFrameIn receiveMsgFrame() throws Exception{
+		//判断信息包是否开始
+		
+		byte b;
+		boolean isBegin = false;
+		while(iStream.available()>0){
+			if(iStream.read() == 0xfe){
+				isBegin = true;
+				break;
+			}
+		}
+		if( ! isBegin)
+			return null;
+		
+		Byte len = readByte(iStream);
+		if(len == null)
+			return null;
+
+		MsgFrameIn msg = new MsgFrameIn();
+		Byte cmd0 = readByte(iStream);
+		if(cmd0 == null)
+			return null;
+		msg.setCmd0(cmd0);
+		
+		Byte cmd1 = readByte(iStream);
+		if(cmd1 == null)
+			return null;
+		msg.setCmd1(cmd1);
+
+		byte[] data = readBytes(len, iStream);
+		if(data == null)
+			return null;
+		msg.setData(data);
+		
+		Byte fcs = readByte(iStream);
+		if(fcs == null)
+			return null;
+		
+		if(msg.validate(fcs))
+			return msg;
+		else
+			return null;
+	}
+}

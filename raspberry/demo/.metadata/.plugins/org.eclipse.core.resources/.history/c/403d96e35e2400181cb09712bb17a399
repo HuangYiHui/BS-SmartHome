@@ -1,0 +1,35 @@
+package bs.pi.gateway.client.zigbee;
+
+import java.util.HashMap;
+
+import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.main.ISender;
+
+public class ZigbeeSender implements ISender {
+
+	private ISender portSender;
+	private IConverter converter;
+	
+	public ZigbeeSender(ISender portSender, IConverter converter){
+		this.portSender = portSender;
+		this.converter = converter;
+	}
+	
+	@Override
+	public String getName() {
+		return ISender.V_SEND_NAME_ZIGBEE_SNEDER;
+	}
+
+	@Override
+	public HashMap<String, Object> send(HashMap<String, Object> msg) {
+		if(msg != null){
+			HashMap<String, Object> msg1 = converter.convertMsgSend(msg);
+			if(IConverter.V_CONVERT_STATUS_SUCCESS.equals(msg1.get(IConverter.K_CONVERT_STATUS))){
+				byte[] dstAddr = (byte[]) msg1.get(ZigbeeMsg.K_DESTINATION_ADDRESS);
+				byte[] data = (byte[]) msg1.get(ZigbeeMsg.K_DATA);
+			}
+		}
+		return null;
+	}
+
+}

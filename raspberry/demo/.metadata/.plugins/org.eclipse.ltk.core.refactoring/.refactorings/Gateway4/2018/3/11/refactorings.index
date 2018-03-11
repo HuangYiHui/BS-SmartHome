@@ -1,0 +1,19 @@
+1520727195358	Rename type 'Msg'
+1520727376552	Delete element
+1520729693326	Rename type 'PortSendReponse'
+1520730596667	Rename type 'PortSendReponseMsg'
+1520731012901	Copy compilation unit
+1520736230557	Rename type 'PortMsg'
+1520736502619	Rename type 'PortReceivedMsg'
+1520736729245	Rename type 'PortMsgReceived'
+1520736741198	Rename local variable 'PortMsgReceived'
+1520737147697	Rename type 'PortSendMsg'
+1520737175245	Rename local variable 'portSendMsg'
+1520737181596	Rename type 'SendPortMsg'
+1520737240463	Rename local variable 'sendPortMsg'
+1520737340802	Rename type 'ZigbeeMsg'
+1520737402401	Rename local variable 'zigbeeMsg'
+1520737709197	Move compilation unit
+1520770556463	Move compilation unit
+1520770572416	Delete element
+1520770657086	Rename package 'bs.pi.gateway.Msg'

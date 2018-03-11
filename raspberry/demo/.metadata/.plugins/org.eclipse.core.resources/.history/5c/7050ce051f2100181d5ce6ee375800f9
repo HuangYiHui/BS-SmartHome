@@ -1,0 +1,42 @@
+package com.test;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import net.sf.json.JSONObject;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//test2();
+		test3();
+	}
+
+	public static void test1(){
+		ClassB classB = new ClassB();
+		classB.fun1();
+	}
+	
+	public static void test2(){
+		String str = "{'name':{'name1':'value1', 'name2':'value2'}}";
+		JSONObject jo = JSONObject.fromObject(str);
+		JSONObject jo1 = jo.getJSONObject("name");
+		Set<Map.Entry<String, String>> set1 = jo1.entrySet();
+		for (Map.Entry<String, String> entry : set1) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+        }
+	}
+	
+	public static void test3(){
+		String str = "{}";
+		JSONObject jo = JSONObject.fromObject(str);
+		if(jo == null){
+			System.out.println("null");
+		}
+		
+		if(jo.has("name"))
+			jo.getString("name");
+	}
+}

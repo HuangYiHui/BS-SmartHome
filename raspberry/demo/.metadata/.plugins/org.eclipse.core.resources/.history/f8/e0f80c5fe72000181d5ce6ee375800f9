@@ -1,0 +1,6 @@
+package bs.pi.gateway.main;
+
+public interface MsgReceivedCallBack {
+	//接收到一条消息的回调
+	void received(Msg msg);
+}

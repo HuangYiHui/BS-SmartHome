@@ -1,0 +1,45 @@
+package bs.app.http;
+
+import bs.app.zigbee.zigbee.ZigbeeClient;
+import bs.main.IApp;
+
+public class HttpApp implements IApp {
+
+	public static final String DEFAULT_CFG_PATH = System.getProperty("user.dir")+System.getProperty("file.separator")+"httpAppCfg.properties";	
+	private String cfgPath;
+	private HttpClient httpClient;
+	
+	public HttpApp(){
+		httpClient = new HttpClient();
+	}
+	
+	public HttpApp(String cfgPath){
+		httpClient = new HttpClient();
+		this.cfgPath = cfgPath;
+	}
+	
+	public void setCfgPath(String path){
+		this.cfgPath = path;
+	}
+	
+	@Override
+	public void init() throws Exception {
+		if(cfgPath != null)
+			httpClient.setCfgPath(cfgPath);
+		else
+			httpClient.setCfgPath(DEFAULT_CFG_PATH);
+	}
+
+	@Override
+	public void run() throws Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void destory() throws Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+}

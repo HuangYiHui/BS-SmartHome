@@ -1,0 +1,5 @@
+package bs.pi.gateway.converter;
+
+public interface IConverter {
+
+}

@@ -1,0 +1,32 @@
+package bs.pi.gateway.Msg;
+
+public class HttpSendResponseMsg implements IMsg {
+
+	public final static String MSG_NAME = "HttpSendResponseMsg";
+	public final static int TYPE = 1;
+	
+	private boolean sendSuccess;
+	private int type;
+	
+	@Override
+	public String getName() {
+		return MSG_NAME;
+	}
+
+	public boolean getSendSuccess() {
+		return sendSuccess;
+	}
+
+	public void setSendSuccess(boolean sendSuccess) {
+		this.sendSuccess = sendSuccess;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+	
+}

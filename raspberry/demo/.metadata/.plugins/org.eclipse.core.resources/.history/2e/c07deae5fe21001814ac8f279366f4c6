@@ -1,0 +1,130 @@
+package bs.app.zigbee.zigbee;
+
+import java.util.Properties;
+
+import bs.app.zigbee.tool.Tool;
+
+public class ZigbeeAppReg {
+	
+	public final static String KEY_APP_COUNT = "appCount";
+	public final static String KEY_ENDPOINT = "endpoint";
+	public final static String KEY_APP_PROF_ID = "appProfID";
+	public final static String KEY_APP_DEVICE_ID = "appDeviceID";
+	public final static String KEY_DEV_VER = "endDevVer";
+	public final static String KEY_LATENCY_REQ = "latencyReq";
+	public final static String KEY_APP_NUM_IN_CLUSTERS = "endDevVer";
+	public final static String KEY_APP_IN_CLUSTER_LIST = "endDevVer";
+	public final static String KEY_APP_NUM_OUT_CLUSTERS = "endDevVer";
+	public final static String KEY_APP_OUT_CLUSTER_LIST = "endDevVer";
+	
+	private byte endpoint;
+	private byte[] appProfID = new byte[2];
+	private byte[] appDeviceID = new byte[2];
+	private byte endDevVer;
+	private byte latencyReq;
+	private byte appNumInClusters;
+	private byte[] appInClusterList = new byte[0];
+	private byte appNumOutClusters;
+	private byte[] appOutClusterList = new byte[0];
+	
+	public ZigbeeAppReg(Properties properties, int index){
+		endpoint = Tool.strToBytes(properties.getProperty(KEY_ENDPOINT+index))[0];
+		appProfID = Tool.strToBytes(properties.getProperty(KEY_APP_PROF_ID+index));
+		appDeviceID = Tool.strToBytes(properties.getProperty(KEY_APP_DEVICE_ID+index));
+		endDevVer = Tool.strToBytes(properties.getProperty(KEY_DEV_VER+index))[0];
+		latencyReq = Tool.strToBytes(properties.getProperty(KEY_LATENCY_REQ+index))[0];
+		appNumInClusters = Tool.strToBytes(properties.getProperty(KEY_APP_NUM_IN_CLUSTERS+index))[0];
+	}
+	
+	public ZigbeeAppReg()
+	{	
+		endpoint = (byte) 0xff;
+	}
+	
+	public ZigbeeAppReg(ZigbeeAppReg reg)
+	{
+		endpoint = reg.getEndpoint();
+		setAppProfID(reg.getAppProfID());
+		setAppDeviceID(reg.getAppDeviceID());
+		endDevVer = reg.getEndDevVer();
+		latencyReq = reg.getLatencyReq();
+		appNumInClusters = reg.getAppNumInClusters();
+		setAppInClusterList(reg.getAppInClusterList());
+		appNumOutClusters = reg.getAppNumOutClusters();
+		setAppOutClusterList(reg.getAppOutClusterList());
+	}
+	
+	public byte getEndpoint() {
+		return endpoint;
+	}
+
+	public void setEndpoint(byte endpoint) {
+		this.endpoint = endpoint;
+	}
+
+	public byte[] getAppProfID() {
+		return appProfID;
+	}
+
+	public void setAppProfID(byte[] appProfID) {
+		this.appProfID = appProfID.clone();
+	}
+
+	public byte[] getAppDeviceID() {
+		return appDeviceID;
+	}
+
+	public void setAppDeviceID(byte[] appDeviceID) {
+		this.appDeviceID = appDeviceID.clone();
+	}
+
+	public byte getEndDevVer() {
+		return endDevVer;
+	}
+
+	public void setEndDevVer(byte endDevVer) {
+		this.endDevVer = endDevVer;
+	}
+
+	public byte getLatencyReq() {
+		return latencyReq;
+	}
+
+	public void setLatencyReq(byte latencyReq) {
+		this.latencyReq = latencyReq;
+	}
+
+	public byte getAppNumInClusters() {
+		return appNumInClusters;
+	}
+
+	public void setAppNumInClusters(byte appNumInClusters) {
+		this.appNumInClusters = appNumInClusters;
+		appInClusterList = new byte[appNumInClusters];
+	}
+
+	public byte[] getAppInClusterList() {
+		return appInClusterList;
+	}
+
+	public void setAppInClusterList(byte[] appInClusterList) {
+		this.appInClusterList = appInClusterList.clone();
+		appOutClusterList = new byte[appNumOutClusters];
+	}
+
+	public byte getAppNumOutClusters() {
+		return appNumOutClusters;
+	}
+
+	public void setAppNumOutClusters(byte appNumOutClusters) {
+		this.appNumOutClusters = appNumOutClusters;
+	}
+
+	public byte[] getAppOutClusterList() {
+		return appOutClusterList.clone();
+	}
+
+	public void setAppOutClusterList(byte[] appOutClusterList) {
+		this.appOutClusterList = appOutClusterList.clone();
+	}
+}

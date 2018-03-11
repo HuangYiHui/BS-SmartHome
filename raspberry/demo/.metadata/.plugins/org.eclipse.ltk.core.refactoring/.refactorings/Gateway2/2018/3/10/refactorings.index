@@ -1,0 +1,63 @@
+1520392152329	Rename package 'bs.pi.gateway.zigbeee'
+1520392469942	Rename package 'bs.zigbeee'
+1520392611828	Rename type 'PortMsgClientCfg'
+1520392630521	Rename type 'PortMsgClient'
+1520393505311	Move compilation unit
+1520393531883	Copy package
+1520393539292	Delete element
+1520393561508	Rename package 'bs.support'
+1520393572159	Copy package
+1520393579040	Delete element
+1520393596106	Delete element
+1520393630594	Move compilation unit
+1520393634340	Move compilation unit
+1520393644980	Move compilation units
+1520393650233	Delete element
+1520393737501	Move compilation units
+1520393753112	Delete element
+1520393771372	Move compilation units
+1520393777046	Delete element
+1520395222562	Rename type 'MsgReceivedCallback'
+1520395371568	Rename type 'PortClientCfg'
+1520396461060	Rename field 'ZIGBEE_DEVICE_TYPE_COORDINATOR'
+1520396466420	Rename field 'ZIGBEE_DEVICE_TYPE_ROUTE'
+1520396470953	Rename field 'ZIGBEE_DEVICE_TYPE_END_DEVICE'
+1520396478480	Rename field 'DEFAULT_ZIGBEE_CHANNEL'
+1520396483713	Rename field 'DEFAULT_ZIGBEE_PANID'
+1520396488098	Rename field 'DEFAULT_ZIGBEE_DEVICE_TYPE'
+1520421796539	Rename type 'ZBAppReg'
+1520431051719	Delete element
+1520432304190	Rename type 'MsgFrame'
+1520432369998	Rename type 'ZBCG'
+1520432403829	Rename type 'ZigbeeMsgFrameGenerator'
+1520432409503	Rename type 'ZigbeeMsgFrame'
+1520432420771	Rename type 'ZigbeeAppReg'
+1520432538167	Rename type 'MsgFrame'
+1520432553438	Rename type 'ZBPacketSend'
+1520432583641	Delete element
+1520432637454	Rename type 'MsgFrameGenerator'
+1520432963785	Rename type 'MsgFrameReceiver'
+1520433137836	Delete element
+1520433290805	Move compilation unit
+1520433578271	Delete element
+1520433581923	Delete element
+1520434672987	Rename field 'portOutStream'
+1520434679782	Rename field 'portInStream'
+1520475530497	Delete element
+1520482155963	Rename type 'PortCfg'
+1520486796045	Rename type 'HttpMsgClientCfg'
+1520486804028	Rename type 'HttpMsgClient'
+1520486856112	Rename type 'Zigbee'
+1520486866175	Rename type 'ZigbeeCfg'
+1520486892131	Rename field 'zigbee'
+1520487006243	Rename type 'HtppApp'
+1520505544849	Copy compilation unit
+1520505698484	Copy compilation unit
+1520505775876	Copy compilation unit
+1520506211260	Copy compilation unit
+1520506427880	Copy compilation unit
+1520508845887	Copy folder
+1520517976970	Copy compilation unit
+1520573363227	Copy compilation unit
+1520573451477	Copy compilation unit
+1520685112032	Copy compilation unit

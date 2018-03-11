@@ -1,0 +1,16 @@
+package bs.app;
+
+public class ZigbeeApp {
+	
+	public void init(){
+		
+	}
+	
+	public void run(){
+		
+	}
+	
+	public void stop(){
+		
+	}
+}

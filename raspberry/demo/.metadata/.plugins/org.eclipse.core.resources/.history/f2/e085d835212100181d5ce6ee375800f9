@@ -1,0 +1,14 @@
+package bs.pi.gateway.client.http;
+
+import org.apache.http.HttpResponse;
+
+import net.sf.json.JSONObject;
+import bs.pi.gateway.main.MsgSender;
+
+public class HttpMsgSender{
+
+	public HttpResponse send(JSONObject msg) {
+		return null;
+	}
+
+}

@@ -1,0 +1,174 @@
+package bs.pi.gateway.client.port;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+
+import com.test.Debugger;
+
+import bs.pi.gateway.Msg.IMsg;
+import bs.pi.gateway.Msg.PortMsgReceivedMsg;
+import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.main.IReceivedListener;
+import bs.pi.gateway.main.IReceiver;
+
+public class PortReceiver implements IReceiver {
+	
+	private ArrayList<IReceivedListener> receivedListenerList;
+	private InputStream iStream;
+	private IConverter converter;
+	private Thread rTread = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			while( ! rTread.isInterrupted()){
+				if(converter != null && receivedListenerList != null && receivedListenerList.size()>0){
+					PortMsgReceive portMsgReceive = null;
+					try{
+						portMsgReceive = receiveMsg();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					IMsg result = converter.convertMsgReceive(portMsgReceive);
+					if(result != null){
+						for(IReceivedListener listener : receivedListenerList){
+							listener.handleEvent(result);
+						}
+					}
+				}
+			}
+		}
+	});
+	
+	public PortReceiver(InputStream iStream, IConverter converter){
+		this.iStream = iStream;
+		this.converter = converter;
+	}
+
+	@Override
+	public void addReceivedListenr(IReceivedListener listener) {
+		if(listener == null)
+			return;
+		if(receivedListenerList == null)
+			receivedListenerList = new ArrayList<IReceivedListener>();
+		receivedListenerList.add(listener);
+	}
+
+	@Override
+	public void start() {
+		flush();
+		rTread.start();
+	}
+
+	@Override
+	public void stop() {
+		rTread.interrupt();
+	}
+	
+	private PortMsgReceive receiveMsg(){
+		//判断信息包是否开始
+		boolean isBegin = false;
+		try{
+			while(iStream.available()>0){
+				if(iStream.read() == 0xfe){
+					isBegin = true;
+					break;
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		
+		if( ! isBegin)
+			return null;
+		
+		Byte len = readByte();
+		if(len == null)
+			return null;
+
+		Byte cmd0 = readByte();
+		if(cmd0 == null)
+			return null;
+		
+		Byte cmd1 = readByte();
+		if(cmd1 == null)
+			return null;
+
+		byte[] data = readBytes(len);
+		if(data == null)
+			return null;
+		
+		Byte fcs = readByte();
+		if(fcs == null)
+			return null;
+		
+		if(getFcs(cmd0, cmd1, data) == fcs){
+			PortMsgReceive msg = new PortMsgReceive();
+			msg.setCmd0(cmd0);
+			msg.setCmd1(cmd1);
+			msg.setData(data);
+			return msg;
+		}else{
+			return null;
+		}
+	}
+	
+	private Byte readByte()
+	{
+		int time1 = Calendar.getInstance().get(Calendar.MILLISECOND);
+		while(true){
+			int time2 = Calendar.getInstance().get(Calendar.MILLISECOND);
+			if((time2-time1)>12)
+				return null;
+			
+			int temp = -1;
+			try{
+				temp = iStream.read();
+			}catch(Exception e){
+				return null;
+			}
+			if(temp != -1){
+				Byte result = new Byte((byte) temp);
+				return result;
+			}
+		}
+	}
+	
+	private byte[] readBytes(int len)
+	{
+		byte[] result = new byte[len];
+		for(int i=0;i<len;i++){
+			Byte temp = readByte();
+			if(temp == null)
+				return null;
+			result[i] = temp;
+		}
+		
+		return result;
+	}
+	
+	private byte getFcs(byte cmd0, byte cmd1, byte[] data){
+		byte fcs = (byte) data.length;
+		fcs ^= cmd0;
+		fcs ^= cmd1;
+		for(byte b : data)
+			fcs ^= b;
+		return fcs;
+	}
+
+	@Override
+	public void flush() {
+		// TODO Auto-generated method stub
+		if(iStream != null){
+			try {
+				while(iStream.available()>0){
+					iStream.read();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}

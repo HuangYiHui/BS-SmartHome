@@ -1,0 +1,57 @@
+package bs.pi.gateway.receiver;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import bs.pi.gateway.converter.IConverter;
+
+public class ZigbeeReceiver implements IReceiver {
+
+	private ArrayList<IReceivedListener> receivedListenerList;
+	private IReceiver portReceiver;
+	private IConverter converter;
+	private IReceivedListener receivedListener = new IReceivedListener() {
+		
+		@Override
+		public void handleEvent(HashMap<String, Object> msg) {
+			if(converter != null && receivedListenerList != null && receivedListenerList.size() > 0)
+				for(IReceivedListener receivedListener : receivedListenerList)
+					receivedListener.handleEvent(msg);
+		}
+	};
+	
+	public ZigbeeReceiver(IReceiver portReceiver){
+		this.portReceiver = portReceiver;
+	}
+	
+	@Override
+	public void addReceivedListenr(IReceivedListener listener) {
+		if(listener == null)
+			return;
+		if(receivedListenerList == null)
+			receivedListenerList = new ArrayList<IReceivedListener>();
+		receivedListenerList.add(listener);
+	}
+
+	@Override
+	public void start() {
+		portReceiver.flush();
+		portReceiver.addReceivedListenr(receivedListener);
+	}
+
+	@Override
+	public void stop() {
+		portReceiver.stop();
+	}
+
+	@Override
+	public void flush() {
+		portReceiver.flush();
+	}
+
+	@Override
+	public void setConverter(IConverter converter) {
+		this.converter = converter;
+	}
+
+}

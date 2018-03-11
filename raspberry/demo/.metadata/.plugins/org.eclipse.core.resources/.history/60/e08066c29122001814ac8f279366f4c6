@@ -1,0 +1,33 @@
+package bs.app.http;
+
+import bs.main.IApp;
+
+public class HtppApp implements IApp {
+
+	public static final String DEFAULT_CFG_PATH = System.getProperty("user.dir")+System.getProperty("file.separator")+"httpAppCfg.properties";	
+	private String cfgPath;
+	private HttpClient httpClient;
+	
+	public HtppApp(){
+		httpClient = new HttpClient();
+	}
+	
+	@Override
+	public void init() throws Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void run() throws Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void destory() throws Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+}

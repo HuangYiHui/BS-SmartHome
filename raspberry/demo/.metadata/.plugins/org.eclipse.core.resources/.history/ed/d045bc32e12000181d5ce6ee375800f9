@@ -1,0 +1,12 @@
+package main;
+
+
+/*
+ * 消息发送者，属于消息客户端内部组件
+ */
+
+public interface MessageSender {
+
+	//发送一条消息，成功返回true
+	 boolean send(Message message);
+}

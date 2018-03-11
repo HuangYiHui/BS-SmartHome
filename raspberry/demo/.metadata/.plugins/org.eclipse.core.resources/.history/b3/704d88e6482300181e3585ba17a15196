@@ -1,0 +1,27 @@
+package bs.pi.gateway.client.zigbee;
+
+import java.util.HashMap;
+
+import bs.pi.gateway.client.port.PortConverter;
+import bs.pi.gateway.main.IConverter;
+
+public class ZigbeeConverter implements IConverter {
+
+	@Override
+	public HashMap<String, Object> convertMsgReceive(HashMap<String, Object> msg) {
+		if(msg == null)
+			return null;
+		
+		if( ! PortConverter.KEY_MSG_TYPE.equals(msg.get(PortConverter.MSG_TYPE_PORT_MSG))){
+				return null;
+		}
+		return null;
+	}
+
+	@Override
+	public HashMap<String, Object> convertMsgSend(HashMap<String, Object> msg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

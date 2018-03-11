@@ -1,0 +1,42 @@
+package bs.pi.gateway.receiver;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class ZigbeeReceiver implements IReceiver {
+
+	private ArrayList<IReceivedListener> receivedListenerList;
+	private IReceiver portReceiver;
+	private IReceivedListener receivedListener = new IReceivedListener() {
+		
+		@Override
+		public void handleEvent(HashMap<String, Object> msg) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
+	
+	public ZigbeeReceiver(IReceiver portReceiver){
+		this.portReceiver = portReceiver;
+	}
+	
+	@Override
+	public void addReceivedListenr(IReceivedListener listener) {
+		if(listener == null)
+			return;
+		if(receivedListenerList == null)
+			receivedListenerList = new ArrayList<IReceivedListener>();
+		receivedListenerList.add(listener);
+	}
+
+	@Override
+	public void start() {
+		portReceiver.addReceivedListenr(receivedListener);
+	}
+
+	@Override
+	public void stop() {
+
+	}
+
+}

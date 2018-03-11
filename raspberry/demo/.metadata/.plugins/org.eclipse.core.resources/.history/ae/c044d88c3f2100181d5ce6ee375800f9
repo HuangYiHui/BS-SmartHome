@@ -1,0 +1,96 @@
+package bs.pi.gateway.client.http;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import net.sf.json.JSONObject;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.message.BasicNameValuePair;
+
+import bs.pi.gateway.main.Msg;
+import bs.pi.gateway.main.MsgClient;
+import bs.pi.gateway.main.MsgReceivedCallback;
+
+public class HttpMsgClient implements MsgClient {
+
+	private HttpMsgClientCfg cfg;
+	private HttpMsgReceiver receiver;
+	private HttpMsgSender sender = new HttpMsgSender();
+	private MsgReceivedCallback callback;
+	
+	public HttpMsgClient(HttpMsgClientCfg cfg){
+		this.cfg = cfg;
+	}
+	
+	@Override
+	public void connect() throws Exception {
+		
+	}
+
+	@Override
+	public void setReceivedCallBack(MsgReceivedCallback callback) {
+		// TODO Auto-generated method stub
+		this.callback = callback;
+		receiver.setReceiveCallBack(callback);
+	}
+
+	@Override
+	public void startReceive() {
+		// TODO Auto-generated method stub
+		receiver.start();
+	}
+
+	@Override
+	public void stopReceive() {
+		// TODO Auto-generated method stub
+		receiver.stop();
+	}
+
+	@Override
+	public boolean send(JSONObject msg) {
+		if(msg == null)
+			return false;
+		
+		if(Msg.CMD_SEND_MSG_TO_HTTP_SERVER.equals( msg.getString(Msg.KEY_CMD_NAME) )){
+			JSONObject response = sender.send(msg);
+			if(response != null && response.has("success") && 
+					"true".equals(response.getString("success"))){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+	
+	/*
+	public JSONObject sendReturnResponse(JSONObject msg) {
+		if(msg == null)
+			return null;
+		
+		if(Msg.CMD_SEND_MSG_TO_HTTP_SERVER.equals( msg.getString(Msg.KEY_CMD_NAME) )){
+			JSONObject jo = sender.send(msg);
+			if(jo == null){
+				return null;
+			}
+			else{
+				JSONObject result = new JSONObject();
+				result.put(Msg.KEY_CMD_NAME, Msg.CMD_HTTP_SERVER_RESPONSE);
+				result.put("ResponseContent", jo);
+				return result;
+			}
+		}else{
+			return null;
+		}
+	}*/
+	
+}

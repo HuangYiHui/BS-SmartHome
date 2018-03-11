@@ -1,0 +1,7 @@
+package bs.pi.gateway.Msg;
+
+public interface Msg {
+
+	public String getName();
+	
+}

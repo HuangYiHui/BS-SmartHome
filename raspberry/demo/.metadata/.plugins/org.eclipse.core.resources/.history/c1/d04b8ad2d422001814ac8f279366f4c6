@@ -1,0 +1,27 @@
+package bs.pi.gateway.sender;
+
+import java.io.OutputStream;
+import java.util.HashMap;
+
+public class PortSender implements ISender {
+
+	public final String NAME = "PortSender";
+	private OutputStream oStream;
+	
+	public PortSender(OutputStream oStream){
+		this.oStream = oStream;
+	}
+	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return NAME;
+	}
+
+	@Override
+	public HashMap<String, Object> send(HashMap<String, Object> msg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

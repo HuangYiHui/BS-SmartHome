@@ -1,0 +1,12 @@
+package bs.pi.gateway.Msg;
+
+public class PortSendReponseMsg implements IMsg {
+
+	public final static String MSG_NAME = "PortSendResponseMsg";
+	
+	@Override
+	public String getName() {
+		return MSG_NAME;
+	}
+
+}

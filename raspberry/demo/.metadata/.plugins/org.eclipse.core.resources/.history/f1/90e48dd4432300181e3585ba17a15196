@@ -1,0 +1,18 @@
+package bs.pi.gateway.converter;
+
+import java.util.HashMap;
+
+public class PortConverter implements IConverter {
+
+	@Override
+	public HashMap<String, Object> convertMsgReceive(HashMap<String, Object> msg) {
+		return msg;
+	}
+
+	@Override
+	public HashMap<String, Object> convertMsgSend(HashMap<String, Object> msg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

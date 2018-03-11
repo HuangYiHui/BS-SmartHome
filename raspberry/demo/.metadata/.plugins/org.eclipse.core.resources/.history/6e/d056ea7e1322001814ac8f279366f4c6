@@ -1,0 +1,6 @@
+package bs.app.zigbee.zigbee;
+
+public interface MsgFrameReceivedCallback {
+	
+	public void received(MsgFrameIn);
+}

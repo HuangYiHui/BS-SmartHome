@@ -1,0 +1,32 @@
+package bs.pi.gateway.client.http;
+
+import java.util.ArrayList;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+import bs.pi.gateway.main.SampleMsgReceiver;
+
+public class HttpMsgReceiver extends SampleMsgReceiver {
+
+	private int requestIndex = 0;
+	private ArrayList<HttpUriRequest> requestList = new ArrayList<HttpUriRequest>();
+	
+	public void receive(){
+		while( ! receiveThread.isInterrupted()){
+			try{
+				HttpClient client = HttpClients.createDefault();
+				//HttpResponse response =  client.execute(httpGet);
+				//´òÓ¡½á¹û
+				System.out.println(EntityUtils.toString(response.getEntity()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+}

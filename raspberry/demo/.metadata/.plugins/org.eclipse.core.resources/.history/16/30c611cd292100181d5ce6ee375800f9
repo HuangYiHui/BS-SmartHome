@@ -1,0 +1,72 @@
+package com.test;
+
+import java.util.Map;
+import java.util.Set;
+
+import net.sf.json.JSONObject;
+
+import org.apache.http.client.methods.HttpDelete;
+
+import bs.pi.gateway.client.http.HttpMsgSender;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//test2();
+		//test3();
+		//test4();
+		test5();
+	}
+
+	public static void test1(){
+		ClassB classB = new ClassB();
+		classB.fun1();
+	}
+	
+	public static void test2(){
+		String str = "{'name':{'name1':'value1', 'name2':'value2'}}";
+		JSONObject jo = JSONObject.fromObject(str);
+		JSONObject jo1 = jo.getJSONObject("name");
+		Set<Map.Entry<String, String>> set1 = jo1.entrySet();
+		for (Map.Entry<String, String> entry : set1) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+        }
+	}
+	
+	public static void test3(){
+		String str = "{}";
+		JSONObject jo = JSONObject.fromObject(str);
+		if(jo == null){
+			System.out.println("null");
+		}
+		
+		if(jo.has("name"))
+			jo.getString("name");
+	}
+	
+	public static void test4(){
+		HttpMsgSender sender = new HttpMsgSender();
+		JSONObject jo1 = new JSONObject();
+		jo1.put(HttpMsgSender.KEY_CMD, "SendMsgToHttpService");
+		jo1.put(HttpMsgSender.KEY_URL, "http://119.29.36.20/dgutlink/api/device/21/command");
+		jo1.put(HttpMsgSender.KEY_METHOD, HttpMsgSender.METHOD_GET);
+		jo1.put(HttpMsgSender.KEY_APIKEY, "6000000620879617");
+		JSONObject jo2 = sender.send(jo1);
+		System.out.println(jo2.toString());
+	}
+	
+	public static void test5(){
+		HttpMsgSender sender = new HttpMsgSender();
+		JSONObject jo1 = new JSONObject();
+		jo1.put(HttpMsgSender.KEY_CMD, "SendMsgToHttpService");
+		jo1.put(HttpMsgSender.KEY_URL, "http://119.29.36.20/dgutlink/api/device/21/sensor/13/datapoint");
+		jo1.put(HttpMsgSender.KEY_METHOD, HttpMsgSender.METHOD_POST);
+		jo1.put(HttpMsgSender.KEY_APIKEY, "6000000620879617");
+		JSONObject jo2 = new JSONObject();
+		jo2.put("value", 107);
+		jo1.put(HttpMsgSender.KEY_PARAMS, jo2);
+		JSONObject jo3 = sender.send(jo1);
+		System.out.println(jo3.toString());
+	}
+}

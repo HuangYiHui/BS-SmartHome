@@ -1,0 +1,45 @@
+package bs.pi.gateway.client.port;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.HashMap;
+
+import bs.pi.gateway.Msg.IMsg;
+import bs.pi.gateway.Msg.PortSendReponseMsg;
+import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.main.ISender;
+
+public class PortSender implements ISender {
+
+	private OutputStream oStream;
+	private IConverter converter;
+	
+	public PortSender(OutputStream oStream, IConverter converter){
+		this.oStream = oStream;
+		this.converter = converter;
+	}
+	
+	@Override
+	public String getName() {
+		return ISender.V_SEND_NAME_PORT_SNEDER;
+	}
+
+	@Override
+	public IMsg send(IMsg msg) {
+		PortSendReponseMsg response = new PortSendReponseMsg();
+		PortMsg portMsg = (PortMsg) converter.convertMsgSend(msg);
+		if(portMsg != null){
+			try {
+				oStream.write(portMsg.getData());
+				response.setSendSuccess(true);
+			} catch (IOException e) {
+				e.printStackTrace();
+				result.put(ISender.K_SEND_STATUS, ISender.V_SEND_STATUS_FAIL);
+			}
+		}else{
+			result.put(ISender.K_SEND_STATUS, ISender.V_SEND_STATUS_FAIL);
+		}
+		return result;
+	}
+
+}

@@ -1,0 +1,83 @@
+package bs.pi.gateway.client.http;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.http.Consts;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import net.sf.json.JSONObject;
+import bs.pi.gateway.main.MsgSender;
+
+public class HttpMsgSender{
+
+	public final static String METHOD_GET = "Get";
+	public final static String METHOD_POST = "Post";
+	public final static String METHOD_PUT = "Put";
+	public final static String METHOD_DELETE = "Delete";
+	
+	private String url;
+	private String apiKey;
+	private List<NameValuePair> params;
+	private String method;
+	
+	public HttpResponse send(JSONObject msg) {
+		if(msg == null)
+			return null;
+		
+		if("SendMsgToHttpService".equals( msg.getString("CmdName") )){
+			String url = msg.getString("URI");
+			String apiKey = msg.getString("APIKEY");
+			String method = msg.getString("Method");
+			Set<Map.Entry<String, String>> paramSet = null;
+			if(msg.has("Params")){
+				paramSet = msg.getJSONObject("Params").entrySet();
+			}
+			
+			HttpRequestBase request = null;
+			switch(method){
+			case "GET":
+				request = new HttpGet(url);
+				break;
+			case "POST":
+				request = new HttpPost(url);
+				break;
+			}
+			if(request != null){
+				request.addHeader("APIKEY", apiKey);
+				
+				List<NameValuePair> pairs = null;
+			    if (paramSet != null && !paramSet.isEmpty()) {
+			    	pairs = new ArrayList<NameValuePair>(paramSet.size());
+			    	for(Map.Entry<String, String> entry : paramSet)
+			    		pairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+			    }
+			    if (pairs != null && pairs.size() > 0) {
+			    	request.setEntity(new UrlEncodedFormEntity(pairs, "UTF-8"));
+			    }
+			}
+		}
+	}
+	
+	private HttpResponse doGet(String url, String apiKey, List<NameValuePair> params){
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		try{
+			String paramStr = EntityUtils.toString(new UrlEncodedFormEntity(params, Consts.UTF_8));
+			HttpGet httpGet = new 
+		}finally{
+			
+		}
+	}
+
+}

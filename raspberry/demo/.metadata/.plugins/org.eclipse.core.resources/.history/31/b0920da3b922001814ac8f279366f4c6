@@ -1,0 +1,8 @@
+package bs.pi.gateway.sender;
+
+import java.util.HashMap;
+
+public interface ISender {
+
+	public HashMap<String, Object> send(HashMap<String, Object> msg);  
+}

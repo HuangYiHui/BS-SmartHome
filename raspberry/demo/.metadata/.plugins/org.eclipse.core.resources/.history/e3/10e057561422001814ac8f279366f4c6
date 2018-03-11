@@ -1,0 +1,8 @@
+package bs.app.zigbee.port;
+
+import net.sf.json.JSONObject;
+
+public interface PortMsgReceivedCallback {
+	//接收到一条消息的回调
+	void received(JSONObject msg);
+}

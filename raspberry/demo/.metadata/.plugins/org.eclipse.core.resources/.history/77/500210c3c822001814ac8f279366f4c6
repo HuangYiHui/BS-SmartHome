@@ -1,0 +1,12 @@
+package bs.pi.gateway.receiver;
+
+import java.io.InputStream;
+
+public class PortReceiver implements IReceiver {
+	
+	private InputStream iStream;
+	
+	public PortReceiver(InputStream iStream){
+		this.iStream = iStream;
+	}
+}

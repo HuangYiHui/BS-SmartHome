@@ -1,0 +1,93 @@
+package bs.pi.gateway.client.http;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import net.sf.json.JSONObject;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.message.BasicNameValuePair;
+
+import bs.pi.gateway.main.MsgClient;
+import bs.pi.gateway.main.MsgReceivedCallback;
+
+public class HttpMsgClient implements MsgClient {
+
+	private HttpMsgClientCfg cfg;
+	private HttpMsgReceiver receiver;
+	private HttpMsgSender sender;
+	
+	public HttpMsgClient(HttpMsgClientCfg cfg){
+		this.cfg = cfg;
+	}
+	
+	@Override
+	public void connect() throws Exception {
+		
+	}
+
+	@Override
+	public void setReceivedCallBack(MsgReceivedCallback callback) {
+		// TODO Auto-generated method stub
+		receiver.setReceiveCallBack(callback);
+	}
+
+	@Override
+	public void startReceive() {
+		// TODO Auto-generated method stub
+		receiver.start();
+	}
+
+	@Override
+	public void stopReceive() {
+		// TODO Auto-generated method stub
+		receiver.stop();
+	}
+
+	@Override
+	public boolean send(JSONObject msg) {
+		if(msg == null)
+			return false;
+		
+		if("SendMsgToHttpService".equals( msg.getString("CmdName") )){
+			String url = msg.getString("URI");
+			String apiKey = msg.getString("APIKEY");
+			String method = msg.getString("Method");
+			Set<Map.Entry<String, String>> paramSet = null;
+			if(msg.has("Params")){
+				paramSet = msg.getJSONObject("Params").entrySet();
+			}
+			
+			HttpRequestBase request = null;
+			switch(method){
+			case "GET":
+				request = new HttpGet(url);
+				break;
+			case "POST":
+				request = new HttpPost(url);
+				break;
+			}
+			if(request != null){
+				request.addHeader("APIKEY", apiKey);
+				
+				List<NameValuePair> pairs = null;
+			    if (paramSet != null && !paramSet.isEmpty()) {
+			    	pairs = new ArrayList<NameValuePair>(paramSet.size());
+			    	for(Map.Entry<String, String> entry : paramSet)
+			    		pairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+			    }
+			    if (pairs != null && pairs.size() > 0) {
+			    	request.setEntity(new UrlEncodedFormEntity(pairs, "UTF-8"));
+			    }
+			}
+		}
+		return false;
+	}
+
+}

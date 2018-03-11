@@ -1,0 +1,13 @@
+package bs.pi.gateway.processor;
+
+import java.util.ArrayList;
+
+import bs.pi.gateway.main.ISender;
+import bs.pi.gateway.receiver.IReceivedListener;
+
+public interface IProcessor extends IReceivedListener {
+
+	public void setSenders(ArrayList<ISender> senderList);
+	public void start();
+	public void stop();
+}

@@ -1,0 +1,22 @@
+package bs.pi.gateway.main;
+
+public class AppMsg {
+	
+	public final static String KEY_CMD = "Cmd";
+	public final static String KEY_SENSOR_ID = "SensorID";
+	public final static String KEY_SENSOR_VALUE = "SensorValue";
+	public final static String KEY_HTTP_SUCESS = "success";
+	public final static String KEY_HTTP_MSG = "msg";
+	public final static String KEY_APPID = "AppID";
+	
+	public final static String CMD_UPLOAD_DATA_TO_HTTP_SERVER = "UploadDataToHttpServer";
+	public final static String CMD_UPLOAD_DATA_TO_HTTP_SERVER_RESPONSE = "UploadDataToHttpServerResponse";
+	public final static String CMD_GET_DEVICE_CMD_FROM_HTTP_SERVER = "GetDeviceCmdFromHttpServer";
+	public final static String CMD_GET_DEVICE_CMD_FROM_HTTP_SERVER_RESPONSE = "GetDeviceCmdFromHttpServerResponse";
+	public final static String CMD_HTTP_DEVICE_CMD = "HttpDeviceCmd";
+
+	public final static String VALUE_HTTP_TRUE = "true";
+	public final static String VALUE_HTTP_FALSE = "false";
+	public final static String VALUE_HTTP_EXCEPTION = "exception";
+}
+

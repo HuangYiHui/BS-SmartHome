@@ -1,0 +1,46 @@
+package bs.pi.gateway.client.http;
+
+import bs.pi.gateway.main.Msg;
+import bs.pi.gateway.main.MsgClient;
+import bs.pi.gateway.main.MsgReceivedCallBack;
+
+public class HttpMsgClient implements MsgClient {
+
+	private HttpMsgClientCfg cfg;
+	private HttpMsgSender sender;
+	private HttpMsgReceiver receiver;
+	
+	public HttpMsgClient(HttpMsgClientCfg cfg){
+		this.cfg = cfg;
+	}
+	
+	@Override
+	public void connect() throws Exception {
+		
+	}
+
+	@Override
+	public void setReceivedCallBack(MsgReceivedCallBack callBack) {
+		// TODO Auto-generated method stub
+		receiver.setReceiveCallBack(callBack);
+	}
+
+	@Override
+	public void startReceive() {
+		// TODO Auto-generated method stub
+		receiver.start();
+	}
+
+	@Override
+	public void stopReceive() {
+		// TODO Auto-generated method stub
+		receiver.stop();
+	}
+
+	@Override
+	public boolean send(Msg msg) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

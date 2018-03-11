@@ -1,0 +1,13 @@
+package bs.pi.gateway.client.http;
+
+import bs.pi.gateway.main.SampleMsgReceiver;
+
+public class HttpMsgReceiver extends SampleMsgReceiver {
+
+	public void receive(){
+		while( ! receiveThread.isInterrupted()){
+			
+		}
+	}
+
+}

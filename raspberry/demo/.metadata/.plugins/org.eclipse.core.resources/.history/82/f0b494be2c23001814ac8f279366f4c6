@@ -1,0 +1,12 @@
+package bs.pi.gateway.processor;
+
+import java.util.ArrayList;
+
+import bs.pi.gateway.sender.ISender;
+
+public interface IProcessor {
+
+	public void setSenders(ArrayList<ISender> senderList);
+	public void start()£»
+	public void stop()
+}

@@ -1,0 +1,122 @@
+package bs.app.zigbee.zigbee;
+
+import java.util.ArrayList;
+
+import bs.app.zigbee.port.PortClient;
+
+public class Zigbee {
+	
+	private final static int STATE_UNREADY = 0;
+	private final static int STATE_READY = 1;
+	private final static int STATE_WORKING = 2;
+	
+	private static final String DEFAULT_CFG_PATH = System.getProperty("file.separator")+"zigbeeCfg.properties";	
+	private ZigbeeCfg cfg;
+	private PortClient portClient;
+	private int state;
+	
+	public Zigbee(){
+		try{
+			cfg = new ZigbeeCfg(DEFAULT_CFG_PATH);
+		}catch(Exception e){
+			e.printStackTrace();
+			System.err.println("zigbee配置加载出错，只能创建默认配置，加载的配置文件路径为："+DEFAULT_CFG_PATH);
+			cfg = new ZigbeeCfg();
+		}
+		
+		portClient = new PortClient(cfg.getPortCfg());
+		
+		state = STATE_UNREADY;
+	}
+	
+	public Zigbee(String cfgPath){
+		try{
+			cfg = new ZigbeeCfg(cfgPath);
+		}catch(Exception e){
+			e.printStackTrace();
+			System.err.println("zigbee配置加载出错，只能创建默认配置，加载的配置文件路径为："+cfgPath);
+			cfg = new ZigbeeCfg();
+		}
+		
+		portClient = new PortClient(cfg.getPortCfg());
+	}
+	
+	//设置应用注册信息,需要在init方法前才有效
+	public void registerApps(ArrayList<ZigbeeAppReg> appRegList){
+		if(appRegList == null)
+			return;
+		if(this.appRegList == null)
+			this.appRegList = new ArrayList<ZigbeeAppReg>();
+		
+		for(int i=0; i<appRegList.size(); i++){
+			this.appRegList.add(new ZigbeeAppReg(appRegList.get(i)));
+		}
+	}
+	
+	//设置应用注册信息,需要在init方法前才有效
+	public void registerApp(ZigbeeAppReg appReg){
+		
+	}
+
+	public void init(){
+		System.out.println("zigbee begin init");
+		try{
+			portClient.connect();
+			
+			portClient.send(ZBCG.CMD_DEVICE_RESET);
+			Thread.currentThread().sleep(2000);
+			
+			portClient.send(ZBCG.CMD_STARTUP_WITHOUT_LAST_STATE);
+			Thread.currentThread().sleep(500);
+			
+			portClient.send(ZBCG.CMD_DEVICE_RESET);
+			Thread.currentThread().sleep(2000);
+			
+			portClient.send(ZBCG.CMD_ZDO_DIRECT_CB);
+			Thread.currentThread().sleep(500);
+			
+			portClient.send(ZBCG.CMD_DEVICE_RESET);
+			Thread.currentThread().sleep(2000);
+			
+			portClient.send(ZBCG.chanlistCfg(ZBCG.DEFAULT_CHANNEL));
+			Thread.currentThread().sleep(500);
+			
+			portClient.send(ZBCG.PANIDCfg(ZBCG.DEFAULT_PANID));
+			Thread.currentThread().sleep(500);
+			
+			portClient.send(ZBCG.deviceTypeCfg(ZBCG.DEVICE_TYPE_COORDINATOR));
+			Thread.currentThread().sleep(500);
+			
+			ZigbeeAppReg reg = new ZigbeeAppReg();
+			reg.setEndpoint((byte) 0x78);
+			portClient.send(ZBCG.appRegister(reg));
+			Thread.currentThread().sleep(500);
+			
+			System.out.println("zigbee begin has inited");
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		state = STATE_READY;
+	}
+	
+	public void start(){
+		portClient.send(ZBCG.CMD_STARTUP_FROM_APP);
+		try {
+			Thread.currentThread().sleep(2000);
+			System.out.println("zigbee start");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void setPortClient(PortClient client){
+		this.portClient = client;
+	}
+	
+	public void sendPacket(ZBPacketSend packet){
+		portClient.send(ZBCG.packetSend(packet));
+	}
+}

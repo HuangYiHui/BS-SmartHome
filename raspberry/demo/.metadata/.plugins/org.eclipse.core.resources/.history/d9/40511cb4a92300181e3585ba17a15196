@@ -1,0 +1,15 @@
+package bs.pi.gateway.client.http;
+
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+
+public class HttpExecuter {
+	private String url;
+	private String apiKey;
+	private UrlEncodedFormEntity params;
+	
+	HttpExecuter(String url, String apiKey, UrlEncodedFormEntity params){
+		this.url = url;
+		this.apiKey = apiKey;
+		this.params = params;
+	}
+}

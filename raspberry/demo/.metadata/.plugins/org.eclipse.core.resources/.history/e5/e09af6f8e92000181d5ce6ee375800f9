@@ -1,0 +1,26 @@
+package bs.pi.gateway.client.http;
+
+import bs.pi.gateway.main.MsgReceivedCallback;
+import bs.pi.gateway.main.MsgReceiver;
+
+public class HttpMsgReceiver implements MsgReceiver {
+
+	@Override
+	public void setReceiveCallBack(MsgReceivedCallback callback) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void start() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,31 @@
+package bs.pi.gateway.main;
+
+public abstract class SampleMsgReceiver implements MsgReceiver{
+
+	private MsgReceivedCallback callback;
+	private Thread receiveThread = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			while( ! receiveThread.isInterrupted()){
+				receive();
+			}
+		}
+	});
+	
+	@Override
+	public void setReceiveCallBack(MsgReceivedCallback callback) {
+		this.callback = callback;
+	}
+
+	@Override
+	public void start() {
+		receiveThread.start();
+	}
+
+	@Override
+	public void stop() {
+		receiveThread.interrupt();
+	}
+	
+	abstract void receive();
+}

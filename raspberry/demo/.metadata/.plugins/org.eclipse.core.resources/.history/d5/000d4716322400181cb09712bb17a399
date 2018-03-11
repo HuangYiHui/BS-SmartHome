@@ -1,0 +1,15 @@
+package bs.pi.gateway.main;
+
+import java.util.HashMap;
+
+public interface ISender {
+
+	public final static String K_SEND_RESULT = "SendResult";
+	public final static String K_SEND_RESULT_SUCCESS = "Success";
+	public final static String K_SEND_RESULT_FAIL = "Fail";
+	
+	public final static String V_SEND_NAME = "HttpSender";
+	
+	public String getName();
+	public HashMap<String, Object> send(HashMap<String, Object> msg) throws Exception;  
+}

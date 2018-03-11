@@ -1,0 +1,8 @@
+package bs.pi.gateway.main;
+
+import net.sf.json.JSONObject;
+
+public interface MsgReceivedCallback {
+	//接收到一条消息的回调
+	void received(JSONObject msg);
+}

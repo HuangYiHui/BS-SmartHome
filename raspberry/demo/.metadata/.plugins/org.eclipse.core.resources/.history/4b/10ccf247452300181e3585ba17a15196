@@ -1,0 +1,15 @@
+package bs.pi.gateway.client;
+
+import bs.pi.gateway.converter.IConverter;
+import bs.pi.gateway.main.IReceiver;
+import bs.pi.gateway.main.ISender;
+
+public interface IClient {
+
+	public void init() throws Exception;
+	public void start() throws Exception;
+	public void destroy() throws Exception;
+	public void setConverter(IConverter converter);
+	public ISender getSender();
+	public IReceiver getReceiver();
+}

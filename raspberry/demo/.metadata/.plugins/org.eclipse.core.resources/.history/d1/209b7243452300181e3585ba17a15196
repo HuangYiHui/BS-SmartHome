@@ -1,0 +1,34 @@
+package bs.pi.gateway.converter;
+
+import java.util.HashMap;
+
+import bs.pi.gateway.converter.IConverter;
+
+public class PortConverter implements IConverter {
+
+	/*
+	 * 格式：
+	 * 由项组成：MsgType, Cmd0, Cmd1, Data
+	 * MsgType固定为字符串"PortMsg"
+	 * Cmd0和Cmd1都为一个字节的Byte,
+	 * Data为Byte数组
+	 */
+	public final static String KEY_MSG_TYPE = "MsgType";
+	public final static String KEY_CMD0 = "Cmd0";
+	public final static String KEY_CMD1 = "Cmd1";
+	public final static String KEY_DATA = "DATA";
+	
+	public final static String MSG_TYPE_PORT_MSG = "PortMsg";
+	
+	@Override
+	public HashMap<String, Object> convertMsgReceive(HashMap<String, Object> msg) {
+		return msg;
+	}
+
+	@Override
+	public HashMap<String, Object> convertMsgSend(HashMap<String, Object> msg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

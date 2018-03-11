@@ -1,0 +1,8 @@
+package bs.main;
+
+public interface IApp {
+
+	public void init() throws Exception;
+	public void run() throws Exception;
+	public void destory() throws Exception;
+}

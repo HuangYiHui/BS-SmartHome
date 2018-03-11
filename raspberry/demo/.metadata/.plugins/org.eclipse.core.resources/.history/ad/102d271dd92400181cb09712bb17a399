@@ -1,0 +1,5 @@
+package bs.pi.gateway.Msg;
+
+public class ZigbeeMsgReceive {
+
+}

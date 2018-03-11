@@ -1,0 +1,33 @@
+1520300224211	Rename type 'Message'
+1520300233238	Rename type 'MessageInCenter'
+1520300240380	Rename type 'Processor'
+1520300282512	Rename field 'messageCenter'
+1520300742155	Rename type 'MessageClient'
+1520301077170	Rename type 'MessageReceiveCallBack'
+1520301222667	Rename type 'MessageSender'
+1520301263544	Rename type 'MessageReceiver'
+1520303838805	Rename type 'MsgReceiveCallBack'
+1520303873943	Rename type 'MsgReceivedCallBack'
+1520303884743	Rename local variable 'callBack'
+1520306594074	Rename local variable 'httpPost'
+1520306915247	Delete element
+1520311711744	Delete element
+1520311933891	Delete element
+1520312070199	Rename resource '设计'
+1520336127130	Rename field 'CMD_SEND_TO_HTTP_SERVER'
+1520346694562	Delete element
+1520346712013	Delete element
+1520346769933	Delete element
+1520347312841	Rename type 'PortMsgClientSfg'
+1520348447954	Rename type 'MessageReceiveCallBack'
+1520348794515	Rename local variable 'iStream'
+1520349576578	Rename type 'PortReceiver'
+1520350021595	Delete element
+1520385739224	Rename package 'com.zigbeee'
+1520391159164	Copy file
+1520392140270	Copy package
+1520392309563	Copy files
+1520392555411	Copy compilation units
+1520394773642	Copy compilation unit
+1520486754147	Copy compilation unit
+1520486774633	Copy compilation unit
