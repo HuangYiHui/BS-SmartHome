@@ -13,7 +13,7 @@ void ZigbeeApp::init()
 {
 	ZBAppReg appRegs[1];
 	appRegs[0] = ZBAppReg();
-	appRegs[0].endPoint = 0x78;
+	appRegs[0].endPoint = ZIGBEE_REGISTER_ENDPOINT;
 	zigbee.setAppRegs(appRegs, 1);
 
 	zigbee.ready();
@@ -34,10 +34,10 @@ int ZigbeeApp::exeTask()
 	{
 		PT_TIMER_DELAY(&pt, 2000);
 		ZBPacketSend packet;
-		packet.dstAddr[0] = 0xff;
-		packet.dstAddr[1] = 0xff;
-		packet.dstEndpoint = 0x78;
-		packet.srcEndpoint = 0x78;
+		packet.dstAddr[0] = 0x00;
+		packet.dstAddr[1] = 0x00;
+		packet.dstEndpoint = ZIGBEE_REGISTER_ENDPOINT;
+		packet.srcEndpoint = ZIGBEE_REGISTER_ENDPOINT;
 		packet.len = 3;
 		packet.data = new unsigned char[3];
 		packet.data[0] = 0x01;
@@ -66,17 +66,17 @@ void ZigbeeApp::run()
 	zigbee.receive(packet);
 	//收到有效信息
 	if(packet.len != 0 && packet.cmd1 == 0x44 && packet.cmd2 == 0x81){
-		AppMsgSend msg;
-		msg.srcAddr = *((unsigned int *)(&(packet.data[4])));
-		msg.dstAddr = API.getSystemID();
-		msg.srcEndpoint = packet.data[6];
-		msg.dstEndpoint = packet.data[7];
-		msg.len =  packet.data[16];
-		msg.data = new unsigned char[msg.len];
-		for(unsigned int i=0;i<msg.len;i++){
-			msg.data[i] = packet.data[17+i];
+		int dataLen = packet.data[16];
+		if(dataLen > 3){
+			AppMsg msg;
+			int appID = packet.data[17] + 256*packet.data[18];
+			msg.len = dataLen-2;
+			msg.data = new unsigned char[dataLen-2];
+			for(unsigned int i=0;i<dataLen-2;i++){
+				msg.data[i] = packet.data[19+i];
+			}
+			sendMsg(msg, appID);
 		}
-		sendMsg(msg);
 
 		//Debuger::printAppMsgSend(msg);
 		/*

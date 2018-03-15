@@ -21,6 +21,7 @@ int Test3App::runTask()
 	PT_BEGIN(&pt);
 	while(true){
 		PT_TIMER_DELAY(&pt, 1000);
+		
 		Serial.println("test3 app run");
 	}
 	PT_END(&pt);

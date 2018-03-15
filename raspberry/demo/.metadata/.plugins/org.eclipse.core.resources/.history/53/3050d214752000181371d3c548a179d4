@@ -1,9 +1,0 @@
-http方式下，服务器与树莓派间的命令用字符串表示
-命令由各项组成，各项由‘-’分割
-命令格式：cmdName-param
-
-app消息
-	cmdName : CMD_APP_MSG
-	param : appID-appMsg
-		appID为各个app的ID号
-		appMsg为消息实体

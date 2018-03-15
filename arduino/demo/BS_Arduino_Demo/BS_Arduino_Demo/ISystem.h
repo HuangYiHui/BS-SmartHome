@@ -19,9 +19,9 @@ public:
 	virtual void stop() = 0;
 	virtual void reset() = 0;
 	virtual systemState getState() = 0;
-	virtual unsigned int getSystemID();
-	virtual void installApp(IApp* app);
-	virtual void unInstallApp(unsigned int appID);
-	virtual void sendAppMsg(AppMsgSend& msg);
+	virtual unsigned int getSystemID() = 0;
+	virtual void installApp(IApp* app) = 0;
+	virtual void unInstallApp(unsigned int appID) = 0;
+	virtual void sendAppMsg(AppMsg& msg, unsigned int appID) = 0;
 };
 #endif

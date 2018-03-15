@@ -1,8 +1,9 @@
 D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SpeakerDevice.cpp.o: \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SpeakerDevice.cpp \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SpeakerDevice.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\cfg.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemCfg.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOutCfg.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/binary.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/WCharacter.h \

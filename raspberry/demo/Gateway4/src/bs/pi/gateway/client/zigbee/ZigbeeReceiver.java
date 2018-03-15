@@ -25,8 +25,9 @@ public class ZigbeeReceiver implements IReceiver {
 					IMsg msg1 = converter.convertMsgReceive(zigbeeMsgReceive);
 					//×ª»»³É¹¦
 					if(msg1 != null){
-						for(IReceivedListener receivedListener : receivedListenerList)
+						for(IReceivedListener receivedListener : receivedListenerList){
 							receivedListener.handleEvent(msg1);
+						}
 					}
 				}
 			}

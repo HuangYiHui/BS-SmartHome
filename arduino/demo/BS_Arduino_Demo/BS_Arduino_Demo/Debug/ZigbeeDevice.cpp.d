@@ -16,7 +16,8 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeDevice.cpp.o: \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\LCDDevice.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\cfg.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemCfg.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOutCfg.h \
  D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Nokia_5110.h \
  D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Display_Mode.h \
  D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Mux_Rate.h \

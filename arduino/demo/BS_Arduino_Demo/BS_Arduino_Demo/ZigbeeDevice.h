@@ -34,8 +34,8 @@ typedef struct ZBCfg
 		channel[3] = 0x00;
 
 		//设置默认网络号为1234
-		panID[0] = 0x34;
-		panID[1] = 0x12;
+		panID[0] = 0xff;
+		panID[1] = 0xff;
 
 		//设置默认设备类型为路由器
 		zdType = ZB_DEVICE_TYPE_ROUTE;

@@ -1,7 +1,7 @@
 #ifndef _BS_LCD_DEVICE_H_
 #define _BS_LCD_DEVICE_H_
 
-#include "cfg.h"
+#include "SystemCfg.h"
 #include "Nokia_5110.h"
 #include "SampleDevice.h"
 

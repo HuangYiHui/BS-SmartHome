@@ -4,6 +4,7 @@
 #include "Arduino.h"
 #include "SampleApp.h"
 #include "pt.h"
+#include "SystemCfg.h"
 
 class Test1App : public SampleApp
 {

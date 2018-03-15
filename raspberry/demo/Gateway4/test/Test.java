@@ -1,9 +1,13 @@
 import java.util.HashMap;
 
+import com.test.Debugger;
+
 import net.sf.json.JSONObject;
+import bs.pi.gateway.assist.Tool;
 import bs.pi.gateway.client.http.HttpClient;
 import bs.pi.gateway.client.port.PortClient;
 import bs.pi.gateway.client.port.PortConverter;
+import bs.pi.gateway.client.zigbee.CodeGenerator;
 import bs.pi.gateway.client.zigbee.ZigbeeClient;
 import bs.pi.gateway.main.Gateway;
 import bs.pi.gateway.processor.MyProcessor;
@@ -14,11 +18,15 @@ public class Test {
 	public static void main(String[] args) throws Exception {
 		//test2();
 		//test3();
-		test4();
+		//test4();
+		test5();
+	}
+	
+	public static void test5() throws Exception{
+		Debugger.printBytes(Tool.intTo2Byte(0xf1));
 	}
 	
 	public static void test4(){
-		//String str = "{\"success\":true,\"msg\":\"{cmd:'openLight', appID:0xf1}\"}";
 		String str = "{\"key\":{\"key1\":\"value1\"}}";
 		JSONObject json = JSONObject.fromObject(str);
 		

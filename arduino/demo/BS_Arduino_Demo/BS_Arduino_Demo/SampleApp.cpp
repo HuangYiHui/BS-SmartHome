@@ -9,7 +9,7 @@ SampleApp::~SampleApp()
 {
 	while(msgList.size()>0)
 	{
-		AppMsgReceive* msg = msgList.remove(0);
+		AppMsg* msg = msgList.remove(0);
 		delete msg;
 	}
 }
@@ -44,12 +44,12 @@ unsigned int SampleApp::getAppID()
 	return appID;
 }
 
-void SampleApp::sendMsg(AppMsgSend& msg)
+void SampleApp::sendMsg(AppMsg& msg, unsigned int appID)
 {
-	API.sendAppMsg(msg);
+	API.sendAppMsg(msg, appID);
 }
 
-void SampleApp::receiveMsg(AppMsgReceive& msg)
+void SampleApp::receiveMsg(AppMsg& msg)
 {
-	msgList.add(new AppMsgReceive(msg));
+	msgList.add(new AppMsg(msg));
 }

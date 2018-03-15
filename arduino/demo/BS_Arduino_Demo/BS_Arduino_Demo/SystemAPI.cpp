@@ -5,9 +5,9 @@ SystemAPI::SystemAPI(ISystem* curSystem)
 	this->curSystem = curSystem;
 }
 
-void SystemAPI::sendAppMsg(AppMsgSend& appMsg)
+void SystemAPI::sendAppMsg(AppMsg& appMsg, unsigned int appID)
 {
-	curSystem->sendAppMsg(appMsg);
+	curSystem->sendAppMsg(appMsg, appID);
 }
 
 unsigned int SystemAPI::getSystemID()

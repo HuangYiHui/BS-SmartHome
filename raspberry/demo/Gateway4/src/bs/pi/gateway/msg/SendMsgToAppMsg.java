@@ -6,6 +6,8 @@ public class SendMsgToAppMsg implements IMsg {
 	
 	public final static String MSG_NAME = "SendMsgToAppMsg";
 
+	public final static String CMD_TEST_CMD = "TestCmd";
+	
 	private int appID;
 	private String cmd;
 	private HashMap<String, Object> params;

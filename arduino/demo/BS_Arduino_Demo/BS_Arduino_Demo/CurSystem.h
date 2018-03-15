@@ -7,7 +7,7 @@
 CUR_SYSTEM_IN	- 表示当前系统为室内的
 CUR_SYSTEM_OUT	- 表示当前系统为室外的
 */
-#include "cfg.h"
+#include "SystemCfg.h"
 #include "SampleSystem.h"
 #include "SystemAPI.h"
 
@@ -31,8 +31,6 @@ CUR_SYSTEM_OUT	- 表示当前系统为室外的
 #include "Test1App.h"
 #include "Test2App.h"
 #include "Test3App.h"
-
-#include "SystemInCfg.h"
 
 MQ2Device mq2(PIN_MQ2_DO);
 LCDDevice lcd(PIN_NOKIA5110_RST, PIN_NOKIA5110_CE, PIN_NOKIA5110_DC, PIN_NOKIA5110_DIN, PIN_NOKIA5110_CLK);
@@ -67,10 +65,9 @@ SampleSystem curSystem(SYSTEM_ADDR_IN);
 #include "LightAdjustApp.h"
 #include "PM25App.h"
 #include "ZigbeeApp.h"
+#include "Test1App.h"
 #include "Test2App.h"
 #include "Test3App.h"
-
-#include "SystemOutCfg.h"
 
 DHT11Device dht11(PIN_DHT11_DATA);
 TouchSensorDevice touchSensor(PIN_TOUCH_SENSOR_IN);
@@ -83,7 +80,8 @@ PM25Device pm25(PIN_PM25_LED, PIN_PM25_VO);
 ZigbeeDevice zigbee;
 
 ZigbeeApp zigbeeApp(ZIGBEE_APP_ID, zigbee);
-Test2App test2App(0x78);
+Test1App test1App(TEST1_APP_ID);
+Test2App test2App(TEST2_APP_ID);
 Test3App test3App(TEST3_APP_ID);
 
 SampleSystem curSystem(SYSTEM_ADDR_OUT);

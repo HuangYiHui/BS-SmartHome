@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.test.Debugger;
+
 import bs.pi.gateway.assist.Tool;
 
 public class ZigbeeClientCfg {
@@ -11,12 +13,14 @@ public class ZigbeeClientCfg {
 	public final static String K_CHANNEL = "channel";
 	public final static String K_PANID = "PANID";
 	public final static String K_DEVICE_TYPE = "deviceType";
-	public final static String K_DST_ENDPOINT= "dstEndpoint";
-	public final static String K_SRC_ENDPOINT= "srcEndpoint";
-	public final static String K_APP_COUNT = "appCount";
+	
 	public final static String K_CLUSTER_ID = "clusterID";
 	public final static String K_OPTIONS = "options";
 	public final static String K_RADIUS = "radius";
+	
+	public final static String K_OTHER_ZIGBEE_COUNT = "oZigbeeCount";
+	public final static String K_OTHER_ZIGBEE_IEEEADDR = "oZigbeeIEEEAddr";
+	public final static String K_APP_ID_S = "appIDs";
 	
 	public final static byte DEVICE_TYPE_COORDINATOR = 0x00;
 	public final static byte DEVICE_TYPE_ROUTE = 0x01;
@@ -25,8 +29,7 @@ public class ZigbeeClientCfg {
 	public final static byte[] DEFAULT_CHANNEL = {0x00, 0x08, 0x00, 0x00};
 	public final static byte[] DEFAULT_PANID = {0x34, 0x12};
 	public final static byte DEFAULT_DEVICE_TYPE = DEVICE_TYPE_ROUTE;
-	public final static byte DEFAULT_DST_ENDPOINT = 0x08;
-	public final static byte DEFAULT_SRC_ENDPOINT = 0x08;
+	
 	public final static byte[] DEFAULT_CLUSTER_ID = {0x00, 0x00};
 	public final static byte DEFAULT_OPTIONS = 0x00;
 	public final static byte DEFAULT_RADIUS = 0x00;
@@ -34,23 +37,24 @@ public class ZigbeeClientCfg {
 	private byte[] channel;	//信道
 	private byte[] panID;	//网络号
 	private byte deviceType;	//zigbee设备类型
-	private ArrayList<ZigbeeAppReg> appRegList;
-	
-	private byte dstEndpoint;
-	private byte srcEndpoint;
+	private ZigbeeAppReg appReg;
+
 	private byte[] clusterID;
 	private byte options;
 	private byte radius;
 
+	private ArrayList<ZigbeeInfo> zigbeeInfoList;
+	
 	public ZigbeeClientCfg(){
 		channel = DEFAULT_CHANNEL;
 		panID = DEFAULT_PANID;
 		deviceType = DEFAULT_DEVICE_TYPE;
-		dstEndpoint = DEFAULT_DST_ENDPOINT;
-		srcEndpoint = DEFAULT_SRC_ENDPOINT;
+		
 		clusterID = DEFAULT_CLUSTER_ID;
 		options = DEFAULT_OPTIONS;
 		radius = DEFAULT_RADIUS;
+		
+		appReg = new ZigbeeAppReg();
 	}
 	
 	public ZigbeeClientCfg(String cfgPath) throws Exception{
@@ -62,24 +66,38 @@ public class ZigbeeClientCfg {
 		properties.load(new FileInputStream(cfgPath));
 		channel = Tool.strToBytes(properties.getProperty(K_CHANNEL));
 		panID = Tool.strToBytes(properties.getProperty(K_PANID));
-		deviceType = Tool.strToBytes(properties.getProperty(K_DEVICE_TYPE))[0];
+		deviceType = Tool.strToByte(properties.getProperty(K_DEVICE_TYPE));
 		
-		if(properties.containsKey(K_APP_COUNT)){
-			int appCount = Integer.parseInt(properties.getProperty(K_APP_COUNT));
-			if(appCount>0){
-				appRegList = new ArrayList<>();
-				for(int i=1;i<(appCount+1);i++){
-					ZigbeeAppReg reg = new ZigbeeAppReg(properties, i);
-					appRegList.add(reg);
+		clusterID = Tool.strToBytes(properties.getProperty(K_CLUSTER_ID));
+		options = Tool.strToByte(properties.getProperty(K_OPTIONS));
+		radius = Tool.strToByte(properties.getProperty(K_RADIUS));
+		
+		appReg = new ZigbeeAppReg(properties);
+		
+		int count = Integer.parseInt(properties.getProperty(K_OTHER_ZIGBEE_COUNT));
+		if(count > 0){
+			zigbeeInfoList = new ArrayList<ZigbeeInfo>();
+			for(int i=1;i<(count+1);i++){
+				byte[] IEEEAddr = Tool.strToBytes(properties.getProperty(K_OTHER_ZIGBEE_IEEEADDR+i));
+				String appIDsStr = properties.getProperty(K_APP_ID_S+i);
+				String[] appIDsStrs = appIDsStr.split(",");
+				ArrayList<byte[]> appIDs = new ArrayList<byte[]>();
+				for(int j=0;j<appIDsStrs.length;j++){
+					byte[] appID = new byte[2];
+					byte[] bs = Tool.strToBytes(appIDsStrs[j]);
+					if(bs.length == 1){
+						appID[0] = bs[0];
+						appID[1] = 0x00;
+					}else{
+						appID[0] = bs[0];
+						appID[1] = bs[1];
+					}
+					appIDs.add(appID);
 				}
+				ZigbeeInfo info = new ZigbeeInfo(IEEEAddr, null, appIDs);
+				zigbeeInfoList.add(info);
 			}
 		}
-		
-		dstEndpoint = Tool.strToBytes(properties.getProperty(K_DST_ENDPOINT))[0];
-		srcEndpoint = Tool.strToBytes(properties.getProperty(K_SRC_ENDPOINT))[0];
-		clusterID = Tool.strToBytes(properties.getProperty(K_CLUSTER_ID));
-		options = Tool.strToBytes(properties.getProperty(K_OPTIONS))[0];
-		radius = Tool.strToBytes(properties.getProperty(K_RADIUS))[0];
 	}
 	
 	public byte[] getChannel() {
@@ -105,38 +123,13 @@ public class ZigbeeClientCfg {
 	public void setDeviceType(byte deviceType) {
 		this.deviceType = deviceType;
 	}
-	
-	public ArrayList<ZigbeeAppReg> getAppRegList() {
-		return appRegList;
+
+	public ZigbeeAppReg getAppReg() {
+		return appReg;
 	}
 
-	public void setAppRegList(ArrayList<ZigbeeAppReg> appRegList) {
-		this.appRegList = appRegList;
-	}
-	
-	public void addAppReg(ZigbeeAppReg appReg){
-		if(appReg == null)
-			return;
-		if(this.appRegList == null){
-			this.appRegList = new ArrayList<>();
-		}
-		this.appRegList.add(appReg);
-	}
-
-	public byte getDstEndpoint() {
-		return dstEndpoint;
-	}
-
-	public void setDstEndpoint(byte dstEndpoint) {
-		this.dstEndpoint = dstEndpoint;
-	}
-
-	public byte getSrcEndpoint() {
-		return srcEndpoint;
-	}
-
-	public void setSrcEndpoint(byte srcEndpoint) {
-		this.srcEndpoint = srcEndpoint;
+	public void setAppReg(ZigbeeAppReg appReg) {
+		this.appReg = appReg;
 	}
 
 	public byte[] getClusterID() {
@@ -161,5 +154,13 @@ public class ZigbeeClientCfg {
 
 	public void setRadius(byte radius) {
 		this.radius = radius;
+	}
+
+	public ArrayList<ZigbeeInfo> getZigbeeInfoList() {
+		return zigbeeInfoList;
+	}
+
+	public void setZigbeeInfoList(ArrayList<ZigbeeInfo> zigbeeInfoList) {
+		this.zigbeeInfoList = zigbeeInfoList;
 	}
 }

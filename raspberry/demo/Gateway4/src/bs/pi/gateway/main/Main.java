@@ -18,12 +18,12 @@ public class Main {
 		httpClient.init();
 		httpConverter.setHttpClientCfg(httpClient.getHttpClientCfg());
 		httpClient.start();
-		
+
 		PortClient portClient = new PortClient(PortClient.DEFAULT_CFG_PATH);
 		portClient.setConverter(new PortConverter());
 		ZigbeeClient zigbeeClient = new ZigbeeClient(ZigbeeClient.DEFAULT_CFG_PATH, portClient);
-		zigbeeClient.setConverter(new ZigbeeConverter());
 		zigbeeClient.init();
+		zigbeeClient.setConverter(new ZigbeeConverter(zigbeeClient.getZigbeeClientCfg()));
 		zigbeeClient.start();
 		
 		MyProcessor processor = new MyProcessor();

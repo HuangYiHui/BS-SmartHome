@@ -33,16 +33,32 @@ int Test2App::exeTask()
 	PT_BEGIN(&pt);
 	while(true){
 		PT_TIMER_DELAY(&pt, 1000);
+		
 		while(msgList.size()>0){
-			AppMsgReceive* msg = msgList.remove(0);
+			AppMsg* msg = msgList.remove(0);
+			Serial.println("data");
+			Serial.println(msg->data[0]);
+			Serial.println(msg->data[1]);
+			if(msg->data[0] == 0x12 && msg->data[1] == 0x34){
+				digitalWrite(13, HIGH);
+			}else if(msg->data[0] == 0x12 && msg->data[1] == 0x12){
+				digitalWrite(13, LOW);
+			}
+			delete msg;
+			/*
 			lcd->clear();
 			lcd->print("data:");
+			Serial.println("test2App receive data");
+			Serial.println(msg->len);
+			Debugger::printAppMsg(*msg);
 			//Serial.println("data:");
-
+		
 			bool isRight = true;
 			if(msg->len == 5){
-				for(int i=0;i<5;i++){
-					if(msg->data[i]!=0x56){
+				for(int i=0;i<5;i++)
+				{
+					if(msg->data[i]!=0x56)
+					{
 						isRight = false;
 					}
 				}
@@ -52,43 +68,14 @@ int Test2App::exeTask()
 
 			if(isRight){
 				for(int i=0;i<20;i++){
-				digitalWrite(13, HIGH);
-				delay(50);
-				digitalWrite(13, LOW);
-				delay(50);
-		}
-			}
-
-			for(unsigned int i=0;i<msg->len;i++)
-			{
-				lcd->print(msg->data[i], HEX);
-				lcd->print(",");
-
-				//Serial.print(msg->data[i], HEX);
-				//Serial.print(",");
-			}
-			delete msg;
-		}
-	}
-
-	PT_END(&pt);
-
-	/*
-	PT_BEGIN(&pt);
-	while(true){
-		PT_WAIT_UNTIL(&pt, msgList.size()>0);
-		if(msgList.size()>0){
-			
-			AppMsg* msg = msgList.remove(0);
-			lcd.print("data:");
-			for(unsigned int i=0;i<msg->len;i++)
-			{
-				lcd.print(msg->data[i], HEX);
-				lcd.print(",");
-			}
-			delete msg;
+					digitalWrite(13, HIGH);
+					delay(50);
+					digitalWrite(13, LOW);
+					delay(50);
+				}
+				delete msg;
+			}*/
 		}
 	}
 	PT_END(&pt);
-	*/
 }

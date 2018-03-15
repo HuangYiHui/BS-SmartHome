@@ -79,7 +79,7 @@ public class PortReceiver implements IReceiver {
 		
 		if( ! isBegin)
 			return null;
-		
+
 		Byte len = readByte();
 		if(len == null)
 			return null;

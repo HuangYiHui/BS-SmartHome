@@ -74,25 +74,14 @@ void SampleSystem::unInstallApp(unsigned int appID)
 	}
 }
 
-void SampleSystem::sendAppMsg(AppMsgSend& msgSend)
+void SampleSystem::sendAppMsg(AppMsg& msg, unsigned int appID)
 {
-	AppMsgReceive msgReceive(msgSend);
-	
-	//不是发到本地的信息，由zigbee发送出去
-	//否则直接发送到本地app
-	if(msgSend.dstAddr != systemID){
-		//zigbee发送
-		//Serial.println("zigbee send");
-	}
-	else{
-		IApp* app = NULL;
-		for(int i=0;i<appList.size();i++)
-		{
-			app = appList.get(i);
-			if(app->getAppID() == msgSend.dstEndpoint){
-				app->receiveMsg(msgReceive);
-			}
+	IApp* app = NULL;
+	for(int i=0;i<appList.size();i++)
+	{
+		app = appList.get(i);
+		if(app->getAppID() == appID){
+			app->receiveMsg(msg);
 		}
 	}
-	
 }

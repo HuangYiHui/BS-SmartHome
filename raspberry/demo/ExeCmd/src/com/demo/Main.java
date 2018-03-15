@@ -30,8 +30,8 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		
-	//	deleteCmd();
-//		sendCmd();
+		deleteCmd();
+		sendCmd();
 //		getCmd();
 		//String[] strs = "123456".split("-");
 		//System.out.println(strs.length);
@@ -105,13 +105,12 @@ public class Main {
 			
 			Map<String, Object> params = new HashMap<String, Object>();
 			JSONObject msg = new JSONObject();
-			msg.put("cmd", "openLight");
+			msg.put("cmd", "TestCmd");
 			msg.put("appID", 0xf1);
 			params.put("command", msg.toString());
 			
 			List<NameValuePair> pairs = new ArrayList<NameValuePair>(1);
 			pairs.add(new BasicNameValuePair("command", msg.toString()));
-			System.out.println(msg.toString());
 			httpPost.setEntity(new UrlEncodedFormEntity(pairs, "UTF-8"));
 			
 			//÷¥––«Î«Û

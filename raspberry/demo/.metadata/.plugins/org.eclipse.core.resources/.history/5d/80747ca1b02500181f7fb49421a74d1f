@@ -1,0 +1,17 @@
+package bs.pi.gateway.msg;
+
+public class ZigbeeNWKAddrMsg implements IMsg {
+
+	public final static String MSG_NAME = "ZigbeeNWKAddrMsg";
+	
+	private byte[] IEEEAddr;
+	private byte[] NWKAddr;
+	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return MSG_NAME;
+	}
+
+	
+}

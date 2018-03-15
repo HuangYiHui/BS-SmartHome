@@ -1,7 +1,7 @@
 #ifndef _BS_MQ2_APP_H_
 #define _BS_MQ2_APP_H_
 
-#include "cfg.h"
+#include "SystemCfg.h"
 #include "SampleApp.h"
 #include "pt.h"
 #include "MQ2Device.h"

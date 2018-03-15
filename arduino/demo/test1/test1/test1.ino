@@ -16,7 +16,7 @@ void printCmd(ZBCmd& cmd)
 	Serial.println();
 }
 
-void test()
+void test1()
 {
 	ZBCfg cfg;
 
@@ -65,13 +65,7 @@ void test()
 	while(true);
 }
 
-unsigned long cTime;
-void setup() {
-	Serial.begin(19200);
-//	test();
-	cTime = millis();
-}
-void loop() {
+void test2(){
 	byte bs[] = {
 		0xFE, 0x19, 0x44, 0x81, 0x00, 
 		0x01, 0x00, 0x02, 0x34, 0x12, 
@@ -82,5 +76,30 @@ void loop() {
 		0x6f};
 	Serial.write(bs, 35);
 	delay(5000);
+}
+
+void test3(){
+	unsigned int appID = 0x1234;
+	unsigned char b1 = 0x12;
+	unsigned char b2 = 0x34;
+	unsigned char b3 = appID / 256;
+	unsigned char b4 = appID % 256;
+	unsigned int value = 256 * b3 + b4;
+	if(appID == value){
+		Serial.println("==");
+	}else{
+		Serial.println("!=");
+	}
+	while(true);
+}
+unsigned long cTime;
+void setup() {
+	Serial.begin(19200);
+//	test();
+	cTime = millis();
+}
+
+void loop() {
+	test3();
 }
 

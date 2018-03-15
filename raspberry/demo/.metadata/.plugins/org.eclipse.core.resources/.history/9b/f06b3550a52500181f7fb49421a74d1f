@@ -1,0 +1,45 @@
+package bs.pi.gateway.client.zigbee;
+
+import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.main.ISender;
+import bs.pi.gateway.msg.IMsg;
+import bs.pi.gateway.msg.PortSendResponseMsg;
+import bs.pi.gateway.msg.SendPortMsgMsg;
+import bs.pi.gateway.msg.ZigbeeSendReponseMsg;
+
+public class ZigbeeSender implements ISender {
+
+	private ZigbeeClientCfg cfg;
+	private ISender portSender;
+	private IConverter converter;
+	
+	public ZigbeeSender(ISender portSender, IConverter converter, ZigbeeClientCfg cfg){
+		this.portSender = portSender;
+		this.converter = converter;
+		this.cfg = cfg;
+	}
+	
+	@Override
+	public String getName() {
+		return ISender.V_SEND_NAME_ZIGBEE_SNEDER;
+	}
+
+	@Override
+	public IMsg send(IMsg msg) {
+		Object obj = converter.convertMsgSend(msg);
+		ZigbeeSendReponseMsg zigbeeSendReponseMsg = new ZigbeeSendReponseMsg();
+		if(obj != null){
+			ZigbeeMsgSend zigbeeMsg = (ZigbeeMsgSend)obj;
+			SendPortMsgMsg portSendMsg = new SendPortMsgMsg();
+			portSendMsg.setData(CodeGenerator.packetSend(zigbeeMsg));
+			PortSendResponseMsg portSendResponseMsg = (PortSendResponseMsg) portSender.send(portSendMsg);
+			//发送成功
+			zigbeeSendReponseMsg.setSendSuccess(portSendResponseMsg.getSendSuccess());
+			System.out.println("zigbee 发送成功");
+		}else{
+			zigbeeSendReponseMsg.setSendSuccess(false);
+		}
+		return zigbeeSendReponseMsg;
+	}
+
+}

@@ -93,9 +93,9 @@
   <ItemGroup>
     <ClInclude Include="AlarmDevice.h" />
     <ClInclude Include="AppMsg.h" />
-    <ClInclude Include="cfg.h" />
+    <ClInclude Include="SystemCfg.h" />
     <ClInclude Include="CurSystem.h" />
-    <ClInclude Include="Debuger.h" />
+    <ClInclude Include="Debugger.h" />
     <ClInclude Include="DHT11App.h" />
     <ClInclude Include="DHT11Device.h" />
     <ClInclude Include="DoorbellApp.h" />
@@ -136,7 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AlarmDevice.cpp" />
-    <ClCompile Include="Debuger.cpp" />
+    <ClCompile Include="Debugger.cpp" />
     <ClCompile Include="DHT11App.cpp" />
     <ClCompile Include="DHT11Device.cpp" />
     <ClCompile Include="DoorbellApp.cpp" />

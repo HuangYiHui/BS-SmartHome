@@ -6,7 +6,7 @@
 #include "ZigbeeDevice.h"
 #include "SampleApp.h"
 #include "Debuger.h"
-#include "cfg.h"
+#include "SystemCfg.h"
 
 class ZigbeeApp : public SampleApp
 {

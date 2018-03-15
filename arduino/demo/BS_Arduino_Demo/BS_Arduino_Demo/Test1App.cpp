@@ -27,17 +27,13 @@ int Test1App::exeTask()
 		PT_TIMER_DELAY(&pt,2000);
 	
 		
-		AppMsgSend msg;
-		msg.srcAddr = API.getSystemID();
-		msg.dstAddr = API.getSystemID();
-		msg.dstEndpoint = 0x78;
-		msg.dstEndpoint = appID;
+		AppMsg msg;
 		msg.len = 3;
 		msg.data = new unsigned char[3];
 		msg.data[0] = 0x01;
 		msg.data[1] = 0x02;
 		msg.data[2] = 0x03;
-		sendMsg(msg);
+		sendMsg(msg, TEST2_APP_ID);
 
 		Serial.println("Test1 send...");
 	}

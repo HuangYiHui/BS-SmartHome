@@ -89,9 +89,6 @@
     <ClInclude Include="PM25App.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="cfg.h">
-      <Filter>system</Filter>
-    </ClInclude>
     <ClInclude Include="ZigbeeDevice.h">
       <Filter>driver</Filter>
     </ClInclude>
@@ -106,9 +103,6 @@
     </ClInclude>
     <ClInclude Include="AppMsg.h">
       <Filter>app</Filter>
-    </ClInclude>
-    <ClInclude Include="Debuger.h">
-      <Filter>assist</Filter>
     </ClInclude>
     <ClInclude Include="SystemOutCfg.h">
       <Filter>system</Filter>
@@ -128,6 +122,10 @@
     <ClInclude Include="ZBC.h">
       <Filter>assist</Filter>
     </ClInclude>
+    <ClInclude Include="SystemCfg.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="Debugger.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="driver">
@@ -225,9 +223,6 @@
     <ClCompile Include="SystemAPI.cpp">
       <Filter>system</Filter>
     </ClCompile>
-    <ClCompile Include="Debuger.cpp">
-      <Filter>assist</Filter>
-    </ClCompile>
     <ClCompile Include="Test3App.cpp">
       <Filter>test</Filter>
     </ClCompile>
@@ -240,5 +235,6 @@
     <ClCompile Include="ZBC.cpp">
       <Filter>assist</Filter>
     </ClCompile>
+    <ClCompile Include="Debugger.cpp" />
   </ItemGroup>
 </Project>

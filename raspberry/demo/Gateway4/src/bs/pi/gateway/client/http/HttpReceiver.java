@@ -19,9 +19,10 @@ public class HttpReceiver implements IReceiver {
 			while( ! rTread.isInterrupted()){
 				if(converter != null && receivedListenerList != null && receivedListenerList.size()>0){
 					String url = cfg.getServiceUrl()+"/device/"+cfg.getDeviceID()+"/command";
-					HttpExecuter executer = new HttpExecuter(url, HttpExecuter.METHOD_GET, cfg.getApiKey(), null);
+					HttpExecuter executer = new HttpExecuter(url, HttpMsgSend.METHOD_GET, cfg.getApiKey(), null);
 					HttpMsgReceive httpMsgReceive = executer.execute();
-					httpMsgReceive.setType(HttpMsgReceive.TYPE_DEVICE_CMD);
+					if(httpMsgReceive != null)
+						httpMsgReceive.setType(HttpMsgReceive.TYPE_DEVICE_CMD);
 					IMsg msg = converter.convertMsgReceive(httpMsgReceive);
 					if(msg != null){
 						for(IReceivedListener listener : receivedListenerList){

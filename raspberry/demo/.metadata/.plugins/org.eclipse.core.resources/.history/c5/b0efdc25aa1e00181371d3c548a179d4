@@ -1,6 +1,0 @@
-package com.zigbeee;
-
-public class ZBC {
-
-	public byte[] CMD_DEVICE_RESET;
-}

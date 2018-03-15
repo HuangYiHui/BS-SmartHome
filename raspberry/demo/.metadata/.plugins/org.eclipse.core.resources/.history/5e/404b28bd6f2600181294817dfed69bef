@@ -1,0 +1,69 @@
+package bs.pi.gateway.assist;
+
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+
+public class Tool {
+	
+	private final static String HEX_STR = "0123456789ABCDEF";
+	
+	private static byte charsToByte(char highC, char lowC) throws Exception{
+		highC = Character.toUpperCase(highC);
+		lowC = Character.toUpperCase(lowC);
+		if(HEX_STR.indexOf(highC) == -1 || HEX_STR.indexOf(lowC) == -1){
+			throw new Exception("strToByte error");
+		}
+		byte high = (byte)((HEX_STR.indexOf(highC))<<4);
+		byte low = (byte)HEX_STR.indexOf(lowC);
+		byte result = (byte) (high|low);
+		return result;
+	}
+	
+	public static byte strToByte(String str) throws Exception{
+		if(str.length() < 3 || str.length() > 4 || ! str.startsWith("0x"))
+			throw new Exception("strToByte error");
+		char c1 = Character.toUpperCase(str.charAt(2));
+		if(HEX_STR.indexOf(c1) == -1){
+			throw new Exception("strToByte error");
+		}
+		
+		if(str.length() == 3){
+			return charsToByte('0', c1);
+		}else{
+			char c2 = Character.toUpperCase(str.charAt(3));
+			if(HEX_STR.indexOf(c2) == -1){
+				throw new Exception("strToByte error");
+			}
+			return charsToByte(c1, c2);
+		}
+		
+	}
+	
+	public static byte[] strToBytes(String str) throws Exception{
+		if(str.length() < 3 || ! str.startsWith("0x"))
+			throw new Exception("strToByte error");
+		char c1 = Character.toUpperCase(str.charAt(2));
+		if(HEX_STR.indexOf(c1) == -1){
+			throw new Exception("strToByte error");
+		}
+		
+		int len = str.length()/2;
+		byte[] bytes = new byte[len];
+		for(int i=0;i<len;i++){
+			bytes[i] = charsToByte(str.charAt(2*i), str.charAt(2*i+1));
+		}
+		return bytes;
+	}
+	
+	public static float bytesToFloat(byte[] valueBytes) throws Exception{
+		if(valueBytes.length != 4)
+			throw new Exception("bytesToFloat error");
+		
+		DataInputStream dis=new DataInputStream(new ByteArrayInputStream(valueBytes));
+		float value = dis.readFloat();
+		dis.close();
+		
+		return value;
+	}
+}

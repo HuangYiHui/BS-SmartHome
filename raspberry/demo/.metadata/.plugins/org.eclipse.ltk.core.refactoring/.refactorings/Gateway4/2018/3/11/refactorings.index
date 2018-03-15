@@ -17,3 +17,11 @@
 1520770556463	Move compilation unit
 1520770572416	Delete element
 1520770657086	Rename package 'bs.pi.gateway.Msg'
+1520820675471	Rename type 'HttpMsg'
+1520821978393	Rename local variable 'hexStr'
+1520823984263	Rename field 'OTHER_ZIGBEE_IEEEADDR1'
+1520823988896	Rename field 'OTHER_ZIGBEE_IEEEADDR2'
+1520825124135	Delete element
+1520825129912	Rename type 'ZigbeeFrameOut'
+1520908798754	Rename type 'ZigbeeNWKAddrMsg'
+1520919521268	Rename local variable 'dstAddr'

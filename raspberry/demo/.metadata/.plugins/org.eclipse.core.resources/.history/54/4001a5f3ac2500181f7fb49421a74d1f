@@ -1,0 +1,11 @@
+package bs.pi.gateway.main;
+
+import java.util.HashMap;
+
+import bs.pi.gateway.msg.IMsg;
+
+public interface IConverter {
+	
+	public IMsg convertMsgReceive(Object msg);
+	public Object convertMsgSend(IMsg msg);
+}

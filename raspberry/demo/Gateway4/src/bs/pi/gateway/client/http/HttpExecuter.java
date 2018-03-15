@@ -19,11 +19,6 @@ import org.apache.http.util.EntityUtils;
 
 public class HttpExecuter {
 	
-	public final static int METHOD_GET = 1;
-	public final static int METHOD_POST = 2;
-	public final static int METHOD_PUT = 3;
-	public final static int METHOD_DELETE = 4;
-	
 	private String url;
 	private int method;
 	private String apiKey;
@@ -39,13 +34,13 @@ public class HttpExecuter {
 	public HttpMsgReceive execute(){
 		HttpUriRequest request = null;
 		try{
-			if(METHOD_GET == method){
+			if(HttpMsgSend.METHOD_GET == method){
 				request = getGetRequest();
-			}else if(METHOD_POST == method){
+			}else if(HttpMsgSend.METHOD_POST == method){
 				request = getPostRequest();
-			}else if(METHOD_POST == method){
+			}else if(HttpMsgSend.METHOD_POST == method){
 				request = getPutRequest();
-			}else if(METHOD_POST == method){
+			}else if(HttpMsgSend.METHOD_POST == method){
 				request = getDeleteRequest();
 			}else{
 				return null;
@@ -61,13 +56,9 @@ public class HttpExecuter {
 		
 		try{
 			response = httpClient.execute(request);
-			try {
-				jsonResponse = JSONObject.fromObject(EntityUtils.toString(response.getEntity()));
-			} finally {
-                response.close();
-            }
+			jsonResponse = JSONObject.fromObject(EntityUtils.toString(response.getEntity()));
 		}catch(Exception e){
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		}finally{
 			try {

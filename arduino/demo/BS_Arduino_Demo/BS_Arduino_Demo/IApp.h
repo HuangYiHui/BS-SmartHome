@@ -20,7 +20,7 @@ public:
 	virtual void reset() = 0;
 	virtual appState getState() = 0;
 	virtual unsigned int getAppID();
-	virtual void receiveMsg(AppMsgReceive& msg);
+	virtual void receiveMsg(AppMsg& msg);
 };
 
 #endif

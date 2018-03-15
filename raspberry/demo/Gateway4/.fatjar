@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Mon Mar 12 20:40:29 CST 2018
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=gw4.jar
+manifest.mergeall=true
+manifest.mainclass=bs.pi.gateway.main.Main
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=

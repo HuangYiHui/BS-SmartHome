@@ -1,0 +1,105 @@
+import java.util.HashMap;
+
+import com.test.Debugger;
+
+import net.sf.json.JSONObject;
+import bs.pi.gateway.assist.Tool;
+import bs.pi.gateway.client.http.HttpClient;
+import bs.pi.gateway.client.port.PortClient;
+import bs.pi.gateway.client.port.PortConverter;
+import bs.pi.gateway.client.zigbee.CodeGenerator;
+import bs.pi.gateway.client.zigbee.ZigbeeClient;
+import bs.pi.gateway.main.Gateway;
+import bs.pi.gateway.processor.MyProcessor;
+
+
+public class Test {
+
+	public static void main(String[] args) throws Exception {
+		//test2();
+		//test3();
+		//test4();
+		test5();
+	}
+	
+	public static void test5() throws Exception{
+		byte b = Tool.strToByte("0xf3");
+		System.out.printf("%x", b);
+	}
+	
+	public static void test4(){
+		String str = "{\"key\":{\"key1\":\"value1\"}}";
+		JSONObject json = JSONObject.fromObject(str);
+		
+		
+		JSONObject json1 = new JSONObject();
+		JSONObject json2 = new JSONObject();
+		json2.put("key1", "value1");
+		json1.put("key", json2);
+		System.out.println(json1.toString());
+	}
+	public static void test3() throws Exception{
+		
+		PortClient portClient = new PortClient(PortClient.DEFAULT_CFG_PATH);
+		portClient.setConverter(new PortConverter());
+		portClient.init();
+		portClient.start();
+		
+		MyProcessor processor = new MyProcessor();
+		
+		Gateway gateway = new Gateway();
+	//	gateway.installSender(zigbeeClient.getSender());
+		gateway.installReceiver(portClient.getReceiver());
+	//	gateway.installSender(httpClient.getSender());
+	//	gateway.installReceiver(httpClient.getReceiver());
+		gateway.setProcessor(processor);
+		gateway.start();
+	}
+	
+	public static void test2(){
+		
+		float f = (float) -123.45;
+		
+		// 把float转换为byte[]  
+	    int fbit = Float.floatToIntBits(f);  
+	      
+	    byte[] b = new byte[4];    
+	    for (int i = 0; i < 4; i++) {    
+	        b[i] = (byte) (fbit >> (24 - i * 8));    
+	    }   
+	      
+	    // 翻转数组  
+	    int len = b.length;  
+	    // 建立一个与源数组元素类型相同的数组  
+	    byte[] dest = new byte[len];  
+	    // 为了防止修改源数组，将源数组拷贝一份副本  
+	    System.arraycopy(b, 0, dest, 0, len);  
+	    byte temp;  
+	    // 将顺位第i个与倒数第i个交换  
+	    for (int i = 0; i < len / 2; ++i) {  
+	        temp = dest[i];  
+	        dest[i] = dest[len - i - 1];  
+	        dest[len - i - 1] = temp;  
+	    }
+	    
+	    for(byte bb: dest)
+	    	System.out.printf("%x,", bb);
+	}
+	
+	public static void test1() throws InterruptedException{
+		Gateway gateway = new Gateway();
+		
+		MyProcessor processor = new MyProcessor();
+		
+		TestReceiver testReceiver = new TestReceiver();
+		testReceiver.start();
+		gateway.installReceiver(testReceiver);
+		gateway.setProcessor(processor);
+		
+		gateway.start();
+		
+		Thread.sleep(6000);
+		testReceiver.stop();
+	}
+
+}

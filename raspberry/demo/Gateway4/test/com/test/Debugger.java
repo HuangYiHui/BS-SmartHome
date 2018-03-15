@@ -23,4 +23,10 @@ public class Debugger {
 	public static void print(String str){
 		System.out.print(str);
 	}
+	
+	public static void printBytes(byte[] bs){
+		for(byte b : bs)
+			System.out.printf("%x,", b);
+		System.out.println();
+	}
 }

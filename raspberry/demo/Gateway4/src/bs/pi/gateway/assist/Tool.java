@@ -6,21 +6,70 @@ import java.io.IOException;
 
 public class Tool {
 	
-	public static byte[] strToBytes(String str){
-		String hexStr = "0123456789ABCDEF";
-		//hexString的长度对2取整，作为bytes的长度
-		int len = str.length()/2;
-		byte[] bytes = new byte[len];   
-		byte high = 0;//字节高四位
-		byte low = 0;//字节低四位
-
-		for(int i=0;i<len;i++){
-			//右移四位得到高位
-			char highC = Character.toUpperCase(str.charAt(2*i));
-			high = (byte)((hexStr.indexOf(highC))<<4);
-			char lowC = Character.toUpperCase(str.charAt(2*i+1));
-			low = (byte)hexStr.indexOf(lowC);
-			bytes[i] = (byte) (high|low);//高地位做或运算
+	private final static String HEX_STR = "0123456789ABCDEF";
+	
+	private static byte charsToByte(char highC, char lowC) throws Exception{
+		highC = Character.toUpperCase(highC);
+		lowC = Character.toUpperCase(lowC);
+		if(HEX_STR.indexOf(highC) == -1 || HEX_STR.indexOf(lowC) == -1){
+			throw new Exception("strToByte error");
+		}
+		byte high = (byte)((HEX_STR.indexOf(highC))<<4);
+		byte low = (byte)HEX_STR.indexOf(lowC);
+		byte result = (byte) (high|low);
+		return result;
+	}
+	
+	public static byte strToByte(String str) throws Exception{
+		if(str.length() < 3 || str.length() > 4 || ! str.startsWith("0x"))
+			throw new Exception("strToByte error");
+		char c1 = Character.toUpperCase(str.charAt(2));
+		if(HEX_STR.indexOf(c1) == -1){
+			throw new Exception("strToByte error");
+		}
+		
+		if(str.length() == 3){
+			return charsToByte('0', c1);
+		}else{
+			char c2 = Character.toUpperCase(str.charAt(3));
+			if(HEX_STR.indexOf(c2) == -1){
+				throw new Exception("strToByte error");
+			}
+			return charsToByte(c1, c2);
+		}
+		
+	}
+	
+	public static byte[] strToBytes(String str) throws Exception{
+		if(str == null || str.length() < 3 || ! str.startsWith("0x")){
+			throw new Exception("strToByte error");
+		}
+		char c1 = Character.toUpperCase(str.charAt(2));
+		if(HEX_STR.indexOf(c1) == -1){
+			throw new Exception("strToByte error");
+		}
+		
+		String str1 = str.substring(2, str.length());
+		int len = str1.length()/2;
+		byte[] bytes = null;
+		if(str1.length() % 2 == 0){
+			bytes = new byte[len];
+			for(int i=0; i<len; i++){
+				char hc = str1.charAt(2*len-2*i-2);
+				char lc = str1.charAt(2*len-2*i-1);
+				bytes[i] = charsToByte(hc, lc);
+			}
+		}else{
+			bytes = new byte[len+1];
+			for(int i=0; i<len+1; i++){
+				char hc = '0';
+				if(2*len-2*i-1 > 0){
+					hc = str1.charAt(2*len-2*i-1);
+				}
+				char lc = str1.charAt(2*len-2*i);
+				System.out.println(hc+","+lc);
+				bytes[i] = charsToByte(hc, lc);
+			}
 		}
 		return bytes;
 	}
@@ -34,5 +83,12 @@ public class Tool {
 		dis.close();
 		
 		return value;
+	}
+	
+	public static byte[] intTo2Byte(int n){
+		byte[] bs = new byte[2];
+		bs[0] = (byte) (n % 256);
+		bs[1] = (byte) (n / 256);
+		return bs;
 	}
 }

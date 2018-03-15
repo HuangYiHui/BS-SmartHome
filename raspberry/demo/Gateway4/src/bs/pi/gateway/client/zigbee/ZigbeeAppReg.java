@@ -16,7 +16,7 @@ public class ZigbeeAppReg {
 	public final static String KEY_APP_NUM_OUT_CLUSTERS = "reg_endDevVer";
 	public final static String KEY_APP_OUT_CLUSTER_LIST = "reg_endDevVer";
 	
-	public final static byte DEFAULT_DENPOINT = 0x00;
+	public final static byte DEFAULT_DENPOINT = 0x55;
 	public final static byte[] DEFAULT_APP_PROF_ID = {0x00, 0x00};
 	public final static byte[] DEFAULT_APP_DEVICE_ID = {0x00, 0x00};
 	public final static byte DEFAULT_DEV_VER = 0x00;
@@ -49,23 +49,23 @@ public class ZigbeeAppReg {
 		appOutClusterList = DEFAULT_APP_OUT_CLUSTER_LIST;
 	}
 	
-	public ZigbeeAppReg(Properties properties, int index){
-		endpoint = Tool.strToBytes(properties.getProperty(KEY_ENDPOINT+index))[0];
-		appProfID = Tool.strToBytes(properties.getProperty(KEY_APP_PROF_ID+index));
-		appDeviceID = Tool.strToBytes(properties.getProperty(KEY_APP_DEVICE_ID+index));
-		endDevVer = Tool.strToBytes(properties.getProperty(KEY_DEV_VER+index))[0];
-		latencyReq = Tool.strToBytes(properties.getProperty(KEY_LATENCY_REQ+index))[0];
-		appNumInClusters = Tool.strToBytes(properties.getProperty(KEY_APP_NUM_IN_CLUSTERS+index))[0];
+	public ZigbeeAppReg(Properties properties) throws Exception{
+		endpoint = Tool.strToByte(properties.getProperty(KEY_ENDPOINT));
+		appProfID = Tool.strToBytes(properties.getProperty(KEY_APP_PROF_ID));
+		appDeviceID = Tool.strToBytes(properties.getProperty(KEY_APP_DEVICE_ID));
+		endDevVer = Tool.strToByte(properties.getProperty(KEY_DEV_VER));
+		latencyReq = Tool.strToByte(properties.getProperty(KEY_LATENCY_REQ));
+		appNumInClusters = Tool.strToByte(properties.getProperty(KEY_APP_NUM_IN_CLUSTERS));
 		if(appNumInClusters == 0){
 			appInClusterList = new byte[0];
 		}else{
-			appInClusterList = Tool.strToBytes(properties.getProperty(KEY_APP_IN_CLUSTER_LIST+index));
+			appInClusterList = Tool.strToBytes(properties.getProperty(KEY_APP_IN_CLUSTER_LIST));
 		}
-		appNumOutClusters = Tool.strToBytes(properties.getProperty(KEY_APP_NUM_OUT_CLUSTERS+index))[0];
+		appNumOutClusters = Tool.strToByte(properties.getProperty(KEY_APP_NUM_OUT_CLUSTERS));
 		if(appNumOutClusters == 0){
 			appOutClusterList = new byte[0];
 		}else{
-			appInClusterList = Tool.strToBytes(properties.getProperty(KEY_APP_OUT_CLUSTER_LIST+index));
+			appInClusterList = Tool.strToBytes(properties.getProperty(KEY_APP_OUT_CLUSTER_LIST));
 		}
 	}
 	

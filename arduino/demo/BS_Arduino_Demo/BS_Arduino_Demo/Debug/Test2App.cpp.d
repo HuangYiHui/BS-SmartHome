@@ -27,4 +27,5 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Test2App.cpp.o: \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src/Wire.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Stream.h \
  D:\software1\arduino-1.8.5\libraries\LiquidCrystal_I2C/LiquidCrystal_I2C.h \
- D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Print.h
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Print.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Debugger.h

@@ -17,13 +17,13 @@ public:
 	virtual	void reset();
 	virtual appState getState();
 	virtual unsigned int getAppID();
-	virtual void sendMsg(AppMsgSend& msg);
-	virtual void receiveMsg(AppMsgReceive& msg);
+	virtual void sendMsg(AppMsg& msg, unsigned int appID);
+	virtual void receiveMsg(AppMsg& msg);
 
 protected:
 	appState state;
 	const unsigned int appID;
-	LinkedList<AppMsgReceive*> msgList;
+	LinkedList<AppMsg*> msgList;
 };
 
 #endif
