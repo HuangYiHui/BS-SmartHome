@@ -14,4 +14,3 @@ unsigned int SystemAPI::getSystemID()
 {
 	return curSystem->getSystemID();
 }
-

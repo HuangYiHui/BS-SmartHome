@@ -82,9 +82,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Tool.cpp" />
     <ClCompile Include="ZBC.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Tool.h" />
     <ClInclude Include="ZBC.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

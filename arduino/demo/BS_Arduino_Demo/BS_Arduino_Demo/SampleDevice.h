@@ -15,7 +15,8 @@ public:
 	virtual void reset();
 	virtual	void close();
 	virtual	deviceState getState();
-	virtual	void ready();
+	virtual	void begin();	//调用open->init->start
+	virtual	void end();	////调用stop->close
 protected:
 	deviceState state;
 };

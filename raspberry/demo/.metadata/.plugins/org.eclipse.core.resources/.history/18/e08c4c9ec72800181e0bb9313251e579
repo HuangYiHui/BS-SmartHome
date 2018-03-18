@@ -1,0 +1,38 @@
+package bs.pi.gateway.msg;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+
+public class UploadDataToHttpServerMsg implements IMsg {
+
+	public final static String MSG_NAME = "UploadDataToHttpServerMsg";
+	public final static short SENDOR_ID_TEMPERATURE = 13;
+	public final static short SENDOR_ID_HUMIDITY = 14;
+	public final static short SENDOR_ID_HEAT_INDEX = 15;
+	
+	private short sensorID;
+	private float sensorValue;
+	
+	@Override
+	public String getName() {
+		return MSG_NAME;
+	}
+
+	public short getSensorID() {
+		return sensorID;
+	}
+
+	public void setSensorID(short sensorID) {
+		this.sensorID = sensorID;
+	}
+
+	public float getSensorValue() {
+		return sensorValue;
+	}
+
+	public void setSensorValue(float sensorValue) {
+		this.sensorValue = sensorValue;
+	}
+}

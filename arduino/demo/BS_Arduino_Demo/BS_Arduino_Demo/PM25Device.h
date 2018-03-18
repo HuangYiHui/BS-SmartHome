@@ -3,15 +3,15 @@
 #ifndef _BS_PM25_DEVICE_H_
 #define _BS_PM25_DEVICE_H_
 
-#include "SampleDevice.h"
+#include "SensorDevice.h"
 #include "Arduino.h"
 
-class PM25Device : public SampleDevice
+class PM25Device : public SensorDevice
 {
 public:
-	PM25Device(devicePin ledPin, devicePin voPin);
+	PM25Device(devicePin ledPin, devicePin voPin, unsigned int sensorValueIndex);
 	void init();
-	float getDustDensity();
+	float getSensorValue();
 
 private:
 	devicePin ledPin;

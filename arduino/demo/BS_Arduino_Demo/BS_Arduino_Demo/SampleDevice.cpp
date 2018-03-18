@@ -41,8 +41,15 @@ deviceState SampleDevice::getState()
 	return state;
 }
 
-void SampleDevice::ready()
+void SampleDevice::begin()
 {
 	open();
 	init();
+	start();
+}
+
+void SampleDevice::end()
+{
+	stop();
+	close();
 }

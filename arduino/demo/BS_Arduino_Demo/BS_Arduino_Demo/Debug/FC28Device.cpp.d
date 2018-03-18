@@ -1,6 +1,7 @@
 D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FC28Device.cpp.o: \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FC28Device.cpp \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FC28Device.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SensorDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IDevice.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \

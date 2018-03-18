@@ -21,6 +21,8 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\MQ2App.cpp.o: \
  D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemAPI.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ISystem.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeAppCmd.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Tool.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \

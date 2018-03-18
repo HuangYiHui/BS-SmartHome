@@ -16,6 +16,20 @@ import bs.pi.gateway.msg.OtherZigbeeConnectedMsg;
 
 public class ZigbeeConverter implements IConverter {
 	
+	
+	private final short CMD_UPLAOD_DATA = 0x0001;
+	
+	//这里的UPLOAD_INDEX要与arduino的对应
+	private final short UPLOAD_INDEX_OUT_TEMPERATURE = 0x0001;
+	private final short UPLOAD_INDEX_OUT_HUMIDITY = 0x0002;
+	private final short UPLOAD_INDEX_OUT_HEAT = 0x0003;
+	private final short UPLOAD_INDEX_IN_TEMPERATURE = 0x0004;
+	private final short UPLOAD_INDEX_IN_HUMIDITY = 0x0005;
+	private final short UPLOAD_INDEX_IN_HEAT = 0x0006;
+	private final short UPLOAD_INDEX_SOLID_HUMIDITY = 0x0007;
+	private final short UPLOAD_INDEX_DUST_DENSITY = 0x0008;
+	private final short UPLOAD_INDEX_LIGHT_INTENSITY = 0x0009;
+	
 	private byte[] dstAddr1;
 	private byte[] dstAddr2;
 	private ZigbeeClientCfg cfg;
@@ -46,13 +60,12 @@ public class ZigbeeConverter implements IConverter {
 		if(cmd0 == (byte)0x44 && cmd1 == (byte)0x81){
 			if(data != null || data.length > 17){
 				byte len = data[16];
-				byte cmd3 = data[17];
-				byte cmd4 = data[18];
-				//0x0001为数据上传命令
-				if(cmd3 == 0x00 && cmd4 == 0x01 && len == 8){
-					byte[] data1 = new byte[6];
-					System.arraycopy(data, 19, data1, 0, 6);
-					return resolveUplaodDataToHttpServerCMsg(data1);
+				short cmd = (short) (data[17] + 256 * data[18]);
+				//数据上传命令
+				if(cmd == CMD_UPLAOD_DATA){
+					byte[] data1 = new byte[len-2];
+					System.arraycopy(data, 19, data1, 0, len-2);
+					return resolveUplaodDataToHttpServerMsg(data1);
 				}
 			}
 		}else if(cmd0 == (byte)0x45 && cmd1 == (byte)0xC1){
@@ -68,23 +81,46 @@ public class ZigbeeConverter implements IConverter {
 		return null;
 	}
 	
-	private IMsg resolveUplaodDataToHttpServerCMsg(byte[] data){
-		int sensorID = data[0]*256 + data[1];
-		byte[] valueBytes = new byte[4];
-		System.arraycopy(data, 2, valueBytes, 0, 4);
-		float sensorValue;
-		try {
-			sensorValue = Tool.bytesToFloat(valueBytes);
-		} catch (Exception e) {
-			e.printStackTrace();
+	private IMsg resolveUplaodDataToHttpServerMsg(byte[] data){
+		if(data == null || data.length<3)
 			return null;
+		short uploadItem = (short) (data[0] + data[1] * 256);
+		if( uploadItem == UPLOAD_INDEX_OUT_TEMPERATURE ||
+			uploadItem == UPLOAD_INDEX_OUT_HUMIDITY || 
+			uploadItem == UPLOAD_INDEX_OUT_HEAT ||
+			uploadItem == UPLOAD_INDEX_IN_TEMPERATURE ||
+			uploadItem == UPLOAD_INDEX_IN_HUMIDITY || 
+			uploadItem == UPLOAD_INDEX_IN_HEAT ||
+			uploadItem == UPLOAD_INDEX_SOLID_HUMIDITY ||
+			uploadItem == UPLOAD_INDEX_DUST_DENSITY ||
+			uploadItem == UPLOAD_INDEX_LIGHT_INTENSITY
+		){
+			byte[] valueBytes = new byte[4];
+			System.arraycopy(data, 2, valueBytes, 0, 4);
+			float value;
+			try {
+				value = Tool.bytesToFloat(valueBytes);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			UploadDataToHttpServerMsg msg = new UploadDataToHttpServerMsg();
+			msg.setSensorValue(value);
+			if(uploadItem == UPLOAD_INDEX_OUT_TEMPERATURE)
+				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_OUT_TEMPERATURE);
+			else if(uploadItem == UPLOAD_INDEX_OUT_HUMIDITY)
+				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_OUT_HUMIDITY);
+			else if(uploadItem == UPLOAD_INDEX_OUT_HEAT)
+				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_OUT_HEAT);
+			else if(uploadItem == UPLOAD_INDEX_SOLID_HUMIDITY)
+				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_SOLID_HUMIDITY);
+			else if(uploadItem == UPLOAD_INDEX_DUST_DENSITY)
+				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_DUST_DENSITY);
+			else if(uploadItem == UPLOAD_INDEX_LIGHT_INTENSITY)
+				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_LIGHT_INTENSITY);
+			return msg;
 		}
-		
-		UploadDataToHttpServerMsg msg = new UploadDataToHttpServerMsg();
-		msg.setSensorID(sensorID);
-		msg.setSensorValue(sensorValue);
-		
-		return msg;
+		return null;
 	}
 
 	@Override

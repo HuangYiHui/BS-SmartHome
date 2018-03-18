@@ -1061,3 +1061,135 @@ java.io.IOException: 文件名、目录名或卷标语法不正确。
 	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:1)
 	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
 	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+!SESSION 2018-03-16 06:55:38.153 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.equinox.p2.reconciler.dropins 4 0 2018-03-16 06:57:07.636
+!MESSAGE Error occurred while resolving linked folder D:\JAVA\eclipse\eclipse se-4.3.2\D:JAVAeclipselinkseclipse from D:\JAVA\eclipse\eclipse se-4.3.2\links\pydev.link.
+!STACK 0
+java.io.IOException: 文件名、目录名或卷标语法不正确。
+	at java.io.WinNTFileSystem.canonicalize0(Native Method)
+	at java.io.WinNTFileSystem.canonicalize(Unknown Source)
+	at java.io.File.getCanonicalPath(Unknown Source)
+	at java.io.File.getCanonicalFile(Unknown Source)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.DropinsRepositoryListener.getLinkedRepository(DropinsRepositoryListener.java:165)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.Activator.getDropinsToCheck(Activator.java:378)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.Activator.getFilesToCheck(Activator.java:357)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.Activator.isUpToDate(Activator.java:246)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.Activator.start(Activator.java:163)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$1.run(BundleContextImpl.java:711)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.startActivator(BundleContextImpl.java:702)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.start(BundleContextImpl.java:683)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.startWorker(BundleHost.java:381)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.resume(AbstractBundle.java:390)
+	at org.eclipse.osgi.framework.internal.core.Framework.resumeBundle(Framework.java:1176)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:559)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:544)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.incFWSL(StartLevelManager.java:457)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:243)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:438)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.core.resources 2 10035 2018-03-16 06:57:46.661
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.core 4 4 2018-03-16 10:37:08.873
+!MESSAGE JavaBuilder handling ImageBuilderInternalException while building: Gateway4
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:816)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:46)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:178)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:733)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:302)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:358)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:381)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Contains: Could not delete '/Gateway4/bin/bs'.
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:351)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:352)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFolder(ResourceTree.java:798)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1977)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:803)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:46)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:178)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:733)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:302)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:358)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:381)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Contains: Problems encountered while deleting files.
+Contains: Could not delete: D:\Documents\GitHub\BS-SmartHome\raspberry\demo\Gateway4\bin\bs\pi\gateway\client.
+Contains: Could not delete: D:\Documents\GitHub\BS-SmartHome\raspberry\demo\Gateway4\bin\bs\pi\gateway.
+Contains: Could not delete: D:\Documents\GitHub\BS-SmartHome\raspberry\demo\Gateway4\bin\bs\pi.
+Contains: Could not delete: D:\Documents\GitHub\BS-SmartHome\raspberry\demo\Gateway4\bin\bs.
+!SUBENTRY 1 org.eclipse.core.resources 4 273 2018-03-16 10:37:08.874
+!MESSAGE Problems encountered while deleting resources.
+!SUBENTRY 2 org.eclipse.core.resources 4 273 2018-03-16 10:37:08.874
+!MESSAGE Could not delete '/Gateway4/bin/bs'.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:351)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:352)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFolder(ResourceTree.java:798)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1977)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:803)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:46)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:178)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:733)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:302)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:358)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:381)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Contains: Problems encountered while deleting files.
+Contains: Could not delete: D:\Documents\GitHub\BS-SmartHome\raspberry\demo\Gateway4\bin\bs\pi\gateway\client.
+Contains: Could not delete: D:\Documents\GitHub\BS-SmartHome\raspberry\demo\Gateway4\bin\bs\pi\gateway.
+Contains: Could not delete: D:\Documents\GitHub\BS-SmartHome\raspberry\demo\Gateway4\bin\bs\pi.
+Contains: Could not delete: D:\Documents\GitHub\BS-SmartHome\raspberry\demo\Gateway4\bin\bs.
+!SUBENTRY 3 org.eclipse.core.resources 4 273 2018-03-16 10:37:08.874
+!MESSAGE Problems encountered while deleting resources.
+!SUBENTRY 4 org.eclipse.core.filesystem 4 273 2018-03-16 10:37:08.874
+!MESSAGE Problems encountered while deleting files.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2018-03-16 10:37:08.875
+!MESSAGE Could not delete: D:\Documents\GitHub\BS-SmartHome\raspberry\demo\Gateway4\bin\bs\pi\gateway\client.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2018-03-16 10:37:08.875
+!MESSAGE Could not delete: D:\Documents\GitHub\BS-SmartHome\raspberry\demo\Gateway4\bin\bs\pi\gateway.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2018-03-16 10:37:08.875
+!MESSAGE Could not delete: D:\Documents\GitHub\BS-SmartHome\raspberry\demo\Gateway4\bin\bs\pi.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2018-03-16 10:37:08.875
+!MESSAGE Could not delete: D:\Documents\GitHub\BS-SmartHome\raspberry\demo\Gateway4\bin\bs.

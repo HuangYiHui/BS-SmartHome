@@ -24,6 +24,13 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\PM25App.cpp.o: \
  D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemAPI.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ISystem.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemCfg.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOutCfg.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeAppCmd.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Tool.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\PM25Device.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleDevice.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IDevice.h
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IDevice.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\PM25AppCmd.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\AppCmd.h

@@ -19,7 +19,17 @@ public class Test {
 		//test2();
 		//test3();
 		//test4();
-		test5();
+		test6();
+	}
+	
+	public static void test6() throws Exception{
+		short n = 0x1234;
+		byte b1 = (byte) (n % 256);
+		byte b2 = (byte) (n / 256);
+		short n1 = (short) (b1 + b2*256);
+		System.out.printf("%x, %x, %x", b1, b2, n1);
+		if(n1 == n)
+			System.out.printf("123");
 	}
 	
 	public static void test5() throws Exception{

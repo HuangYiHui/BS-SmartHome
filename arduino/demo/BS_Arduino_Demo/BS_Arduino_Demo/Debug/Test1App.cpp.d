@@ -18,12 +18,14 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Test1App.cpp.o: \
  D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemAPI.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ISystem.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemCfg.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOutCfg.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeAppCmd.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Tool.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-timer.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-sem.h \
- D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemCfg.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOutCfg.h
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h

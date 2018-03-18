@@ -4,7 +4,6 @@
 //#define CUR_SYSTEM_IN
 #define CUR_SYSTEM_OUT
 #define SERAIL_BAUD_RATE	19200	//´®¿Ú²¨ÌØÂÊ
-#define ZIGBEE_REGISTER_ENDPOINT 0x55
 
 #include "ZBC.h"
 

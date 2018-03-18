@@ -1,19 +1,17 @@
-//土壤湿度传感器
-
 #ifndef _BS_GY30_DEVICE_H_
 #define _BS_GY30_DEVICE_H_
 
-#include "SampleDevice.h"
+#include "SensorDevice.h"
 #include "Arduino.h"
 #include "Wire.h"
 #include "BH1750xtra.h"
 
-class GY30Device : public SampleDevice
+class GY30Device : public SensorDevice
 {
 public:
-	GY30Device();
+	GY30Device(unsigned int sensorValueIndex);
 	void init();
-	unsigned int getLighteness();
+	float getSensorValue();
 
 private:
 	BH1750xtra bhSensor;

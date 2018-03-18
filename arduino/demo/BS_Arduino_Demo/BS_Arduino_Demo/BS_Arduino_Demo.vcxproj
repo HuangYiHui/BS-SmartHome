@@ -47,7 +47,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\BS_Arduino_Demo;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\LinkedList;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\DHT_sensor;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\TonePlayer;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\BH1750xtra;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\ProtoThreads;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\LiquidCrystal_I2C;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\Adafruit_Sensor;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\BS_Arduino_Demo;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\LinkedList;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\DHT_sensor;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\BH1750xtra;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\ProtoThreads;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\Adafruit_Sensor;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\TonePlayer;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\LiquidCrystal_I2C;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\..\..\software1\arduino-1.8.5\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.BS_Arduino_Demo.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=10805;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -91,80 +91,85 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AlarmDevice.h" />
+    <ClInclude Include="SimpleExecuterDevice.h" />
+    <ClInclude Include="AppCmd.h" />
     <ClInclude Include="AppMsg.h" />
+    <ClInclude Include="GY30Device.h" />
+    <ClInclude Include="HeatSensorDevice.h" />
+    <ClInclude Include="HumiditySensorDevice.h" />
+    <ClInclude Include="SensorApp.h" />
+    <ClInclude Include="SensorAppCmd.h" />
+    <ClInclude Include="SensorDevice.h" />
     <ClInclude Include="SystemCfg.h" />
     <ClInclude Include="CurSystem.h" />
     <ClInclude Include="Debugger.h" />
-    <ClInclude Include="DHT11App.h" />
     <ClInclude Include="DHT11Device.h" />
-    <ClInclude Include="DoorbellApp.h" />
-    <ClInclude Include="FC28App.h" />
-    <ClInclude Include="FC28Device.h" />
     <ClInclude Include="LedDevice.h" />
     <ClInclude Include="LightAdjustApp.h" />
-    <ClInclude Include="GY30Device.h" />
     <ClInclude Include="IRRemoteApp.h" />
     <ClInclude Include="IRRemoteDevice.h" />
-    <ClInclude Include="PM25App.h" />
     <ClInclude Include="PM25Device.h" />
     <ClInclude Include="SpeakerDevice.h" />
     <ClInclude Include="SystemAPI.h" />
     <ClInclude Include="SystemInCfg.h" />
     <ClInclude Include="SystemOutCfg.h" />
+    <ClInclude Include="TemperatureSensorDevice.h" />
     <ClInclude Include="Test1App.h" />
     <ClInclude Include="Test2App.h" />
     <ClInclude Include="Test3App.h" />
+    <ClInclude Include="Tool.h" />
     <ClInclude Include="TouchSensorDevice.h" />
-    <ClInclude Include="FireSensorApp.h" />
-    <ClInclude Include="FireSensorDevice.h" />
+    <ClInclude Include="FireAlarmApp.h" />
     <ClInclude Include="IApp.h" />
     <ClInclude Include="IDevice.h" />
     <ClInclude Include="ISystem.h" />
     <ClInclude Include="LCDDevice.h" />
-    <ClInclude Include="MQ2App.h" />
-    <ClInclude Include="MQ2Device.h" />
+    <ClInclude Include="HarmfulGasAlarmApp.h" />
+    <ClInclude Include="SimpleSensorDevice.h" />
     <ClInclude Include="inPinDef.h" />
     <ClInclude Include="outPinDef.h" />
     <ClInclude Include="SampleApp.h" />
     <ClInclude Include="SampleDevice.h" />
     <ClInclude Include="SampleSystem.h" />
     <ClInclude Include="ZBC.h" />
-    <ClInclude Include="ZigbeeApp.h" />
+    <ClInclude Include="ZigbeeAppCmd.h" />
+    <ClInclude Include="ZigbeeInApp.h" />
+    <ClInclude Include="ZigbeeOutApp.h" />
     <ClInclude Include="ZigbeeDevice.h" />
     <ClInclude Include="__vm\.BS_Arduino_Demo.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AlarmDevice.cpp" />
+    <ClCompile Include="SimpleExecuterDevice.cpp" />
     <ClCompile Include="Debugger.cpp" />
-    <ClCompile Include="DHT11App.cpp" />
     <ClCompile Include="DHT11Device.cpp" />
-    <ClCompile Include="DoorbellApp.cpp" />
-    <ClCompile Include="FC28App.cpp" />
-    <ClCompile Include="FC28Device.cpp" />
+    <ClCompile Include="GY30Device.cpp" />
+    <ClCompile Include="HeatSensorDevice.cpp" />
+    <ClCompile Include="HumiditySensorDevice.cpp" />
     <ClCompile Include="LEDDevice.cpp" />
     <ClCompile Include="LightAdjustApp.cpp" />
-    <ClCompile Include="GY30Device.cpp" />
     <ClCompile Include="IRRemoteApp.cpp" />
     <ClCompile Include="IRRemoteDevice.cpp" />
-    <ClCompile Include="PM25App.cpp" />
     <ClCompile Include="PM25Device.cpp" />
+    <ClCompile Include="SensorApp.cpp" />
+    <ClCompile Include="SensorDevice.cpp" />
     <ClCompile Include="SpeakerDevice.cpp" />
     <ClCompile Include="SystemAPI.cpp" />
+    <ClCompile Include="TemperatureSensorDevice.cpp" />
     <ClCompile Include="Test1App.cpp" />
     <ClCompile Include="Test2App.cpp" />
     <ClCompile Include="Test3App.cpp" />
+    <ClCompile Include="Tool.cpp" />
     <ClCompile Include="TouchSensorDevice.cpp" />
-    <ClCompile Include="FireSensorApp.cpp" />
-    <ClCompile Include="FireSensorDevice.cpp" />
+    <ClCompile Include="FireAlarmApp.cpp" />
     <ClCompile Include="LCDDevice.cpp" />
-    <ClCompile Include="MQ2App.cpp" />
-    <ClCompile Include="MQ2Device.cpp" />
+    <ClCompile Include="HarmfulGasAlarmApp.cpp" />
+    <ClCompile Include="SimpleSensorDevice.cpp" />
     <ClCompile Include="SampleApp.cpp" />
     <ClCompile Include="SampleDevice.cpp" />
     <ClCompile Include="SampleSystem.cpp" />
     <ClCompile Include="ZBC.cpp" />
-    <ClCompile Include="ZigbeeApp.cpp" />
+    <ClCompile Include="ZigbeeInApp.cpp" />
+    <ClCompile Include="ZigbeeOutApp.cpp" />
     <ClCompile Include="ZigbeeDevice.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

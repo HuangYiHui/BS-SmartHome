@@ -10,7 +10,7 @@ BH1750xtra bhSensor;
 
 void setup() {
     uint8_t error;
-    Serial.begin(9600);
+    Serial.begin(19200);
     Wire.begin(); //初始化I2C总线
     Wire.beginTransmission(35);
     //取消测试每个方法

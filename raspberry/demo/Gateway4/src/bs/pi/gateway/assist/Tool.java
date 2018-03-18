@@ -77,8 +77,13 @@ public class Tool {
 	public static float bytesToFloat(byte[] valueBytes) throws Exception{
 		if(valueBytes.length != 4)
 			throw new Exception("bytesToFloat error");
+		byte[] bs = new byte[4];
+		bs[0] = valueBytes[3];
+		bs[1] = valueBytes[2];
+		bs[2] = valueBytes[1];
+		bs[3] = valueBytes[0];
 		
-		DataInputStream dis=new DataInputStream(new ByteArrayInputStream(valueBytes));
+		DataInputStream dis=new DataInputStream(new ByteArrayInputStream(bs));
 		float value = dis.readFloat();
 		dis.close();
 		

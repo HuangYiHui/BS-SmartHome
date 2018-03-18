@@ -11,25 +11,16 @@
     <ClInclude Include="SampleSystem.h">
       <Filter>system</Filter>
     </ClInclude>
-    <ClInclude Include="AlarmDevice.h">
-      <Filter>driver</Filter>
-    </ClInclude>
     <ClInclude Include="IDevice.h">
       <Filter>driver</Filter>
     </ClInclude>
     <ClInclude Include="SampleDevice.h">
       <Filter>driver</Filter>
     </ClInclude>
-    <ClInclude Include="FireSensorDevice.h">
-      <Filter>driver</Filter>
-    </ClInclude>
     <ClInclude Include="DHT11Device.h">
       <Filter>driver</Filter>
     </ClInclude>
     <ClInclude Include="LCDDevice.h">
-      <Filter>driver</Filter>
-    </ClInclude>
-    <ClInclude Include="MQ2Device.h">
       <Filter>driver</Filter>
     </ClInclude>
     <ClInclude Include="IApp.h">
@@ -41,23 +32,11 @@
     <ClInclude Include="IRRemoteApp.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="FireSensorApp.h">
-      <Filter>app</Filter>
-    </ClInclude>
-    <ClInclude Include="MQ2App.h">
-      <Filter>app</Filter>
-    </ClInclude>
-    <ClInclude Include="DHT11App.h">
-      <Filter>app</Filter>
-    </ClInclude>
     <ClInclude Include="inPinDef.h">
       <Filter>driver</Filter>
     </ClInclude>
     <ClInclude Include="outPinDef.h">
       <Filter>driver</Filter>
-    </ClInclude>
-    <ClInclude Include="DoorbellApp.h">
-      <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="TouchSensorDevice.h">
       <Filter>driver</Filter>
@@ -66,15 +45,6 @@
       <Filter>driver</Filter>
     </ClInclude>
     <ClInclude Include="IRRemoteDevice.h">
-      <Filter>driver</Filter>
-    </ClInclude>
-    <ClInclude Include="FC28Device.h">
-      <Filter>driver</Filter>
-    </ClInclude>
-    <ClInclude Include="FC28App.h">
-      <Filter>app</Filter>
-    </ClInclude>
-    <ClInclude Include="GY30Device.h">
       <Filter>driver</Filter>
     </ClInclude>
     <ClInclude Include="LightAdjustApp.h">
@@ -86,14 +56,8 @@
     <ClInclude Include="PM25Device.h">
       <Filter>driver</Filter>
     </ClInclude>
-    <ClInclude Include="PM25App.h">
-      <Filter>app</Filter>
-    </ClInclude>
     <ClInclude Include="ZigbeeDevice.h">
       <Filter>driver</Filter>
-    </ClInclude>
-    <ClInclude Include="ZigbeeApp.h">
-      <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="SystemAPI.h">
       <Filter>system</Filter>
@@ -125,7 +89,57 @@
     <ClInclude Include="SystemCfg.h">
       <Filter>system</Filter>
     </ClInclude>
-    <ClInclude Include="Debugger.h" />
+    <ClInclude Include="Debugger.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="ZigbeeOutApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="ZigbeeInApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="ZigbeeAppCmd.h">
+      <Filter>app\appCmd</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool.h">
+      <Filter>assist</Filter>
+    </ClInclude>
+    <ClInclude Include="AppCmd.h">
+      <Filter>app\appCmd</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorAppCmd.h">
+      <Filter>app\appCmd</Filter>
+    </ClInclude>
+    <ClInclude Include="GY30Device.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="TemperatureSensorDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="HumiditySensorDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="HeatSensorDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleSensorDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleExecuterDevice.h">
+      <Filter>driver</Filter>
+    </ClInclude>
+    <ClInclude Include="FireAlarmApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="HarmfulGasAlarmApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="driver">
@@ -143,6 +157,9 @@
     <Filter Include="test">
       <UniqueIdentifier>{969dea27-c631-4b18-9a76-1d579561a71a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="app\appCmd">
+      <UniqueIdentifier>{89498896-365a-4167-98d5-835564ba9c06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SampleSystem.cpp">
@@ -151,20 +168,8 @@
     <ClCompile Include="SampleDevice.cpp">
       <Filter>driver</Filter>
     </ClCompile>
-    <ClCompile Include="FireSensorDevice.cpp">
-      <Filter>driver</Filter>
-    </ClCompile>
-    <ClCompile Include="AlarmDevice.cpp">
-      <Filter>driver</Filter>
-    </ClCompile>
     <ClCompile Include="DHT11Device.cpp">
       <Filter>driver</Filter>
-    </ClCompile>
-    <ClCompile Include="MQ2Device.cpp">
-      <Filter>driver</Filter>
-    </ClCompile>
-    <ClCompile Include="DHT11App.cpp">
-      <Filter>app</Filter>
     </ClCompile>
     <ClCompile Include="SampleApp.cpp">
       <Filter>app</Filter>
@@ -172,17 +177,8 @@
     <ClCompile Include="IRRemoteApp.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="FireSensorApp.cpp">
-      <Filter>app</Filter>
-    </ClCompile>
-    <ClCompile Include="MQ2App.cpp">
-      <Filter>app</Filter>
-    </ClCompile>
     <ClCompile Include="LCDDevice.cpp">
       <Filter>driver</Filter>
-    </ClCompile>
-    <ClCompile Include="DoorbellApp.cpp">
-      <Filter>app</Filter>
     </ClCompile>
     <ClCompile Include="TouchSensorDevice.cpp">
       <Filter>driver</Filter>
@@ -190,16 +186,7 @@
     <ClCompile Include="SpeakerDevice.cpp">
       <Filter>driver</Filter>
     </ClCompile>
-    <ClCompile Include="FC28Device.cpp">
-      <Filter>driver</Filter>
-    </ClCompile>
     <ClCompile Include="IRRemoteDevice.cpp">
-      <Filter>driver</Filter>
-    </ClCompile>
-    <ClCompile Include="FC28App.cpp">
-      <Filter>app</Filter>
-    </ClCompile>
-    <ClCompile Include="GY30Device.cpp">
       <Filter>driver</Filter>
     </ClCompile>
     <ClCompile Include="LightAdjustApp.cpp">
@@ -211,14 +198,8 @@
     <ClCompile Include="PM25Device.cpp">
       <Filter>driver</Filter>
     </ClCompile>
-    <ClCompile Include="PM25App.cpp">
-      <Filter>app</Filter>
-    </ClCompile>
     <ClCompile Include="ZigbeeDevice.cpp">
       <Filter>driver</Filter>
-    </ClCompile>
-    <ClCompile Include="ZigbeeApp.cpp">
-      <Filter>app</Filter>
     </ClCompile>
     <ClCompile Include="SystemAPI.cpp">
       <Filter>system</Filter>
@@ -235,6 +216,47 @@
     <ClCompile Include="ZBC.cpp">
       <Filter>assist</Filter>
     </ClCompile>
-    <ClCompile Include="Debugger.cpp" />
+    <ClCompile Include="Debugger.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="ZigbeeOutApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="ZigbeeInApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool.cpp">
+      <Filter>assist</Filter>
+    </ClCompile>
+    <ClCompile Include="SensorApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="SensorDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="GY30Device.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="TemperatureSensorDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="HumiditySensorDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="HeatSensorDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleSensorDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleExecuterDevice.cpp">
+      <Filter>driver</Filter>
+    </ClCompile>
+    <ClCompile Include="FireAlarmApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="HarmfulGasAlarmApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

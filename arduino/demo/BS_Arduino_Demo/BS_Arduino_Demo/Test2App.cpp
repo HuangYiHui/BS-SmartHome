@@ -22,14 +22,6 @@ void Test2App::run()
 
 int Test2App::exeTask()
 {
-	/*
-	PT_BEGIN(&pt);
-	while(true){
-		PT_TIMER_DELAY(&pt, 1000);
-		Serial.println("test2App run...");
-	}
-	PT_END(&pt);
-*/
 	PT_BEGIN(&pt);
 	while(true){
 		PT_TIMER_DELAY(&pt, 1000);

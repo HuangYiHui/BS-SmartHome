@@ -33,7 +33,7 @@ int Test1App::exeTask()
 		msg.data[0] = 0x01;
 		msg.data[1] = 0x02;
 		msg.data[2] = 0x03;
-		sendMsg(msg, TEST2_APP_ID);
+		sendMsg(msg, APP_ID_TEST2);
 
 		Serial.println("Test1 send...");
 	}

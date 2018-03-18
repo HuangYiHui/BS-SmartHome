@@ -2,7 +2,6 @@
 #define _BS_IAPP_H_
 
 #include "AppMsg.h"
-//#include "CurSystem.h"
 
 typedef unsigned char appState;
 

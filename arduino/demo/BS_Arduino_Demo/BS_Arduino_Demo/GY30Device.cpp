@@ -1,10 +1,11 @@
 #include "GY30Device.h"
 
-GY30Device::GY30Device()
+GY30Device::GY30Device(unsigned int sensorValueIndex) : SensorDevice(sensorValueIndex)
 {
 	state = DEVICE_STATE_CLOSED;
 }
 
+//注意，如果GY30的电源未接，程序可能卡在这里
 void GY30Device::init()
 {
 	Wire.begin(); //初始化I2C总线
@@ -14,8 +15,9 @@ void GY30Device::init()
 	state = DEVICE_STATE_READY;
 }
 
-unsigned int GY30Device::getLighteness()
+float GY30Device::getSensorValue()
 {
+	Serial.println("5555");
 	if(bhSensor.Read_I2C_To_Buffer() == 2)
 		return bhSensor.Get_Read_Lux();
 	else

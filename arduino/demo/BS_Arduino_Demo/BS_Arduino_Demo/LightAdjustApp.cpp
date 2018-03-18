@@ -11,14 +11,11 @@ LightAdjustApp::LightAdjustApp(unsigned int appID, GY30Device& gy30, LEDDevice& 
 
 void LightAdjustApp::init()
 {
-	gy30.ready();
-	gy30.start();
+	gy30.begin();
 
-	led1.ready();
-	led1.start();
+	led1.begin();
 
-	led2.ready();
-	led2.start();
+	led2.begin();
 
 	state = APP_STATE_READY;
 }
@@ -35,8 +32,8 @@ int LightAdjustApp::runTask()
 	{
 		PT_TIMER_DELAY(&pt,500);
 		Serial.print("lux :");
-		Serial.println(gy30.getLighteness());
-		if(gy30.getState() == DEVICE_STATE_WORKING && gy30.getLighteness() < 100)
+		Serial.println(gy30.getSensorValue());
+		if(gy30.getState() == DEVICE_STATE_WORKING && gy30.getSensorValue() < 100)
 		{
 			led1.light();
 			led2.light();

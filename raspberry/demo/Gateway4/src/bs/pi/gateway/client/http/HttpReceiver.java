@@ -64,7 +64,7 @@ public class HttpReceiver implements IReceiver {
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
-		rTread.interrupt();
+		//rTread.interrupt();
 	}
 
 	@Override

@@ -9,7 +9,7 @@ class DHT11Device : public SampleDevice, public DHT
 {
 public:
 	DHT11Device(devicePin pin);
-	void init();
+	void begin();
 };
 
 #endif

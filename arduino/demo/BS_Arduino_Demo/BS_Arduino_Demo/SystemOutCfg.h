@@ -12,15 +12,17 @@
 b0 - ef PiΩ·µ„
 f0 - ff ±£¡Ù
 */
-#define ZIGBEE_APP_ID			0x0070
-#define PM25_APP_ID				0x0071
-#define DHT11_APP_ID			0x0072
-#define FC28_APP_ID				0x0073
-#define LIGHT_ADJUST_APP_ID		0x0074
-#define DOORBELL_APP_ID			0x0075
+#define APP_ID_ZIGBEE			0x0070
+#define APP_ID_PM25				0x0071
+#define APP_ID_OUT_TEMPERATURE	0x0072
+#define APP_ID_OUT_HUMIDITY		0x0073
+#define APP_ID_OUT_HEAT			0x0074
+#define APP_ID_FC28				0x0075
+#define APP_ID_GY30				0x0078
 
-#define TEST1_APP_ID			0x00f4
-#define TEST2_APP_ID			0x00f1
-#define TEST3_APP_ID			0x00f6
+#define APP_ID_TEST1			0x00f4
+#define APP_ID_TEST2			0x00f1
+#define APP_ID_TEST3			0x00f6
+
 
 #endif

@@ -13,14 +13,18 @@ b0 - ef PiΩ·µ„
 f0 - ff ±£¡Ù
 */
 
-#define ZIGBEE_APP_ID			0x0030
-#define MQ2_APP_ID				0x0031
-#define DHT11_APP_ID			0x0032
-#define FIRESENSOR_APP_ID		0x0033
-#define IRREMOTE_APP_ID			0x0034
+#define APP_ID_ZIGBEE			0x0030
+#define APP_ID_IN_TEMPERATURE	0x0031
+#define APP_ID_IN_HUMIDITY		0x0032
+#define APP_ID_IN_HEAT			0x0033
 
-#define TEST1_APP_ID			0x00f0
-#define TEST2_APP_ID			0x00f1
-#define TEST3_APP_ID			0x00f2
+#define APP_ID_MQ2				0x0034
+#define APP_ID_DHT11			0x0035
+#define APP_ID_FIRESENSOR		0x0036
+#define APP_ID_IRREMOTE			0x0037
+
+#define APP_ID_TEST1			0x00f0
+#define APP_ID_TEST2			0x00f1
+#define APP_ID_TEST3			0x00f2
 
 #endif

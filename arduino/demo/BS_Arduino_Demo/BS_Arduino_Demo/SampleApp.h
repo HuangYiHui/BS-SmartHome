@@ -4,8 +4,11 @@
 #include "IApp.h"
 #include "LinkedList.h"
 #include "SystemAPI.h"
-extern SystemAPI API;
+#include "SystemCfg.h"
+#include "ZigbeeAppCmd.h"
+#include "Tool.h"
 
+extern SystemAPI API;
 class SampleApp : public IApp
 {
 public:
@@ -17,13 +20,14 @@ public:
 	virtual	void reset();
 	virtual appState getState();
 	virtual unsigned int getAppID();
-	virtual void sendMsg(AppMsg& msg, unsigned int appID);
 	virtual void receiveMsg(AppMsg& msg);
 
 protected:
 	appState state;
 	const unsigned int appID;
 	LinkedList<AppMsg*> msgList;
+	virtual void sendMsg(AppMsg& msg, unsigned int appID);
+	virtual void uploadDataByZigbee(AppMsg& msg);
 };
 
 #endif
