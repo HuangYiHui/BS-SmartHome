@@ -8,7 +8,7 @@
 class HeatSensorDevice : public SensorDevice
 {
 public:
-	HeatSensorDevice(DHT11Device& dht11, unsigned int sensorValueIndex);
+	HeatSensorDevice(unsigned int deviceID, DHT11Device& dht11, unsigned int sensorValueIndex);
 	void begin();
 	float getSensorValue();
 private:

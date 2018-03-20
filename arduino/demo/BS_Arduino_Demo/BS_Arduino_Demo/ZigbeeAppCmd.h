@@ -1,6 +1,30 @@
 #ifndef _BS_ZIGBEE_APP_CMD_H_
 #define _BS_ZIGBEE_APP_CMD_H_
 
+//上传数据命令，格式："2byte的命令头 + 2byte的上传项(upload index) + 数据(一般为4byte的float型数值)"
 #define CMD_UPLOAD_DATA 0x0001
+//UPLOAD_INDEX与平台的sensorID对应
+#define UPLOAD_INDEX_OUT_TEMPERATURE		0x0001
+#define UPLOAD_INDEX_OUT_HUMIDITY			0x0002
+#define UPLOAD_INDEX_OUT_HEAT				0x0003
+#define UPLOAD_INDEX_IN_TEMPERATURE			0x0004
+#define UPLOAD_INDEX_IN_HUMIDITY			0x0005
+#define UPLOAD_INDEX_IN_HEAT				0x0006
+#define UPLOAD_INDEX_SOLID_HUMIDITY			0x0007
+#define UPLOAD_INDEX_DUST_DENSITY			0x0008
+#define UPLOAD_INDEX_LIGHT_INTENSITY		0x0009
+#define UPLOAD_INDEX_HARMFUL_GAS			0x000a
+#define UPLOAD_INDEX_FIRE					0x000b
+
+//获取执行器回复命令，格式："2byte的命令头 + 2byte的目标appID + 2byte的执行器标志 + 1byte的执行器状态"
+#define CMD_RSPONSE_TO_GET_EXECUTER_STATUS	0x0002
+//执行器状态
+#define EXECUTER_STATUS_OPENED	0x01	//开启状态
+#define EXECUTER_STATUS_CLOSED	0x02	//关闭状态
+//执行器标志
+#define EXECUTER_INDEX_SWITCH1				0x0001
+#define EXECUTER_INDEX_SWITCH2				0x0002
+#define EXECUTER_INDEX_SWITCH3				0x0003
+#define EXECUTER_INDEX_SWITCH4				0x0004
 
 #endif

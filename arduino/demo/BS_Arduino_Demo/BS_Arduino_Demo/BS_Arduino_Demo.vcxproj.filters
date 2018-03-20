@@ -38,19 +38,10 @@
     <ClInclude Include="outPinDef.h">
       <Filter>driver</Filter>
     </ClInclude>
-    <ClInclude Include="TouchSensorDevice.h">
-      <Filter>driver</Filter>
-    </ClInclude>
     <ClInclude Include="SpeakerDevice.h">
       <Filter>driver</Filter>
     </ClInclude>
     <ClInclude Include="IRRemoteDevice.h">
-      <Filter>driver</Filter>
-    </ClInclude>
-    <ClInclude Include="LightAdjustApp.h">
-      <Filter>app</Filter>
-    </ClInclude>
-    <ClInclude Include="LedDevice.h">
       <Filter>driver</Filter>
     </ClInclude>
     <ClInclude Include="PM25Device.h">
@@ -73,15 +64,6 @@
     </ClInclude>
     <ClInclude Include="SystemInCfg.h">
       <Filter>system</Filter>
-    </ClInclude>
-    <ClInclude Include="Test3App.h">
-      <Filter>test</Filter>
-    </ClInclude>
-    <ClInclude Include="Test1App.h">
-      <Filter>test</Filter>
-    </ClInclude>
-    <ClInclude Include="Test2App.h">
-      <Filter>test</Filter>
     </ClInclude>
     <ClInclude Include="ZBC.h">
       <Filter>assist</Filter>
@@ -140,6 +122,12 @@
     <ClInclude Include="HarmfulGasAlarmApp.h">
       <Filter>app</Filter>
     </ClInclude>
+    <ClInclude Include="SimpleExecuterApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleExecuterAppCmd.h">
+      <Filter>app\appCmd</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="driver">
@@ -180,19 +168,10 @@
     <ClCompile Include="LCDDevice.cpp">
       <Filter>driver</Filter>
     </ClCompile>
-    <ClCompile Include="TouchSensorDevice.cpp">
-      <Filter>driver</Filter>
-    </ClCompile>
     <ClCompile Include="SpeakerDevice.cpp">
       <Filter>driver</Filter>
     </ClCompile>
     <ClCompile Include="IRRemoteDevice.cpp">
-      <Filter>driver</Filter>
-    </ClCompile>
-    <ClCompile Include="LightAdjustApp.cpp">
-      <Filter>app</Filter>
-    </ClCompile>
-    <ClCompile Include="LEDDevice.cpp">
       <Filter>driver</Filter>
     </ClCompile>
     <ClCompile Include="PM25Device.cpp">
@@ -203,15 +182,6 @@
     </ClCompile>
     <ClCompile Include="SystemAPI.cpp">
       <Filter>system</Filter>
-    </ClCompile>
-    <ClCompile Include="Test3App.cpp">
-      <Filter>test</Filter>
-    </ClCompile>
-    <ClCompile Include="Test1App.cpp">
-      <Filter>test</Filter>
-    </ClCompile>
-    <ClCompile Include="Test2App.cpp">
-      <Filter>test</Filter>
     </ClCompile>
     <ClCompile Include="ZBC.cpp">
       <Filter>assist</Filter>
@@ -256,6 +226,9 @@
       <Filter>app</Filter>
     </ClCompile>
     <ClCompile Include="HarmfulGasAlarmApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleExecuterApp.cpp">
       <Filter>app</Filter>
     </ClCompile>
   </ItemGroup>

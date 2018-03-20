@@ -1,7 +1,0 @@
-package bs.pi.gateway.Msg;
-
-public interface IMsg {
-
-	public String getName();
-	
-}

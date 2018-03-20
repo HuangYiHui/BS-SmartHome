@@ -3,7 +3,7 @@
 //因为IRremote库与Tone库冲突，这里选择性编译
 #ifndef CUR_SYSTEM_IN
 
-SpeakerDevice::SpeakerDevice(devicePin pin)
+SpeakerDevice::SpeakerDevice(unsigned int deviceID, devicePin pin) : SampleDevice(deviceID)
 {
 	this->pin = pin;
 }

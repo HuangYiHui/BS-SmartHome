@@ -15,17 +15,28 @@ CUR_SYSTEM_OUT	- 表示当前系统为室外的
 
 void setup() {
 
-//	curSystem.installApp(&zigbeeApp);
-//	curSystem.installApp(&test2App);
+	temperatureApp->setUploadInterval(4000);
+	curSystem.installApp(temperatureApp);
+
+	humidityApp->setUploadInterval(5000);
+	curSystem.installApp(humidityApp);
+
+	heatApp->setUploadInterval(6000);
+	curSystem.installApp(heatApp);
+
+	curSystem.installApp(zigbeeApp);
+
+//	curSystem.installApp(&switch1App);
+//	curSystem.installApp(&fireAlarmApp);
+	
 //	curSystem.installApp(&test3App);
 
 	//设备初始化
 	Serial.begin(SERAIL_BAUD_RATE);
-	lcd.begin();
-	alarm.begin();
 	zigbee.setZDType(CUR_ZB_DEVICE_TYPE);
-
-	lcd.print("lcd print...");
+//	lcd.begin();
+//	alarm.begin();
+//	lcd.print("lcd print...");
 
 	curSystem.init();
 }

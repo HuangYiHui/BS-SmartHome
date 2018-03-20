@@ -110,10 +110,10 @@ private:
 	int readByte();
 
 public:
-	ZigbeeDevice();
-	ZigbeeDevice(ZBCfg& cfg);
-	ZigbeeDevice(ZBAppReg* appRegs, unsigned int count);
-	ZigbeeDevice(ZBCfg& cfg, ZBAppReg* appRegs, unsigned int appRegCount);
+	ZigbeeDevice(unsigned int deviceID);
+	ZigbeeDevice(unsigned int deviceID, ZBCfg& cfg);
+	ZigbeeDevice(unsigned int deviceID, ZBAppReg* appRegs, unsigned int count);
+	ZigbeeDevice(unsigned int deviceID, ZBCfg& cfg, ZBAppReg* appRegs, unsigned int appRegCount);
 	~ZigbeeDevice();
 	void setChannel(unsigned char channel[4]);
 	void setPANID(unsigned char panID[2]);

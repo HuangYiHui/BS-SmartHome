@@ -1,6 +1,0 @@
-package bs.pi.gateway.main;
-
-public class Msg {
-	
-	public final static String K_CMD_NAME = "CmdName";
-}

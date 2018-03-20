@@ -86,15 +86,17 @@
     <ClCompile Include="ZBC.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Base.h" />
     <ClInclude Include="Tool.h" />
     <ClInclude Include="ZBC.h" />
+    <ClInclude Include="__vm\.test1.vsarduino.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties arduino.upload.port="COM6" />
+      <UserProperties arduino.upload.port="COM3" debug.view.FreeMemory="1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

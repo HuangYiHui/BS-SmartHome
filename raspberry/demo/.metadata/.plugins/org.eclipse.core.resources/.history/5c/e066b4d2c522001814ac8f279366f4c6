@@ -1,9 +1,0 @@
-package bs.pi.gateway.client;
-
-import java.util.HashMap;
-
-public interface ISender {
-
-	public String getName();
-	public HashMap<String, Object> send(HashMap<String, Object> msg);  
-}

@@ -13,7 +13,7 @@
 class IRRemoteDevice : public SampleDevice, public IRrecv
 {
 public:
-	IRRemoteDevice(devicePin pin);
+	IRRemoteDevice(unsigned int deviceID, devicePin pin);
 	void init();
 };
 

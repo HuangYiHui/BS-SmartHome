@@ -1,6 +1,0 @@
-package bs.pi.gateway.client.zigbee;
-
-public class ZigbeeMsg {
-
-	public final static String K_DESTINATION_ADDRESS = "DestinationAddress";
-}

@@ -1,7 +1,7 @@
 #include "TemperatureSensorDevice.h"
 
-TemperatureSensorDevice::TemperatureSensorDevice(DHT11Device& dht11,unsigned int sensorValueIndex) : 
-	SensorDevice(sensorValueIndex),
+TemperatureSensorDevice::TemperatureSensorDevice(unsigned int deviceID, DHT11Device& dht11,unsigned int sensorValueIndex) : 
+	SensorDevice(deviceID, sensorValueIndex),
 	dht11(dht11)
 {
 	state = DEVICE_STATE_CLOSED;

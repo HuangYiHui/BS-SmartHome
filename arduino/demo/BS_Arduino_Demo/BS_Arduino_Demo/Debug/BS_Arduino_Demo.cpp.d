@@ -13,16 +13,16 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\BS_Arduino_Demo.cpp.o: \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard/pins_arduino.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\CurSystem.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemCfg.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOutCfg.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemInCfg.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleSystem.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ISystem.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IApp.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\AppMsg.h \
  D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemAPI.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\outPinDef.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\inPinDef.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeDevice.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\LCDDevice.h \
@@ -30,19 +30,19 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\BS_Arduino_Demo.cpp.o: \
  D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Display_Mode.h \
  D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Mux_Rate.h \
  D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Cursor.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SimpleSensorDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SensorDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\DHT11Device.h \
  D:\software1\arduino-1.8.5\libraries\DHT_sensor/DHT.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\TemperatureSensorDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\HumiditySensorDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\HeatSensorDevice.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\GY30Device.h \
- D:\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src/Wire.h \
- D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Stream.h \
- D:\software1\arduino-1.8.5\libraries\BH1750xtra/BH1750xtra.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\PM25Device.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeOutApp.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SimpleSensorDevice.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SimpleExecuterDevice.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IRRemoteDevice.h \
+ D:\software1\arduino-1.8.5\libraries\IRremote/IRremote.h \
+ D:\software1\arduino-1.8.5\libraries\IRremote/IRremoteInt.h \
+ D:\software1\arduino-1.8.5\libraries\IRremote/boarddefs.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeInApp.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \
@@ -55,4 +55,8 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\BS_Arduino_Demo.cpp.o: \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Debugger.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SensorApp.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SensorAppCmd.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\AppCmd.h
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\AppCmd.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SimpleExecuterApp.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SimpleExecuterAppCmd.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FireAlarmApp.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IRRemoteApp.h

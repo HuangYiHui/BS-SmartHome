@@ -4,31 +4,47 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import com.test.Debugger;
-
 import bs.pi.gateway.assist.Tool;
 import bs.pi.gateway.main.IConverter;
 import bs.pi.gateway.msg.IMsg;
+import bs.pi.gateway.msg.OtherZigbeeConnectedMsg;
 import bs.pi.gateway.msg.PortMsgReceivedMsg;
 import bs.pi.gateway.msg.SendMsgToAppMsg;
 import bs.pi.gateway.msg.UploadDataToHttpServerMsg;
-import bs.pi.gateway.msg.OtherZigbeeConnectedMsg;
 
 public class ZigbeeConverter implements IConverter {
 	
 	
 	private final short CMD_UPLAOD_DATA = 0x0001;
 	
-	//这里的UPLOAD_INDEX要与arduino的对应
-	private final short UPLOAD_INDEX_OUT_TEMPERATURE = 0x0001;
-	private final short UPLOAD_INDEX_OUT_HUMIDITY = 0x0002;
-	private final short UPLOAD_INDEX_OUT_HEAT = 0x0003;
-	private final short UPLOAD_INDEX_IN_TEMPERATURE = 0x0004;
-	private final short UPLOAD_INDEX_IN_HUMIDITY = 0x0005;
-	private final short UPLOAD_INDEX_IN_HEAT = 0x0006;
-	private final short UPLOAD_INDEX_SOLID_HUMIDITY = 0x0007;
-	private final short UPLOAD_INDEX_DUST_DENSITY = 0x0008;
-	private final short UPLOAD_INDEX_LIGHT_INTENSITY = 0x0009;
+	//这里的UPLOAD_DATA_INDEX要与arduino的对应
+	private final short UPLOAD_DATA_INDEX_SENSOR_VALUE = 0x0001;
+	
+	
+	//设备ID要与Arduino的SystemCfg.h中的设备ID一致
+	//室内设备
+	private final short DEVICE_ID_IN_ZIGBEE				= 0x0030;
+	private final short DEVICE_ID_IN_DHT11				= 0x0031;
+	private final short DEVICE_ID_IN_TEMPERATURE_SENSOR	= 0x0032;
+	private final short DEVICE_ID_IN_HUMIDITY_SENSOR	= 0x0033;
+	private final short DEVICE_ID_IN_HEAT_SENSOR		= 0x0034;
+	private final short DEVICE_ID_HARMFUL_GAS_SENSOR	= 0x0035;
+	private final short DEVICE_ID_SWITCH1				= 0x0036;
+	private final short DEVICE_ID_SWITCH2				= 0x0037;
+	private final short DEVICE_ID_SWITCH3				= 0x0038;
+	private final short DEVICE_ID_SWITCH4				= 0x0039;
+	private final short DEVICE_ID_LCD					= 0x003a;
+	private final short DEVICE_ID_ALARM					= 0x003b;
+	private final short DEVICE_ID_FIRE_SENSOR			= 0x003c;
+	private final short DEVICE_ID_IR_REMOTE				= 0x003d;
+	
+	//室外设备
+	private final short DEVICE_ID_OUT_TEMPERATURE_SENSOR	= 0x0032;
+	private final short DEVICE_ID_OUT_HUMIDITY_SENSOR		= 0x0033;
+	private final short DEVICE_ID_OUT_HEAT_SENSOR			= 0x0034;
+	private final short DEVICE_ID_SOLID_HUMIDITY_SENSOR		= 0x0034;
+	private final short DEVICE_ID_DUST_DENSITY_SENSOR		= 0x0034;
+	private final short DEVICE_ID_LIGHT_INTENSITY_SENSOR	= 0x0034;
 	
 	private byte[] dstAddr1;
 	private byte[] dstAddr2;
@@ -84,19 +100,16 @@ public class ZigbeeConverter implements IConverter {
 	private IMsg resolveUplaodDataToHttpServerMsg(byte[] data){
 		if(data == null || data.length<3)
 			return null;
-		short uploadItem = (short) (data[0] + data[1] * 256);
-		if( uploadItem == UPLOAD_INDEX_OUT_TEMPERATURE ||
-			uploadItem == UPLOAD_INDEX_OUT_HUMIDITY || 
-			uploadItem == UPLOAD_INDEX_OUT_HEAT ||
-			uploadItem == UPLOAD_INDEX_IN_TEMPERATURE ||
-			uploadItem == UPLOAD_INDEX_IN_HUMIDITY || 
-			uploadItem == UPLOAD_INDEX_IN_HEAT ||
-			uploadItem == UPLOAD_INDEX_SOLID_HUMIDITY ||
-			uploadItem == UPLOAD_INDEX_DUST_DENSITY ||
-			uploadItem == UPLOAD_INDEX_LIGHT_INTENSITY
-		){
+		short uploadIndex = (short) (data[0] + data[1] * 256);
+		//上传传感器数据
+		if(uploadIndex == UPLOAD_DATA_INDEX_SENSOR_VALUE)
+		{
+			if(data.length<8)
+				return null;
+			
+			short deviceID = (short) (data[2] + data[3] * 256);
 			byte[] valueBytes = new byte[4];
-			System.arraycopy(data, 2, valueBytes, 0, 4);
+			System.arraycopy(data, 4, valueBytes, 0, 4);
 			float value;
 			try {
 				value = Tool.bytesToFloat(valueBytes);
@@ -106,20 +119,27 @@ public class ZigbeeConverter implements IConverter {
 			}
 			UploadDataToHttpServerMsg msg = new UploadDataToHttpServerMsg();
 			msg.setSensorValue(value);
-			if(uploadItem == UPLOAD_INDEX_OUT_TEMPERATURE)
+			if(deviceID == DEVICE_ID_IN_TEMPERATURE_SENSOR)
+				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_IN_TEMPERATURE);
+			else if(deviceID == DEVICE_ID_IN_HUMIDITY_SENSOR)
+				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_IN_HUMIDITY);
+			else if(deviceID == DEVICE_ID_IN_HEAT_SENSOR)
+				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_IN_HEAT);
+			else if(deviceID == DEVICE_ID_OUT_TEMPERATURE_SENSOR)
 				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_OUT_TEMPERATURE);
-			else if(uploadItem == UPLOAD_INDEX_OUT_HUMIDITY)
+			else if(deviceID == DEVICE_ID_OUT_HUMIDITY_SENSOR)
 				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_OUT_HUMIDITY);
-			else if(uploadItem == UPLOAD_INDEX_OUT_HEAT)
+			else if(deviceID == DEVICE_ID_OUT_HEAT_SENSOR)
 				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_OUT_HEAT);
-			else if(uploadItem == UPLOAD_INDEX_SOLID_HUMIDITY)
+			else if(deviceID == DEVICE_ID_SOLID_HUMIDITY_SENSOR)
 				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_SOLID_HUMIDITY);
-			else if(uploadItem == UPLOAD_INDEX_DUST_DENSITY)
+			else if(deviceID == DEVICE_ID_DUST_DENSITY_SENSOR)
 				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_DUST_DENSITY);
-			else if(uploadItem == UPLOAD_INDEX_LIGHT_INTENSITY)
+			else if(deviceID == DEVICE_ID_LIGHT_INTENSITY_SENSOR)
 				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_LIGHT_INTENSITY);
 			return msg;
 		}
+		
 		return null;
 	}
 

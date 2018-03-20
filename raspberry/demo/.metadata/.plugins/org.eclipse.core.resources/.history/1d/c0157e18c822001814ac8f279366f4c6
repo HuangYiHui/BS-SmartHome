@@ -1,8 +1,0 @@
-package bs.pi.gateway.receiver;
-
-import java.util.HashMap;
-
-public interface IReceivedListener {
-	
-	public void handleEvent(HashMap<String, Object> msg);
-}

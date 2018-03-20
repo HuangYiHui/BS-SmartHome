@@ -1,6 +1,6 @@
 #include "SimpleSensorDevice.h"
 
-SimpleSensorDevice::SimpleSensorDevice(devicePin pin, unsigned char readMode, unsigned int sensorValueIndex) : SensorDevice(sensorValueIndex)
+SimpleSensorDevice::SimpleSensorDevice(unsigned int deviceID, devicePin pin, unsigned char readMode, unsigned int sensorValueIndex) : SensorDevice(deviceID, sensorValueIndex)
 {
 	this->pin = pin;
 	this->readMode = readMode;

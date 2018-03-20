@@ -27,9 +27,6 @@ void ZigbeeOutApp::init()
 
 	zigbee.begin();
 
-	//调试用
-	pinMode(13, OUTPUT);
-
 	state = APP_STATE_READY;
 }
 
@@ -69,8 +66,10 @@ void ZigbeeOutApp::prcAppMsg()
 	//数据上传
 	if(CMD_UPLOAD_DATA == cmd){
 		//CMD_UPLOAD_DATA命令，除了2个byte的cmd外，后两个字节作数据上传项标志,数据至少1个byte,所以要大于5个byte
-		if(msg->len < 5)
+		if(msg->len < 5){
+			delete msg;
 			return;
+		}
 		ZBPacketSend packet;
 		packet.dstAddr[0] = 0x00;
 		packet.dstAddr[1] = 0x00;

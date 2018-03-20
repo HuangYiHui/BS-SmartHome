@@ -22,13 +22,15 @@ CUR_SYSTEM_OUT	- 表示当前系统为室外的
 #include "HumiditySensorDevice.h"
 #include "HeatSensorDevice.h"
 #include "SimpleSensorDevice.h"
-#include "LCDDevice.h"
 #include "SimpleExecuterDevice.h"
+
+#include "LCDDevice.h"
 #include "IRRemoteDevice.h"
 
 #include "ZigbeeInApp.h"
 #include "SensorApp.h"
-#include "FireSensorApp.h"
+#include "SimpleExecuterApp.h"
+#include "FireAlarmApp.h"
 #include "IRRemoteApp.h"
 
 #include "SensorAppCmd.h"
@@ -39,21 +41,33 @@ CUR_SYSTEM_OUT	- 表示当前系统为室外的
 #include "Test3App.h"
 */
 
-ZigbeeDevice zigbee;
-DHT11Device dht11(PIN_DHT11_DATA);
-TemperatureSensorDevice temperatureSensor(dht11, UPLOAD_INDEX_IN_TEMPERATURE);
-HumiditySensorDevice humiditySensor(dht11, UPLOAD_INDEX_IN_HUMIDITY);
-HeatSensorDevice heatSensor(dht11, UPLOAD_INDEX_IN_HEAT);
-SimpleSensorDevice mq2(PIN_MQ2_DO, SENSOR_READ_MODE_ANALOG, UPLOAD_INDEX_HARMFUL_GAS);
-LCDDevice lcd(PIN_NOKIA5110_RST, PIN_NOKIA5110_CE, PIN_NOKIA5110_DC, PIN_NOKIA5110_DIN, PIN_NOKIA5110_CLK);
-SimpleExecuterDevice alarm(PIN_ALARM_OUT, LOGIC_LEVEL_OPEN_HIGH);
-SimpleSensorDevice fireSensor(PIN_FIRE_SENSOR_DO, SENSOR_READ_MODE_DIGITAL, UPLOAD_INDEX_FIRE);
-IRRemoteDevice irRemote(PIN_IR_REMOTE_OUT);
+ZigbeeDevice zigbee(DEVICE_ID_ZIGBEE);
+DHT11Device dht11(DEVICE_ID_IN_DHT11, PIN_DHT11_DATA);
+TemperatureSensorDevice temperatureSensor(DEVICE_ID_IN_TEMPERATURE_SENSOR, dht11, UPLOAD_INDEX_IN_TEMPERATURE);
+HumiditySensorDevice humiditySensor(DEVICE_ID_IN_HUMIDITY_SENSOR, dht11, UPLOAD_INDEX_IN_HUMIDITY);
+HeatSensorDevice heatSensor(DEVICE_ID_IN_HEAT_SENSOR, dht11, UPLOAD_INDEX_IN_HEAT);
+/*
+SimpleExecuterDevice switch1(DEVICE_ID_SWITCH1, PIN_SWITCH1_OUT, LOGIC_LEVEL_OPEN_HIGH);
+SimpleExecuterDevice switch2(DEVICE_ID_SWITCH2, PIN_SWITCH2_OUT, LOGIC_LEVEL_OPEN_HIGH);
+SimpleExecuterDevice switch3(DEVICE_ID_SWITCH3, PIN_SWITCH3_OUT, LOGIC_LEVEL_OPEN_HIGH);
+SimpleExecuterDevice switch4(DEVICE_ID_SWITCH4, PIN_SWITCH4_OUT, LOGIC_LEVEL_OPEN_HIGH);
+*/
+SimpleExecuterDevice alarm(DEVICE_ID_ALARM, PIN_ALARM_OUT, LOGIC_LEVEL_OPEN_HIGH);
+SimpleSensorDevice mq2(DEVICE_ID_HARMFUL_GAS_SENSOR, PIN_MQ2_DO, SENSOR_READ_MODE_ANALOG, UPLOAD_INDEX_HARMFUL_GAS);
+SimpleSensorDevice fireSensor(DEVICE_ID_FIRE_SENSOR, PIN_FIRE_SENSOR_DO, SENSOR_READ_MODE_DIGITAL, UPLOAD_INDEX_FIRE);
+LCDDevice lcd(DEVICE_ID_LCD, PIN_NOKIA5110_RST, PIN_NOKIA5110_CE, PIN_NOKIA5110_DC, PIN_NOKIA5110_DIN, PIN_NOKIA5110_CLK);
+IRRemoteDevice irRemote(DEVICE_ID_IR_REMOTE, PIN_IR_REMOTE_OUT);
 
-ZigbeeInApp zigbeeApp(APP_ID_ZIGBEE, zigbee);
-SensorApp temperatureApp(APP_ID_IN_TEMPERATURE, temperatureSensor);
-SensorApp humidityApp(APP_ID_IN_HUMIDITY, humiditySensor);
-SensorApp heatApp(APP_ID_IN_HEAT, heatSensor);
+SensorApp* temperatureApp = new SensorApp(APP_ID_IN_TEMPERATURE, temperatureSensor);
+SensorApp* humidityApp = new SensorApp(APP_ID_IN_HUMIDITY, humiditySensor);
+SensorApp* heatApp = new SensorApp(APP_ID_IN_HEAT, heatSensor);
+/*
+SimpleExecuterApp switch1App(APP_ID_SWITCH1, switch1);
+SimpleExecuterApp switch2App(APP_ID_SWITCH2, switch2);
+SimpleExecuterApp switch3App(APP_ID_SWITCH3, switch3);
+SimpleExecuterApp switch4App(APP_ID_SWITCH4, switch4);*/
+FireAlarmApp fireAlarmApp(APP_ID_FIRE_ALARM, fireSensor, alarm);
+ZigbeeInApp* zigbeeApp = new ZigbeeInApp(APP_ID_ZIGBEE, zigbee);
 
 //Test2App test2App(0x78);
 //Test3App test3App(APP_ID_TEST3);

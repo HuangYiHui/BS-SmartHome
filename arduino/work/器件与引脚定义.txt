@@ -46,15 +46,15 @@ a4,a5(I2C)
 2	室内温湿度传感器DATA脚
 3*	nokia5110_PIN_SCLK
 4	nokia5110_PIN_SDIN
-5*	nokia5110_PIN_SDIN 
+5*	nokia5110_PIN_SDIN
 6*	nokia5110_PIN_RESET
 7	nokia5110_PIN_SCE
-8	智能插座3
-9*	红外遥控传感器
-10*	报警器
+8	智能插座1
+9*	智能插座2
+10*	智能插座3
 11*	智能插座4
-12	智能插座2
-13	智能插座1
+12	报警器
+13	红外遥控传感器
 a0	
 a1	
 a2	火焰传感器

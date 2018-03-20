@@ -1,5 +1,0 @@
-package bs.pi.gateway.sender;
-
-public interface ISender {
-
-}

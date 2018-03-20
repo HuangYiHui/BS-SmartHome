@@ -1,7 +1,7 @@
 #include "HumiditySensorDevice.h"
 
-HumiditySensorDevice::HumiditySensorDevice(DHT11Device& dht11,unsigned int sensorValueIndex) : 
-	SensorDevice(sensorValueIndex),
+HumiditySensorDevice::HumiditySensorDevice(unsigned int deviceID, DHT11Device& dht11,unsigned int sensorValueIndex) : 
+	SensorDevice(deviceID, sensorValueIndex),
 	dht11(dht11)
 {
 	state = DEVICE_STATE_CLOSED;

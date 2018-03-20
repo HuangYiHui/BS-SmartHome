@@ -1,6 +1,0 @@
-package bs.pi.gateway.receiver;
-
-public class PortReceiver implements IReceiver {
-	
-	private InputStream iStream;
-}

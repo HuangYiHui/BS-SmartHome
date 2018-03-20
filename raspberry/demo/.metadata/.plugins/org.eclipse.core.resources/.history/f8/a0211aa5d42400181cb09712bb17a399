@@ -1,7 +1,0 @@
-package bs.pi.gateway.main;
-
-import java.util.HashMap;
-
-public interface IReceivedListener {
-	public void handleEvent(IMsg msg);
-}

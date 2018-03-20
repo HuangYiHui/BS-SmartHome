@@ -1,6 +1,6 @@
 #include "GY30Device.h"
 
-GY30Device::GY30Device(unsigned int sensorValueIndex) : SensorDevice(sensorValueIndex)
+GY30Device::GY30Device(unsigned int deviceID, unsigned int sensorValueIndex) : SensorDevice(deviceID, sensorValueIndex)
 {
 	state = DEVICE_STATE_CLOSED;
 }

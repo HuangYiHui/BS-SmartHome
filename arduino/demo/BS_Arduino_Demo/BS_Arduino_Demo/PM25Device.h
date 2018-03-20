@@ -9,7 +9,7 @@
 class PM25Device : public SensorDevice
 {
 public:
-	PM25Device(devicePin ledPin, devicePin voPin, unsigned int sensorValueIndex);
+	PM25Device(unsigned int deviceID, devicePin ledPin, devicePin voPin, unsigned int sensorValueIndex);
 	void init();
 	float getSensorValue();
 

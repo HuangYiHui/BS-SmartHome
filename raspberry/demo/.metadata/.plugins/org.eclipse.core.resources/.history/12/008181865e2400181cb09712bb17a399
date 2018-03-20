@@ -1,5 +1,0 @@
-package bs.pi.gateway.client.zigbee;
-
-public class ZigbeeMsg {
-
-}

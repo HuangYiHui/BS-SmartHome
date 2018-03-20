@@ -8,7 +8,7 @@
 class DHT11Device : public SampleDevice, public DHT
 {
 public:
-	DHT11Device(devicePin pin);
+	DHT11Device(unsigned int deviceID, devicePin pin);
 	void begin();
 };
 

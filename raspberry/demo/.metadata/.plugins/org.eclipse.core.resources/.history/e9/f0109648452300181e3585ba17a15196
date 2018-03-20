@@ -1,9 +1,0 @@
-package bs.pi.gateway.converter;
-
-import java.util.HashMap;
-
-public interface IConverter {
-	
-	public HashMap<String, Object> convertMsgReceive(HashMap<String, Object> msg);
-	public HashMap<String, Object> convertMsgSend(HashMap<String, Object> msg);
-}

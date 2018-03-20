@@ -6,7 +6,7 @@
 class SensorDevice : public SampleDevice
 {
 public:
-	SensorDevice(unsigned int sensorValueIndex);
+	SensorDevice(unsigned int deviceID, unsigned int sensorValueIndex);
 	virtual float getSensorValue() = 0;
 	unsigned int getSensorValueIndex();
 private:

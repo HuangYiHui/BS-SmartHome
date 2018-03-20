@@ -1,5 +1,0 @@
-package bs.pi.gateway.converter;
-
-public class ZigbeeConverter implements IConverter {
-
-}

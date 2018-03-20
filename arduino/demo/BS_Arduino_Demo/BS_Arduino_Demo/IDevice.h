@@ -25,6 +25,7 @@ public:
 	virtual void reset() = 0;	//重置，-> 未准备状态
 	virtual void close() = 0;	//关闭，已准备状态 -> 关闭状态
 	virtual deviceState getState() = 0;	//获取状态
+	virtual unsigned int getDeviceID() = 0;
 };
 
 #endif

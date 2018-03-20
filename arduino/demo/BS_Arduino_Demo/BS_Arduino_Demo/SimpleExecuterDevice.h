@@ -15,14 +15,16 @@
 class SimpleExecuterDevice : public SampleDevice
 {
 public:
-	SimpleExecuterDevice(devicePin pin, unsigned char logicLevelOpen);
+	SimpleExecuterDevice(unsigned int deviceID, devicePin pin, unsigned char logicLevelOpen);
 	void init();
-	void openSwitch();
-	void closeSwitch();
+	void openExecuter();
+	void closeExecuter();
+	bool isOpened();
 
 private:
 	devicePin pin;
 	unsigned char logicLevelOpen;
+	bool isSwitchOpened;
 };
 
 #endif

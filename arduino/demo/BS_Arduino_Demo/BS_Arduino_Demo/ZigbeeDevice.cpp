@@ -1,18 +1,18 @@
 #include "ZigbeeDevice.h"
 
-ZigbeeDevice::ZigbeeDevice()
+ZigbeeDevice::ZigbeeDevice(unsigned int deviceID) : SampleDevice(deviceID)
 {
 	receiveTimeout = 300;
 	state = DEVICE_STATE_CLOSED;
 }
 
-ZigbeeDevice::ZigbeeDevice(ZBCfg& cfg)
+ZigbeeDevice::ZigbeeDevice(unsigned int deviceID, ZBCfg& cfg) : SampleDevice(deviceID)
 {
 	this->cfg.clone(cfg);
 	state = DEVICE_STATE_CLOSED;
 }
 
-ZigbeeDevice::ZigbeeDevice(ZBAppReg* appRegs, unsigned int count)
+ZigbeeDevice::ZigbeeDevice(unsigned int deviceID, ZBAppReg* appRegs, unsigned int count) : SampleDevice(deviceID)
 {
 	this->appRegCount = count;
 	this->appRegs = new ZBAppReg[count];
@@ -23,7 +23,7 @@ ZigbeeDevice::ZigbeeDevice(ZBAppReg* appRegs, unsigned int count)
 	state = DEVICE_STATE_CLOSED;
 }
 
-ZigbeeDevice::ZigbeeDevice(ZBCfg& cfg, ZBAppReg* appRegs, unsigned int appRegCount)
+ZigbeeDevice::ZigbeeDevice(unsigned int deviceID, ZBCfg& cfg, ZBAppReg* appRegs, unsigned int appRegCount) : SampleDevice(deviceID)
 {
 	this->cfg.clone(cfg);
 	this->appRegCount = appRegCount;
@@ -118,16 +118,16 @@ void ZigbeeDevice::init()
 	Serial.write((byte*)ZBC::CMD_ZDO_DIRECT_CB.cmd, ZBC::CMD_ZDO_DIRECT_CB.len);
 	delay(500);
 	//rec(300);
-
+	
 	//×¢²áÓ¦ÓÃ
 	for(unsigned int i=0;i<appRegCount;i++)
 	{
-		//Serial.println("------register--------");
 		ZBCmd registerAppCmd;
 		ZBC::appRegister(appRegs[i], &registerAppCmd);
-		Serial.write((byte*)registerAppCmd.cmd, registerAppCmd.len);
+//		Serial.write((byte*)registerAppCmd.cmd, registerAppCmd.len);
 		delay(500);
 	}
+
 	//rec(300);
 
 	state = DEVICE_STATE_READY;

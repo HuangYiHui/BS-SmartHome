@@ -2,8 +2,7 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FireAlarmApp.cpp.o: \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FireAlarmApp.cpp \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FireAlarmApp.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemCfg.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOutCfg.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemInCfg.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleApp.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IApp.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\AppMsg.h \
@@ -26,4 +25,5 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\FireAlarmApp.cpp.o: \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SimpleSensorDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SensorDevice.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleDevice.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IDevice.h
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\IDevice.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SimpleExecuterDevice.h

@@ -4,14 +4,16 @@
 #include "SystemCfg.h"
 #include "SampleApp.h"
 #include "SimpleSensorDevice.h"
+#include "SimpleExecuterDevice.h"
 
 class FireAlarmApp : public SampleApp
 {
 public:
-	FireAlarmApp(unsigned int appID, SimpleSensorDevice& fireSensor);
+	FireAlarmApp(unsigned int appID, SimpleSensorDevice& fireSensor, SimpleExecuterDevice& alarm);
 	void init();
 	void run();
 private:
 	SimpleSensorDevice& fireSensor;
+	SimpleExecuterDevice& alarm;
 };
 #endif

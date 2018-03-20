@@ -1,5 +1,0 @@
-package bs.pi.gateway.Msg;
-
-public interface Msg {
-
-}

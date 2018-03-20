@@ -7,6 +7,7 @@
 #include "SampleApp.h"
 #include "Debugger.h"
 #include "SystemCfg.h"
+#include "ZigbeeAppCmd.h"
 
 #define ZB_REG_ENDPOINT	0x55
 #define ZB_REG_APP_PROF_ID0	0x00
@@ -31,11 +32,11 @@ public:
 	ZigbeeInApp(unsigned int appID, ZigbeeDevice& zigbee);
 	void init();
 	void run();
-	int exeTask();
 private:
+	void prcAppMsg();
+	void receiveZigbeeMsg();
 	unsigned char zbPacketTransID;
 	ZigbeeDevice& zigbee;
-	struct pt pt;
 };
 
 #endif

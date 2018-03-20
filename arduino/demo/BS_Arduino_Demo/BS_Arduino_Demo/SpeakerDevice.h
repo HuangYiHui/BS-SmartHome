@@ -12,7 +12,7 @@
 class SpeakerDevice : public SampleDevice
 {
 public:
-	SpeakerDevice(devicePin pin);
+	SpeakerDevice(unsigned int deviceID, devicePin pin);
 	void init();
 	void speak(unsigned int frequency, unsigned long duration);
 	void noSpeak();

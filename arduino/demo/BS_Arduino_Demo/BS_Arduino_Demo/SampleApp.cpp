@@ -54,6 +54,11 @@ void SampleApp::receiveMsg(AppMsg& msg)
 	msgList.add(new AppMsg(msg));
 }
 
+void SampleApp::sendMsgToZigbee(AppMsg& msg)
+{
+	API.sendAppMsg(msg, APP_ID_ZIGBEE);
+}
+
 void SampleApp::uploadDataByZigbee(AppMsg& msg)
 {
 	if(msg.len<1)
@@ -67,5 +72,5 @@ void SampleApp::uploadDataByZigbee(AppMsg& msg)
 	for(int i=0;i<msg.len;i++){
 		zigbeeMsg.data[i+2] = msg.data[i];
 	}
-	API.sendAppMsg(zigbeeMsg, APP_ID_ZIGBEE);
+	sendMsgToZigbee(zigbeeMsg);
 }

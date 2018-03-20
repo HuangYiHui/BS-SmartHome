@@ -18,7 +18,6 @@ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SampleApp.cpp.o: \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemAPI.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ISystem.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemCfg.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZBC.h \
- D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemOutCfg.h \
+ D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\SystemInCfg.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\ZigbeeAppCmd.h \
  D:\software\Temp\VMBuilds\BS_Arduino_Demo\uno\Debug\Tool.h

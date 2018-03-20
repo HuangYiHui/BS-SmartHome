@@ -27,6 +27,7 @@ protected:
 	const unsigned int appID;
 	LinkedList<AppMsg*> msgList;
 	virtual void sendMsg(AppMsg& msg, unsigned int appID);
+	virtual void sendMsgToZigbee(AppMsg& msg);
 	virtual void uploadDataByZigbee(AppMsg& msg);
 };
 

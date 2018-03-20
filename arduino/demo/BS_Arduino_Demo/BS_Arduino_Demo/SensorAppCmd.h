@@ -3,23 +3,14 @@
 
 #include "AppCmd.h"
 
+//单次获取传感器数据命令，格式："2byte命令头"
 #define CMD_UPLOAD_SENSOR_VALUE				0x0031
+//开启周期性上传数据命令，格式："2byte命令头"
 #define CMD_CIRCULARLY_UPLOAD_SENSOR_VALUE	0x0032
+//停止周期性上传数据命令，格式："2byte命令头"
 #define CMD_STOP_UPLOAD_SENSOR_VALUE		0x0033
-#define CMD_SET_CIRCULARLY_UPLOAD_INTERVAL	0x0034	//带2个byte参数，表示unsigned int的interval数值
-
-//UPLOAD_INDEX与平台的sensorID对应
-#define UPLOAD_INDEX_OUT_TEMPERATURE		0x0001
-#define UPLOAD_INDEX_OUT_HUMIDITY			0x0002
-#define UPLOAD_INDEX_OUT_HEAT				0x0003
-#define UPLOAD_INDEX_IN_TEMPERATURE			0x0004
-#define UPLOAD_INDEX_IN_HUMIDITY			0x0005
-#define UPLOAD_INDEX_IN_HEAT				0x0006
-#define UPLOAD_INDEX_SOLID_HUMIDITY			0x0007
-#define UPLOAD_INDEX_DUST_DENSITY			0x0008
-#define UPLOAD_INDEX_LIGHT_INTENSITY		0x0009
-#define UPLOAD_INDEX_HARMFUL_GAS			0x000a
-#define UPLOAD_INDEX_FIRE					0x000b
+//设置上传传感器数值的时间间隔，格式："2byte命令头 + 2byte的时间"，时间单位为ms,类型为unsigned int
+#define CMD_SET_CIRCULARLY_UPLOAD_INTERVAL	0x0034
 
 
 #endif
