@@ -20,9 +20,7 @@ public class ZigbeeConverter implements IConverter {
 	//这里的UPLOAD_DATA_INDEX要与arduino的对应
 	private final short UPLOAD_DATA_INDEX_SENSOR_VALUE = 0x0001;
 	
-	
-	//设备ID要与Arduino的SystemCfg.h中的设备ID一致
-	//室内设备
+	//室内设备， 设备ID要与SmarHomeIn的SystemCfg.h中的设备ID一致
 	private final short DEVICE_ID_IN_ZIGBEE				= 0x0030;
 	private final short DEVICE_ID_IN_DHT11				= 0x0031;
 	private final short DEVICE_ID_IN_TEMPERATURE_SENSOR	= 0x0032;
@@ -38,13 +36,13 @@ public class ZigbeeConverter implements IConverter {
 	private final short DEVICE_ID_FIRE_SENSOR			= 0x003c;
 	private final short DEVICE_ID_IR_REMOTE				= 0x003d;
 	
-	//室外设备
-	private final short DEVICE_ID_OUT_TEMPERATURE_SENSOR	= 0x0032;
-	private final short DEVICE_ID_OUT_HUMIDITY_SENSOR		= 0x0033;
-	private final short DEVICE_ID_OUT_HEAT_SENSOR			= 0x0034;
-	private final short DEVICE_ID_SOLID_HUMIDITY_SENSOR		= 0x0034;
-	private final short DEVICE_ID_DUST_DENSITY_SENSOR		= 0x0034;
-	private final short DEVICE_ID_LIGHT_INTENSITY_SENSOR	= 0x0034;
+	//室外设备， 设备ID要与SmarHomeOut的SystemCfg.h中的设备ID一致
+	private final short DEVICE_ID_OUT_TEMPERATURE_SENSOR	= 0x0092;
+	private final short DEVICE_ID_OUT_HUMIDITY_SENSOR		= 0x0093;
+	private final short DEVICE_ID_OUT_HEAT_SENSOR			= 0x0094;
+	private final short DEVICE_ID_SOLID_HUMIDITY_SENSOR		= 0x0095;
+	private final short DEVICE_ID_DUST_DENSITY_SENSOR		= 0x0096;
+	private final short DEVICE_ID_LIGHT_INTENSITY_SENSOR	= 0x0097;
 	
 	private byte[] dstAddr1;
 	private byte[] dstAddr2;
@@ -104,10 +102,9 @@ public class ZigbeeConverter implements IConverter {
 		//上传传感器数据
 		if(uploadIndex == UPLOAD_DATA_INDEX_SENSOR_VALUE)
 		{
-			if(data.length<8)
+			if(data.length != 8)
 				return null;
-			
-			short deviceID = (short) (data[2] + data[3] * 256);
+			short deviceID = Tool.bytesToShort(data[2], data[3]);
 			byte[] valueBytes = new byte[4];
 			System.arraycopy(data, 4, valueBytes, 0, 4);
 			float value;
@@ -119,6 +116,7 @@ public class ZigbeeConverter implements IConverter {
 			}
 			UploadDataToHttpServerMsg msg = new UploadDataToHttpServerMsg();
 			msg.setSensorValue(value);
+			
 			if(deviceID == DEVICE_ID_IN_TEMPERATURE_SENSOR)
 				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_IN_TEMPERATURE);
 			else if(deviceID == DEVICE_ID_IN_HUMIDITY_SENSOR)
@@ -137,6 +135,9 @@ public class ZigbeeConverter implements IConverter {
 				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_DUST_DENSITY);
 			else if(deviceID == DEVICE_ID_LIGHT_INTENSITY_SENSOR)
 				msg.setSensorID(UploadDataToHttpServerMsg.SENDOR_ID_LIGHT_INTENSITY);
+			else
+				return null;
+			
 			return msg;
 		}
 		

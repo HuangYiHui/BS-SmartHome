@@ -40,7 +40,7 @@ public class ZigbeeSender implements ISender {
 			PortSendResponseMsg portSendResponseMsg = (PortSendResponseMsg) portSender.send(portSendMsg);
 			//·¢ËÍ³É¹¦
 			zigbeeSendReponseMsg.setSendSuccess(portSendResponseMsg.getSendSuccess());
-			System.out.println("zigbee send");
+			//System.out.println("zigbee send");
 		}else{
 			zigbeeSendReponseMsg.setSendSuccess(false);
 		}

@@ -96,4 +96,8 @@ public class Tool {
 		bs[1] = (byte) (n / 256);
 		return bs;
 	}
+	
+	public static short bytesToShort(byte lowByte, byte HighByte){
+		return (short)(((HighByte << 8) | lowByte & 0xff));
+	}
 }

@@ -31,6 +31,7 @@ public class HttpSender implements ISender {
 			HttpMsgReceive httpMsgReceive = executer.execute();
 			if(httpMsgReceive != null){
 				responseMsg.setSendSuccess(true);
+				System.out.println("http send ok");
 			}else{
 				responseMsg.setSendSuccess(false);
 			}

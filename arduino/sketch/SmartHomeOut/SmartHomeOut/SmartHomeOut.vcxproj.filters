@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="SmartHomeOut.ino" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="__vm\.SmartHomeOut.vsarduino.h" />
+    <ClInclude Include="AppMsg.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="DHT11Device.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="HeatSensorDevice.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="HumiditySensorDevice.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="IDevice.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="IApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystem.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleDevice.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="ZigbeeDevice.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="TemperatureSensorDevice.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleSensorDevice.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorDevice.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemCfg.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemAPI.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="SmartHomeSystem.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleSystem.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="ZigbeeApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorAppCmd.h">
+      <Filter>app\appCmd</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleExecuterAppCmd.h">
+      <Filter>app\appCmd</Filter>
+    </ClInclude>
+    <ClInclude Include="ZigbeeAppCmd.h">
+      <Filter>app\appCmd</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool.h">
+      <Filter>assist</Filter>
+    </ClInclude>
+    <ClInclude Include="GY30Device.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="PM25Device.h">
+      <Filter>device</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="app">
+      <UniqueIdentifier>{c54faa07-2657-49d2-9121-96fe3b0e056f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="device">
+      <UniqueIdentifier>{4d322b05-59a9-48b9-ab3b-d043f0b9247f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="system">
+      <UniqueIdentifier>{add893e5-4fe1-4b03-a43c-493c6e57fb06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assist">
+      <UniqueIdentifier>{8025e43e-b042-4357-807f-635a2086fff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="app\appCmd">
+      <UniqueIdentifier>{75bde97d-d9d7-4970-ad7f-20a91db2da0d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DHT11Device.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="HeatSensorDevice.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="HumiditySensorDevice.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleDevice.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="SensorApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="ZigbeeDevice.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="TemperatureSensorDevice.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleSensorDevice.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="SensorDevice.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemAPI.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="SmarHomeSystem.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleSystem.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="ZigbeeApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool.cpp">
+      <Filter>assist</Filter>
+    </ClCompile>
+    <ClCompile Include="GY30Device.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="PM25Device.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
