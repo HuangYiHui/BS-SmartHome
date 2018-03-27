@@ -24,4 +24,5 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="org.apache.http.message.BasicNameValuePair"/>
 <fullyQualifiedTypeName name="com.demo.MessageReceiveCallBack"/>
+<fullyQualifiedTypeName name="com.test.Debugger"/>
 </qualifiedTypeNameHistroy>

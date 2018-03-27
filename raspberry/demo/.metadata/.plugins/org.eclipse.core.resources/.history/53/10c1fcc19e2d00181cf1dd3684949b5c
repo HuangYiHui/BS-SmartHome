@@ -1,0 +1,87 @@
+package bs.pi.gateway.client.mqtt;
+
+import java.io.FileInputStream;
+import java.util.Properties;
+
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+
+public class MQTTClientCfg {
+
+	public final static String KEY_HOST = "host";
+	public final static String KEY_CLIENT_ID = "clientID";
+	public final static String KEY_QOSES = "qoses";
+	public final static String KEY_USERNAME = "username";
+	public final static String KEY_TOPICS = "topics";
+	public final static String KEY_TOPICS = "topics";
+
+	private String host;
+	private String clientID;
+	private int[] qoses;
+	private String[] topics;
+	private MqttConnectOptions connectOption;
+	
+	public MQTTClientCfg(String cfgPath){
+		Properties properties = new Properties();
+		properties.load(new FileInputStream(cfgPath));
+		
+		host = properties.getProperty(KEY_HOST);
+		clientID = properties.getProperty(KEY_HOST);
+		
+		String[] qosesStr = properties.getProperty(KEY_QOSES).split(",");
+		qoses = new int[qosesStr.length];
+		for(int i=0; i<qoses.length; i++){
+			String str = qosesStr[i];
+			int qos = Integer.parseInt(str.trim());
+			qoses[i] = qos;
+		}
+    	
+    	String[] topicsStr = properties.getProperty(KEY_TOPICS).split(",");
+    	topics = new String[topicsStr.length];
+		for(int i=0; i<topicsStr.length; i++){
+			topics[i] = topicsStr[i].trim();
+		}
+    	
+    	MqttConnectOptions connectOption = new MqttConnectOptions();
+    	connectOption.setCleanSession(true);
+    	connectOption.setUserName(properties.getProperty(KEY_USERNAME));
+    	connectOption.setPassword(properties.getProperty("password").toCharArray());
+    	int connectTimeout = Integer.parseInt(properties.getProperty("connectTimeout"));
+    	connectOption.setConnectionTimeout(connectTimeout);
+    	int keepAliveInterval = Integer.parseInt(properties.getProperty("keepAliveInterval"));
+    	connectOption.setKeepAliveInterval(keepAliveInterval);
+    	//setWill方法，如果项目中需要知道客户端是否掉线可以调用该方法。设置最终端口的通知消息 
+    	//connectOption.setWill(topic, "close".getBytes(), 2, true);  
+    	option.setConnectOption(connectOption);
+	}
+
+	public String getHost() {
+		return host;
+	}
+	public void setHost(String host) {
+		this.host = host;
+	}
+	public String getClientId() {
+		return clientId;
+	}
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+	public int[] getQoses() {
+		return qoses;
+	}
+	public void setQoses(int[] qoses) {
+		this.qoses = qoses;
+	}
+	public String[] getTopics() {
+		return topics;
+	}
+	public void setTopics(String[] topics) {
+		this.topics = topics;
+	}
+	public MqttConnectOptions getConnectOption() {
+		return connectOption;
+	}
+	public void setConnectOption(MqttConnectOptions connectOption) {
+		this.connectOption = connectOption;
+	}
+}

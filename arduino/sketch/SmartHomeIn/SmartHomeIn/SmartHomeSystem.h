@@ -40,7 +40,6 @@ private:
 	SimpleExecuterDevice* switch1;
 	SimpleExecuterDevice* switch2;
 	SimpleExecuterDevice* switch3;
-	SimpleExecuterDevice* switch4;
 	SimpleExecuterDevice* alarm;
 	SimpleSensorDevice* mq2;
 	SimpleSensorDevice* fireSensor;

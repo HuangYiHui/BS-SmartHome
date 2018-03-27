@@ -5,13 +5,11 @@
 
 ZigbeeApp::ZigbeeApp(unsigned int appID, ZigbeeDevice& zigbee) : SampleApp(appID), zigbee(zigbee)
 {
-	state = APP_STATE_UNREADY;
 }
 
 void ZigbeeApp::init()
 {
-	zigbee.begin();
-
+	zigbee.start();
 	state = APP_STATE_READY;
 }
 
@@ -86,7 +84,7 @@ void ZigbeeApp::prcAppMsg()
 			packet.len = msg->len;
 			packet.data = new unsigned char[msg->len];
 			Tool::byteArrayCopy(msg->data, 0, packet.data, 0, msg->len);
-	//		zigbee.send(packet);
+			zigbee.send(packet);
 		}
 		delete msg;
 	}

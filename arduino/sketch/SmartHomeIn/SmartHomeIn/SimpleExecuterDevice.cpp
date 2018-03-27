@@ -4,11 +4,10 @@ SimpleExecuterDevice::SimpleExecuterDevice(unsigned int deviceID, devicePin pin,
 {
 	this->pin = pin;
 	this->logicLevelOpen = logicLevelOpen;
-	this->isSwitchOpened = false;
-	state = DEVICE_STATE_CLOSED;
+	this->isSimpleExecuterOpened = false;
 }
 
-void SimpleExecuterDevice::init()
+void SimpleExecuterDevice::start()
 {
 	pinMode(pin, OUTPUT);
 	if(logicLevelOpen == HIGH)
@@ -16,15 +15,13 @@ void SimpleExecuterDevice::init()
 	else
 		digitalWrite(pin, HIGH);
 
-	this->isSwitchOpened = false;
-
-	state = DEVICE_STATE_READY;
+	this->isSimpleExecuterOpened = false;
 }
 
 void SimpleExecuterDevice::openExecuter()
 {
 	digitalWrite(pin, logicLevelOpen);
-	this->isSwitchOpened = true;
+	this->isSimpleExecuterOpened = true;
 }
 
 void SimpleExecuterDevice::closeExecuter()
@@ -34,10 +31,10 @@ void SimpleExecuterDevice::closeExecuter()
 	else
 		digitalWrite(pin, HIGH);
 
-	this->isSwitchOpened = false;
+	this->isSimpleExecuterOpened = false;
 }
 
 boolean SimpleExecuterDevice::isOpened()
 {
-	return this->isSwitchOpened;
+	return this->isSimpleExecuterOpened;
 }

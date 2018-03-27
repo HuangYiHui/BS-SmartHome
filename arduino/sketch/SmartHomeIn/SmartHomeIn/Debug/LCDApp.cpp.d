@@ -23,9 +23,17 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDApp.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeAppCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\Tool.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDDevice.h \
- D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Nokia_5110.h \
- D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Display_Mode.h \
- D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Mux_Rate.h \
- D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Cursor.h \
+ D:\software1\arduino-1.8.5\libraries\U8glib/U8glib.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Print.h \
+ D:\software1\arduino-1.8.5\libraries\U8glib/utility/u8g.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SampleDevice.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IDevice.h
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IDevice.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDAppCmd.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-timer.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-sem.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DHT11Device.h \
+ D:\software1\arduino-1.8.5\libraries\DHT11/DHT11.h

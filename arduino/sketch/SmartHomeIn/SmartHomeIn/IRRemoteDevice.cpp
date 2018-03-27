@@ -3,7 +3,7 @@
 IRRemoteDevice::IRRemoteDevice(unsigned int deviceID, devicePin pin) : SampleDevice(deviceID), IRrecv(pin)
 {}
 
-void IRRemoteDevice::init()
+void IRRemoteDevice::start()
 {
 	enableIRIn();
 }

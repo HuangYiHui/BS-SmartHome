@@ -24,6 +24,7 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SmartHomeIn.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SampleDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IDevice.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\Tool.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DHT11Device.h \
  D:\software1\arduino-1.8.5\libraries\DHT11/DHT11.h \
@@ -33,28 +34,27 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SmartHomeIn.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SimpleSensorDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SimpleExecuterDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDDevice.h \
- D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Nokia_5110.h \
- D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Display_Mode.h \
- D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Mux_Rate.h \
- D:\software1\arduino-1.8.5\libraries\Nokia_5110_Driver\src/Cursor.h \
+ D:\software1\arduino-1.8.5\libraries\U8glib/U8glib.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Print.h \
+ D:\software1\arduino-1.8.5\libraries\U8glib/utility/u8g.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IRRemoteDevice.h \
  D:\software1\arduino-1.8.5\libraries\IRremote/IRremote.h \
  D:\software1\arduino-1.8.5\libraries\IRremote/IRremoteInt.h \
  D:\software1\arduino-1.8.5\libraries\IRremote/boarddefs.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeApp.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SampleApp.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeAppCmd.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorApp.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorAppCmd.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-timer.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-sem.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SampleApp.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeAppCmd.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\Tool.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorApp.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorAppCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SimpleExecuterApp.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SimpleExecuterAppCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DangerAlarmApp.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IRRemoteApp.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDApp.h
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDApp.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDAppCmd.h

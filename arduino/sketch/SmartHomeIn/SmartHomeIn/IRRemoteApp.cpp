@@ -7,7 +7,7 @@ IRRemoteApp::IRRemoteApp(unsigned int appID, IRRemoteDevice& irRemote) : SampleA
 
 void IRRemoteApp::init()
 {
-	irRemote.begin();
+	irRemote.start();
 	state = APP_STATE_READY;
 }
 

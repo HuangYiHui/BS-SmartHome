@@ -44,3 +44,11 @@ void Tool::byteArrayCopy(unsigned char* bs1, int begin1, unsigned char* bs2, int
 	for(int i=0; i<len; i++)
 		bs2[i+begin2] = bs1[begin1+i];
 }
+
+
+void Tool::readBytesFromFlash(unsigned int address, unsigned char* buffer, unsigned int count)
+{
+	for(unsigned int i=0;i <count; i++){
+		buffer[i] = pgm_read_byte_near(address+i);
+	}
+}

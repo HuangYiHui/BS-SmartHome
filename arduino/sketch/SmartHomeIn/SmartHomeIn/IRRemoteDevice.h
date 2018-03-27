@@ -8,7 +8,7 @@ class IRRemoteDevice : public SampleDevice, public IRrecv
 {
 public:
 	IRRemoteDevice(unsigned int deviceID, devicePin pin);
-	void init();
+	void start();
 };
 
 #endif

@@ -90,6 +90,8 @@ void SensorApp::prcAppMsg()
 void SensorApp::uploadSensorValue(SensorDevice* sensor)
 {
 	float value = sensor->getSensorValue();
+	Serial.print("value : ");
+	Serial.println(value);
 	AppMsg msg;
 	msg.len = 8;
 	msg.data = new unsigned char[8];

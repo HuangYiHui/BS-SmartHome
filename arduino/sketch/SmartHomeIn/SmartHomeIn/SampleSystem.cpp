@@ -22,9 +22,9 @@ void SampleSystem::start()
 	{
 		for(int i=0;i<appList.size();i++){
 			(appList.get(i))->run();
-		//	Serial.print(appList.get(i)->getAppID(), HEX);
-		//	Serial.print("run memory=");
-		//	Serial.println(freeMemory());
+			//Serial.print(appList.get(i)->getAppID(), HEX);
+			//Serial.print("run memory=");
+			//Serial.println(freeMemory());
 		}
 	}
 }

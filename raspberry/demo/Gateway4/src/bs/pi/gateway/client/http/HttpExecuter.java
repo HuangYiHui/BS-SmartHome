@@ -38,9 +38,9 @@ public class HttpExecuter {
 				request = getGetRequest();
 			}else if(HttpMsgSend.METHOD_POST == method){
 				request = getPostRequest();
-			}else if(HttpMsgSend.METHOD_POST == method){
+			}else if(HttpMsgSend.METHOD_PUT == method){
 				request = getPutRequest();
-			}else if(HttpMsgSend.METHOD_POST == method){
+			}else if(HttpMsgSend.METHOD_DELETE == method){
 				request = getDeleteRequest();
 			}else{
 				return null;

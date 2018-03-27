@@ -12,16 +12,19 @@ DangerAlarmApp::DangerAlarmApp(unsigned int appID, SimpleSensorDevice& fireSenso
 
 void DangerAlarmApp::init()
 {
-	fireSensor.begin();
-	alarm.begin();
+	fireSensor.start();
+	alarm.start();
 	state = APP_STATE_READY;
 }
 
 void DangerAlarmApp::run()
 {
 	//сп╩П
-	if(fireSensor.getSensorValue() == 0){
+	if(fireSensor.getSensorValue() == 0 ||
+		harmfulGasSensor.getSensorValue() > 350
+	){
 		alarm.openExecuter();
+		Serial.println("openExecuter");
 	}else{
 		alarm.closeExecuter();
 	}

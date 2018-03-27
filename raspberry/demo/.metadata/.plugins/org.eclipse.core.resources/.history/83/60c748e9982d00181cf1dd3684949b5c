@@ -1,0 +1,7 @@
+package bs.pi.gateway.client.mqtt;
+
+import bs.pi.gateway.main.IClient;
+
+public class MQTTClient implements IClient{
+
+}

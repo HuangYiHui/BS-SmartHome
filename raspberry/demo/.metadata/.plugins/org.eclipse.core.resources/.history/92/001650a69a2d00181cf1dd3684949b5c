@@ -1,0 +1,46 @@
+package bs.pi.gateway.client.mqtt;
+
+import bs.pi.gateway.main.IClient;
+import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.main.IReceiver;
+import bs.pi.gateway.main.ISender;
+
+public class MQTTClient implements IClient{
+
+	@Override
+	public void init() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void start() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setConverter(IConverter converter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ISender getSender() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IReceiver getReceiver() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

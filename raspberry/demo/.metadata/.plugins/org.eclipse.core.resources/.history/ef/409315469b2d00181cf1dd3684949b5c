@@ -1,0 +1,73 @@
+package bs.pi.gateway.client.mqtt;
+
+import gnu.io.SerialPort;
+import bs.pi.gateway.client.http.HttpClientCfg;
+import bs.pi.gateway.client.port.PortClientCfg;
+import bs.pi.gateway.client.port.PortReceiver;
+import bs.pi.gateway.client.port.PortSender;
+import bs.pi.gateway.main.IClient;
+import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.main.IReceiver;
+import bs.pi.gateway.main.ISender;
+
+public class MQTTClient implements IClient{
+
+	public static final String DEFAULT_CFG_PATH = System.getProperty("user.dir")+System.getProperty("file.separator")+"mqttClientCfg.properties";
+	private String cfgPath;
+	private MQTTClientCfg cfg;
+	private MQTTSender sender;
+	private MQTTReceiver receiver;
+	private IConverter converter;
+	
+	public MQTTClient(String path){
+		this.cfgPath = path;
+	}
+	private void loadCfg() throws Exception{
+		if(cfgPath == null){
+			throw new Exception("cfgPath is null");
+		}else{
+			cfg = new MQTTClientCfg(cfgPath);
+		}
+	}
+	
+	public void init() throws Exception{
+		loadCfg();
+	}
+	
+	@Override
+	public void init() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void start() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setConverter(IConverter converter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ISender getSender() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IReceiver getReceiver() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

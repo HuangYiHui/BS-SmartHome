@@ -7,6 +7,10 @@
 		<item value="433" key="DIALOG_X_ORIGIN"/>
 		<item value="124" key="DIALOG_Y_ORIGIN"/>
 	</section>
+	<section name="ResourceNavigator">
+		<item value="Aggregate for window 1519435560224" key="ResourceWorkingSetFilter.STORE_WORKING_SET"/>
+		<item value="1" key="ResourceViewer.STORE_SORT_TYPE"/>
+	</section>
 	<section name="NewWizardAction">
 	</section>
 	<section name="SaveAsDialogSettings">

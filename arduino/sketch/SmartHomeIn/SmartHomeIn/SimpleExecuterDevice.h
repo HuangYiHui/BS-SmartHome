@@ -15,7 +15,7 @@ class SimpleExecuterDevice : public SampleDevice
 {
 public:
 	SimpleExecuterDevice(unsigned int deviceID, devicePin pin, unsigned char logicLevelOpen);
-	void init();
+	void start();
 	void openExecuter();
 	void closeExecuter();
 	bool isOpened();
@@ -23,7 +23,7 @@ public:
 private:
 	devicePin pin;
 	unsigned char logicLevelOpen;
-	bool isSwitchOpened;
+	bool isSimpleExecuterOpened;
 };
 
 #endif

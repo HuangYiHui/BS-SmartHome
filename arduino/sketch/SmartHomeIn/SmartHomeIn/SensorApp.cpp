@@ -27,7 +27,7 @@ void SensorApp::addSensorTask(SensorDevice* sensor, unsigned int uploadInterval,
 void SensorApp::init()
 {
 	for(int i=0;i<sensorTaskList.size();i++){
-		sensorTaskList.get(i)->sensor->begin();
+		sensorTaskList.get(i)->sensor->start();
 	}
 
 	state = APP_STATE_READY;
@@ -36,8 +36,6 @@ void SensorApp::init()
 void SensorApp::prcAppMsg()
 {
 	while(msgList.size()>0){
-
-		//Serial.println("sensor app get msg");
 
 		AppMsg* msg = msgList.remove(0);
 		if(msg->len < 2){
@@ -95,6 +93,8 @@ void SensorApp::prcAppMsg()
 void SensorApp::uploadSensorValue(SensorDevice* sensor)
 {
 	float value = sensor->getSensorValue();
+	//Serial.print("sensor:");
+	//Serial.println(value);
 	AppMsg msg;
 	msg.len = 8;
 	msg.data = new unsigned char[8];
@@ -107,7 +107,6 @@ void SensorApp::uploadSensorValue(SensorDevice* sensor)
 void SensorApp::run()
 {
 	prcAppMsg();
-
 	for(int i=0;i<sensorTaskList.size();i++){
 		SensorTask* task = sensorTaskList.get(i);
 

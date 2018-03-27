@@ -1,0 +1,8 @@
+package bs.pi.gateway.client.mqtt;
+
+public class MQTTClientCfg {
+
+	public MQTTClientCfg(String path){
+		
+	}
+}

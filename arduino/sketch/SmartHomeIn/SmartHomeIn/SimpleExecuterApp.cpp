@@ -23,7 +23,7 @@ void SimpleExecuterApp::addExecuter(SimpleExecuterDevice* executer)
 void SimpleExecuterApp::init()
 {
 	for(int i=0; i<executerList.size();i++){
-		executerList.get(i)->begin();
+		executerList.get(i)->start();
 	}
 	state = APP_STATE_READY;
 }
@@ -59,8 +59,10 @@ void SimpleExecuterApp::run()
 				}
 			}
 
-			if(executer == NULL)
+			if(executer == NULL){
+				delete msg;
 				return;
+			}
 		}
 
 		if(CMD_GET_SIMPLE_EXECUTER_STATUS == cmd){
@@ -88,5 +90,6 @@ void SimpleExecuterApp::run()
 		}else if(CMD_CLOSE_SIMPLE_EXECUTER == cmd){
 			executer->closeExecuter();
 		}
+		delete msg;
 	}
 }

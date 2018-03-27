@@ -21,8 +21,17 @@ public class HttpReceiver implements IReceiver {
 					String url = cfg.getServiceUrl()+"/device/"+cfg.getDeviceID()+"/command";
 					HttpExecuter executer = new HttpExecuter(url, HttpMsgSend.METHOD_GET, cfg.getApiKey(), null);
 					HttpMsgReceive httpMsgReceive = executer.execute();
-					if(httpMsgReceive != null)
+					if(httpMsgReceive != null){
 						httpMsgReceive.setType(HttpMsgReceive.TYPE_DEVICE_CMD);
+						
+						//获取成功删除命令
+						if(HttpMsgReceive.V_SUCCESS_TRUE == httpMsgReceive.getData().getBoolean(HttpMsgReceive.K_SUCCESS)){
+							HttpExecuter executer1 = new HttpExecuter(url, HttpMsgSend.METHOD_DELETE, cfg.getApiKey(), null);
+							executer1.execute();
+							System.out.println("delete");
+						}
+						
+					}
 					IMsg msg = converter.convertMsgReceive(httpMsgReceive);
 					if(msg != null){
 						for(IReceivedListener listener : receivedListenerList){
@@ -64,7 +73,7 @@ public class HttpReceiver implements IReceiver {
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
-		//rTread.interrupt();
+		rTread.interrupt();
 	}
 
 	@Override

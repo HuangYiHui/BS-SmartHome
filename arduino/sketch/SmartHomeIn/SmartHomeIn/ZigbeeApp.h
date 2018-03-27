@@ -2,7 +2,6 @@
 #ifndef _BS_ZIGBEE_IN_APP_H_
 #define _BS_ZIGBEE_IN_APP_H_
 
-#include "pt.h"
 #include "ZigbeeDevice.h"
 #include "SampleApp.h"
 #include "SystemCfg.h"

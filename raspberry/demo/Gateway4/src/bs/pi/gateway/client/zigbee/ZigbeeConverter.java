@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import com.test.Debugger;
+
 import bs.pi.gateway.assist.Tool;
 import bs.pi.gateway.main.IConverter;
 import bs.pi.gateway.msg.IMsg;
@@ -152,6 +154,26 @@ public class ZigbeeConverter implements IConverter {
 			SendMsgToAppMsg sendMsgToAppMsg = (SendMsgToAppMsg)msg;
 			byte[] appID = Tool.intTo2Byte(sendMsgToAppMsg.getAppID());
 			String cmd = sendMsgToAppMsg.getCmd();
+			byte[] data = new byte[6];
+			System.out.println(cmd);
+			if(cmd.equals("openSwitch1")){
+				data[0] = appID[0];
+				data[1] = appID[1];
+				data[2] = 0x31;
+				data[3] = 0x00;
+				data[4] = 0x36;
+				data[5] = 0x00;
+			}else if(cmd.equals("closeSwitch1")){
+				data[0] = appID[0];
+				data[1] = appID[1];
+				data[2] = 0x32;
+				data[3] = 0x00;
+				data[4] = 0x36;
+				data[5] = 0x00;
+			}else{
+				return null;
+			}
+			/*
 			HashMap<String, Object> params = sendMsgToAppMsg.getParams();
 			
 			byte[] data = null;
@@ -161,8 +183,9 @@ public class ZigbeeConverter implements IConverter {
 				data[1] = appID[1];
 				data[2] = ZigbeeMsgSend.CMD_TEST_CMD[0];
 				data[3] = ZigbeeMsgSend.CMD_TEST_CMD[1];
-			}
+			}*/
 
+			//Debugger.printBytes(data);
 			byte[] dstAddr = getDstAddr(appID);
 			if(dstAddr == null)
 				return null;
@@ -176,6 +199,7 @@ public class ZigbeeConverter implements IConverter {
 			zigbeeMsgSend.setOptions(cfg.getOptions());
 			zigbeeMsgSend.setRadius(cfg.getRadius());
 			zigbeeMsgSend.setTransID((byte) 0x00);
+			
 			return zigbeeMsgSend;
 		}
 		return null;

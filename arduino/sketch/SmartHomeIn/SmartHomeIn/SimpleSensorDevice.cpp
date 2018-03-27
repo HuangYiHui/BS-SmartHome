@@ -4,13 +4,11 @@ SimpleSensorDevice::SimpleSensorDevice(unsigned int deviceID, devicePin pin, uns
 {
 	this->pin = pin;
 	this->readMode = readMode;
-	state = DEVICE_STATE_CLOSED;
 }
 
-void SimpleSensorDevice::init()
+void SimpleSensorDevice::start()
 {
 	pinMode(pin, INPUT);
-	state = DEVICE_STATE_READY;
 }
 	
 float SimpleSensorDevice::getSensorValue()

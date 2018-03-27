@@ -4,75 +4,65 @@ ZigbeeDevice::ZigbeeDevice(unsigned int deviceID) : SampleDevice(deviceID)
 {
 }
 
-void ZigbeeDevice::init()
+void ZigbeeDevice::start()
 {
-	unsigned char CMD_DEVICE_RESET_BYTES[6] = {0xfe, 0x01, 0x41, 0x00, 0x00, 0x40};
-	unsigned char CMD_STARTUP_WITHOUT_LAST_STATE_BYTES[8] = {0xfe, 0x03, 0x26, 0x05, 0x03, 0x01, 0x03, 0x21};
-	unsigned char CMD_ZDO_DIRECT_CB_BYTES[8] = {SOF, 0x03, 0x26, 0x05, 0x8f, 0x01, 0x01, 0xaf};
-	//信道使用0x00000800
-	unsigned char CMD_CHANNEL_SET_BYTES[11] = {0xfe, 0x06, 0x26, 0x05, 0x84, 0x04, 0x00, 0x08, 0x00, 0x00, 0xad};
-	//工作子网为0xffff
-	unsigned char CMD_PANID_SET_BYTES[9] = {0xfe, 0x04, 0x26, 0x05, 0x83, 0x02, 0xff, 0xff, 0xa6};
-	//设备类型0x01,路由器
-	unsigned char CMD_DEVICE_TYPE_SET_BYTES[8] = {0xfe, 0x03, 0x26, 0x05, 0x87, 0x01, 0x01, 0xa7};
-	//应用注册
-	unsigned char CMD_APP_REGISTER_BYTES[14] = {0xfe, 0x09, 0x24, 0x00, 0x55, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x78};
-
+	unsigned char buffer[14];
 
 	//重启，时间太短不行，比如1000
-	Serial.write(CMD_DEVICE_RESET_BYTES, 6);
+	Tool::readBytesFromFlash((unsigned int)CMD_DEVICE_RESET_BYTES, buffer, 6);
+	Serial.write(buffer, 6);
 	delay(2000);
 	//rec(1500);
 
 	//设置不从上次状态启动
-	Serial.write(CMD_STARTUP_WITHOUT_LAST_STATE_BYTES, 8);
+	Tool::readBytesFromFlash((unsigned int)CMD_STARTUP_WITHOUT_LAST_STATE_BYTES, buffer, 8);
+	Serial.write(buffer, 8);
 	delay(500);
 	//rec(300);
 
 	//重启
-	Serial.write(CMD_DEVICE_RESET_BYTES, 6);
+	Tool::readBytesFromFlash((unsigned int)CMD_DEVICE_RESET_BYTES, buffer, 6);
+	Serial.write(buffer, 6);
 	delay(2000);
 	//rec(1500);
 	
 	//设置0x00000800信道，默认也是0x00000800信道
-	Serial.write(CMD_CHANNEL_SET_BYTES, 11);
+	Tool::readBytesFromFlash((unsigned int)CMD_CHANNEL_SET_BYTES, buffer, 11);
+	Serial.write(buffer, 11);
 	delay(500);
 	//rec(300);
 
 	//设置工作子网
-	Serial.write(CMD_PANID_SET_BYTES, 9);
+	Tool::readBytesFromFlash((unsigned int)CMD_PANID_SET_BYTES, buffer, 9);
+	Serial.write(buffer, 9);
 	delay(500);
 	//rec(300);
 
 	//设置zigbee设备类型（协调器/路由器/终端）
-	Serial.write(CMD_DEVICE_TYPE_SET_BYTES, 8);
+	Tool::readBytesFromFlash((unsigned int)CMD_DEVICE_TYPE_SET_BYTES, buffer, 8);
+	Serial.write(buffer, 8);
 	delay(500);
 	//rec(300);
 
 	//打开设备mac地址或网络地址查寻回显开关
-	Serial.write(CMD_ZDO_DIRECT_CB_BYTES, 8);
+	Tool::readBytesFromFlash((unsigned int)CMD_ZDO_DIRECT_CB_BYTES, buffer, 8);
+	Serial.write(buffer, 8);
 	delay(500);
 	//rec(300);
 	
 	//注册应用
-	Serial.write(CMD_APP_REGISTER_BYTES, 14);
+	Tool::readBytesFromFlash((unsigned int)CMD_APP_REGISTER_BYTES, buffer, 14);
+	Serial.write(buffer, 14);
 	delay(500);
 
-	state = DEVICE_STATE_READY;
-}
-
-void ZigbeeDevice::start()
-{
-	unsigned char CMD_STARTUP_FROM_APP_BYTES[7] = {0xfe, 0x02, 0x25, 0x40, 0x00, 0x00, 0x67};
-
+	Tool::readBytesFromFlash((unsigned int)CMD_STARTUP_FROM_APP_BYTES, buffer, 7);
 	//Serial.println("------start--------");
 	//建立网络或者连接网络
-	Serial.write(CMD_STARTUP_FROM_APP_BYTES, 7);
+	Serial.write(buffer, 7);
 	//rec(2500);
 	delay(2000);
-
-	state = DEVICE_STATE_WORKING;
 }
+
 
 int ZigbeeDevice::readByte()
 {

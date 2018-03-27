@@ -30,12 +30,12 @@ void SmartHomeSystem::init()
 
 	ZigbeeApp* zigbeeApp = new ZigbeeApp(APP_ID_ZIGBEE, *zigbee);
 	SensorApp* sensorApp = new SensorApp(APP_ID_SENSOR);
-	sensorApp->addSensorTask(temperatureSensor, 5100, true);
-	sensorApp->addSensorTask(humiditySensor, 5200, true);
-	sensorApp->addSensorTask(heatSensor, 5300, true);
-	sensorApp->addSensorTask(gy30, 5400, true);
-	sensorApp->addSensorTask(fc28, 5500, true);
-	sensorApp->addSensorTask(pm25, 5600, true);
+//	sensorApp->addSensorTask(temperatureSensor, 2100, true);
+//	sensorApp->addSensorTask(humiditySensor, 2200, true);
+//	sensorApp->addSensorTask(heatSensor, 2300, true);
+	sensorApp->addSensorTask(gy30, 2400, true);
+//	sensorApp->addSensorTask(fc28, 2500, true);
+//	sensorApp->addSensorTask(pm25, 2600, true);
 
 	installApp(zigbeeApp);
 	installApp(sensorApp);

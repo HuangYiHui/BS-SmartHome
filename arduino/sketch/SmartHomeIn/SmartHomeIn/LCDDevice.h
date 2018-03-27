@@ -2,18 +2,20 @@
 #define _BS_LCD_DEVICE_H_
 
 #include "SystemCfg.h"
-#include "Nokia_5110.h"
+#include "U8glib.h"
 #include "SampleDevice.h"
 
-class LCDDevice : public SampleDevice, public Nokia_5110
+class LCDDevice : public SampleDevice, public U8GLIB_MINI12864
 {
 public:
 	LCDDevice(
 		unsigned int deviceID,
-		unsigned short RST, 
-		unsigned short CE, 
-		unsigned short DC, 
-		unsigned short DIN, 
-		unsigned short CLK);
+		unsigned char CS,
+		unsigned char RST,
+		unsigned char RS,
+		unsigned char SDA,
+		unsigned char SCK);
+	void start();
+	void printStr(unsigned int x, unsigned y, char * cs);
 };
 #endif

@@ -96,7 +96,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties arduino.upload.port="COM3" debug.view.FreeMemory="1" />
+      <UserProperties arduino.upload.port="COM6" debug.view.FreeMemory="1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

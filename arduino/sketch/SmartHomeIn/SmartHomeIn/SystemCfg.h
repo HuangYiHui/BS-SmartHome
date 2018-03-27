@@ -3,19 +3,28 @@
 
 /**********引脚配置**********/
 #define PIN_DHT11_DATA		2	//温湿度传感器DHT11引脚
-#define PIN_NOKIA5110_CLK	3	//nokia5110的clk引脚
-#define PIN_NOKIA5110_DIN	4	//nokia5110的din引脚
-#define PIN_NOKIA5110_DC	5	//nokia5110的dc引脚
-#define PIN_NOKIA5110_CE	6	//nokia5110的ce引脚
-#define PIN_NOKIA5110_RST	7	//nokia5110的rst引脚
+//#define PIN_NOKIA5110_CLK	3	//nokia5110的clk引脚
+//#define PIN_NOKIA5110_DIN	4	//nokia5110的din引脚
+//#define PIN_NOKIA5110_DC	5	//nokia5110的dc引脚
+//#define PIN_NOKIA5110_CE	6	//nokia5110的ce引脚
+//#define PIN_NOKIA5110_RST	7	//nokia5110的rst引脚
+#define PIN_LCD_CS			3
+#define PIN_LCD_RST			4
+#define PIN_LCD_RS			5
+#define PIN_LCD_SDA			6
+#define PIN_LCD_SCK			7
 #define PIN_SWITCH1_OUT		8	//开关1OUT引脚
 #define PIN_SWITCH2_OUT		9	//开关2OUT引脚
 #define PIN_SWITCH3_OUT		10	//开关3OUT引脚
-#define PIN_SWITCH4_OUT		11	//开关4OUT引脚
+#define PIN_LCD_LED			11
 #define PIN_ALARM_OUT		12	//警报器引脚
 #define PIN_IR_REMOTE_OUT	13	//红外传感器OUT引脚
-#define PIN_FIRE_SENSOR_DO	A2	//火焰传感器DO引脚
-#define PIN_MQ2_DO			A3	//MQ2传感器DO引脚
+#define PIN_FIRE_SENSOR_DO	A0	//火焰传感器DO引脚
+#define PIN_MQ2_DO			A1	//MQ2传感器DO引脚
+#define PIN_LCD_ROM_CS		A2
+#define PIN_LCD_ROM_SCK		A3
+#define PIN_LCD_ROM_OUT		A4
+#define PIN_LCD_ROM_IN		A5
 /**********引脚配置**********/
 
 
@@ -29,11 +38,10 @@
 #define DEVICE_ID_SWITCH1				0x0036
 #define DEVICE_ID_SWITCH2				0x0037
 #define DEVICE_ID_SWITCH3				0x0038
-#define DEVICE_ID_SWITCH4				0x0039
-#define DEVICE_ID_LCD					0x003a
-#define DEVICE_ID_ALARM					0x003b
-#define DEVICE_ID_FIRE_SENSOR			0x003c
-#define DEVICE_ID_IR_REMOTE				0x003d
+#define DEVICE_ID_LCD					0x0039
+#define DEVICE_ID_ALARM					0x003a
+#define DEVICE_ID_FIRE_SENSOR			0x003b
+#define DEVICE_ID_IR_REMOTE				0x003c
 /**********设备ID分配**********/
 
 

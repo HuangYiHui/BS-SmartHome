@@ -10,4 +10,5 @@ D:\software\Temp\VMBuilds\test1\uno\Debug\test1.cpp.o: \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Printable.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/USBAPI.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
- D:\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard/pins_arduino.h
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard/pins_arduino.h \
+ D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h

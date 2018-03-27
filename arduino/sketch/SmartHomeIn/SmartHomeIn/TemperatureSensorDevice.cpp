@@ -4,13 +4,11 @@ TemperatureSensorDevice::TemperatureSensorDevice(unsigned int deviceID, DHT11Dev
 	SensorDevice(deviceID),
 	dht11(dht11)
 {
-	state = DEVICE_STATE_CLOSED;
 }
 	
-void TemperatureSensorDevice::begin()
+void TemperatureSensorDevice::start()
 {
-	dht11.begin();
-	SensorDevice::begin();
+	dht11.start();
 }
 
 float TemperatureSensorDevice::getSensorValue()

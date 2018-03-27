@@ -1,0 +1,49 @@
+package bs.pi.gateway.client.mqtt;
+
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+
+public class MQTTClientCfg {
+
+	public final static String KEY_SERVICE_URL = "serviceUrl";
+
+	private String host;
+	private String clientId;
+	private int[] qoses;
+	private String[] topics;
+	private MqttConnectOptions connectOption;
+	
+	public MQTTClientCfg(String path){
+		
+	}
+
+	public String getHost() {
+		return host;
+	}
+	public void setHost(String host) {
+		this.host = host;
+	}
+	public String getClientId() {
+		return clientId;
+	}
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+	public int[] getQoses() {
+		return qoses;
+	}
+	public void setQoses(int[] qoses) {
+		this.qoses = qoses;
+	}
+	public String[] getTopics() {
+		return topics;
+	}
+	public void setTopics(String[] topics) {
+		this.topics = topics;
+	}
+	public MqttConnectOptions getConnectOption() {
+		return connectOption;
+	}
+	public void setConnectOption(MqttConnectOptions connectOption) {
+		this.connectOption = connectOption;
+	}
+}
