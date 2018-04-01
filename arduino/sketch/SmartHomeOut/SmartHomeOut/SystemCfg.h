@@ -11,26 +11,17 @@
 /**********引脚配置**********/
 
 
-/**********设备ID分配**********/
-#define DEVICE_ID_OUT_ZIGBEE				0x0090
-#define DEVICE_ID_OUT_DHT11					0x0091
-#define DEVICE_ID_OUT_TEMPERATURE_SENSOR	0x0092
-#define DEVICE_ID_OUT_HUMIDITY_SENSOR		0x0093
-#define DEVICE_ID_OUT_HEAT_SENSOR			0x0094
-#define DEVICE_ID_SOLID_HUMIDITY_SENSOR		0x0095
-#define DEVICE_ID_DUST_DENSITY_SENSOR		0x0096
-#define DEVICE_ID_LIGHT_INTENSITY_SENSOR	0x0097
-/**********设备ID分配**********/
-
+#define SENSOR_ID_OUT_TEMPERATURE	0x11
+#define SENSOR_ID_OUT_HUMIDITY		0x12
+#define SENSOR_ID_OUT_HEAT			0x13
+#define SENSOR_ID_SOLID_HUMIDITY	0x14
+#define SENSOR_ID_DUST_DENSITY		0x15
+#define SENSOR_ID_LIGHT_INTENSITY	0x16
 
 /**********应用ID分配**********/
-#define APP_ID_ZIGBEE				0x0030
-#define APP_ID_SENSOR				0x0031
-#define APP_ID_DANGER_ALARM			0x0032
-#define APP_ID_SWITCHS				0x0033
-#define APP_ID_IRREMOTE				0x0034
-#define APP_ID_LCD					0x0035
-
+#define APP_ID_OUT_ZIGBEE				0x90
+#define APP_ID_OUT_SENSOR				0x91
+#define APP_ID_NOTICE_OUT_SENSOR_VALUE	0x92
 /**********应用ID分配**********/
 
 #define SERAIL_BAUD_RATE	19200	//串口波特率

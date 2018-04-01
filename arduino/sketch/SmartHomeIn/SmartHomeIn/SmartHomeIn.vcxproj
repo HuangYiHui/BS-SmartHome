@@ -81,13 +81,11 @@
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <None Include="SmartHomeIn.ino">
       <FileType>CppCode</FileType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AppMsg.h" />
     <ClInclude Include="DHT11Device.h" />
     <ClInclude Include="DangerAlarmApp.h" />
     <ClInclude Include="HeatSensorDevice.h" />
@@ -101,7 +99,6 @@
     <ClInclude Include="LCDAppCmd.h" />
     <ClInclude Include="LCDDevice.h" />
     <ClInclude Include="SampleApp.h" />
-    <ClInclude Include="SampleDevice.h" />
     <ClInclude Include="SampleSystem.h" />
     <ClInclude Include="SensorApp.h" />
     <ClInclude Include="SensorAppCmd.h" />
@@ -114,6 +111,7 @@
     <ClInclude Include="SystemAPI.h" />
     <ClInclude Include="SystemCfg.h" />
     <ClInclude Include="TemperatureSensorDevice.h" />
+    <ClInclude Include="THHUpdateApp.h" />
     <ClInclude Include="Tool.h" />
     <ClInclude Include="ZigbeeAppCmd.h" />
     <ClInclude Include="ZigbeeDevice.h" />
@@ -130,16 +128,15 @@
     <ClCompile Include="LCDApp.cpp" />
     <ClCompile Include="LCDDevice.cpp" />
     <ClCompile Include="SampleApp.cpp" />
-    <ClCompile Include="SampleDevice.cpp" />
     <ClCompile Include="SampleSystem.cpp" />
     <ClCompile Include="SensorApp.cpp" />
-    <ClCompile Include="SensorDevice.cpp" />
     <ClCompile Include="SimpleExecuterApp.cpp" />
     <ClCompile Include="SimpleExecuterDevice.cpp" />
     <ClCompile Include="SimpleSensorDevice.cpp" />
     <ClCompile Include="SmarHomeSystem.cpp" />
     <ClCompile Include="SystemAPI.cpp" />
     <ClCompile Include="TemperatureSensorDevice.cpp" />
+    <ClCompile Include="THHUpdateApp.cpp" />
     <ClCompile Include="Tool.cpp" />
     <ClCompile Include="ZigbeeDevice.cpp" />
     <ClCompile Include="ZigbeeApp.cpp" />

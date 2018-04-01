@@ -9,13 +9,13 @@
 class PM25Device : public SensorDevice
 {
 public:
-	PM25Device(unsigned int deviceID, devicePin ledPin, devicePin voPin);
-	void init();
+	PM25Device(unsigned int deviceID, unsigned char ledPin, unsigned char voPin);
+	void start();
 	float getSensorValue();
 
 private:
-	devicePin ledPin;
-	devicePin voPin;
+	unsigned char ledPin;
+	unsigned char voPin;
 };
 
 #endif

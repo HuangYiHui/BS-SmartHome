@@ -1,6 +1,8 @@
 #ifndef _BS_TOOL_H_
 #define _BS_TOOL_H_
 
+#include "Arduino.h"
+
 typedef union IBConv 
 {   
     int n;   
@@ -21,6 +23,7 @@ public:
 	static int bytesToInt(unsigned char* bytes);
 	static float bytesToFloat(unsigned char* bytes);
 	static void byteArrayCopy(unsigned char* bs1, int begin1, unsigned char* bs2, int begin2, int len);
+	static void readBytesFromFlash(unsigned int address, unsigned char* buffer, unsigned int count);
 };
 
 #endif

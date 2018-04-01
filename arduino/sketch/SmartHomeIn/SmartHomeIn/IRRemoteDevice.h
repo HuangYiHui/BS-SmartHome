@@ -1,13 +1,13 @@
 #ifndef _BS_IRREMOTE_DEVICE_H_
 #define _BS_IRREMOTE_DEVICE_H_
 
-#include "SampleDevice.h"
+#include "IDevice.h"
 #include "IRremote.h"
 
 class IRRemoteDevice : public SampleDevice, public IRrecv
 {
 public:
-	IRRemoteDevice(unsigned int deviceID, devicePin pin);
+	IRRemoteDevice(unsigned char pin);
 	void start();
 };
 

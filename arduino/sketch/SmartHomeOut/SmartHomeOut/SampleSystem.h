@@ -16,7 +16,7 @@ public:
 	virtual	void stop();
 	virtual	void reset();
 	virtual void installApp(IApp* app);
-	virtual void sendAppMsg(AppMsg& msg, unsigned int appID);
+	virtual void sendAppMsg(AppMsg& msg, unsigned char appID);
 
 protected:
 	LinkedList<IApp*> appList;

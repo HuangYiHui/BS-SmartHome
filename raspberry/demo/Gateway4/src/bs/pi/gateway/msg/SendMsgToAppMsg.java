@@ -5,10 +5,8 @@ import java.util.HashMap;
 public class SendMsgToAppMsg implements IMsg {
 	
 	public final static String MSG_NAME = "SendMsgToAppMsg";
-
-	public final static String CMD_TEST_CMD = "TestCmd";
 	
-	private int appID;
+	private short appID;
 	private String cmd;
 	private HashMap<String, Object> params;
 	
@@ -17,11 +15,11 @@ public class SendMsgToAppMsg implements IMsg {
 		return MSG_NAME;
 	}
 
-	public int getAppID() {
+	public short getAppID() {
 		return appID;
 	}
 
-	public void setAppID(int appID) {
+	public void setAppID(short appID) {
 		this.appID = appID;
 	}
 

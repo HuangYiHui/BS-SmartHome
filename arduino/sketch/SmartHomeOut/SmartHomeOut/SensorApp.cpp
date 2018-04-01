@@ -1,7 +1,8 @@
 #include "SensorApp.h"
 
-SensorApp::SensorApp(unsigned int appID) : SampleApp(appID)
+SensorApp::SensorApp()
 {
+	this->appID = APP_ID_OUT_SENSOR;
 }
 
 SensorApp::~SensorApp()
@@ -27,47 +28,37 @@ void SensorApp::addSensorTask(SensorDevice* sensor, unsigned int uploadInterval,
 void SensorApp::init()
 {
 	for(int i=0;i<sensorTaskList.size();i++){
-		sensorTaskList.get(i)->sensor->begin();
+		sensorTaskList.get(i)->sensor->start();
 	}
-
-	state = APP_STATE_READY;
 }
 
-void SensorApp::prcAppMsg()
+void SensorApp::appMsgReceivedCallback(AppMsg& msg)
 {
-	while(msgList.size()>0){
-
-		AppMsg* msg = msgList.remove(0);
-		if(msg->len < 2){
-			delete msg;
+	/*
+		if(msg.len < 1)
 			return;
-		}
 	
-		int cmd = msg->data[0] + 256 * msg->data[1];
-		unsigned int deviceID;
+		unsigned char cmd = msg.data[0];
+		unsigned char sensorID;
 		if(CMD_START_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd ||
 			CMD_STOP_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd ||
 			CMD_SET_CIRCULARLY_UPLOAD_INTERVAL == cmd
 		){
-			if(msg->len < 4){
-				delete msg;
+			if(msg.len < 2)
 				return;
-			}
-			deviceID = msg->data[2] + 256 * msg->data[3];
+			sensorID = msg.data[1];
 		}
 		
 		SensorTask* task = NULL;
 		for(int i=0;i<sensorTaskList.size();i++){
-			if(sensorTaskList.get(i)->sensor->getDeviceID() == deviceID){
+			if(sensorTaskList.get(i)->sensor->getSensorID() == sensorID){
 				task = sensorTaskList.get(i);
 				break;
 			}
 		}
 
-		if(task == NULL){
-			delete msg;
+		if(task == NULL)
 			return;
-		}
 
 		if(CMD_START_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd){
 			task->isCirCularlyUploadSensorValue = true;
@@ -75,36 +66,31 @@ void SensorApp::prcAppMsg()
 			task->isCirCularlyUploadSensorValue = false;
 		}else if(CMD_SET_CIRCULARLY_UPLOAD_INTERVAL == cmd){
 			//带2个byte参数，表示unsigned int的interval数值
-			if(msg->len < 6)
+			if(msg.len < 4)
 				return;
-			unsigned int value = Tool::bytesToInt(&(msg->data[4]));
+			unsigned int value = Tool::bytesToInt(&(msg.data[2]));
 			if(value > 0){
 				task->uploadInterval = value;
 			}
 		}
-
-		delete msg;
-	}
+		*/
 }
 
 void SensorApp::uploadSensorValue(SensorDevice* sensor)
 {
 	float value = sensor->getSensorValue();
-	Serial.print("value : ");
-	Serial.println(value);
 	AppMsg msg;
-	msg.len = 8;
-	msg.data = new unsigned char[8];
-	Tool::intTo2Bytes(UPLOAD_DATA_INDEX_SENSOR_VALUE, msg.data);
-	Tool::intTo2Bytes(sensor->getDeviceID(), &(msg.data[2]));
-	Tool::floatTo4Bytes(value, &(msg.data[4]));
-	uploadDataByZigbee(msg);
+	msg.len = 7;
+	msg.data = new unsigned char[7];
+	msg.data[0] = CMD_UPLOAD_DATA;
+	msg.data[1] = UPLOAD_DATA_INDEX_SENSOR_VALUE;
+	msg.data[2] = sensor->getSensorID();
+	Tool::floatTo4Bytes(value, &(msg.data[3]));
+	sendMsgToZigbee(msg);
 }
 
 void SensorApp::run()
 {
-	prcAppMsg();
-
 	for(int i=0;i<sensorTaskList.size();i++){
 		SensorTask* task = sensorTaskList.get(i);
 

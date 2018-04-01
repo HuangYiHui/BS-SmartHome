@@ -1,13 +1,26 @@
 #ifndef _BS_IAPP_H_
 #define _BS_IAPP_H_
 
-#include "AppMsg.h"
+#include "Arduino.h"
 
-typedef unsigned char appState;
+//用于app消息发送
+typedef struct AppMsg
+{
+	unsigned int len;
+	unsigned char* data;
 
-#define APP_STATE_UNREADY	0x31
-#define APP_STATE_READY		0x32
-#define APP_STATE_WORKING	0x33
+	AppMsg()
+	{
+		len = 0;
+		data = NULL;
+	}
+
+	~AppMsg()
+	{
+		delete[] data;
+	}
+
+}AppMsg;
 
 class IApp
 {
@@ -17,9 +30,9 @@ public:
 	virtual void run() = 0;
 	virtual void stop() = 0;
 	virtual void reset() = 0;
-	virtual appState getState() = 0;
-	virtual unsigned int getAppID();
-	virtual void receiveMsg(AppMsg& msg);
+	virtual unsigned char getAppID() = 0;
+	virtual void appMsgReceivedCallback(AppMsg& msg) = 0;
 };
+
 
 #endif

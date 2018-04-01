@@ -22,29 +22,36 @@
 #include "DangerAlarmApp.h"
 #include "IRRemoteApp.h"
 #include "LCDApp.h"
-#include "SensorAppCmd.h"
-
+#include "THHUpdateApp.h"
 
 class SmartHomeSystem : public SampleSystem
 {
 public:
 	SmartHomeSystem();
-	~SmartHomeSystem();
 	void init();
 private:
-	ZigbeeDevice* zigbee;
-	DHT11Device* dht11;
-	TemperatureSensorDevice* temperatureSensor;
-	HumiditySensorDevice* humiditySensor;
-	HeatSensorDevice* heatSensor;
-	SimpleExecuterDevice* switch1;
-	SimpleExecuterDevice* switch2;
-	SimpleExecuterDevice* switch3;
-	SimpleExecuterDevice* alarm;
-	SimpleSensorDevice* mq2;
-	SimpleSensorDevice* fireSensor;
-	LCDDevice* lcd;
-	IRRemoteDevice* irRemote;
+	LCDDevice lcd;
+	ZigbeeDevice zigbee;
+	DHT11Device dht11;
+	TemperatureSensorDevice temperatureSensor;
+	HumiditySensorDevice humiditySensor;
+	HeatSensorDevice heatSensor;
+	SimpleExecuterDevice socket1;
+	SimpleExecuterDevice socket2;
+	SimpleExecuterDevice socket3;
+	SimpleExecuterDevice alarm;
+	SimpleSensorDevice mq2;
+	SimpleSensorDevice fireSensor;
+	IRRemoteDevice irRemote;
+	
+	ZigbeeApp zigbeeApp;
+	LCDApp lcdApp;
+	THHUpdateApp thhUpdateApp;
+	SensorApp sensorApp;
+	SimpleExecuterApp simpleExecuterApp;
+	DangerAlarmApp dangerAlarmApp;
+	IRRemoteApp irRemoteApp;
+	
 };
 
 #endif

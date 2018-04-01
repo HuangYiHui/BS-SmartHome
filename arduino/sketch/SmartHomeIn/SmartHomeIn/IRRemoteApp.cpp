@@ -1,14 +1,13 @@
 #include "IRRemoteApp.h"
 
-IRRemoteApp::IRRemoteApp(unsigned int appID, IRRemoteDevice& irRemote) : SampleApp(appID), irRemote(irRemote)
+IRRemoteApp::IRRemoteApp(IRRemoteDevice& irRemote) : irRemote(irRemote)
 {
-	state = APP_STATE_UNREADY;
+	this->appID = APP_ID_IRREMOTE;
 }
 
 void IRRemoteApp::init()
 {
 	irRemote.start();
-	state = APP_STATE_READY;
 }
 
 void IRRemoteApp::run()

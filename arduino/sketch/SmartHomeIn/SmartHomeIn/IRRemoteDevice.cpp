@@ -1,6 +1,6 @@
 #include "IRRemoteDevice.h"
 
-IRRemoteDevice::IRRemoteDevice(unsigned int deviceID, devicePin pin) : SampleDevice(deviceID), IRrecv(pin)
+IRRemoteDevice::IRRemoteDevice(unsigned char pin) : IRrecv(pin)
 {}
 
 void IRRemoteDevice::start()

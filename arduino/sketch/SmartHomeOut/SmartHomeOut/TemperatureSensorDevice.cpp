@@ -1,16 +1,11 @@
 #include "TemperatureSensorDevice.h"
 
-TemperatureSensorDevice::TemperatureSensorDevice(unsigned int deviceID, DHT11Device& dht11) : 
-	SensorDevice(deviceID),
-	dht11(dht11)
-{
-	state = DEVICE_STATE_CLOSED;
-}
+TemperatureSensorDevice::TemperatureSensorDevice(DHT11Device& dht11) : SensorDevice(SENSOR_ID_OUT_TEMPERATURE), dht11(dht11)
+{}
 	
-void TemperatureSensorDevice::begin()
+void TemperatureSensorDevice::start()
 {
-	dht11.begin();
-	SensorDevice::begin();
+	dht11.start();
 }
 
 float TemperatureSensorDevice::getSensorValue()

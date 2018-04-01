@@ -17,12 +17,10 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SmartHomeIn.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ISystem.h \
  D:\software1\arduino-1.8.5\libraries\MemoryFree/MemoryFree.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IApp.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\AppMsg.h \
  D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SystemCfg.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SystemAPI.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeDevice.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SampleDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\Tool.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorDevice.h \
@@ -44,17 +42,18 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SmartHomeIn.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeApp.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SampleApp.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeAppCmd.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorApp.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorAppCmd.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDAppCmd.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-timer.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-sem.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorApp.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorAppCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SimpleExecuterApp.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SimpleExecuterAppCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DangerAlarmApp.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IRRemoteApp.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDApp.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDAppCmd.h
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\THHUpdateApp.h

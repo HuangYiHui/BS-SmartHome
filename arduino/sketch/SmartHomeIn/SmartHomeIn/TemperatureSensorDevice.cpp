@@ -1,10 +1,7 @@
 #include "TemperatureSensorDevice.h"
 
-TemperatureSensorDevice::TemperatureSensorDevice(unsigned int deviceID, DHT11Device& dht11) : 
-	SensorDevice(deviceID),
-	dht11(dht11)
-{
-}
+TemperatureSensorDevice::TemperatureSensorDevice(DHT11Device& dht11) : SensorDevice(SENSOR_ID_IN_TEMPERATURE), dht11(dht11)
+{}
 	
 void TemperatureSensorDevice::start()
 {

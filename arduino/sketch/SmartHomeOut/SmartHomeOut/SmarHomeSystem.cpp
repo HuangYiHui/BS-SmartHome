@@ -1,44 +1,37 @@
 #include "SmartHomeSystem.h"
 
 SmartHomeSystem::SmartHomeSystem()
-{
-	zigbee = new ZigbeeDevice (DEVICE_ID_OUT_ZIGBEE);
-	dht11 = new DHT11Device (DEVICE_ID_OUT_DHT11, PIN_DHT11_DATA);
-	temperatureSensor = new TemperatureSensorDevice (DEVICE_ID_OUT_TEMPERATURE_SENSOR, *dht11);
-	humiditySensor = new HumiditySensorDevice (DEVICE_ID_OUT_HUMIDITY_SENSOR, *dht11);
-	heatSensor = new HeatSensorDevice (DEVICE_ID_OUT_HEAT_SENSOR, *dht11);
-	fc28 = new SimpleSensorDevice(DEVICE_ID_SOLID_HUMIDITY_SENSOR, PIN_FC28_IN, SENSOR_READ_MODE_ANALOG);
-	gy30 = new GY30Device(DEVICE_ID_LIGHT_INTENSITY_SENSOR);
-	pm25 = new PM25Device(DEVICE_ID_DUST_DENSITY_SENSOR, PIN_PM25_LED, PIN_PM25_VO);
-}
+		:
+	zigbee(),
+	dht11(PIN_DHT11_DATA),
+	temperatureSensor(dht11),
+	humiditySensor(dht11),
+	heatSensor(dht11),
+	fc28(SENSOR_ID_SOLID_HUMIDITY, PIN_FC28_IN, SENSOR_READ_MODE_ANALOG),
+	gy30(SENSOR_ID_LIGHT_INTENSITY),
+	pm25(SENSOR_ID_DUST_DENSITY, PIN_PM25_LED, PIN_PM25_VO),
 
-SmartHomeSystem::~SmartHomeSystem()
-{
-	delete zigbee;
-	delete dht11;
-	delete temperatureSensor;
-	delete humiditySensor;
-	delete heatSensor;
-	delete fc28;
-	delete gy30;
-	delete pm25;
-}
+	zigbeeApp(zigbee),
+	sensorApp(),
+	noticeOutSensorValueApp(dht11, pm25, gy30, fc28)
+{}
+
 
 void SmartHomeSystem::init()
 {
 	Serial.begin(SERAIL_BAUD_RATE);
+	while (!Serial);
 
-	ZigbeeApp* zigbeeApp = new ZigbeeApp(APP_ID_ZIGBEE, *zigbee);
-	SensorApp* sensorApp = new SensorApp(APP_ID_SENSOR);
-//	sensorApp->addSensorTask(temperatureSensor, 2100, true);
-//	sensorApp->addSensorTask(humiditySensor, 2200, true);
-//	sensorApp->addSensorTask(heatSensor, 2300, true);
-	sensorApp->addSensorTask(gy30, 2400, true);
-//	sensorApp->addSensorTask(fc28, 2500, true);
-//	sensorApp->addSensorTask(pm25, 2600, true);
+	sensorApp.addSensorTask(&temperatureSensor, 3000, true);
+	sensorApp.addSensorTask(&humiditySensor, 3100, true);
+	sensorApp.addSensorTask(&heatSensor, 3200, true);
+	sensorApp.addSensorTask(&gy30, 3300, true);
+	sensorApp.addSensorTask(&fc28, 3400, true);
+	sensorApp.addSensorTask(&pm25, 3500, true);
 
-	installApp(zigbeeApp);
-	installApp(sensorApp);
+	installApp(&zigbeeApp);
+	installApp(&sensorApp);
+	installApp(&noticeOutSensorValueApp);
 
 	SampleSystem::init();
 

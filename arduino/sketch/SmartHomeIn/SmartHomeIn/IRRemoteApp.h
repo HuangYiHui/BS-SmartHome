@@ -7,7 +7,7 @@
 class IRRemoteApp : public SampleApp
 {
 public:
-	IRRemoteApp(unsigned int appID, IRRemoteDevice& irRemote);
+	IRRemoteApp(IRRemoteDevice& irRemote);
 	void init();
 	void run();
 private:

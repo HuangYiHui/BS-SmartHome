@@ -7,9 +7,9 @@
 class HumiditySensorDevice : public SensorDevice
 {
 public:
-	HumiditySensorDevice(unsigned int deviceID, DHT11Device& dht11);
-	void begin();
+	HumiditySensorDevice(DHT11Device& dht11);
 	float getSensorValue();
+	void start();
 private:
 	DHT11Device& dht11;
 };

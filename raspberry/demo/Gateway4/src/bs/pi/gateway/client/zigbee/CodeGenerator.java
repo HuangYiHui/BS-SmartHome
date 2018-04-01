@@ -2,6 +2,8 @@ package bs.pi.gateway.client.zigbee;
 
 import java.util.Arrays;
 
+import com.test.Debugger;
+
 //zigbeeÃüÁîbyteÐòÁÐÉú³ÉÆ÷
 public class CodeGenerator {
 
@@ -67,10 +69,10 @@ public class CodeGenerator {
 	
 	public static byte[] appRegister(ZigbeeAppReg reg)
 	{
-		int bsLength = 14 + reg.getAppNumInClusters() + reg.getAppNumOutClusters();
+		int bsLength = 14 + reg.getAppNumInClusters()*2 + reg.getAppNumOutClusters()*2;
 		byte[] bs = new byte[bsLength];
 		bs[0] = SOF;
-		bs[1] = (byte) (0x09 + reg.getAppNumInClusters() + reg.getAppNumOutClusters());
+		bs[1] = (byte) (0x09 + reg.getAppNumInClusters()*2 + reg.getAppNumOutClusters()*2);
 		bs[2] = 0x24;
 		bs[3] = 0x00;
 		bs[4] = reg.getEndpoint();
@@ -81,11 +83,15 @@ public class CodeGenerator {
 		bs[9] = reg.getEndDevVer();
 		bs[10] = reg.getLatencyReq();
 		bs[11] = reg.getAppNumInClusters();
-		System.arraycopy(reg.getAppInClusterList(), 0, bs, 12, reg.getAppNumInClusters());
-		int index = 12 + reg.getAppNumInClusters();
+		byte[] bs1 = reg.getAppInClusterListBytes();
+		if(bs1 != null && bs1.length > 0)
+			System.arraycopy(bs1, 0, bs, 12, bs1.length);
+		int index = 12 + bs1.length;
 		bs[index] = reg.getAppNumOutClusters();
 		index++;
-		System.arraycopy(reg.getAppOutClusterList(), 0, bs, index, reg.getAppNumOutClusters());
+		byte[] bs2 = reg.getAppOutClusterListBytes();
+		if(bs2 != null && bs2.length > 0)
+			System.arraycopy(bs2, 0, bs, index, bs2.length);
 		bs[bs.length-1] = calCrc(Arrays.copyOfRange(bs, 1, bs.length-1));
 		return bs;
 	}
@@ -109,6 +115,9 @@ public class CodeGenerator {
 		bs[13] = (byte) packet.getData().length;
 		System.arraycopy(packet.getData(), 0, bs, 14, packet.getData().length);
 		bs[bs.length-1] = calCrc(Arrays.copyOfRange(bs, 1, bs.length-1));
+		
+		Debugger.printBytes(bs);
+		
 		return bs;
 	}
 	

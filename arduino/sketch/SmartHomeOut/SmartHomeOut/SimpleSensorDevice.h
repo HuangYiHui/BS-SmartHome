@@ -11,12 +11,12 @@
 class SimpleSensorDevice : public SensorDevice
 {
 public:
-	SimpleSensorDevice(unsigned int deviceID, devicePin pin, unsigned char readMode);
+	SimpleSensorDevice(unsigned char deviceID, unsigned char pin, unsigned char readMode);
 	void init();
 	float getSensorValue();
 
 private:
-	devicePin pin;
+	unsigned char pin;
 	unsigned char readMode;
 };
 

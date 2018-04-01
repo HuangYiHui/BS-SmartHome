@@ -6,9 +6,9 @@
 
 //如果使用逻辑电压是3.3V的板子，比如Arduino Due，那么需要连接pin 1的来3.3V代替5v
 
-#include "DHT.h"
+#include "DHT11.h"
 
-#define DHTPIN 13
+#define DHTPIN 9
 #define DHTTYPE DHT11   // DHT 11
 //#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)

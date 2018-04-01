@@ -4,16 +4,18 @@
 #include "SampleApp.h"
 #include "SimpleExecuterDevice.h"
 #include "SimpleExecuterAppCmd.h"
+#include "LCDAppCmd.h"
+#include "LinkedList.h"
 
 class SimpleExecuterApp : public SampleApp
 {
 public:
-	SimpleExecuterApp(unsigned int appID);
+	SimpleExecuterApp();
 	~SimpleExecuterApp();
 	void addExecuter(SimpleExecuterDevice* executer);
 	void init();
-	void run();
-
+	void appMsgReceivedCallback(AppMsg& msg);
+	void noticeLCDSocketStateChange(SimpleExecuterDevice* executer);
 private:
 	LinkedList<SimpleExecuterDevice*> executerList;
 };

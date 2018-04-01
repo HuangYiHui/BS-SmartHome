@@ -1,0 +1,32 @@
+D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\THHUpdateApp.cpp.o: \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\THHUpdateApp.cpp \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\THHUpdateApp.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SampleApp.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IApp.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/binary.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/WCharacter.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/WString.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/HardwareSerial.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Stream.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Print.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Printable.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/USBAPI.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard/pins_arduino.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SystemAPI.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ISystem.h \
+ D:\software1\arduino-1.8.5\libraries\MemoryFree/MemoryFree.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SystemCfg.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeAppCmd.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\Tool.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-timer.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-sem.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DHT11Device.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IDevice.h \
+ D:\software1\arduino-1.8.5\libraries\DHT11/DHT11.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDAppCmd.h

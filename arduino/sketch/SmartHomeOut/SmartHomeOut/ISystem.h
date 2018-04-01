@@ -6,7 +6,6 @@
 
 #include "Arduino.h"
 #include "IApp.h"
-#include "AppMsg.h"
 
 class ISystem
 {
@@ -17,6 +16,6 @@ public:
 	virtual void stop() = 0;
 	virtual void reset() = 0;
 	virtual void installApp(IApp* app) = 0;
-	virtual void sendAppMsg(AppMsg& msg, unsigned int appID) = 0;
+	virtual void sendAppMsg(AppMsg& msg, unsigned char appID) = 0;
 };
 #endif

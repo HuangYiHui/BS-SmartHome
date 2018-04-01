@@ -3,17 +3,12 @@
 
 /**********引脚配置**********/
 #define PIN_DHT11_DATA		2	//温湿度传感器DHT11引脚
-//#define PIN_NOKIA5110_CLK	3	//nokia5110的clk引脚
-//#define PIN_NOKIA5110_DIN	4	//nokia5110的din引脚
-//#define PIN_NOKIA5110_DC	5	//nokia5110的dc引脚
-//#define PIN_NOKIA5110_CE	6	//nokia5110的ce引脚
-//#define PIN_NOKIA5110_RST	7	//nokia5110的rst引脚
 #define PIN_LCD_CS			3
 #define PIN_LCD_RST			4
 #define PIN_LCD_RS			5
 #define PIN_LCD_SDA			6
 #define PIN_LCD_SCK			7
-#define PIN_SWITCH1_OUT		8	//开关1OUT引脚
+#define PIN_SWITCH1_OUT		8	//1OUT引脚
 #define PIN_SWITCH2_OUT		9	//开关2OUT引脚
 #define PIN_SWITCH3_OUT		10	//开关3OUT引脚
 #define PIN_LCD_LED			11
@@ -27,31 +22,28 @@
 #define PIN_LCD_ROM_IN		A5
 /**********引脚配置**********/
 
+#define EXECUTER_ID_SOCKET1	0x01
+#define EXECUTER_ID_SOCKET2	0x02
+#define EXECUTER_ID_SOCKET3	0x03
+#define EXECUTER_ID_ALARM	0x04
 
-/**********设备ID分配**********/
-#define DEVICE_ID_IN_ZIGBEE				0x0030
-#define DEVICE_ID_IN_DHT11				0x0031
-#define DEVICE_ID_IN_TEMPERATURE_SENSOR	0x0032
-#define DEVICE_ID_IN_HUMIDITY_SENSOR	0x0033
-#define DEVICE_ID_IN_HEAT_SENSOR		0x0034
-#define DEVICE_ID_HARMFUL_GAS_SENSOR	0x0035
-#define DEVICE_ID_SWITCH1				0x0036
-#define DEVICE_ID_SWITCH2				0x0037
-#define DEVICE_ID_SWITCH3				0x0038
-#define DEVICE_ID_LCD					0x0039
-#define DEVICE_ID_ALARM					0x003a
-#define DEVICE_ID_FIRE_SENSOR			0x003b
-#define DEVICE_ID_IR_REMOTE				0x003c
-/**********设备ID分配**********/
+/********传感器ID分配*********/
+#define SENSOR_ID_IN_TEMPERATURE	0x01
+#define SENSOR_ID_IN_HUMIDITY		0x02
+#define SENSOR_ID_IN_HEAT			0x03
+#define	SENSOR_ID_HARMFUL_GAS		0x04
+#define	SENSOR_ID_FIRE				0x05
+/********传感器ID分配*********/
 
 
 /**********应用ID分配**********/
-#define APP_ID_ZIGBEE				0x0030
-#define APP_ID_SENSOR				0x0031
-#define APP_ID_DANGER_ALARM			0x0032
-#define APP_ID_SWITCHS				0x0033
-#define APP_ID_IRREMOTE				0x0034
-#define APP_ID_LCD					0x0035
+#define APP_ID_IN_ZIGBEE			0x30
+#define APP_ID_IN_SENSOR			0x31
+#define APP_ID_DANGER_ALARM			0x32
+#define APP_ID_SIMPLE_EXECUTER		0x33
+#define APP_ID_IRREMOTE				0x34
+#define APP_ID_LCD					0x35
+#define APP_ID_THH_UPDATA			0x36
 
 /**********应用ID分配**********/
 

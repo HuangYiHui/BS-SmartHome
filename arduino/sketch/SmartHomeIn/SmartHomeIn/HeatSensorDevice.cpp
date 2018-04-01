@@ -1,10 +1,7 @@
 #include "HeatSensorDevice.h"
 
-HeatSensorDevice::HeatSensorDevice(unsigned int deviceID, DHT11Device& dht11) : 
-	SensorDevice(deviceID),
-	dht11(dht11)
-{
-}
+HeatSensorDevice::HeatSensorDevice(DHT11Device& dht11) : SensorDevice(SENSOR_ID_IN_HEAT), dht11(dht11)
+{}
 
 float HeatSensorDevice::getSensorValue()
 {

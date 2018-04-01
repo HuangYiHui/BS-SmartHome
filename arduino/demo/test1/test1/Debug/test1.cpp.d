@@ -11,4 +11,8 @@ D:\software\Temp\VMBuilds\test1\uno\Debug\test1.cpp.o: \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/USBAPI.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard/pins_arduino.h \
- D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h
+ D:\software1\arduino-1.8.5\libraries\U8glib/U8glib.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Print.h \
+ D:\software1\arduino-1.8.5\libraries\U8glib/utility/u8g.h \
+ D:\software\Temp\VMBuilds\test1\uno\Debug\Tool.h \
+ D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h

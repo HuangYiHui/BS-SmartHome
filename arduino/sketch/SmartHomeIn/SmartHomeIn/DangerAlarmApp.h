@@ -9,7 +9,7 @@
 class DangerAlarmApp : public SampleApp
 {
 public:
-	DangerAlarmApp(unsigned int appID, SimpleSensorDevice& fireSensor, SimpleSensorDevice& harmfulGasSensor, SimpleExecuterDevice& alarm);
+	DangerAlarmApp(SimpleSensorDevice& fireSensor, SimpleSensorDevice& harmfulGasSensor, SimpleExecuterDevice& alarm);
 	void init();
 	void run();
 private:

@@ -1,21 +1,21 @@
 #ifndef _BS_DHT11_DEVICE_H_
 #define _BS_DHT11_DEVICE_H_
 
-#include "SampleDevice.h"
+#include "IDevice.h"
 #include "DHT11.h"
 
 class DHT11Device : public SampleDevice
 {
 private:
-	char pin;
+	unsigned char pin;
 	DHT11 dht11;
-
+	float calcHeatIndex(float t, float h);
 public:
-	DHT11Device(unsigned int deviceID, devicePin pin);
-	void begin();
+	DHT11Device(unsigned char pin);
 	float readTemperature();
 	float readHumidity();
 	float readHeatIndex();
+	void readSensorValue(float* results);
 };
 
 #endif

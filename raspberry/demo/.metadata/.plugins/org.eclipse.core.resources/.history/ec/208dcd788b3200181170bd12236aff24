@@ -1,0 +1,12 @@
+package bs.pi.gateway.msg;
+
+public class QueryZigbeeIsOnlineMsg implements IMsg {
+
+	public final static String MSG_NAME = "QueryZigbeeIsOnlineMsg";
+	
+	@Override
+	public String getName() {
+		return MSG_NAME;
+	}
+
+}

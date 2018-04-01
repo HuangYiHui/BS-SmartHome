@@ -15,5 +15,4 @@ D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SampleSystem.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\ISystem.h \
  D:\software1\arduino-1.8.5\libraries\MemoryFree/MemoryFree.h \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\IApp.h \
- D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\AppMsg.h \
  D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h

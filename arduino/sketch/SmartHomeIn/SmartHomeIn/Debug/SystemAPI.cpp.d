@@ -14,5 +14,4 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SystemAPI.cpp.o: \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/USBAPI.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\variants\standard/pins_arduino.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IApp.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\AppMsg.h
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IApp.h

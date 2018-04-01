@@ -1,10 +1,7 @@
 #include "HumiditySensorDevice.h"
 
-HumiditySensorDevice::HumiditySensorDevice(unsigned int deviceID, DHT11Device& dht11) : 
-	SensorDevice(deviceID),
-	dht11(dht11)
-{
-}
+HumiditySensorDevice::HumiditySensorDevice(DHT11Device& dht11) : SensorDevice(SENSOR_ID_IN_HUMIDITY), dht11(dht11)
+{}
 
 float HumiditySensorDevice::getSensorValue()
 {

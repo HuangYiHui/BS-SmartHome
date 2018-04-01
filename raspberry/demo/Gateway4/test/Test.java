@@ -1,5 +1,6 @@
 import java.util.HashMap;
 
+import com.sun.org.apache.bcel.internal.util.ByteSequence;
 import com.test.Debugger;
 
 import net.sf.json.JSONObject;
@@ -23,7 +24,8 @@ public class Test {
 	}
 	
 	public static void test6() throws Exception{
-		System.out.printf("%x", Tool.bytesToShort((byte)0xfe, (byte)0x57));
+		byte bs[] = Tool.floatToBytes((float) 123.456);
+		System.out.printf("%x,%x,%x,%x", bs[0], bs[1],bs[2], bs[3]);
 	}
 	
 	public static void test5() throws Exception{

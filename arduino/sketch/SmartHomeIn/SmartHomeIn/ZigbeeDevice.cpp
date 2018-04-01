@@ -1,66 +1,107 @@
 #include "ZigbeeDevice.h"
 
-ZigbeeDevice::ZigbeeDevice(unsigned int deviceID) : SampleDevice(deviceID)
+ZigbeeDevice::ZigbeeDevice()
 {
+	receiveTimeout = 200;
+}
+
+void ZigbeeDevice::sendFlashCmdBytes(unsigned int address, unsigned int len)
+{
+	unsigned char* buffer = new unsigned char[len];
+	Tool::readBytesFromFlash(address, buffer, len);
+	Serial.write(buffer, len);
+	delete[] buffer;
+}
+
+bool ZigbeeDevice::startUpWithoutLastState()
+{
+	sendFlashCmdBytes((unsigned int)CMD_STARTUP_WITHOUT_LAST_STATE_BYTES, 8);
+	ZBPacketReceive packet;
+	receive(packet, 100);
+	if(packet.len == 0x01 && packet.cmd1 == 0x66 && packet.cmd2 == 0x05 && packet.data[0] == 0x00)
+		return true;
+	else
+		return false;
+}
+
+bool ZigbeeDevice::restart()
+{
+	sendFlashCmdBytes((unsigned int)CMD_DEVICE_RESET_BYTES, 6);
+	ZBPacketReceive packet;
+	receive(packet, 2000);
+	if(packet.len == 0x06 && packet.cmd1 == 0x41 && packet.cmd2 == 0x80)
+		return true;
+	else
+		return false;
+}
+
+bool ZigbeeDevice::setDeviceType()
+{
+	sendFlashCmdBytes((unsigned int)CMD_DEVICE_TYPE_SET_BYTES, 8);
+	ZBPacketReceive packet;
+	receive(packet, 100);
+	if(packet.len == 0x01 && packet.cmd1 == 0x61 && packet.cmd2 == 0x09 && packet.data[0] == 0x00)
+		return true;
+	else
+		return false;
+}
+
+bool ZigbeeDevice::setDirectCB()
+{
+	sendFlashCmdBytes((unsigned int)CMD_ZDO_DIRECT_CB_BYTES, 8);
+	ZBPacketReceive packet;
+	receive(packet, 100);
+	if(packet.len == 0x01 && packet.cmd1 == 0x66 && packet.cmd2 == 0x05 && packet.data[0] == 0x00)
+		return true;
+	else
+		return false;
+}
+
+bool ZigbeeDevice::registerApp()
+{
+	sendFlashCmdBytes((unsigned int)CMD_APP_REGISTER_BYTES, 18);
+	ZBPacketReceive packet;
+	receive(packet, 100);
+	if(packet.len == 0x01 && packet.cmd1 == 0x64 && packet.cmd2 == 0x00 && packet.data[0] == 0xb8)
+		return true;
+	else
+		return false;
+}
+bool ZigbeeDevice::startFromApp()
+{
+	sendFlashCmdBytes((unsigned int)CMD_STARTUP_FROM_APP_BYTES, 7);
+	return true;
 }
 
 void ZigbeeDevice::start()
 {
-	unsigned char buffer[14];
+	//清空串口缓存
+	while(Serial.available()>0)
+		Serial.read();
 
-	//重启，时间太短不行，比如1000
-	Tool::readBytesFromFlash((unsigned int)CMD_DEVICE_RESET_BYTES, buffer, 6);
-	Serial.write(buffer, 6);
-	delay(2000);
-	//rec(1500);
+	unsigned char buffer[14];
+	ZBPacketReceive packet;
 
 	//设置不从上次状态启动
-	Tool::readBytesFromFlash((unsigned int)CMD_STARTUP_WITHOUT_LAST_STATE_BYTES, buffer, 8);
-	Serial.write(buffer, 8);
-	delay(500);
-	//rec(300);
-
+	startUpWithoutLastState();
 	//重启
-	Tool::readBytesFromFlash((unsigned int)CMD_DEVICE_RESET_BYTES, buffer, 6);
-	Serial.write(buffer, 6);
-	delay(2000);
-	//rec(1500);
+	restart();
 	
-	//设置0x00000800信道，默认也是0x00000800信道
-	Tool::readBytesFromFlash((unsigned int)CMD_CHANNEL_SET_BYTES, buffer, 11);
-	Serial.write(buffer, 11);
-	delay(500);
-	//rec(300);
-
-	//设置工作子网
-	Tool::readBytesFromFlash((unsigned int)CMD_PANID_SET_BYTES, buffer, 9);
-	Serial.write(buffer, 9);
-	delay(500);
-	//rec(300);
+	//设置信道，使用默认的0x00000800
+	//设置工作子网,使用默认的0xffff
 
 	//设置zigbee设备类型（协调器/路由器/终端）
-	Tool::readBytesFromFlash((unsigned int)CMD_DEVICE_TYPE_SET_BYTES, buffer, 8);
-	Serial.write(buffer, 8);
-	delay(500);
-	//rec(300);
+	setDeviceType();
 
 	//打开设备mac地址或网络地址查寻回显开关
-	Tool::readBytesFromFlash((unsigned int)CMD_ZDO_DIRECT_CB_BYTES, buffer, 8);
-	Serial.write(buffer, 8);
-	delay(500);
+	setDirectCB();
 	//rec(300);
 	
 	//注册应用
-	Tool::readBytesFromFlash((unsigned int)CMD_APP_REGISTER_BYTES, buffer, 14);
-	Serial.write(buffer, 14);
-	delay(500);
+	registerApp();
 
-	Tool::readBytesFromFlash((unsigned int)CMD_STARTUP_FROM_APP_BYTES, buffer, 7);
-	//Serial.println("------start--------");
 	//建立网络或者连接网络
-	Serial.write(buffer, 7);
-	//rec(2500);
-	delay(2000);
+	startFromApp();
 }
 
 
@@ -86,20 +127,29 @@ bool ZigbeeDevice::isDataComing()
 	return false;
 }
 
+void ZigbeeDevice::setReceiveTimeout(unsigned int receiveTimeout)
+{
+	this->receiveTimeout = receiveTimeout;
+}
+
 void ZigbeeDevice::receive(ZBPacketReceive& packet)
+{
+	receive(packet, receiveTimeout);
+}
+
+void ZigbeeDevice::receive(ZBPacketReceive& packet, unsigned int timeout)
 {
 	//判断信息包是否开始
 	//返回默认msg，表示读取到了无效的dataPacket（len=0）
 	bool isBegin = false;
 	unsigned long cTime = millis();
-	while((millis() - cTime) < 300)
-	{
+	do{
 		if(Serial.read() == SOF)
 		{
 			isBegin = true;
 			break;
 		}
-	}
+	}while((millis() - cTime) < timeout);
 
 	if( ! isBegin)
 	{

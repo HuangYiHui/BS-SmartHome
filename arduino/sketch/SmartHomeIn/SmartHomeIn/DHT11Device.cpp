@@ -1,9 +1,10 @@
 #include "DHT11Device.h"
 
-DHT11Device::DHT11Device(unsigned int deviceID, devicePin pin) : SampleDevice(deviceID)
+DHT11Device::DHT11Device(unsigned char pin)
 {
 	this->pin = pin;
 }
+
 
 float DHT11Device::readTemperature()
 {
@@ -19,7 +20,6 @@ float DHT11Device::readHumidity()
 
 float DHT11Device::readHeatIndex()
 {
-	
 	dht11.read(pin);
 	float t = dht11.temperature;
 	float h = dht11.humidity;

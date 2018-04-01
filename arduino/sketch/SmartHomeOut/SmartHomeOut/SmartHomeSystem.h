@@ -18,23 +18,26 @@
 #include "ZigbeeApp.h"
 #include "SensorApp.h"
 #include "SensorAppCmd.h"
-
+#include "NoticeOutSensorValueApp.h"
 
 class SmartHomeSystem : public SampleSystem
 {
 public:
 	SmartHomeSystem();
-	~SmartHomeSystem();
 	void init();
 private:
-	ZigbeeDevice* zigbee;
-	DHT11Device* dht11;
-	TemperatureSensorDevice* temperatureSensor;
-	HumiditySensorDevice* humiditySensor;
-	HeatSensorDevice* heatSensor;
-	SimpleSensorDevice* fc28;
-	GY30Device* gy30;
-	PM25Device* pm25;
+	ZigbeeDevice zigbee;
+	DHT11Device dht11;
+	TemperatureSensorDevice temperatureSensor;
+	HumiditySensorDevice humiditySensor;
+	HeatSensorDevice heatSensor;
+	SimpleSensorDevice fc28;
+	GY30Device gy30;
+	PM25Device pm25;
+
+	ZigbeeApp zigbeeApp;
+	NoticeOutSensorValueApp noticeOutSensorValueApp;
+	SensorApp sensorApp;
 };
 
 #endif

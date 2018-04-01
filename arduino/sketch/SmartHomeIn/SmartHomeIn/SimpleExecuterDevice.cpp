@@ -1,10 +1,16 @@
 #include "SimpleExecuterDevice.h"
 
-SimpleExecuterDevice::SimpleExecuterDevice(unsigned int deviceID, devicePin pin, unsigned char logicLevelOpen) : SampleDevice(deviceID)
+SimpleExecuterDevice::SimpleExecuterDevice(unsigned char executerID, unsigned char pin, unsigned char logicLevelOpen)
 {
+	this->executerID = executerID;
 	this->pin = pin;
 	this->logicLevelOpen = logicLevelOpen;
 	this->isSimpleExecuterOpened = false;
+}
+
+unsigned char SimpleExecuterDevice::getExecuterID()
+{
+	return executerID;
 }
 
 void SimpleExecuterDevice::start()

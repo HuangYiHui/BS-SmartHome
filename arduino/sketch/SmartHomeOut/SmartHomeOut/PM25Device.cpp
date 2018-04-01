@@ -1,16 +1,15 @@
 #include "PM25Device.h"
 
-PM25Device::PM25Device(unsigned int deviceID, devicePin ledPin, devicePin voPin) : SensorDevice(deviceID)
+PM25Device::PM25Device(unsigned int deviceID, unsigned char ledPin, unsigned char voPin) : SensorDevice(deviceID)
 {
 	this->ledPin = ledPin;
 	this->voPin = voPin;
 }
 
-void PM25Device::init()
+void PM25Device::start()
 {
 	pinMode(ledPin, OUTPUT);
 	pinMode(voPin, INPUT);
-	state = DEVICE_STATE_READY;
 }
 
 float PM25Device::getSensorValue()

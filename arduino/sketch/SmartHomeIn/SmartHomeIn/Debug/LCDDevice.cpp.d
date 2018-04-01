@@ -7,7 +7,6 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDDevice.cpp.o: \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/WString.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Printable.h \
  D:\software1\arduino-1.8.5\libraries\U8glib/utility/u8g.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SampleDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IDevice.h \
  D:\software1\arduino-1.8.5\libraries\MemoryFree/MemoryFree.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Arduino.h \

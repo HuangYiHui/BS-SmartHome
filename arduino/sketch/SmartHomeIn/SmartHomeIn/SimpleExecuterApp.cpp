@@ -1,7 +1,8 @@
 #include "SimpleExecuterApp.h"
 
-SimpleExecuterApp::SimpleExecuterApp(unsigned int appID) : SampleApp(appID)
+SimpleExecuterApp::SimpleExecuterApp()
 {
+	this->appID = APP_ID_SIMPLE_EXECUTER;
 }
 
 SimpleExecuterApp::~SimpleExecuterApp()
@@ -25,71 +26,88 @@ void SimpleExecuterApp::init()
 	for(int i=0; i<executerList.size();i++){
 		executerList.get(i)->start();
 	}
-	state = APP_STATE_READY;
 }
 
-void SimpleExecuterApp::run()
+void SimpleExecuterApp::appMsgReceivedCallback(AppMsg& msg)
 {
-	while(msgList.size()>0){
-
-		AppMsg* msg = msgList.remove(0);
-		if(msg->len < 2){
-			delete msg;
-			return;
-		}
+	if(msg.len < 1)
+		return;
 	
-		int cmd = msg->data[0] + 256 * msg->data[1];
-		unsigned int executerID;
-		SimpleExecuterDevice* executer = NULL;
-		if(CMD_GET_SIMPLE_EXECUTER_STATUS == cmd ||
-			CMD_OPEN_SIMPLE_EXECUTER == cmd ||
-			CMD_CLOSE_SIMPLE_EXECUTER == cmd)
-		{
-			if(msg->len < 4){
-				delete msg;
-				return;
-			}
+	unsigned char cmd = msg.data[0];
+	unsigned char executerID = msg.data[1];
+	SimpleExecuterDevice* executer = NULL;
+	if(CMD_GET_SIMPLE_EXECUTER_STATE == cmd ||
+		CMD_OPEN_SIMPLE_EXECUTER == cmd ||
+		CMD_CLOSE_SIMPLE_EXECUTER == cmd)
+	{
+		if(msg.len < 2)
+			return;
 
-			executerID = msg->data[2] + 256 * msg->data[3];
-
-			for(int i=0; i<executerList.size();i++){
-				if(executerList.get(i)->getDeviceID() == executerID){
-					executer = executerList.get(i);
-					break;
-				}
-			}
-
-			if(executer == NULL){
-				delete msg;
-				return;
+		for(int i=0; i<executerList.size();i++){
+			if(executerList.get(i)->getExecuterID() == executerID){
+				executer = executerList.get(i);
+				break;
 			}
 		}
 
-		if(CMD_GET_SIMPLE_EXECUTER_STATUS == cmd){
-			if(msg->len != 6){
-				delete msg;
-				return;
-			}
-			unsigned int appID = msg->data[4] + 256 * msg->data[5];
+		if(executer == NULL)
+			return;
+	}
 
-			AppMsg responseMsg;
-			responseMsg.len = 7;
-			responseMsg.data = new unsigned char[7];
+	if(CMD_GET_SIMPLE_EXECUTER_STATE == cmd){
+		if(msg.len != 3)
+			return;
 
-			//CMD_RSPONSE_TO_GET_EXECUTER_STATUS, 2byte的命令头 + 2byte的目标appID + 2byte的执行器标志 + 1byte的执行器状态"
-			Tool::intTo2Bytes(CMD_RSPONSE_TO_GET_EXECUTER_STATUS , &(responseMsg.data[0]));
-			Tool::intTo2Bytes(appID , &(responseMsg.data[2]));
-			Tool::intTo2Bytes(executer->getDeviceID() , &(responseMsg.data[4]));
-			if(executer->isOpened())
-				responseMsg.data[6] = EXECUTER_STATUS_OPENED;
-			else
-				responseMsg.data[6] = EXECUTER_STATUS_CLOSED;
-			sendMsgToZigbee(responseMsg);
-		}else if(CMD_OPEN_SIMPLE_EXECUTER == cmd){
-			executer->openExecuter();
-		}else if(CMD_CLOSE_SIMPLE_EXECUTER == cmd){
-			executer->closeExecuter();
-		}
-		delete msg;
+		AppMsg responseMsg;
+		responseMsg.len = 3;
+		responseMsg.data = new unsigned char[3];
+		//回复执行器状态命令，格式："1byte命令头+1byte执行器设备ID+1byte状态"
+		responseMsg.data[0] = CMD_RESPONSE_EXECUTER_STATE;
+		responseMsg.data[1] = executer->getExecuterID();
+		if(executer->isOpened())
+			responseMsg.data[2] = FLAG_EXECUTER_ON;
+		else
+			responseMsg.data[2] = FLAG_EXECUTER_OFF;
+
+		unsigned char appID = msg.data[2];
+		sendMsg(responseMsg, appID);
+
+	}else if(CMD_OPEN_SIMPLE_EXECUTER == cmd){
+		executer->openExecuter();
+		noticeLCDSocketStateChange(executer);
+	}else if(CMD_CLOSE_SIMPLE_EXECUTER == cmd){
+		executer->closeExecuter();
+		noticeLCDSocketStateChange(executer);
+	}
+}
+
+void SimpleExecuterApp::noticeLCDSocketStateChange(SimpleExecuterDevice* executer)
+{
+	AppMsg msg;
+	msg.len = 3;
+	msg.data = new unsigned char[3];
+	msg.data[0] = CMD_NOTICE_SOCKET_STATE_CHANGE;
+	bool isOpend = executer->isOpened();
+	if(executer->getExecuterID() == 0x01){
+		msg.data[1] = FLAG_SOCKET1;
+		if(isOpend)
+			msg.data[2] = FLAG_SOCKET_ON;
+		else
+			msg.data[2] = FLAG_SOCKET_OFF;
+		sendMsg(msg, APP_ID_LCD);
+	}else if(executer->getExecuterID() == 0x02){
+		msg.data[1] = FLAG_SOCKET2;
+		if(isOpend)
+			msg.data[2] = FLAG_SOCKET_ON;
+		else
+			msg.data[2] = FLAG_SOCKET_OFF;
+		sendMsg(msg, APP_ID_LCD);
+	}else if(executer->getExecuterID() == 0x03){
+		msg.data[1] = FLAG_SOCKET3;
+		if(isOpend)
+			msg.data[2] = FLAG_SOCKET_ON;
+		else
+			msg.data[2] = FLAG_SOCKET_OFF;
+		sendMsg(msg, APP_ID_LCD);
 	}
 }

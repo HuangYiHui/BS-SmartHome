@@ -2,7 +2,6 @@
 #define _BS_SYSTEM_API_H_
 
 #include "ISystem.h"
-#include "AppMsg.h"
 
 class SystemAPI
 {

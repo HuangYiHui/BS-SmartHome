@@ -18,6 +18,9 @@ void SampleSystem::init()
 
 void SampleSystem::start()
 {
+//	Serial.print(F("start memory = "));
+//	Serial.println(freeMemory());
+
 	while(true)
 	{
 		for(int i=0;i<appList.size();i++){
@@ -47,14 +50,14 @@ void SampleSystem::installApp(IApp* app)
 }
 
 
-void SampleSystem::sendAppMsg(AppMsg& msg, unsigned int appID)
+void SampleSystem::sendAppMsg(AppMsg& msg, unsigned char appID)
 {
 	IApp* app = NULL;
 	for(int i=0;i<appList.size();i++)
 	{
 		app = appList.get(i);
 		if(app->getAppID() == appID){
-			app->receiveMsg(msg);
+			app->appMsgReceivedCallback(msg);
 		}
 	}
 }

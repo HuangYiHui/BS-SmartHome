@@ -1,0 +1,33 @@
+#zigbee信道设置，4byte，使用16进制表示
+channel = 0x00000800
+#zigbee子网络设置，2byte，使用16进制表示
+PANID = 0xFFFF
+#zigbee设备类型设置，1byte，使用16进制表示,00为协调器，01为路由器，02为端设备
+deviceType = 0x00
+
+clusterID = 0x0000
+options = 0x80
+radius = 0x00
+
+##########通信应用注册配置开始############
+#配置都用16进制表示
+
+reg_endpoint = 0x55
+reg_appProfID = 0x0000
+reg_appDeviceID = 0x0000
+reg_endDevVer = 0x00
+reg_latencyReq = 0x00
+reg_appNumInClusters = 0x00
+reg_appInClusterList = 0x00
+reg_appNumOutClusters = 0x00
+reg_appOutClusterList = 0x00
+
+##########通信应用注册配置开结束###########
+
+oZigbeeCount = 2
+//in
+oZigbeeIEEEAddr1 = 0x00124B001110D573
+appIDs1 = 0x0035,0x0002,0x0003,0x00f1
+//out
+oZigbeeIEEEAddr2 = 0x00124B001110DB66
+appIDs2 = 0x0004,0x0005,0x0033

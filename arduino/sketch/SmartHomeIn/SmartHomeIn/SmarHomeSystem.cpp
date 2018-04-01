@@ -1,39 +1,29 @@
 #include "SmartHomeSystem.h"
 
-SmartHomeSystem::SmartHomeSystem()
+SmartHomeSystem::SmartHomeSystem() : 
+	lcd(PIN_LCD_CS, PIN_LCD_RST, PIN_LCD_RS, PIN_LCD_SDA, PIN_LCD_SCK),
+	zigbee(),
+	dht11(PIN_DHT11_DATA),
+	temperatureSensor(dht11),
+	humiditySensor(dht11),
+	heatSensor(dht11),
+	socket1(EXECUTER_ID_SOCKET1, PIN_SWITCH1_OUT, LOGIC_LEVEL_OPEN_LOW),
+	socket2(EXECUTER_ID_SOCKET2, PIN_SWITCH2_OUT, LOGIC_LEVEL_OPEN_LOW),
+	socket3(EXECUTER_ID_SOCKET3, PIN_SWITCH3_OUT, LOGIC_LEVEL_OPEN_LOW),
+	alarm(EXECUTER_ID_ALARM, PIN_ALARM_OUT, LOGIC_LEVEL_OPEN_HIGH),
+	mq2(SENSOR_ID_HARMFUL_GAS, PIN_MQ2_DO, SENSOR_READ_MODE_ANALOG),
+	fireSensor(SENSOR_ID_FIRE, PIN_FIRE_SENSOR_DO, SENSOR_READ_MODE_DIGITAL),
+	irRemote(PIN_IR_REMOTE_OUT),
+
+	zigbeeApp(zigbee),
+	sensorApp(),
+	simpleExecuterApp(),
+	dangerAlarmApp(fireSensor, mq2, alarm),
+	irRemoteApp(irRemote),
+	lcdApp(lcd),
+	thhUpdateApp(dht11)
 {
-	zigbee = new ZigbeeDevice (DEVICE_ID_IN_ZIGBEE);
-	dht11 = new DHT11Device (DEVICE_ID_IN_DHT11, PIN_DHT11_DATA);
-	temperatureSensor = new TemperatureSensorDevice (DEVICE_ID_IN_TEMPERATURE_SENSOR, *dht11);
-	humiditySensor = new HumiditySensorDevice (DEVICE_ID_IN_HUMIDITY_SENSOR, *dht11);
-	heatSensor = new HeatSensorDevice (DEVICE_ID_IN_HEAT_SENSOR, *dht11);
-
-	switch1 = new SimpleExecuterDevice (DEVICE_ID_SWITCH1, PIN_SWITCH1_OUT, LOGIC_LEVEL_OPEN_LOW);
-	switch2 = new SimpleExecuterDevice (DEVICE_ID_SWITCH2, PIN_SWITCH2_OUT, LOGIC_LEVEL_OPEN_LOW);
-	switch3 = new SimpleExecuterDevice (DEVICE_ID_SWITCH3, PIN_SWITCH3_OUT, LOGIC_LEVEL_OPEN_LOW);
-
-	alarm = new SimpleExecuterDevice (DEVICE_ID_ALARM, PIN_ALARM_OUT, LOGIC_LEVEL_OPEN_HIGH);
-	mq2 = new SimpleSensorDevice (DEVICE_ID_HARMFUL_GAS_SENSOR, PIN_MQ2_DO, SENSOR_READ_MODE_ANALOG);
-	fireSensor =new SimpleSensorDevice (DEVICE_ID_FIRE_SENSOR, PIN_FIRE_SENSOR_DO, SENSOR_READ_MODE_DIGITAL);
-	lcd = new LCDDevice (DEVICE_ID_LCD, PIN_LCD_CS, PIN_LCD_RST, PIN_LCD_RS, PIN_LCD_SDA, PIN_LCD_SCK);
-	irRemote = new IRRemoteDevice (DEVICE_ID_IR_REMOTE, PIN_IR_REMOTE_OUT);
-}
-
-SmartHomeSystem::~SmartHomeSystem()
-{
-	delete zigbee;
-	delete dht11;
-	delete temperatureSensor;
-	delete humiditySensor;
-	delete heatSensor;
-	delete switch1;
-	delete switch2;
-	delete switch3;
-	delete alarm;
-	delete mq2;
-	delete fireSensor;
-	delete lcd;
-	delete irRemote;
+	
 }
 
 void SmartHomeSystem::init()
@@ -41,32 +31,26 @@ void SmartHomeSystem::init()
 	Serial.begin(SERAIL_BAUD_RATE);
 	while (!Serial);
 
-	ZigbeeApp* zigbeeApp = new ZigbeeApp(APP_ID_ZIGBEE, *zigbee);
+	sensorApp.addSensorTask(&temperatureSensor, 6000, true);
+	sensorApp.addSensorTask(&humiditySensor, 6000, true);
+	sensorApp.addSensorTask(&heatSensor, 6000, true);
 	
-	SensorApp* sensorApp = new SensorApp(APP_ID_SENSOR);
-	sensorApp->addSensorTask(temperatureSensor, 3000, true);
-	sensorApp->addSensorTask(humiditySensor, 3000, true);
-	sensorApp->addSensorTask(heatSensor, 3000, true);
-	SimpleExecuterApp* switchsApp = new SimpleExecuterApp(APP_ID_SWITCHS);
-	switchsApp->addExecuter(switch1);
-	switchsApp->addExecuter(switch2);
-	switchsApp->addExecuter(switch3);
+	simpleExecuterApp.addExecuter(&socket1);
+	simpleExecuterApp.addExecuter(&socket2);
+	simpleExecuterApp.addExecuter(&socket3);
 
-	DangerAlarmApp* dangerAlarmApp = new DangerAlarmApp(APP_ID_DANGER_ALARM, *fireSensor, *mq2, *alarm);
-	IRRemoteApp* irRemoteApp = new IRRemoteApp(APP_ID_IRREMOTE, *irRemote);
-	LCDApp* lcdApp = new LCDApp(APP_ID_LCD, *lcd, *dht11);
+	installApp(&zigbeeApp);
+	installApp(&lcdApp);
+	installApp(&thhUpdateApp);
+	installApp(&sensorApp);
 
-	installApp(zigbeeApp);
-	installApp(sensorApp);
-	installApp(switchsApp);
-	installApp(dangerAlarmApp);
-	installApp(irRemoteApp);
-	installApp(lcdApp);
+	installApp(&simpleExecuterApp);
+	installApp(&dangerAlarmApp);
+	installApp(&irRemoteApp);
 
 	SampleSystem::init();
 
-	//345
-//	Serial.print("inited memory = ");
+//	Serial.print(F("inited memory = "));
 //	Serial.println(freeMemory());
 }
 SmartHomeSystem curSystem;

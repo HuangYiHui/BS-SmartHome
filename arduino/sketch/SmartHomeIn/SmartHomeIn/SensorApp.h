@@ -4,7 +4,9 @@
 #include "SampleApp.h"
 #include "SensorDevice.h"
 #include "SensorAppCmd.h"
+#include "ZigbeeAppCmd.h"
 #include "pt.h"
+#include "LinkedList.h"
 
 struct SensorTask
 {
@@ -30,16 +32,15 @@ struct SensorTask
 class SensorApp : public SampleApp
 {
 public:
-	SensorApp(unsigned int appID);
+	SensorApp();
 	~SensorApp();
 	void addSensorTask(SensorDevice* sensor, unsigned int uploadInterval, bool isCirCularlyUploadSensorValue);
 	void init();
 	void run();
 	void setUploadInterval(unsigned int interval);
-
+	void appMsgReceivedCallback(AppMsg& msg);
 private:
 	LinkedList<SensorTask*> sensorTaskList;
-	void prcAppMsg();
 	void uploadSensorValue(SensorDevice* sensor);
 	int runCirCularlyUploadSensorValueTask(SensorTask* task);
 };

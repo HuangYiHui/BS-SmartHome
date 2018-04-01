@@ -9,8 +9,8 @@
 class GY30Device : public SensorDevice
 {
 public:
-	GY30Device(unsigned int deviceID);
-	void init();
+	GY30Device(unsigned char sensorID);
+	void start();
 	float getSensorValue();
 
 private:

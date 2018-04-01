@@ -82,7 +82,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AppMsg.h" />
     <ClInclude Include="DHT11Device.h" />
     <ClInclude Include="GY30Device.h" />
     <ClInclude Include="HeatSensorDevice.h" />
@@ -92,7 +91,6 @@
     <ClInclude Include="ISystem.h" />
     <ClInclude Include="PM25Device.h" />
     <ClInclude Include="SampleApp.h" />
-    <ClInclude Include="SampleDevice.h" />
     <ClInclude Include="SampleSystem.h" />
     <ClInclude Include="SensorApp.h" />
     <ClInclude Include="SensorAppCmd.h" />
@@ -103,6 +101,7 @@
     <ClInclude Include="SystemAPI.h" />
     <ClInclude Include="SystemCfg.h" />
     <ClInclude Include="TemperatureSensorDevice.h" />
+    <ClInclude Include="NoticeOutSensorValueApp.h" />
     <ClInclude Include="Tool.h" />
     <ClInclude Include="ZigbeeApp.h" />
     <ClInclude Include="ZigbeeAppCmd.h" />
@@ -114,12 +113,11 @@
     <ClCompile Include="GY30Device.cpp" />
     <ClCompile Include="HeatSensorDevice.cpp" />
     <ClCompile Include="HumiditySensorDevice.cpp" />
+    <ClCompile Include="NoticeOutSensorValueApp.cpp" />
     <ClCompile Include="PM25Device.cpp" />
     <ClCompile Include="SampleApp.cpp" />
-    <ClCompile Include="SampleDevice.cpp" />
     <ClCompile Include="SampleSystem.cpp" />
     <ClCompile Include="SensorApp.cpp" />
-    <ClCompile Include="SensorDevice.cpp" />
     <ClCompile Include="SimpleSensorDevice.cpp" />
     <ClCompile Include="SmarHomeSystem.cpp" />
     <ClCompile Include="SystemAPI.cpp" />

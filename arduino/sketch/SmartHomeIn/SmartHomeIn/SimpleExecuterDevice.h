@@ -4,7 +4,7 @@
 #ifndef _BS_SIMPLE_EXECUTER_DEVICE_H_
 #define _BS_SIMPLE_EXECUTER_DEVICE_H_
 
-#include "SampleDevice.h"
+#include "IDevice.h"
 
 #define LOGIC_LEVEL_OPEN_HIGH HIGH
 #define LOGIC_LEVEL_OPEN_LOW LOW
@@ -14,14 +14,18 @@
 class SimpleExecuterDevice : public SampleDevice
 {
 public:
-	SimpleExecuterDevice(unsigned int deviceID, devicePin pin, unsigned char logicLevelOpen);
+	SimpleExecuterDevice(unsigned char executerID, unsigned char pin, unsigned char logicLevelOpen);
+	unsigned char getExecuterID();
 	void start();
 	void openExecuter();
 	void closeExecuter();
 	bool isOpened();
 
+protected:
+	unsigned char executerID;
+
 private:
-	devicePin pin;
+	unsigned char pin;
 	unsigned char logicLevelOpen;
 	bool isSimpleExecuterOpened;
 };

@@ -1,0 +1,11 @@
+package bs.pi.gateway.msg;
+
+public class OutSensorValuesComingMsg implements IMsg {
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

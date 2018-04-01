@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <None Include="SmartHomeIn.ino" />
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.SmartHomeIn.vsarduino.h" />
@@ -13,9 +12,6 @@
       <Filter>device</Filter>
     </ClInclude>
     <ClInclude Include="SimpleExecuterDevice.h">
-      <Filter>device</Filter>
-    </ClInclude>
-    <ClInclude Include="SampleDevice.h">
       <Filter>device</Filter>
     </ClInclude>
     <ClInclude Include="DHT11Device.h">
@@ -46,9 +42,6 @@
       <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="IApp.h">
-      <Filter>app</Filter>
-    </ClInclude>
-    <ClInclude Include="AppMsg.h">
       <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="SampleApp.h">
@@ -99,6 +92,9 @@
     <ClInclude Include="LCDAppCmd.h">
       <Filter>app\cmd</Filter>
     </ClInclude>
+    <ClInclude Include="THHUpdateApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="device">
@@ -122,9 +118,6 @@
       <Filter>device</Filter>
     </ClCompile>
     <ClCompile Include="SimpleExecuterDevice.cpp">
-      <Filter>device</Filter>
-    </ClCompile>
-    <ClCompile Include="SampleDevice.cpp">
       <Filter>device</Filter>
     </ClCompile>
     <ClCompile Include="DHT11Device.cpp">
@@ -166,9 +159,6 @@
     <ClCompile Include="SampleSystem.cpp">
       <Filter>system</Filter>
     </ClCompile>
-    <ClCompile Include="SensorDevice.cpp">
-      <Filter>device</Filter>
-    </ClCompile>
     <ClCompile Include="SystemAPI.cpp">
       <Filter>system</Filter>
     </ClCompile>
@@ -182,6 +172,9 @@
       <Filter>app</Filter>
     </ClCompile>
     <ClCompile Include="LCDApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="THHUpdateApp.cpp">
       <Filter>app</Filter>
     </ClCompile>
   </ItemGroup>

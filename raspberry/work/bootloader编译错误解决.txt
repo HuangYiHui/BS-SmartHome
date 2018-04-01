@@ -1,0 +1,10 @@
+竟然出现了Fatal Error[e72]: Segment PDATA_Z must be defined in a segment definition option (-Z, -b or -P) 这个问题，我之前也在论坛发了帖子问过类似的问题，不过貌似也成了死贴，可能真的没什么人真正去研究或者不屑回答吧。看错误我们可以很明白就是段PDATA_Z 没有定义，问题是怎么会出现这个问题呢？我猜想可能是IAR版本太高了对于一些段的映射可能更严格吧，所以需要定义。问题来了。如果要改的话，我们在那改呢？其实就是在sb-boot.xcl这个文件里面
+////////////////////////////////////////////////////////////////////////////////
+//
+// XDATA memory
+//
+-Z(XDATA)XSTACK+_XDATA_STACK_SIZE=_XDATA_START-_XDATA_END
+-Z(XDATA)XDATA_Z,XDATA_I=_XDATA_START-_XDATA_END
+-P(XDATA)XDATA_N=_XDATA_START-_XDATA_END
+-cx51
+颜色为绿色的地方修改。修改成-Z(XDATA)PDATA_Z,XDATA_Z,XDATA_I=_XDATA_START-_XDATA_END。以后碰到了类似的情况也可以这样修改。这样就没问题。

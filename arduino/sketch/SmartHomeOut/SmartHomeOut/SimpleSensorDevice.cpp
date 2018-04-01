@@ -1,16 +1,14 @@
 #include "SimpleSensorDevice.h"
 
-SimpleSensorDevice::SimpleSensorDevice(unsigned int deviceID, devicePin pin, unsigned char readMode) : SensorDevice(deviceID)
+SimpleSensorDevice::SimpleSensorDevice(unsigned char sensorID, unsigned char pin, unsigned char readMode) : SensorDevice(sensorID)
 {
 	this->pin = pin;
 	this->readMode = readMode;
-	state = DEVICE_STATE_CLOSED;
 }
 
 void SimpleSensorDevice::init()
 {
 	pinMode(pin, INPUT);
-	state = DEVICE_STATE_READY;
 }
 	
 float SimpleSensorDevice::getSensorValue()

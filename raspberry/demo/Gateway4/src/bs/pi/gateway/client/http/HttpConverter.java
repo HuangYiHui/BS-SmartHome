@@ -43,10 +43,6 @@ public class HttpConverter implements IConverter {
 			JSONObject data = httpMsgReceive.getData();
 			if(HttpMsgReceive.V_SUCCESS_TRUE == data.getBoolean(HttpMsgReceive.K_SUCCESS)){
 			
-				SendMsgToAppMsg sendMsgToAppMsg = new SendMsgToAppMsg();
-				sendMsgToAppMsg.setAppID(51);
-				sendMsgToAppMsg.setCmd(data.getString(HttpMsgReceive.K_MSG));
-				sendMsgToAppMsg.setParams(null);
 				//	String appMsgStr = data.getString(HttpMsgReceive.K_MSG);
 				/*
 				JSONObject appMsg = JSONObject.fromObject(appMsgStr.substring(1, appMsgStr.length()-1));
@@ -62,7 +58,7 @@ public class HttpConverter implements IConverter {
 						params.put(entry.getKey(), entry.getValue());
 					sendMsgToAppMsg.setParams(params);
 				}*/
-				return sendMsgToAppMsg;
+			//	return sendMsgToAppMsg;
 			}
 		}
 		return null;

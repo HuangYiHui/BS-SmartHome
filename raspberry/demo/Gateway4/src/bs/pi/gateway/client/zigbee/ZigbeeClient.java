@@ -14,8 +14,11 @@ import bs.pi.gateway.main.IReceiver;
 import bs.pi.gateway.main.ISender;
 import bs.pi.gateway.msg.IMsg;
 import bs.pi.gateway.msg.OtherZigbeeConnectedMsg;
+import bs.pi.gateway.msg.OutSensorValuesComingMsg;
 import bs.pi.gateway.msg.PortMsgReceivedMsg;
 import bs.pi.gateway.msg.PortSendResponseMsg;
+import bs.pi.gateway.msg.QueryZigbeeIsOnlineMsg;
+import bs.pi.gateway.msg.ResponseToZigbeeOnlineQueryMsg;
 import bs.pi.gateway.msg.SendPortMsgMsg;
 
 public class ZigbeeClient implements IClient{
@@ -43,6 +46,22 @@ public class ZigbeeClient implements IClient{
 						info.setNWKAddr(connectedMsg.getNWKAddr());
 					}
 				}
+				
+			}else if(QueryZigbeeIsOnlineMsg.MSG_NAME.equals(msg.getName())){
+				QueryZigbeeIsOnlineMsg queryZigbeeIsOnlineMsg = (QueryZigbeeIsOnlineMsg) msg;
+				if(queryZigbeeIsOnlineMsg.getSrcAddr() == null || queryZigbeeIsOnlineMsg.getSrcAddr().length != 2)
+					return;
+				ResponseToZigbeeOnlineQueryMsg responseToZigbeeOnlineQueryMsg = new ResponseToZigbeeOnlineQueryMsg();
+				responseToZigbeeOnlineQueryMsg.setSrcAddr(queryZigbeeIsOnlineMsg.getSrcAddr());
+				zigbeeSender.send(responseToZigbeeOnlineQueryMsg);
+				/*
+				OutSensorValuesComingMsg msg1 = new OutSensorValuesComingMsg();
+				msg1.setTemperature(23.4f);
+				msg1.setHumidity(50.2f);
+				msg1.setHeat(60.4f);
+				msg1.setDustConcentration(12.2f);
+				msg1.setLightIntensity(33.6f);
+				zigbeeSender.send(msg1);*/
 			}
 			
 		}
