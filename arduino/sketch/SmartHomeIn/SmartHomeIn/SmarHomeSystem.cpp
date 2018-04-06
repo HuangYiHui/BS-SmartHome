@@ -39,8 +39,8 @@ void SmartHomeSystem::init()
 	simpleExecuterApp.addExecuter(&socket2);
 	simpleExecuterApp.addExecuter(&socket3);
 
-	installApp(&zigbeeApp);
 	installApp(&lcdApp);
+	installApp(&zigbeeApp);
 	installApp(&thhUpdateApp);
 	installApp(&sensorApp);
 

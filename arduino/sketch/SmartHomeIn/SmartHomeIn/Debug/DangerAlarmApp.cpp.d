@@ -19,6 +19,7 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DangerAlarmApp.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ISystem.h \
  D:\software1\arduino-1.8.5\libraries\MemoryFree/MemoryFree.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeAppCmd.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DeviceCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\Tool.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SimpleSensorDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorDevice.h \

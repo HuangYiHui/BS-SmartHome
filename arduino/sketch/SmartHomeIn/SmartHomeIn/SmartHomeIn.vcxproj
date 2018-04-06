@@ -86,6 +86,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DeviceCmd.h" />
     <ClInclude Include="DHT11Device.h" />
     <ClInclude Include="DangerAlarmApp.h" />
     <ClInclude Include="HeatSensorDevice.h" />

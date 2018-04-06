@@ -2,7 +2,7 @@ package bs.pi.gateway.client.port;
 
 import bs.pi.gateway.main.IConverter;
 import bs.pi.gateway.msg.IMsg;
-import bs.pi.gateway.msg.PortMsgReceivedMsg;
+import bs.pi.gateway.msg.PortMsgArrivedMsg;
 import bs.pi.gateway.msg.SendPortMsgMsg;
 
 public class PortConverter implements IConverter {
@@ -26,7 +26,7 @@ public class PortConverter implements IConverter {
 		}catch(Exception e){
 			return null;
 		}
-		PortMsgReceivedMsg portMsgReceivedMsg = new PortMsgReceivedMsg();
+		PortMsgArrivedMsg portMsgReceivedMsg = new PortMsgArrivedMsg();
 		portMsgReceivedMsg.setCmd0(PortMsgReceive.getCmd0());
 		portMsgReceivedMsg.setCmd1(PortMsgReceive.getCmd1());
 		portMsgReceivedMsg.setData(PortMsgReceive.getData());
@@ -35,7 +35,7 @@ public class PortConverter implements IConverter {
 
 	@Override
 	public Object convertMsgSend(IMsg msg) {
-		if( msg != null && SendPortMsgMsg.MSG_NAME.equals(msg.getName())){
+		if( msg != null && IMsg.MSG_SEND_PORT_MSG.equals(msg.getName())){
 			SendPortMsgMsg sendPortMsgMsg = (SendPortMsgMsg) msg;
 			PortMsgSend portMsg = new PortMsgSend();
 			portMsg.setData(sendPortMsgMsg.getData());

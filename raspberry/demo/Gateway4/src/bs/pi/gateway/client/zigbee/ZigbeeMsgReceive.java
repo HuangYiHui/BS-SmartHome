@@ -1,16 +1,16 @@
 package bs.pi.gateway.client.zigbee;
 
-import bs.pi.gateway.msg.PortMsgReceivedMsg;
+import bs.pi.gateway.msg.PortMsgArrivedMsg;
 
 public class ZigbeeMsgReceive {
 	
-	private PortMsgReceivedMsg msg;
+	private PortMsgArrivedMsg msg;
 
-	public PortMsgReceivedMsg getMsg() {
+	public PortMsgArrivedMsg getMsg() {
 		return msg;
 	}
 
-	public void setMsg(PortMsgReceivedMsg msg) {
+	public void setMsg(PortMsgArrivedMsg msg) {
 		this.msg = msg;
 	}
 }

@@ -7,7 +7,7 @@ import bs.pi.gateway.main.IConverter;
 import bs.pi.gateway.main.IReceivedListener;
 import bs.pi.gateway.main.IReceiver;
 import bs.pi.gateway.msg.IMsg;
-import bs.pi.gateway.msg.PortMsgReceivedMsg;
+import bs.pi.gateway.msg.PortMsgArrivedMsg;
 
 public class ZigbeeReceiver implements IReceiver {
 
@@ -18,8 +18,8 @@ public class ZigbeeReceiver implements IReceiver {
 		@Override
 		public void handleEvent(IMsg msg) {
 			if(converter != null && receivedListenerList != null && receivedListenerList.size() > 0){
-				if(PortMsgReceivedMsg.MSG_NAME.equals(msg.getName())){
-					PortMsgReceivedMsg portMsgReceivedMsg = (PortMsgReceivedMsg) msg;
+				if(IMsg.MSG_PORT_MSG_ARRIVED.equals(msg.getName())){
+					PortMsgArrivedMsg portMsgReceivedMsg = (PortMsgArrivedMsg) msg;
 					ZigbeeMsgReceive zigbeeMsgReceive = new ZigbeeMsgReceive();
 					zigbeeMsgReceive.setMsg(portMsgReceivedMsg);
 					IMsg msg1 = converter.convertMsgReceive(zigbeeMsgReceive);
@@ -52,6 +52,7 @@ public class ZigbeeReceiver implements IReceiver {
 	public void start() {
 		flush();
 		portReceiver.addReceivedListenr(receivedListener);
+		portReceiver.start();
 	}
 
 	@Override
@@ -62,5 +63,10 @@ public class ZigbeeReceiver implements IReceiver {
 	@Override
 	public void flush() {
 		portReceiver.flush();
+	}
+
+	@Override
+	public String getName() {
+		return IReceiver.NAME_ZIGBEE_RECEIVER;
 	}
 }

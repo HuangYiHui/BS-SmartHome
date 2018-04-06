@@ -34,6 +34,16 @@ void SensorApp::init()
 
 void SensorApp::appMsgReceivedCallback(AppMsg& msg)
 {
+	if(msg.len < 1)
+		return;
+	
+	unsigned char cmd = msg.data[0];
+	if(CMD_UPLOAD_ALL_DEVICE_VALUE == cmd && msg.len == 1){
+		for(int i=0;i<sensorTaskList.size();i++){
+			uploadSensorValue(sensorTaskList.get(i)->sensor);
+		}
+	}
+
 	/*
 		if(msg.len < 1)
 			return;

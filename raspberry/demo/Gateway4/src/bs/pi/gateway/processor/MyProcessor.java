@@ -1,18 +1,25 @@
 package bs.pi.gateway.processor;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import bs.pi.gateway.main.IProcessor;
+import bs.pi.gateway.main.IReceiver;
 import bs.pi.gateway.main.ISender;
+import bs.pi.gateway.msg.HttpCommandArrivedMsg;
 import bs.pi.gateway.msg.IMsg;
-import bs.pi.gateway.msg.OutSensorValuesComingMsg;
-import bs.pi.gateway.msg.SendMsgToAppMsg;
-import bs.pi.gateway.msg.UploadDataToHttpServerMsg;
 import bs.pi.gateway.msg.OtherZigbeeConnectedMsg;
+import bs.pi.gateway.msg.OutSensorValuesComingMsg;
+import bs.pi.gateway.msg.QueryZigbeeIsOnlineMsg;
+import bs.pi.gateway.msg.ResponseToZigbeeOnlineQueryMsg;
+import bs.pi.gateway.msg.SendMsgToAppMsg;
+import bs.pi.gateway.msg.SimpleMsg;
+import bs.pi.gateway.msg.UploadSensorValueToHttpServerMsg;
 
 public class MyProcessor implements IProcessor {
 
 	private ArrayList<ISender> senderList;
+	private ArrayList<IReceiver> receiverList;
 	private ArrayList<IMsg> msgList;
 	private Thread processThread = new Thread(new Runnable() {
 		@Override
@@ -53,7 +60,6 @@ public class MyProcessor implements IProcessor {
 	public void stop(){
 		//让nextMsg能退出
 		msgList.notifyAll();
-		
 		processThread.interrupt();
 	}
 	
@@ -76,15 +82,42 @@ public class MyProcessor implements IProcessor {
 	
 	private void process(IMsg msg){
 		System.out.println(msg.getName());
-		
-		if(UploadDataToHttpServerMsg.MSG_NAME.equals(msg.getName())){
-			send(ISender.V_SEND_NAME_HTTP_SNEDER, msg);
-		}else if(SendMsgToAppMsg.MSG_NAME.equals(msg.getName())){
-			send(ISender.V_SEND_NAME_ZIGBEE_SNEDER, msg);
-		}else if(OtherZigbeeConnectedMsg.MSG_NAME.equals(msg.getName())){
-			send(ISender.V_SEND_NAME_ZIGBEE_SNEDER, msg);
-		}else if(OutSensorValuesComingMsg.MSG_NAME.equals(msg.getName())){
-			send(ISender.V_SEND_NAME_ZIGBEE_SNEDER, msg);
+		if(IMsg.MSG_QUERY_ZIGBEE_IS_ONLINE.equals(msg.getName())){
+			QueryZigbeeIsOnlineMsg queryZigbeeIsOnlineMsg = (QueryZigbeeIsOnlineMsg) msg;
+			if(queryZigbeeIsOnlineMsg.getSrcAddr() != null && queryZigbeeIsOnlineMsg.getSrcAddr().length == 2){
+				ResponseToZigbeeOnlineQueryMsg responseToZigbeeOnlineQueryMsg = new ResponseToZigbeeOnlineQueryMsg();
+				responseToZigbeeOnlineQueryMsg.setSrcAddr(queryZigbeeIsOnlineMsg.getSrcAddr());
+				send(ISender.NAME_ZIGBEE_SENDER, responseToZigbeeOnlineQueryMsg);
+			}
+		}else if(IMsg.MSG_UPLAOD_SENSOR_VALUE_TO_HTTP_SERVER.equals(msg.getName())){
+			send(ISender.NAME_HTTP_SENDER, msg);
+		}else if(IMsg.MSG_UPLAOD_EXECUTER_VALUE_TO_HTTP_SERVER.equals(msg.getName())){
+			send(ISender.NAME_HTTP_SENDER, msg);
+		}else if(IMsg.MSG_SEND_MSG_TO_APP.equals(msg.getName())){
+			send(ISender.NAME_ZIGBEE_SENDER, msg);
+		}else if(IMsg.MSG_OTHER_ZIGBEE_CONNECTED.equals(msg.getName())){
+			//send(ISender.NAME_ZIGBEE_SENDER, msg);
+		}else if(IMsg.MSG_OUT_SENSOR_VALUES_COMING.equals(msg.getName())){
+			send(ISender.NAME_ZIGBEE_SENDER, msg);
+		}else if(IMsg.MSG_GET_HTTP_COMMAND.equals(msg.getName())){
+			if(receiverList != null && receiverList.size()>0){
+				for(IReceiver receiver : receiverList){
+					if(IReceiver.NAME_HTTP_RECEIVER.equals(receiver.getName())){
+						receiver.start();
+					}
+				}
+			}
+		}else if(IMsg.MSG_HTTP_COMMAND_ARRIVED.equals(msg.getName())){
+			HttpCommandArrivedMsg httpCommandReceivedMsg = (HttpCommandArrivedMsg) msg;
+			if(httpCommandReceivedMsg.isSuccess()){
+				//删除平台命令
+				send(ISender.NAME_HTTP_SENDER, new SimpleMsg(IMsg.MSG_DELETE_HTTP_COMMAND));
+				send(ISender.NAME_ZIGBEE_SENDER, msg);
+			}
+		}else if(IMsg.MSG_UPLAOD_ALL_DEVICE_VALUE.equals(msg.getName())){
+			send(ISender.NAME_ZIGBEE_SENDER, msg);
+		}else if(IMsg.MSG_RESPONSE_TO_HTTP_SERVER_ALIVE.equals(msg.getName())){
+			send(ISender.NAME_HTTP_SENDER, msg);
 		}
 	}
 	
@@ -98,5 +131,10 @@ public class MyProcessor implements IProcessor {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void setReceivers(ArrayList<IReceiver> receiverList) {
+		this.receiverList = receiverList;
 	}
 }

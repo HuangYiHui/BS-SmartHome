@@ -2,7 +2,6 @@ package bs.pi.gateway.msg;
 
 public class HttpSendResponseMsg implements IMsg {
 
-	public final static String MSG_NAME = "HttpSendResponseMsg";
 	public final static int TYPE = 1;
 	
 	private boolean sendSuccess;
@@ -10,7 +9,7 @@ public class HttpSendResponseMsg implements IMsg {
 	
 	@Override
 	public String getName() {
-		return MSG_NAME;
+		return IMsg.MSG_HTTP_SEND_RESPONSE;
 	}
 
 	public boolean getSendSuccess() {

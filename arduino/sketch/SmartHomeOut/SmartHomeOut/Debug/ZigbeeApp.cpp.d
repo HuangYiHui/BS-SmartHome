@@ -27,4 +27,5 @@ D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\ZigbeeApp.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\IApp.h \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SystemAPI.h \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\ISystem.h \
- D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\ZigbeeAppCmd.h
+ D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\ZigbeeAppCmd.h \
+ D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SensorAppCmd.h

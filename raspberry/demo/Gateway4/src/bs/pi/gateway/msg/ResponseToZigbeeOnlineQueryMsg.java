@@ -1,8 +1,6 @@
 package bs.pi.gateway.msg;
 
 public class ResponseToZigbeeOnlineQueryMsg implements IMsg {
-
-	public final static String MSG_NAME = "ResponseToZigbeeOnlineQueryMsg";
 	
 	private byte[] srcAddr;
 	
@@ -17,7 +15,7 @@ public class ResponseToZigbeeOnlineQueryMsg implements IMsg {
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return MSG_NAME;
+		return IMsg.MSG_RESPONSE_TO_ZIGBEE_ONLINE_QUERY;
 	}
 
 }

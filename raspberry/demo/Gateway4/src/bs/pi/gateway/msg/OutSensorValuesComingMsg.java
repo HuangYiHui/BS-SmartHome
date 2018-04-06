@@ -1,8 +1,6 @@
 package bs.pi.gateway.msg;
 
 public class OutSensorValuesComingMsg implements IMsg {
-
-	public final static String MSG_NAME = "OutSensorValuesComingMsg";
 	
 	private float temperature;
 	private float humidity;
@@ -14,7 +12,7 @@ public class OutSensorValuesComingMsg implements IMsg {
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return MSG_NAME;
+		return IMsg.MSG_OUT_SENSOR_VALUES_COMING;
 	}
 
 	public float getTemperature() {

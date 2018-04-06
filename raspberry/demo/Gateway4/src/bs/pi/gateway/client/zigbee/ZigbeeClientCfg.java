@@ -81,17 +81,9 @@ public class ZigbeeClientCfg {
 				byte[] IEEEAddr = Tool.strToBytes(properties.getProperty(K_OTHER_ZIGBEE_IEEEADDR+i));
 				String appIDsStr = properties.getProperty(K_APP_ID_S+i);
 				String[] appIDsStrs = appIDsStr.split(",");
-				ArrayList<byte[]> appIDs = new ArrayList<byte[]>();
+				ArrayList<Byte> appIDs = new ArrayList<Byte>();
 				for(int j=0;j<appIDsStrs.length;j++){
-					byte[] appID = new byte[2];
-					byte[] bs = Tool.strToBytes(appIDsStrs[j]);
-					if(bs.length == 1){
-						appID[0] = bs[0];
-						appID[1] = 0x00;
-					}else{
-						appID[0] = bs[0];
-						appID[1] = bs[1];
-					}
+					byte appID = Tool.strToByte(appIDsStrs[j]);
 					appIDs.add(appID);
 				}
 				ZigbeeInfo info = new ZigbeeInfo(IEEEAddr, null, appIDs);

@@ -33,7 +33,7 @@ public class Test {
 	}
 	
 	public static void test4(){
-		String str = "{\"key\":{\"key1\":\"value1\"}}";
+		String str = "{\"cmd\":\"onSwitch\",\"params\":[{\"name\":\"sensorId\",\"value\":\"30\"}]}";
 		JSONObject json = JSONObject.fromObject(str);
 		
 		
@@ -89,22 +89,6 @@ public class Test {
 	    
 	    for(byte bb: dest)
 	    	System.out.printf("%x,", bb);
-	}
-	
-	public static void test1() throws InterruptedException{
-		Gateway gateway = new Gateway();
-		
-		MyProcessor processor = new MyProcessor();
-		
-		TestReceiver testReceiver = new TestReceiver();
-		testReceiver.start();
-		gateway.installReceiver(testReceiver);
-		gateway.setProcessor(processor);
-		
-		gateway.start();
-		
-		Thread.sleep(6000);
-		testReceiver.stop();
 	}
 
 }

@@ -42,6 +42,7 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SmartHomeIn.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeApp.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SampleApp.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeAppCmd.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DeviceCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDAppCmd.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \

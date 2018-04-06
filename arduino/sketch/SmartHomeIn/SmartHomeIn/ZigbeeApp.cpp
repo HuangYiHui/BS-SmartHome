@@ -78,6 +78,7 @@ void ZigbeeApp::appMsgReceivedCallback(AppMsg& msg)
 	packet.srcEndpoint = ZB_PACKET_SEND_SRC_ENDPOINT;
 	packet.clusterID[0] = ZB_PACKET_SEND_CLUSTER_ID0;
 	packet.clusterID[1] = ZB_PACKET_SEND_CLUSTER_ID1;
+	packet.transID = 0x00;
 	packet.options = ZB_PACKET_SEND_OPTIONS;
 	packet.radius = ZB_PACKET_SEND_RADIUS;
 
@@ -85,11 +86,13 @@ void ZigbeeApp::appMsgReceivedCallback(AppMsg& msg)
 	//数据上传
 	if(CMD_UPLOAD_DATA == cmd){
 		//CMD_UPLOAD_DATA命令，除了1个byte的cmd外，后1个字节作数据上传项标志,数据至少1个byte,所以要大于5个byte
-		if(msg.len != 7)
+		if(msg.len < 3)
 			return;
+
 		packet.dstAddr[0] = 0x00;
 		packet.dstAddr[1] = 0x00;
 		packet.len = msg.len;
+		
 		packet.data = new unsigned char[msg.len];
 		Tool::byteArrayCopy(msg.data, 0, packet.data, 0, msg.len);
 		zigbee.send(packet);
@@ -165,6 +168,13 @@ void ZigbeeApp::receiveZigbeeMsg()
 				msg.data[1+i] = packet.data[18+i];
 			}
 			sendMsg(msg, APP_ID_LCD);
+		}else if(cmd == CMD_ZIGBEE_APP_UPLAOD_ALL_DEVICE_VALUE){
+			AppMsg msg;
+			msg.len = 1;
+			msg.data = new unsigned char[1];
+			msg.data[0] = CMD_UPLOAD_ALL_DEVICE_VALUE;
+			sendMsg(msg, APP_ID_SIMPLE_EXECUTER);
+			sendMsg(msg, APP_ID_IN_SENSOR);
 		}
 	}
 }

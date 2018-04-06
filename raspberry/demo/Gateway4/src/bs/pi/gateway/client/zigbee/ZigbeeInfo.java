@@ -6,19 +6,19 @@ public class ZigbeeInfo {
 	
 	private byte[] IEEEAddr;
 	private byte[] NWKAddr;
-	private ArrayList<byte[]> appIDList;
+	private ArrayList<Byte> appIDList;
 	
 	public ZigbeeInfo(){
 		
 	}
 	
-	public ZigbeeInfo(byte[] IEEEAddr, byte[] NWKAddr, ArrayList<byte[]> appIDList){
+	public ZigbeeInfo(byte[] IEEEAddr, byte[] NWKAddr, ArrayList<Byte> appIDList){
 		if(IEEEAddr != null)
 			this.IEEEAddr = IEEEAddr.clone();
 		if(NWKAddr != null)
 			this.NWKAddr = NWKAddr.clone();
 		if(appIDList != null)
-			this.appIDList = (ArrayList<byte[]>) appIDList.clone();
+			this.appIDList = (ArrayList<Byte>) appIDList.clone();
 	}
 	
 	public byte[] getIEEEAddr() {
@@ -41,11 +41,11 @@ public class ZigbeeInfo {
 		if(NWKAddr != null)
 			this.NWKAddr = NWKAddr.clone();
 	}
-	public ArrayList<byte[]> getAppIDList() {
+	public ArrayList<Byte> getAppIDList() {
 		return appIDList;
 	}
-	public void setAppIDList(ArrayList<byte[]> appIDList) {
+	public void setAppIDList(ArrayList<Byte> appIDList) {
 		if(appIDList != null)
-			this.appIDList = (ArrayList<byte[]>) appIDList.clone();
+			this.appIDList = (ArrayList<Byte>) appIDList.clone();
 	}
 }

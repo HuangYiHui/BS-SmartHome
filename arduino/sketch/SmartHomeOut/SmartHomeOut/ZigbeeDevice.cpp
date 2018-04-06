@@ -17,7 +17,7 @@ bool ZigbeeDevice::startUpWithoutLastState()
 {
 	sendFlashCmdBytes((unsigned int)CMD_STARTUP_WITHOUT_LAST_STATE_BYTES, 8);
 	ZBPacketReceive packet;
-	receive(packet, 100);
+	receive(packet, 20);
 	if(packet.len == 0x01 && packet.cmd1 == 0x66 && packet.cmd2 == 0x05 && packet.data[0] == 0x00)
 		return true;
 	else
@@ -28,7 +28,7 @@ bool ZigbeeDevice::restart()
 {
 	sendFlashCmdBytes((unsigned int)CMD_DEVICE_RESET_BYTES, 6);
 	ZBPacketReceive packet;
-	receive(packet, 2000);
+	receive(packet, 1500);
 	if(packet.len == 0x06 && packet.cmd1 == 0x41 && packet.cmd2 == 0x80)
 		return true;
 	else
@@ -39,7 +39,7 @@ bool ZigbeeDevice::setDeviceType()
 {
 	sendFlashCmdBytes((unsigned int)CMD_DEVICE_TYPE_SET_BYTES, 8);
 	ZBPacketReceive packet;
-	receive(packet, 100);
+	receive(packet, 20);
 	if(packet.len == 0x01 && packet.cmd1 == 0x61 && packet.cmd2 == 0x09 && packet.data[0] == 0x00)
 		return true;
 	else
@@ -50,7 +50,7 @@ bool ZigbeeDevice::setDirectCB()
 {
 	sendFlashCmdBytes((unsigned int)CMD_ZDO_DIRECT_CB_BYTES, 8);
 	ZBPacketReceive packet;
-	receive(packet, 100);
+	receive(packet, 20);
 	if(packet.len == 0x01 && packet.cmd1 == 0x66 && packet.cmd2 == 0x05 && packet.data[0] == 0x00)
 		return true;
 	else
@@ -61,7 +61,7 @@ bool ZigbeeDevice::registerApp()
 {
 	sendFlashCmdBytes((unsigned int)CMD_APP_REGISTER_BYTES, 18);
 	ZBPacketReceive packet;
-	receive(packet, 100);
+	receive(packet, 20);
 	if(packet.len == 0x01 && packet.cmd1 == 0x64 && packet.cmd2 == 0x00 && packet.data[0] == 0xb8)
 		return true;
 	else
@@ -70,6 +70,7 @@ bool ZigbeeDevice::registerApp()
 bool ZigbeeDevice::startFromApp()
 {
 	sendFlashCmdBytes((unsigned int)CMD_STARTUP_FROM_APP_BYTES, 7);
+	delay(100);
 	return true;
 }
 

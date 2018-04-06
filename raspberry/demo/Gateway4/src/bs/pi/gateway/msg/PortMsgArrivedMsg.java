@@ -1,8 +1,6 @@
 package bs.pi.gateway.msg;
 
-public class PortMsgReceivedMsg implements IMsg {
-
-	public final static String MSG_NAME = "PortReceivedMsg";
+public class PortMsgArrivedMsg implements IMsg {
 	
 	private byte cmd0;
 	private byte cmd1;
@@ -10,7 +8,7 @@ public class PortMsgReceivedMsg implements IMsg {
 	
 	@Override
 	public String getName() {
-		return MSG_NAME;
+		return IMsg.MSG_PORT_MSG_ARRIVED;
 	}
 
 	public byte getCmd0() {

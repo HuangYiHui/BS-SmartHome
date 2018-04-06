@@ -1,10 +1,7 @@
 package bs.pi.gateway.client.mqtt;
 
-import gnu.io.SerialPort;
-import bs.pi.gateway.client.http.HttpClientCfg;
-import bs.pi.gateway.client.port.PortClientCfg;
-import bs.pi.gateway.client.port.PortReceiver;
-import bs.pi.gateway.client.port.PortSender;
+import org.fusesource.mqtt.client.MQTT;
+
 import bs.pi.gateway.main.IClient;
 import bs.pi.gateway.main.IConverter;
 import bs.pi.gateway.main.IReceiver;
@@ -15,6 +12,7 @@ public class MQTTClient implements IClient{
 	public static final String DEFAULT_CFG_PATH = System.getProperty("user.dir")+System.getProperty("file.separator")+"mqttClientCfg.properties";
 	private String cfgPath;
 	private MQTTClientCfg cfg;
+	MQTT mqtt;
 	private MQTTSender sender;
 	private MQTTReceiver receiver;
 	private IConverter converter;
@@ -32,14 +30,21 @@ public class MQTTClient implements IClient{
 	
 	@Override
 	public void init() throws Exception {
-		// TODO Auto-generated method stub
 		loadCfg();
+		mqtt = new MQTT();
+        mqtt.setHost(cfg.getHost(), cfg.getPort());
+        mqtt.setUserName(cfg.getUsername());
+        mqtt.setPassword(cfg.getPassword());
 	}
 
 	@Override
 	public void start() throws Exception {
-		// TODO Auto-generated method stub
-		
+		try {
+			sender = new MQTTSender(mqtt.futureConnection(), converter);
+			receiver = new MQTTReceiver(mqtt.callbackConnection(), cfg.getTopics(), converter);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -51,19 +56,19 @@ public class MQTTClient implements IClient{
 	@Override
 	public void setConverter(IConverter converter) {
 		// TODO Auto-generated method stub
-		
+		this.converter = converter;
 	}
 
 	@Override
 	public ISender getSender() {
 		// TODO Auto-generated method stub
-		return null;
+		return sender;
 	}
 
 	@Override
 	public IReceiver getReceiver() {
 		// TODO Auto-generated method stub
-		return null;
+		return receiver;
 	}
 
 }

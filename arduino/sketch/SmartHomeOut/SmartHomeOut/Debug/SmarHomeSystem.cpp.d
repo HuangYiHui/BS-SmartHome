@@ -43,6 +43,6 @@ D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SmarHomeSystem.cpp.o: \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SampleApp.h \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\ZigbeeAppCmd.h \
- D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SensorApp.h \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SensorAppCmd.h \
+ D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SensorApp.h \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\NoticeOutSensorValueApp.h

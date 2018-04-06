@@ -22,7 +22,7 @@ public class PortSender implements ISender {
 	
 	@Override
 	public String getName() {
-		return ISender.V_SEND_NAME_PORT_SNEDER;
+		return ISender.NAME_PORT_SENDER;
 	}
 
 	@Override

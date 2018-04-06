@@ -13,42 +13,6 @@ public class HttpReceiver implements IReceiver {
 	private HttpClientCfg cfg;
 	private IConverter converter;
 	private HttpSender sender;
-	private Thread rTread = new Thread(new Runnable() {
-		@Override
-		public void run() {
-			while( ! rTread.isInterrupted()){
-				if(converter != null && receivedListenerList != null && receivedListenerList.size()>0){
-					String url = cfg.getServiceUrl()+"/device/"+cfg.getDeviceID()+"/command";
-					HttpExecuter executer = new HttpExecuter(url, HttpMsgSend.METHOD_GET, cfg.getApiKey(), null);
-					HttpMsgReceive httpMsgReceive = executer.execute();
-					if(httpMsgReceive != null){
-						httpMsgReceive.setType(HttpMsgReceive.TYPE_DEVICE_CMD);
-						
-						//获取成功删除命令
-						if(HttpMsgReceive.V_SUCCESS_TRUE == httpMsgReceive.getData().getBoolean(HttpMsgReceive.K_SUCCESS)){
-							HttpExecuter executer1 = new HttpExecuter(url, HttpMsgSend.METHOD_DELETE, cfg.getApiKey(), null);
-							executer1.execute();
-							System.out.println("delete");
-						}
-						
-					}
-					IMsg msg = converter.convertMsgReceive(httpMsgReceive);
-					if(msg != null){
-						for(IReceivedListener listener : receivedListenerList){
-							listener.handleEvent(msg);
-						}
-					}
-				}
-				
-				try {
-					Thread.sleep(cfg.getGetCmdTaskInterval());
-				} catch (InterruptedException e) {
-					//出现异常，可能是执行了stop方法，打断了休眠，这里直接退出线程
-					break;
-				}
-			}
-		}
-	});
 	
 	public HttpReceiver(HttpClientCfg cfg, IConverter converter){
 		this.cfg = cfg;
@@ -67,18 +31,40 @@ public class HttpReceiver implements IReceiver {
 	@Override
 	public void start() {
 		flush();
-		rTread.start();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				receive();
+			}
+		}).start();
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
-		rTread.interrupt();
 	}
 
 	@Override
 	public void flush() {
 
+	}
+	@Override
+	public String getName() {
+		return IReceiver.NAME_HTTP_RECEIVER;
+	}
+	
+	private void receive(){
+		if(converter != null && receivedListenerList != null && receivedListenerList.size()>0){
+			String url = cfg.getServiceUrl()+"/device/"+cfg.getDeviceID()+"/command";
+			HttpExecuter executer = new HttpExecuter(url, HttpMsgSend.METHOD_GET, cfg.getApiKey(), null);
+			HttpMsgReceive httpMsgReceive = executer.execute();
+			httpMsgReceive.setType(HttpMsgReceive.TYPE_DEVICE_CMD);
+			IMsg msg = converter.convertMsgReceive(httpMsgReceive);
+			if(msg != null){
+				for(IReceivedListener listener : receivedListenerList){
+					listener.handleEvent(msg);
+				}
+			}
+		}
 	}
 
 }

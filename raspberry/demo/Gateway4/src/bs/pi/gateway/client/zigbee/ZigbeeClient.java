@@ -2,9 +2,6 @@ package bs.pi.gateway.client.zigbee;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-
-import com.test.Debugger;
 
 import bs.pi.gateway.client.port.PortClient;
 import bs.pi.gateway.main.IClient;
@@ -14,8 +11,6 @@ import bs.pi.gateway.main.IReceiver;
 import bs.pi.gateway.main.ISender;
 import bs.pi.gateway.msg.IMsg;
 import bs.pi.gateway.msg.OtherZigbeeConnectedMsg;
-import bs.pi.gateway.msg.OutSensorValuesComingMsg;
-import bs.pi.gateway.msg.PortMsgReceivedMsg;
 import bs.pi.gateway.msg.PortSendResponseMsg;
 import bs.pi.gateway.msg.QueryZigbeeIsOnlineMsg;
 import bs.pi.gateway.msg.ResponseToZigbeeOnlineQueryMsg;
@@ -39,7 +34,7 @@ public class ZigbeeClient implements IClient{
 			if(zigbeeInfoList == null || zigbeeInfoList.isEmpty())
 				return;
 			
-			if(OtherZigbeeConnectedMsg.MSG_NAME.equals(msg.getName())){
+			if(IMsg.MSG_OTHER_ZIGBEE_CONNECTED.equals(msg.getName())){
 				OtherZigbeeConnectedMsg connectedMsg = (OtherZigbeeConnectedMsg) msg;
 				for(ZigbeeInfo info : zigbeeInfoList){
 					if(Arrays.equals(connectedMsg.getIEEEAddr() , info.getIEEEAddr())){
@@ -47,23 +42,7 @@ public class ZigbeeClient implements IClient{
 					}
 				}
 				
-			}else if(QueryZigbeeIsOnlineMsg.MSG_NAME.equals(msg.getName())){
-				QueryZigbeeIsOnlineMsg queryZigbeeIsOnlineMsg = (QueryZigbeeIsOnlineMsg) msg;
-				if(queryZigbeeIsOnlineMsg.getSrcAddr() == null || queryZigbeeIsOnlineMsg.getSrcAddr().length != 2)
-					return;
-				ResponseToZigbeeOnlineQueryMsg responseToZigbeeOnlineQueryMsg = new ResponseToZigbeeOnlineQueryMsg();
-				responseToZigbeeOnlineQueryMsg.setSrcAddr(queryZigbeeIsOnlineMsg.getSrcAddr());
-				zigbeeSender.send(responseToZigbeeOnlineQueryMsg);
-				/*
-				OutSensorValuesComingMsg msg1 = new OutSensorValuesComingMsg();
-				msg1.setTemperature(23.4f);
-				msg1.setHumidity(50.2f);
-				msg1.setHeat(60.4f);
-				msg1.setDustConcentration(12.2f);
-				msg1.setLightIntensity(33.6f);
-				zigbeeSender.send(msg1);*/
 			}
-			
 		}
 	};
 	
@@ -82,23 +61,26 @@ public class ZigbeeClient implements IClient{
 		portClient.init();
 		portClient.start();
 		portSender = portClient.getSender();
+		IReceiver portReceiver = portClient.getReceiver();
+		portReceiver.flush();
 		
-		portSend(CodeGenerator.CMD_DEVICE_RESET);
-		Thread.sleep(2000);
 		portSend(CodeGenerator.CMD_STARTUP_WITHOUT_LAST_STATE);
-		Thread.sleep(500);
+		Thread.sleep(1);
 		portSend(CodeGenerator.CMD_DEVICE_RESET);
-		Thread.sleep(2000);
+		Thread.sleep(1500);
 		portSend(CodeGenerator.chanlistCfg(cfg.getChannel()));
-		Thread.sleep(500);
+		Thread.sleep(1);
 		portSend(CodeGenerator.PANIDCfg(cfg.getPanID()));
-		Thread.sleep(500);
+		Thread.sleep(1);
 		portSend(CodeGenerator.deviceTypeCfg(cfg.getDeviceType()));
-		Thread.sleep(500);
+		Thread.sleep(1);
 		portSend(CodeGenerator.CMD_ZDO_DIRECT_CB);
-		Thread.sleep(500);
+		Thread.sleep(1);
 		portSend(CodeGenerator.appRegister(cfg.getAppReg()));
-		Thread.sleep(500);
+		Thread.sleep(1);
+		
+		portSend(CodeGenerator.CMD_STARTUP_FROM_APP);
+		
 	}
 	
 	private PortSendResponseMsg portSend(byte[] data) throws Exception{
@@ -112,11 +94,6 @@ public class ZigbeeClient implements IClient{
 		
 		zigbeeReceiver = new ZigbeeReceiver(portClient.getReceiver(), converter);
 		zigbeeReceiver.addReceivedListenr(receivedListener);//监听应将地址对应的网络地址
-		zigbeeReceiver.start();
-		
-		portSend(CodeGenerator.CMD_STARTUP_FROM_APP);
-		Thread.sleep(2000);
-		
 		zigbeeSender = new ZigbeeSender(portSender, converter, cfg);
 	}
 

@@ -19,6 +19,7 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDApp.cpp.o: \
  D:\software1\arduino-1.8.5\libraries\MemoryFree/MemoryFree.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SystemCfg.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeAppCmd.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DeviceCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\Tool.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDDevice.h \
  D:\software1\arduino-1.8.5\libraries\U8glib/U8glib.h \

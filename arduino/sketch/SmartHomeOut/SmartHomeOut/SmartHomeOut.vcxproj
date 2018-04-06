@@ -95,7 +95,6 @@
     <ClInclude Include="SensorApp.h" />
     <ClInclude Include="SensorAppCmd.h" />
     <ClInclude Include="SensorDevice.h" />
-    <ClInclude Include="SimpleExecuterAppCmd.h" />
     <ClInclude Include="SimpleSensorDevice.h" />
     <ClInclude Include="SmartHomeSystem.h" />
     <ClInclude Include="SystemAPI.h" />

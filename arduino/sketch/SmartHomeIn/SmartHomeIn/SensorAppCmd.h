@@ -1,6 +1,8 @@
 #ifndef _BS_SENSOR_APP_CMD_H_
 #define _BS_SENSOR_APP_CMD_H_
 
+#include "DeviceCmd.h"
+
 /*
 //开启周期性上传数据命令，格式："1byte命令头 + 1byte设备ID"
 #define CMD_START_CIRCULARLY_UPLOAD_SENSOR_VALUE	0x01

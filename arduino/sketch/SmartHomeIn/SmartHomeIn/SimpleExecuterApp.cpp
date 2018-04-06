@@ -3,6 +3,7 @@
 SimpleExecuterApp::SimpleExecuterApp()
 {
 	this->appID = APP_ID_SIMPLE_EXECUTER;
+	this->uploadInterval = 5000;
 }
 
 SimpleExecuterApp::~SimpleExecuterApp()
@@ -12,6 +13,12 @@ SimpleExecuterApp::~SimpleExecuterApp()
 		delete executer;
 		executer = NULL;
 	}
+}
+
+void SimpleExecuterApp::setUploadInterval(unsigned int uploadInterval)
+{
+	if(uploadInterval > 0)
+		this->uploadInterval = uploadInterval;
 }
 
 void SimpleExecuterApp::addExecuter(SimpleExecuterDevice* executer)
@@ -26,6 +33,18 @@ void SimpleExecuterApp::init()
 	for(int i=0; i<executerList.size();i++){
 		executerList.get(i)->start();
 	}
+	PT_INIT(&pt);
+}
+
+SimpleExecuterDevice* SimpleExecuterApp::findExecuter(unsigned char executerID)
+{
+	for(int i=0; i<executerList.size();i++){
+		if(executerList.get(i)->getExecuterID() == executerID){
+			return executerList.get(i);
+		}
+	}
+
+	return NULL;
 }
 
 void SimpleExecuterApp::appMsgReceivedCallback(AppMsg& msg)
@@ -34,30 +53,15 @@ void SimpleExecuterApp::appMsgReceivedCallback(AppMsg& msg)
 		return;
 	
 	unsigned char cmd = msg.data[0];
-	unsigned char executerID = msg.data[1];
-	SimpleExecuterDevice* executer = NULL;
-	if(CMD_GET_SIMPLE_EXECUTER_STATE == cmd ||
-		CMD_OPEN_SIMPLE_EXECUTER == cmd ||
-		CMD_CLOSE_SIMPLE_EXECUTER == cmd)
-	{
-		if(msg.len < 2)
-			return;
-
-		for(int i=0; i<executerList.size();i++){
-			if(executerList.get(i)->getExecuterID() == executerID){
-				executer = executerList.get(i);
-				break;
-			}
-		}
-
-		if(executer == NULL)
-			return;
-	}
-
 	if(CMD_GET_SIMPLE_EXECUTER_STATE == cmd){
 		if(msg.len != 3)
 			return;
-
+		
+		unsigned char executerID = msg.data[1];
+		SimpleExecuterDevice* executer = findExecuter(executerID);
+		if(executer == NULL)
+			return;
+		
 		AppMsg responseMsg;
 		responseMsg.len = 3;
 		responseMsg.data = new unsigned char[3];
@@ -73,11 +77,23 @@ void SimpleExecuterApp::appMsgReceivedCallback(AppMsg& msg)
 		sendMsg(responseMsg, appID);
 
 	}else if(CMD_OPEN_SIMPLE_EXECUTER == cmd){
+		unsigned char executerID = msg.data[1];
+		SimpleExecuterDevice* executer = findExecuter(executerID);
+		if(executer == NULL)
+			return;
 		executer->openExecuter();
 		noticeLCDSocketStateChange(executer);
 	}else if(CMD_CLOSE_SIMPLE_EXECUTER == cmd){
+		unsigned char executerID = msg.data[1];
+		SimpleExecuterDevice* executer = findExecuter(executerID);
+		if(executer == NULL)
+			return;
 		executer->closeExecuter();
 		noticeLCDSocketStateChange(executer);
+	}else if(CMD_UPLOAD_ALL_DEVICE_VALUE == cmd && msg.len == 1){
+		for(int i=0; i<executerList.size();i++){
+			uploadExecuterValue(executerList.get(i));
+		}
 	}
 }
 
@@ -110,4 +126,38 @@ void SimpleExecuterApp::noticeLCDSocketStateChange(SimpleExecuterDevice* execute
 			msg.data[2] = FLAG_SOCKET_OFF;
 		sendMsg(msg, APP_ID_LCD);
 	}
+}
+
+void SimpleExecuterApp::run()
+{
+	runCirCularlyUploadSensorValueTask();
+}
+
+int SimpleExecuterApp::runCirCularlyUploadSensorValueTask()
+{
+	PT_BEGIN(&pt);
+	while(true){
+		for(int i=0; i<executerList.size();i++){
+			uploadExecuterValue(executerList.get(i));
+		}
+		PT_TIMER_DELAY(&pt, uploadInterval);
+	}
+	
+	PT_END(&pt);
+}
+
+
+void SimpleExecuterApp::uploadExecuterValue(SimpleExecuterDevice* executer)
+{
+	AppMsg msg;
+	msg.len = 4;
+	msg.data = new unsigned char[4];
+	msg.data[0] = CMD_UPLOAD_DATA;
+	msg.data[1] = UPLOAD_DATA_INDEX_EXECUTER_VALUE;
+	msg.data[2] = executer->getExecuterID();
+	if(executer->isOpened())
+		msg.data[3] = EXECUTER_VALUE_OPENED;
+	else
+		msg.data[3] = EXECUTER_VALUE_CLOSED;
+	sendMsgToZigbee(msg);
 }

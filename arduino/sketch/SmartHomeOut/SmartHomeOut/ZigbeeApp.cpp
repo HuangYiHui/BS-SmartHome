@@ -25,6 +25,13 @@ void ZigbeeApp::receiveZigbeeMsg()
 		if(dataLen<1)
 			return;
 		unsigned char cmd = packet.data[17];
+		if(cmd == CMD_ZIGBEE_APP_UPLAOD_ALL_DEVICE_VALUE){
+			AppMsg msg;
+			msg.len = 1;
+			msg.data = new unsigned char[1];
+			msg.data[0] = CMD_UPLOAD_ALL_DEVICE_VALUE;
+			sendMsg(msg, APP_ID_OUT_SENSOR);
+		}
 	}
 }
 

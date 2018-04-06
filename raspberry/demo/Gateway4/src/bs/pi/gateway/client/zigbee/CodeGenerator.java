@@ -116,8 +116,6 @@ public class CodeGenerator {
 		System.arraycopy(packet.getData(), 0, bs, 14, packet.getData().length);
 		bs[bs.length-1] = calCrc(Arrays.copyOfRange(bs, 1, bs.length-1));
 		
-		Debugger.printBytes(bs);
-		
 		return bs;
 	}
 	

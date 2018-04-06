@@ -2,6 +2,8 @@ package bs.pi.gateway.main;
 
 import bs.pi.gateway.client.http.HttpClient;
 import bs.pi.gateway.client.http.HttpConverter;
+import bs.pi.gateway.client.mqtt.MQTTClient;
+import bs.pi.gateway.client.mqtt.MQTTConverter;
 import bs.pi.gateway.client.port.PortClient;
 import bs.pi.gateway.client.port.PortConverter;
 import bs.pi.gateway.client.zigbee.ZigbeeClient;
@@ -11,7 +13,7 @@ import bs.pi.gateway.processor.MyProcessor;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		
+
 		HttpClient httpClient = new HttpClient(HttpClient.DEFAULT_CFG_PATH);
 		HttpConverter httpConverter = new HttpConverter();
 		httpClient.setConverter(httpConverter);
@@ -26,6 +28,11 @@ public class Main {
 		zigbeeClient.setConverter(new ZigbeeConverter(zigbeeClient.getZigbeeClientCfg()));
 		zigbeeClient.start();
 		
+		MQTTClient mqttClient = new MQTTClient(MQTTClient.DEFAULT_CFG_PATH);
+		mqttClient.setConverter(new MQTTConverter());
+		mqttClient.init();
+		mqttClient.start();
+		
 		MyProcessor processor = new MyProcessor();
 		
 		Gateway gateway = new Gateway();
@@ -33,6 +40,8 @@ public class Main {
 		gateway.installReceiver(zigbeeClient.getReceiver());
 		gateway.installSender(httpClient.getSender());
 		gateway.installReceiver(httpClient.getReceiver());
+		gateway.installSender(mqttClient.getSender());
+		gateway.installReceiver(mqttClient.getReceiver());
 		gateway.setProcessor(processor);
 		gateway.start();
 	}

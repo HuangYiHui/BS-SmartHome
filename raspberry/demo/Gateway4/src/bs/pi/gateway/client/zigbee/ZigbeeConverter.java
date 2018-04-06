@@ -3,48 +3,70 @@ package bs.pi.gateway.client.zigbee;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.test.Debugger;
 
 import bs.pi.gateway.assist.Tool;
 import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.msg.HttpCommandArrivedMsg;
 import bs.pi.gateway.msg.IMsg;
 import bs.pi.gateway.msg.OtherZigbeeConnectedMsg;
 import bs.pi.gateway.msg.OutSensorValuesComingMsg;
-import bs.pi.gateway.msg.PortMsgReceivedMsg;
+import bs.pi.gateway.msg.PortMsgArrivedMsg;
 import bs.pi.gateway.msg.QueryZigbeeIsOnlineMsg;
 import bs.pi.gateway.msg.ResponseToZigbeeOnlineQueryMsg;
 import bs.pi.gateway.msg.SendMsgToAppMsg;
-import bs.pi.gateway.msg.UploadDataToHttpServerMsg;
+import bs.pi.gateway.msg.UploadExecuterValueToHttpServerMsg;
+import bs.pi.gateway.msg.UploadSensorValueToHttpServerMsg;
 
 public class ZigbeeConverter implements IConverter {
 	
-	private final byte CMD_SEND_MSG_TO_APP = 0x01;
-	private final short CMD_UPLAOD_DATA = 0x02;
-	private final byte UPLOAD_DATA_INDEX_SENSOR_VALUE = 0x01;
-	private final byte CMD_OUT_SENSOR_VALUES_COMING = 0x03;
-	private final byte CMD_QUERY_ZIGBEE_IS_ONLINE = 0x04;
-	private final byte CMD_RESPONSE_ZIGBEE_ONLINE = 0x05;
+	private final static byte CMD_SEND_MSG_TO_APP = 0x01;
+	private final static short CMD_UPLAOD_DATA = 0x02;
+	private final static byte UPLOAD_DATA_INDEX_SENSOR_VALUE = 0x01;
+	private final static byte UPLOAD_DATA_INDEX_EXECUTER_VALUE = 0x02;
+	private final static byte EXECUTER_VALUE_OPENED = 0x01;
+	private final static byte EXECUTER_VALUE_CLOSED = 0x02;
+	private final static byte CMD_OUT_SENSOR_VALUES_COMING = 0x03;
+	private final static byte CMD_QUERY_ZIGBEE_IS_ONLINE = 0x04;
+	private final static byte CMD_RESPONSE_ZIGBEE_ONLINE = 0x05;
+	private final static byte CMD_UPLOAD_ALL_DEVICE_VALUE = 0x06;
 	
-	private final byte SENSOR_ID_IN_TEMPERATURE = 0x01;
-	private final byte SENSOR_ID_IN_HUMIDITY = 0x02;
-	private final byte SENSOR_ID_IN_HEAT = 0x03;
-	private final byte SENSOR_ID_HARMFUL_GAS = 0x04;
-	private final byte SENSOR_ID_FIRE = 0x05;
+	private final static byte SENSOR_ID_IN_TEMPERATURE = 0x01;
+	private final static byte SENSOR_ID_IN_HUMIDITY = 0x02;
+	private final static byte SENSOR_ID_IN_HEAT = 0x03;
+	private final static byte SENSOR_ID_HARMFUL_GAS = 0x04;
+	private final static byte SENSOR_ID_FIRE = 0x05;
+
+	private final static byte SENSOR_ID_OUT_TEMPERATURE = 0x11;
+	private final static byte SENSOR_ID_OUT_HUMIDITY = 0x12;
+	private final static byte SENSOR_ID_OUT_HEAT = 0x13;
+	private final static byte SENSOR_ID_SOLID_HUMIDITY = 0x14;
+	private final static byte SENSOR_ID_DUST_DENSITY = 0x15;
+	private final static byte SENSOR_ID_LIGHT_INTENSITY = 0x16;
 	
-	private final byte SENSOR_ID_OUT_TEMPERATURE = 0x11;
-	private final byte SENSOR_ID_OUT_HUMIDITY = 0x12;
-	private final byte SENSOR_ID_OUT_HEAT = 0x13;
-	private final byte SENSOR_ID_SOLID_HUMIDITY = 0x14;
-	private final byte SENSOR_ID_DUST_DENSITY = 0x15;
-	private final byte SENSOR_ID_LIGHT_INTENSITY = 0x16;
+	private final static byte EXECUTER_ID_SOCKET1 = 0x01;
+	private final static byte EXECUTER_ID_SOCKET2 = 0x02;
+	private final static byte EXECUTER_ID_SOCKET3 = 0x03;
 	
-	private final short APP_ID_ZIGBEE = 0x0030;
-	private final short APP_ID_SENSOR = 0x0031;
-	private final short APP_ID_DANGER_ALARM = 0x0032;
-	private final short APP_ID_SWITCHS = 0x0033;
-	private final short APP_ID_IRREMOTE = 0x0034;
-	private final short APP_ID_LCD = 0x0035;
+	private final static byte APP_ID_IN_ZIGBEE = 0x30;
+	private final static byte APP_ID_IN_SENSOR = 0x31;
+	private final static byte APP_ID_DANGER_ALARM = 0x32;
+	private final static byte APP_ID_SIMPLE_EXECUTER = 0x33;
+	private final static byte APP_ID_IRREMOTE = 0x34;
+	private final static byte APP_ID_LCD = 0x35;
+	private final static byte APP_ID_THH_UPDATA = 0x36;
+	
+	private final static byte APP_ID_OUT_ZIGBEE = (byte) 0x90;
+	private final static byte APP_ID_OUT_SENSOR = (byte) 0x91;
+	private final static byte APP_ID_NOTICE_OUT_SENSOR_VALUE = (byte) 0x92;
+	
+	/******SimpleExecuterApp √¸¡Ó******/
+	//ø™∆Ù÷¥––∆˜√¸¡Ó£¨∏Ò Ω£∫"1byte√¸¡ÓÕ∑ + 1byte÷¥––∆˜ID
+	private final static byte CMD_OPEN_SIMPLE_EXECUTER = 0x31;
+	//πÿ±’÷¥––∆˜√¸¡Ó£¨∏Ò Ω£∫1byte√¸¡ÓÕ∑ + 1byte÷¥––∆˜ID
+	private final static byte CMD_CLOSE_SIMPLE_EXECUTER = 0x32;
 	
 	private byte[] dstAddr1;
 	private byte[] dstAddr2;
@@ -66,7 +88,7 @@ public class ZigbeeConverter implements IConverter {
 			return null;
 		}
 		
-		PortMsgReceivedMsg msg1 = zigbeeMsgReceive.getMsg();
+		PortMsgArrivedMsg msg1 = zigbeeMsgReceive.getMsg();
 		
 		byte cmd0 = msg1.getCmd0();
 		byte cmd1 = msg1.getCmd1();
@@ -155,30 +177,51 @@ public class ZigbeeConverter implements IConverter {
 				e.printStackTrace();
 				return null;
 			}
-			UploadDataToHttpServerMsg msg = new UploadDataToHttpServerMsg();
+			UploadSensorValueToHttpServerMsg msg = new UploadSensorValueToHttpServerMsg();
 			msg.setSensorValue(value);
 			
 			if(deviceID == SENSOR_ID_IN_TEMPERATURE)
-				msg.setSensorID(UploadDataToHttpServerMsg.SENSOR_ID_IN_TEMPERATURE);
+				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_IN_TEMPERATURE);
 			else if(deviceID == SENSOR_ID_IN_HUMIDITY)
-				msg.setSensorID(UploadDataToHttpServerMsg.SENSOR_ID_IN_HUMIDITY);
+				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_IN_HUMIDITY);
 			else if(deviceID == SENSOR_ID_IN_HEAT)
-				msg.setSensorID(UploadDataToHttpServerMsg.SENSOR_ID_IN_HEAT);
+				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_IN_HEAT);
 			else if(deviceID == SENSOR_ID_OUT_TEMPERATURE)
-				msg.setSensorID(UploadDataToHttpServerMsg.SENSOR_ID_OUT_TEMPERATURE);
+				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_OUT_TEMPERATURE);
 			else if(deviceID == SENSOR_ID_OUT_HUMIDITY)
-				msg.setSensorID(UploadDataToHttpServerMsg.SENSOR_ID_OUT_HUMIDITY);
+				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_OUT_HUMIDITY);
 			else if(deviceID == SENSOR_ID_OUT_HEAT)
-				msg.setSensorID(UploadDataToHttpServerMsg.SENSOR_ID_OUT_HEAT);
+				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_OUT_HEAT);
 			else if(deviceID == SENSOR_ID_SOLID_HUMIDITY)
-				msg.setSensorID(UploadDataToHttpServerMsg.SENSOR_ID_SOLID_HUMIDITY);
+				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_SOLID_HUMIDITY);
 			else if(deviceID == SENSOR_ID_DUST_DENSITY)
-				msg.setSensorID(UploadDataToHttpServerMsg.SENSOR_ID_DUST_DENSITY);
+				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_DUST_DENSITY);
 			else if(deviceID == SENSOR_ID_LIGHT_INTENSITY)
-				msg.setSensorID(UploadDataToHttpServerMsg.SENSOR_ID_LIGHT_INTENSITY);
+				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_LIGHT_INTENSITY);
 			else
 				return null;
 			
+			return msg;
+		}else if(UPLOAD_DATA_INDEX_EXECUTER_VALUE == uploadIndex && data.length == 3){
+			byte executerID = data[1];
+			byte executerValue = data[2];
+			
+			UploadExecuterValueToHttpServerMsg msg = new UploadExecuterValueToHttpServerMsg();
+			if(executerID == EXECUTER_ID_SOCKET1){
+				msg.setExecuterID(UploadExecuterValueToHttpServerMsg.EXECUTER_ID_SOCKET1);
+			}else if(executerID == EXECUTER_ID_SOCKET2){
+				msg.setExecuterID(UploadExecuterValueToHttpServerMsg.EXECUTER_ID_SOCKET2);
+			}else if(executerID == EXECUTER_ID_SOCKET3){
+				msg.setExecuterID(UploadExecuterValueToHttpServerMsg.EXECUTER_ID_SOCKET3);
+			}else{
+				return null;
+			}
+			
+			if(executerValue == EXECUTER_VALUE_OPENED){
+				msg.setExecuterValue(UploadExecuterValueToHttpServerMsg.EXECUTER_VALUE_ON);
+			}else{
+				msg.setExecuterValue(UploadExecuterValueToHttpServerMsg.EXECUTER_VALUE_OFF);
+			}
 			return msg;
 		}
 		
@@ -189,81 +232,32 @@ public class ZigbeeConverter implements IConverter {
 	public Object convertMsgSend(IMsg msg) {
 		if(msg == null)
 			return null;
-		if(SendMsgToAppMsg.MSG_NAME.equals(msg.getName())){
-			SendMsgToAppMsg sendMsgToAppMsg = (SendMsgToAppMsg)msg;
-			byte[] appID = Tool.shortTo2Byte(sendMsgToAppMsg.getAppID());
-			String cmd = sendMsgToAppMsg.getCmd();
-			byte[] data = new byte[6];
-			if(cmd.equals("openSwitch1")){
-				data[0] = appID[0];
-				data[1] = appID[1];
-				data[2] = 0x31;
-				data[3] = 0x00;
-				data[4] = 0x36;
-				data[5] = 0x00;
-			}else if(cmd.equals("closeSwitch1")){
-				data[0] = appID[0];
-				data[1] = appID[1];
-				data[2] = 0x32;
-				data[3] = 0x00;
-				data[4] = 0x36;
-				data[5] = 0x00;
-			}else{
-				return null;
-			}
-			/*
-			HashMap<String, Object> params = sendMsgToAppMsg.getParams();
+		
+		ZigbeeMsgSend zigbeeMsgSend = new ZigbeeMsgSend();
+		zigbeeMsgSend.setDstEndpoint(cfg.getAppReg().getEndpoint());
+		zigbeeMsgSend.setSrcEndpoint(cfg.getAppReg().getEndpoint());
+		zigbeeMsgSend.setClusterID(cfg.getClusterID());
+		zigbeeMsgSend.setOptions(cfg.getOptions());
+		zigbeeMsgSend.setRadius(cfg.getRadius());
+		zigbeeMsgSend.setTransID((byte) 0x00);
+		
+		if(IMsg.MSG_SEND_MSG_TO_APP.equals(msg.getName())){
 			
-			byte[] data = null;
-			if(SendMsgToAppMsg.CMD_TEST_CMD.equals(cmd)){
-				data = new byte[4];
-				data[0] = appID[0];
-				data[1] = appID[1];
-				data[2] = ZigbeeMsgSend.CMD_TEST_CMD[0];
-				data[3] = ZigbeeMsgSend.CMD_TEST_CMD[1];
-			}*/
-
-			//Debugger.printBytes(data);
-			byte[] dstAddr = getDstAddr(appID);
-			if(dstAddr == null)
-				return null;
 			
-			ZigbeeMsgSend zigbeeMsgSend = new ZigbeeMsgSend();
-			zigbeeMsgSend.setDstAddr(dstAddr);
-			zigbeeMsgSend.setDstEndpoint(cfg.getAppReg().getEndpoint());
-			zigbeeMsgSend.setSrcEndpoint(cfg.getAppReg().getEndpoint());
-			zigbeeMsgSend.setData(data);
-			zigbeeMsgSend.setClusterID(cfg.getClusterID());
-			zigbeeMsgSend.setOptions(cfg.getOptions());
-			zigbeeMsgSend.setRadius(cfg.getRadius());
-			zigbeeMsgSend.setTransID((byte) 0x00);
-			
-			return zigbeeMsgSend;
-			
-		}else if(ResponseToZigbeeOnlineQueryMsg.MSG_NAME.equals(msg.getName())){
+		}else if(IMsg.MSG_RESPONSE_TO_ZIGBEE_ONLINE_QUERY.equals(msg.getName())){
 			ResponseToZigbeeOnlineQueryMsg responseToZigbeeOnlineQueryMsg = (ResponseToZigbeeOnlineQueryMsg) msg;
-			ZigbeeMsgSend zigbeeMsgSend = new ZigbeeMsgSend();
 			zigbeeMsgSend.setDstAddr(responseToZigbeeOnlineQueryMsg.getSrcAddr());
-			zigbeeMsgSend.setDstEndpoint(cfg.getAppReg().getEndpoint());
-			zigbeeMsgSend.setSrcEndpoint(cfg.getAppReg().getEndpoint());
 			byte data[] = {CMD_RESPONSE_ZIGBEE_ONLINE};
 			zigbeeMsgSend.setData(data);
-			zigbeeMsgSend.setClusterID(cfg.getClusterID());
-			zigbeeMsgSend.setOptions(cfg.getOptions());
-			zigbeeMsgSend.setRadius(cfg.getRadius());
-			zigbeeMsgSend.setTransID((byte) 0x00);
 			return zigbeeMsgSend;
-		}else if(OutSensorValuesComingMsg.MSG_NAME.equals(msg.getName())){
-			byte[] appID = Tool.shortTo2Byte(APP_ID_LCD);
-			byte[]dstAddr = getDstAddr(appID);
+		}else if(IMsg.MSG_OUT_SENSOR_VALUES_COMING.equals(msg.getName())){
+			byte[]dstAddr = getDstAddr(APP_ID_LCD);
 			if(dstAddr == null)
 				return null;
 			
 			OutSensorValuesComingMsg outSensorValuesComingMsg = (OutSensorValuesComingMsg) msg;
-			ZigbeeMsgSend zigbeeMsgSend = new ZigbeeMsgSend();
+			
 			zigbeeMsgSend.setDstAddr(dstAddr);
-			zigbeeMsgSend.setDstEndpoint(cfg.getAppReg().getEndpoint());
-			zigbeeMsgSend.setSrcEndpoint(cfg.getAppReg().getEndpoint());
 			byte data[] = new byte[25];
 			data[0] = CMD_OUT_SENSOR_VALUES_COMING;
 			byte[] bs2 = Tool.floatToBytes(outSensorValuesComingMsg.getTemperature());
@@ -279,31 +273,57 @@ public class ZigbeeConverter implements IConverter {
 			bs2 = Tool.floatToBytes(outSensorValuesComingMsg.getSolidHumidity());
 			System.arraycopy(bs2, 0, data, 21, 4);
 			zigbeeMsgSend.setData(data);
-			zigbeeMsgSend.setClusterID(cfg.getClusterID());
-			zigbeeMsgSend.setOptions(cfg.getOptions());
-			zigbeeMsgSend.setRadius(cfg.getRadius());
-			zigbeeMsgSend.setTransID((byte) 0x00);
 			
 			return zigbeeMsgSend;
+		}else if(IMsg.MSG_UPLAOD_ALL_DEVICE_VALUE.equals(msg.getName())){
+			byte[] dstAddr = {(byte) 0xff, (byte) 0xff};
+			zigbeeMsgSend.setDstAddr(dstAddr);
+			byte data[] = {CMD_UPLOAD_ALL_DEVICE_VALUE};
+			zigbeeMsgSend.setData(data);
+			return zigbeeMsgSend;
+		}else if(IMsg.MSG_HTTP_COMMAND_ARRIVED.equals(msg.getName())){
+			HttpCommandArrivedMsg httpCmd = (HttpCommandArrivedMsg) msg;
+			if(HttpCommandArrivedMsg.CMD_ON_SWITCH.equals(httpCmd.getCmd())){
+				byte[]dstAddr = getDstAddr(APP_ID_SIMPLE_EXECUTER);
+				if(dstAddr == null)
+					return null;
+				
+				zigbeeMsgSend.setDstAddr(dstAddr);
+				byte data[] = new byte[4];
+				data[0] = CMD_SEND_MSG_TO_APP;
+				data[1] = APP_ID_SIMPLE_EXECUTER;
+				data[2] = CMD_OPEN_SIMPLE_EXECUTER;
+				String executerIDStr = (String) httpCmd.getParams().get("sensorId");
+				int sensorID = Integer.parseInt(executerIDStr);
+				if(sensorID == 30)
+					data[3] = EXECUTER_ID_SOCKET1;
+				else if(sensorID == 34)
+					data[3] = EXECUTER_ID_SOCKET2;
+				else if(sensorID == 35)
+					data[3] = EXECUTER_ID_SOCKET3;
+				
+				zigbeeMsgSend.setData(data); 
+				return zigbeeMsgSend;
+			}
 		}
 		
 		return null;
 	}
 	
-	private byte[] getDstAddr(byte[] appID){
+	private byte[] getDstAddr(byte appID){
 		
 		ArrayList<ZigbeeInfo> zigbeeInfoList = cfg.getZigbeeInfoList();
 		if(zigbeeInfoList == null || zigbeeInfoList.isEmpty())
 			return null;
 
 		for(ZigbeeInfo info : zigbeeInfoList){
-			ArrayList<byte[]> appIDList = info.getAppIDList();
+			ArrayList<Byte> appIDList = info.getAppIDList();
 			if(info.getNWKAddr() != null && 
 					info.getNWKAddr().length == 2 && 
 					appIDList != null && 
 					appIDList.size()>0){
-				for(byte[] id : appIDList){
-					if(Arrays.equals(id, appID))
+				for(byte id : appIDList){
+					if(id == appID)
 						return info.getNWKAddr();
 				}
 			}

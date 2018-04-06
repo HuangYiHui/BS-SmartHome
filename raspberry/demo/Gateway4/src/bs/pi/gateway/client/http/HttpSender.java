@@ -17,7 +17,7 @@ public class HttpSender implements ISender {
 	
 	@Override
 	public String getName() {
-		return ISender.V_SEND_NAME_HTTP_SNEDER;
+		return ISender.NAME_HTTP_SENDER;
 	}
 
 	@Override
@@ -31,7 +31,6 @@ public class HttpSender implements ISender {
 			HttpMsgReceive httpMsgReceive = executer.execute();
 			if(httpMsgReceive != null){
 				responseMsg.setSendSuccess(true);
-				System.out.println("http send ok");
 			}else{
 				responseMsg.setSendSuccess(false);
 			}

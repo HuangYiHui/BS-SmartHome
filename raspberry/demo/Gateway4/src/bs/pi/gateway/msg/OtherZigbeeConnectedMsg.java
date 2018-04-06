@@ -1,15 +1,9 @@
 package bs.pi.gateway.msg;
 
 public class OtherZigbeeConnectedMsg implements IMsg {
-
-	public final static String MSG_NAME = "OtherZigbeeConnectedMsg";
 	
 	private byte[] IEEEAddr;
 	private byte[] NWKAddr;
-	
-	public OtherZigbeeConnectedMsg(){
-		
-	}
 		
 	public OtherZigbeeConnectedMsg(byte[] IEEEAddr, byte[] NWKAddr){
 		this.IEEEAddr = IEEEAddr.clone();
@@ -18,7 +12,7 @@ public class OtherZigbeeConnectedMsg implements IMsg {
 	
 	@Override
 	public String getName() {
-		return MSG_NAME;
+		return IMsg.MSG_OTHER_ZIGBEE_CONNECTED;
 	}
 
 	public byte[] getIEEEAddr() {

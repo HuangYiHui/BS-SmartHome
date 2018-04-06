@@ -2,13 +2,11 @@ package bs.pi.gateway.msg;
 
 public class QueryZigbeeIsOnlineMsg implements IMsg {
 
-	public final static String MSG_NAME = "QueryZigbeeIsOnlineMsg";
-	
 	private byte[] srcAddr;
 	
 	@Override
 	public String getName() {
-		return MSG_NAME;
+		return IMsg.MSG_QUERY_ZIGBEE_IS_ONLINE;
 	}
 
 	public byte[] getSrcAddr() {

@@ -33,7 +33,6 @@ public class HttpClient implements IClient{
 	public void start()throws Exception{
 		sender = new HttpSender(cfg, converter);
 		receiver = new HttpReceiver(cfg, converter);
-		receiver.start();
 	}
 
 	@Override

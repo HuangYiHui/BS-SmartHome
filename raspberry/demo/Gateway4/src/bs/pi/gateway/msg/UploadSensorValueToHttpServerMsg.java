@@ -1,11 +1,9 @@
 package bs.pi.gateway.msg;
 
 
-public class UploadDataToHttpServerMsg implements IMsg {
-
-	public final static String MSG_NAME = "UploadDataToHttpServerMsg";
+public class UploadSensorValueToHttpServerMsg implements IMsg {
 	
-	//这里反的sensorID要与平台的sensorID一致
+	//这里的sensorID要与平台的sensorID一致
 	public final static short SENSOR_ID_IN_TEMPERATURE 	= 20;
 	public final static short SENSOR_ID_IN_HUMIDITY 	= 21;
 	public final static short SENSOR_ID_IN_HEAT 		= 22;
@@ -21,7 +19,7 @@ public class UploadDataToHttpServerMsg implements IMsg {
 	
 	@Override
 	public String getName() {
-		return MSG_NAME;
+		return IMsg.MSG_UPLAOD_SENSOR_VALUE_TO_HTTP_SERVER;
 	}
 
 	public short getSensorID() {

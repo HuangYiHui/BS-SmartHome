@@ -12,6 +12,17 @@
 	<classpathentry kind="lib" path="lib/httpcore-4.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/json-lib-2.1-jdk15.jar"/>
 	<classpathentry kind="lib" path="lib/RXTXcomm.jar"/>
-	<classpathentry kind="lib" path="lib/org.eclipse.paho.client.mqttv3-1.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/mqtt-client-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/hawtbuf-1.9.jar"/>
+	<classpathentry kind="lib" path="lib/hawtdispatch-1.9.jar"/>
+	<classpathentry kind="lib" path="D:/software1/apache-maven-3.5.0/repository/org/fusesource/hawtdispatch/hawtdispatch-transport/1.9/hawtdispatch-transport-1.9.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.fusesource.hawtdispatch"/>
+			<attribute name="maven.artifactId" value="hawtdispatch-transport"/>
+			<attribute name="maven.version" value="1.9"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

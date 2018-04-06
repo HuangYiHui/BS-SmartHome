@@ -7,6 +7,7 @@
 #include "SampleApp.h"
 #include "SystemCfg.h"
 #include "ZigbeeAppCmd.h"
+#include "SensorAppCmd.h"
 
 #define ZB_PACKET_SEND_DST_ENDPOINT	0x55
 #define ZB_PACKET_SEND_SRC_ENDPOINT 0x55

@@ -43,7 +43,6 @@ public class PortClient implements IClient{
                 serialPort.setSerialPortParams(cfg.getBaudRate(), cfg.getDataBits(), cfg.getStopBits(), cfg.getParity());
                 sender = new PortSender(serialPort.getOutputStream(), converter);
                 receiver = new PortReceiver(serialPort.getInputStream(), converter);
-                receiver.start();
             }
             else{
                 String errorStr = cfg.getPortName() +"not a serial port";

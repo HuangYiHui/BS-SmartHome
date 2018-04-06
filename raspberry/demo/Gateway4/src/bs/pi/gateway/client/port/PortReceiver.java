@@ -12,7 +12,7 @@ import bs.pi.gateway.main.IConverter;
 import bs.pi.gateway.main.IReceivedListener;
 import bs.pi.gateway.main.IReceiver;
 import bs.pi.gateway.msg.IMsg;
-import bs.pi.gateway.msg.PortMsgReceivedMsg;
+import bs.pi.gateway.msg.PortMsgArrivedMsg;
 
 public class PortReceiver implements IReceiver {
 	
@@ -166,5 +166,10 @@ public class PortReceiver implements IReceiver {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public String getName() {
+		return IReceiver.NAME_PORT_RECEIVER;
 	}
 }

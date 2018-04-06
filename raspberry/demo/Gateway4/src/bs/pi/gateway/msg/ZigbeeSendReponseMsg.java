@@ -2,13 +2,11 @@ package bs.pi.gateway.msg;
 
 public class ZigbeeSendReponseMsg implements IMsg {
 
-	public final static String MSG_NAME = "ZigbeeSendResponseMsg";
-	
 	private boolean sendSuccess;
 	
 	@Override
 	public String getName() {
-		return MSG_NAME;
+		return IMsg.MSG_ZIGBEE_SEND_RESPONSE;
 	}
 
 	public boolean getSendSuccess() {

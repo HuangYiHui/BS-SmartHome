@@ -4,15 +4,13 @@ import java.util.HashMap;
 
 public class SendMsgToAppMsg implements IMsg {
 	
-	public final static String MSG_NAME = "SendMsgToAppMsg";
-	
 	private short appID;
 	private String cmd;
 	private HashMap<String, Object> params;
 	
 	@Override
 	public String getName() {
-		return MSG_NAME;
+		return IMsg.MSG_SEND_MSG_TO_APP;
 	}
 
 	public short getAppID() {

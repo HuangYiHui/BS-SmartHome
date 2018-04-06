@@ -26,7 +26,7 @@ public class ZigbeeSender implements ISender {
 	
 	@Override
 	public String getName() {
-		return ISender.V_SEND_NAME_ZIGBEE_SNEDER;
+		return ISender.NAME_ZIGBEE_SENDER;
 	}
 
 	@Override
