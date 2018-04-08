@@ -19,8 +19,10 @@ void DangerAlarmApp::run()
 {
 	//сп╩П
 	if(fireSensor.getSensorValue() == 0 ||
-		harmfulGasSensor.getSensorValue() > 350
+		harmfulGasSensor.getSensorValue() > 500
 	){
+		Serial.println("harmfulGasValue : ");
+		Serial.println(harmfulGasSensor.getSensorValue());
 		alarm.openExecuter();
 		Serial.println("openExecuter");
 	}else{

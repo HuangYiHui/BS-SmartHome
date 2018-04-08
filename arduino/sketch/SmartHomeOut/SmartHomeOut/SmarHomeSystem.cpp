@@ -7,7 +7,7 @@ SmartHomeSystem::SmartHomeSystem()
 	temperatureSensor(dht11),
 	humiditySensor(dht11),
 	heatSensor(dht11),
-	fc28(SENSOR_ID_SOLID_HUMIDITY, PIN_FC28_IN, SENSOR_READ_MODE_ANALOG),
+	fc28(SENSOR_ID_SOLID_HUMIDITY, PIN_FC28_IN),
 	gy30(SENSOR_ID_LIGHT_INTENSITY),
 	pm25(SENSOR_ID_DUST_DENSITY, PIN_PM25_LED, PIN_PM25_VO),
 
@@ -22,12 +22,12 @@ void SmartHomeSystem::init()
 	Serial.begin(SERAIL_BAUD_RATE);
 	while (!Serial);
 
-	sensorApp.addSensorTask(&temperatureSensor, 3000, true);
-	sensorApp.addSensorTask(&humiditySensor, 3100, true);
-	sensorApp.addSensorTask(&heatSensor, 3200, true);
-	sensorApp.addSensorTask(&gy30, 3300, true);
-	sensorApp.addSensorTask(&fc28, 3400, true);
-	sensorApp.addSensorTask(&pm25, 3500, true);
+	sensorApp.addSensorTask(&temperatureSensor, 5000, true);
+	sensorApp.addSensorTask(&humiditySensor, 5100, true);
+	sensorApp.addSensorTask(&heatSensor, 5200, true);
+	sensorApp.addSensorTask(&gy30, 5300, true);
+	sensorApp.addSensorTask(&fc28, 5400, true);
+	sensorApp.addSensorTask(&pm25, 5500, true);
 
 	installApp(&zigbeeApp);
 	installApp(&sensorApp);

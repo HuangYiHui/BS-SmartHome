@@ -1,6 +1,6 @@
 #include "PM25Device.h"
 
-PM25Device::PM25Device(unsigned int deviceID, unsigned char ledPin, unsigned char voPin) : SensorDevice(deviceID)
+PM25Device::PM25Device(unsigned char deviceID, unsigned char ledPin, unsigned char voPin) : SensorDevice(deviceID)
 {
 	this->ledPin = ledPin;
 	this->voPin = voPin;

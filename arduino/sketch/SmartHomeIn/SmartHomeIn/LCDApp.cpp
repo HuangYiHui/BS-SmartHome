@@ -12,6 +12,7 @@ LCDApp::LCDApp(LCDDevice& lcd) : lcd(lcd)
 	thhOut[2] = 0;
 	lightIntensity = 0;
 	dustConcentration = 0;
+	solidHumidity = 0;
 	isOnline = false;
 	isSocket1On = false;
 	isSocket2On = false;
@@ -42,80 +43,84 @@ void LCDApp::refreshMainPage()
 {
 	lcd.firstPage();
 	do {
-		lcd.drawFrame(52,0,76,22);
-		lcd.drawFrame(52,21,76,22);
-		lcd.drawFrame(52,42,76,21);
-		lcd.drawFrame(0,42,53,21);
+		lcd.drawFrame(59,0,69,22);
+		lcd.drawFrame(59,21,69,22);
+		lcd.drawFrame(59,42,69,22);
+		lcd.drawFrame(0,33,60,31);
 
-		lcd.drawXBMP(54,3,16,16,temperatureIcon);
-		lcd.drawXBMP(54,24,16,16,humidityIcon);
-		lcd.drawXBMP(54,45,16,16,heatIcon);
-		lcd.drawXBMP(2,44,8,8,dustConcentrationIcon);
-		lcd.drawXBMP(2,53,8,8,lightIntensityIcon);
+		lcd.drawXBMP(60,3,16,16,temperatureIcon);
+		lcd.drawXBMP(60,24,16,16,humidityIcon);
+		lcd.drawXBMP(60,45,16,16,heatIcon);
+		lcd.drawXBMP(2,35,8,8,dustConcentrationIcon);
+		lcd.drawXBMP(2,44,8,8,lightIntensityIcon);
+		lcd.drawXBMP(2,53,8,8,solidHumidityIcon);
 
-		lcd.drawStr(1, 8, "Smar");
-		lcd.drawStr(21, 8, "tHome");
+		lcd.drawStr(4, 10, "Smar");
+		lcd.drawStr(26, 10, "tHome");
 
-		lcd.drawStr(71, 10, "I:");
-		lcd.drawStr(71, 19, "O:");
+		lcd.drawStr(75, 10, "I:");
+		lcd.drawStr(75, 19, "O:");
 
 		lcd.drawCircle(117, 3, 1);
 		lcd.drawStr(120, 10, "C");
 		lcd.drawCircle(117, 12, 1);
 		lcd.drawStr(120, 19, "C");
 	
-		lcd.drawStr(71, 31, "I:");
-		lcd.drawStr(71, 40, "O:");
+		lcd.drawStr(75, 31, "I:");
+		lcd.drawStr(75, 40, "O:");
 		lcd.drawStr(120, 31, "%");
 		lcd.drawStr(120, 40, "%");
 
-		lcd.drawStr(71, 52, "I:");
-		lcd.drawStr(71, 61, "O:");
+		lcd.drawStr(75, 52, "I:");
+		lcd.drawStr(75, 61, "O:");
 
-		lcd.drawStr(47, 52, "P");
-		lcd.drawStr(47, 61, "L");
+		lcd.drawStr(50, 43, "P");
+		lcd.drawStr(50, 52, "L");
+		lcd.drawStr(50, 61, "%");
 
-		//室内温度
-		printFloat(83, 10, thhIn[0]);
-		//室外温度
-		printFloat(83, 19, thhOut[0]);
-		//室内湿度度
-		printFloat(83, 31, thhIn[1]);
-		//室外湿度度
-		printFloat(83, 40, thhOut[1]);
-		//室内热度
-		printFloat(83, 52, thhIn[2]);
-		//室外热度
-		printFloat(83, 61, thhOut[2]);
-	
+		//êò?ú???è
+		printFloat(87, 10, thhIn[0]);
+		//êòía???è
+		printFloat(87, 19, thhOut[0]);
+		//êò?úêa?è?è
+		printFloat(87, 31, thhIn[1]);
+		//êòíaêa?è?è
+		printFloat(87, 40, thhOut[1]);
+		//êò?úèè?è
+		printFloat(87, 52, thhIn[2]);
+		//êòíaèè?è
+		printFloat(87, 61, thhOut[2]);
+
 		//pm2.5
-		lcd.setPrintPos(11, 52);
+		lcd.setPrintPos(15, 43);
 		lcd.print(dustConcentration, 1);
-		//光强
-		lcd.setPrintPos(11, 61);
+		//1a??
+		lcd.setPrintPos(15, 52);
 		lcd.print(lightIntensity, 1);
 
+		lcd.setPrintPos(15, 61);
+		lcd.print(solidHumidity, 1);
+
 		if(isOnline)
-			lcd.drawXBMP(20,8,16,16,onlineIcon);
+			lcd.drawXBMP(0,14,16,16,onlineIcon);
 		else{
-			lcd.drawXBMP(20,8,16,16,offlineIcon);
-			lcd.drawStr(33, 22, "...");
+			lcd.drawXBMP(0,14,16,16,offlineIcon);
 		}
 
 		if(isSocket1On)
-			lcd.drawXBMP(2,25,16,16,socketOnIcon);
+			lcd.drawXBMP(16,15,16,16,socketOnIcon);
 		else
-			lcd.drawXBMP(2,25,16,16,socketOffIcon);
+			lcd.drawXBMP(16,15,16,16,socketOffIcon);
 
 		if(isSocket2On)
-			lcd.drawXBMP(18,25,16,16,socketOnIcon);
+			lcd.drawXBMP(30,15,16,16,socketOnIcon);
 		else
-			lcd.drawXBMP(18,25,16,16,socketOffIcon);
+			lcd.drawXBMP(30,15,16,16,socketOffIcon);
 
 		if(isSocket3On)
-			lcd.drawXBMP(34,25,16,16,socketOnIcon);
+			lcd.drawXBMP(44,15,16,16,socketOnIcon);
 		else
-			lcd.drawXBMP(34,25,16,16,socketOffIcon);
+			lcd.drawXBMP(44,15,16,16,socketOffIcon);
 			
 	} while ( lcd.nextPage() );
 }
@@ -141,7 +146,7 @@ void LCDApp::appMsgReceivedCallback(AppMsg& msg)
 		thhOut[2] = Tool::bytesToFloat(&msg.data[9]);
 		dustConcentration = Tool::bytesToFloat(&msg.data[13]);
 		lightIntensity = Tool::bytesToFloat(&msg.data[17]);
-		//solidHumidity
+		solidHumidity = Tool::bytesToFloat(&msg.data[21]);
 	}else if(CMD_NOTICE_ZIGBEE_ONLINE == cmd){
 		if(msg.len != 2)
 			return;

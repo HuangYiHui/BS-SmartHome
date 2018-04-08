@@ -74,6 +74,9 @@
     <ClInclude Include="NoticeOutSensorValueApp.h">
       <Filter>app</Filter>
     </ClInclude>
+    <ClInclude Include="FC28Device.h">
+      <Filter>device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="app">
@@ -140,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="NoticeOutSensorValueApp.cpp">
       <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="FC28Device.cpp">
+      <Filter>device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

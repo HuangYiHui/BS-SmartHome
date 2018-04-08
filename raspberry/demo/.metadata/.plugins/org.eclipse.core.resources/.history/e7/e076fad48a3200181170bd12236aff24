@@ -1,5 +1,0 @@
-package bs.pi.gateway.msg;
-
-public class ResponseToZigbeeOnlineQueryMsg implements IMsg {
-
-}

@@ -29,7 +29,7 @@ D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SmartHomeOut.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\TemperatureSensorDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\HumiditySensorDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\HeatSensorDevice.h \
- D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SimpleSensorDevice.h \
+ D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\FC28Device.h \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\GY30Device.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\libraries\Wire\src/Wire.h \
  D:\software1\arduino-1.8.5\hardware\arduino\avr\cores\arduino/Stream.h \
@@ -46,4 +46,5 @@ D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SmartHomeOut.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\ZigbeeAppCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SensorAppCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SensorApp.h \
- D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\NoticeOutSensorValueApp.h
+ D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\NoticeOutSensorValueApp.h \
+ D:\software\Temp\VMBuilds\SmartHomeOut\uno\Debug\SimpleSensorDevice.h

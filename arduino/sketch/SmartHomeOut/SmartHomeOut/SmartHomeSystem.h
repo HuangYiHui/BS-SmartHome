@@ -11,7 +11,7 @@
 #include "TemperatureSensorDevice.h"
 #include "HumiditySensorDevice.h"
 #include "HeatSensorDevice.h"
-#include "SimpleSensorDevice.h"
+#include "FC28Device.h"
 #include "GY30Device.h"
 #include "PM25Device.h"
 
@@ -31,7 +31,7 @@ private:
 	TemperatureSensorDevice temperatureSensor;
 	HumiditySensorDevice humiditySensor;
 	HeatSensorDevice heatSensor;
-	SimpleSensorDevice fc28;
+	FC28Device fc28;
 	GY30Device gy30;
 	PM25Device pm25;
 

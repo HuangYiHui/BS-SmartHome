@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DHT11Device.h" />
+    <ClInclude Include="FC28Device.h" />
     <ClInclude Include="GY30Device.h" />
     <ClInclude Include="HeatSensorDevice.h" />
     <ClInclude Include="HumiditySensorDevice.h" />
@@ -109,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DHT11Device.cpp" />
+    <ClCompile Include="FC28Device.cpp" />
     <ClCompile Include="GY30Device.cpp" />
     <ClCompile Include="HeatSensorDevice.cpp" />
     <ClCompile Include="HumiditySensorDevice.cpp" />
