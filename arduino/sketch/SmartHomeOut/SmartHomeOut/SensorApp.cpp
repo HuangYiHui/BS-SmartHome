@@ -29,6 +29,7 @@ void SensorApp::init()
 {
 	for(int i=0;i<sensorTaskList.size();i++){
 		sensorTaskList.get(i)->sensor->start();
+		PT_INIT(&(sensorTaskList.get(i)->pt));
 	}
 }
 
@@ -42,47 +43,43 @@ void SensorApp::appMsgReceivedCallback(AppMsg& msg)
 		for(int i=0;i<sensorTaskList.size();i++){
 			uploadSensorValue(sensorTaskList.get(i)->sensor);
 		}
-	}
-	/*
-		if(msg.len < 1)
-			return;
-	
-		unsigned char cmd = msg.data[0];
-		unsigned char sensorID;
-		if(CMD_START_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd ||
-			CMD_STOP_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd ||
-			CMD_SET_CIRCULARLY_UPLOAD_INTERVAL == cmd
-		){
-			if(msg.len < 2)
-				return;
-			sensorID = msg.data[1];
+	}else if(CMD_START_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd && msg.len == 2){
+		SensorTask* task = findUploadTaskByID(msg.data[1]);
+		if(task != NULL){
+			task->isCirCularlyUploadSensorValue = true;
 		}
-		
-		SensorTask* task = NULL;
+	}else if(CMD_STOP_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd && msg.len == 2){
+		SensorTask* task = findUploadTaskByID(msg.data[1]);
+		if(task != NULL){
+			task->isCirCularlyUploadSensorValue = false;
+		}
+	}else if(CMD_SET_CIRCULARLY_UPLOAD_INTERVAL == cmd && msg.len == 4){
+		SensorTask* task = findUploadTaskByID(msg.data[1]);
+		if(task != NULL){
+			unsigned int interval = Tool::bytesToInt(&(msg.data[2]));
+			if(interval > 0)
+				task->uploadInterval = interval;
+		}
+	}else if(CMD_UPLOAD_SENSOR_VALUE == cmd && msg.len == 2){
+		SensorTask* task = findUploadTaskByID(msg.data[1]);
+		if(task != NULL){
+			uploadSensorValue(task->sensor);
+		}
+	}
+}
+
+SensorTask* SensorApp::findUploadTaskByID(unsigned char sensorID)
+{
+	if(sensorTaskList.size()>0){
 		for(int i=0;i<sensorTaskList.size();i++){
 			if(sensorTaskList.get(i)->sensor->getSensorID() == sensorID){
-				task = sensorTaskList.get(i);
-				break;
+				return sensorTaskList.get(i);
 			}
 		}
-
-		if(task == NULL)
-			return;
-
-		if(CMD_START_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd){
-			task->isCirCularlyUploadSensorValue = true;
-		}else if(CMD_STOP_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd){
-			task->isCirCularlyUploadSensorValue = false;
-		}else if(CMD_SET_CIRCULARLY_UPLOAD_INTERVAL == cmd){
-			//带2个byte参数，表示unsigned int的interval数值
-			if(msg.len < 4)
-				return;
-			unsigned int value = Tool::bytesToInt(&(msg.data[2]));
-			if(value > 0){
-				task->uploadInterval = value;
-			}
-		}
-		*/
+	}
+	
+	return NULL;
+	
 }
 
 void SensorApp::uploadSensorValue(SensorDevice* sensor)
@@ -109,7 +106,6 @@ void SensorApp::run()
 			PT_INIT(&(task->pt));
 		}
 	}
-
 }
 
 int SensorApp::runCirCularlyUploadSensorValueTask(SensorTask* task)

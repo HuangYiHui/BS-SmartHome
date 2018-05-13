@@ -1,0 +1,62 @@
+package com.test;
+
+import java.net.URISyntaxException;
+
+import org.fusesource.mqtt.client.MQTT;
+
+import bs.pi.gateway.client.mqtt.MQTTClientCfg;
+import bs.pi.gateway.client.mqtt.MQTTReceiver;
+import bs.pi.gateway.client.mqtt.MQTTSender;
+import bs.pi.gateway.main.IConverter;
+import bs.pi.gateway.main.IReceiver;
+import bs.pi.gateway.main.ISender;
+
+public class MQTTClient {
+
+	private MQTTClientCfg cfg;
+	private MQTT mqtt;
+	private MQTTSender sender;
+	private MQTTReceiver receiver;
+	private IConverter converter;
+	
+	public MQTTClient(String path) throws URISyntaxException{
+		mqtt = new MQTT();
+        mqtt.setHost(cfg.getHost(), cfg.getPort());
+        mqtt.setUserName(cfg.getUsername());
+        mqtt.setPassword(cfg.getPassword());
+	}
+
+	public void start() throws Exception {
+		try {
+			sender = new MQTTSender(mqtt.futureConnection(), converter);
+			receiver = new MQTTReceiver(mqtt.callbackConnection(), cfg.getTopics(), converter);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setConverter(IConverter converter) {
+		// TODO Auto-generated method stub
+		this.converter = converter;
+	}
+
+	@Override
+	public ISender getSender() {
+		// TODO Auto-generated method stub
+		return sender;
+	}
+
+	@Override
+	public IReceiver getReceiver() {
+		// TODO Auto-generated method stub
+		return receiver;
+	}
+
+}

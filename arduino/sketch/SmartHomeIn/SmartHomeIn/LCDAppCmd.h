@@ -20,4 +20,9 @@
 #define FLAG_SOCKET_ON		0x01
 #define FLAG_SOCKET_OFF		0x02
 
+//通知插座状态改变命令，格式："1byte命令头 + 1byte插座ID + 1byte状态标志"
+#define CMD_NOTICE_IS_DANGER			0x05
+#define FLAG_DANGER		0x01
+#define FLAG_NO_DANGER	0x02
+
 #endif

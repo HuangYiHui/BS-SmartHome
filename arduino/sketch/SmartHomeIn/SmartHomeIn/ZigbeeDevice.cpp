@@ -17,7 +17,7 @@ bool ZigbeeDevice::startUpWithoutLastState()
 {
 	sendFlashCmdBytes((unsigned int)CMD_STARTUP_WITHOUT_LAST_STATE_BYTES, 8);
 	ZBPacketReceive packet;
-	receive(packet, 20);
+	receive(packet, 50);
 	if(packet.len == 0x01 && packet.cmd1 == 0x66 && packet.cmd2 == 0x05 && packet.data[0] == 0x00)
 		return true;
 	else
@@ -28,7 +28,7 @@ bool ZigbeeDevice::restart()
 {
 	sendFlashCmdBytes((unsigned int)CMD_DEVICE_RESET_BYTES, 6);
 	ZBPacketReceive packet;
-	receive(packet, 1700);
+	receive(packet, 1900);
 	if(packet.len == 0x06 && packet.cmd1 == 0x41 && packet.cmd2 == 0x80)
 		return true;
 	else
@@ -39,7 +39,7 @@ bool ZigbeeDevice::setDeviceType()
 {
 	sendFlashCmdBytes((unsigned int)CMD_DEVICE_TYPE_SET_BYTES, 8);
 	ZBPacketReceive packet;
-	receive(packet, 20);
+	receive(packet, 50);
 	if(packet.len == 0x01 && packet.cmd1 == 0x61 && packet.cmd2 == 0x09 && packet.data[0] == 0x00)
 		return true;
 	else
@@ -50,7 +50,7 @@ bool ZigbeeDevice::setDirectCB()
 {
 	sendFlashCmdBytes((unsigned int)CMD_ZDO_DIRECT_CB_BYTES, 8);
 	ZBPacketReceive packet;
-	receive(packet, 20);
+	receive(packet, 50);
 	if(packet.len == 0x01 && packet.cmd1 == 0x66 && packet.cmd2 == 0x05 && packet.data[0] == 0x00)
 		return true;
 	else
@@ -61,7 +61,7 @@ bool ZigbeeDevice::registerApp()
 {
 	sendFlashCmdBytes((unsigned int)CMD_APP_REGISTER_BYTES, 18);
 	ZBPacketReceive packet;
-	receive(packet, 20);
+	receive(packet, 50);
 	if(packet.len == 0x01 && packet.cmd1 == 0x64 && packet.cmd2 == 0x00 && packet.data[0] == 0xb8)
 		return true;
 	else
@@ -79,9 +79,6 @@ void ZigbeeDevice::start()
 	//清空串口缓存
 	while(Serial.available()>0)
 		Serial.read();
-
-	unsigned char buffer[14];
-	ZBPacketReceive packet;
 
 	//设置不从上次状态启动
 	startUpWithoutLastState();
@@ -103,6 +100,8 @@ void ZigbeeDevice::start()
 
 	//建立网络或者连接网络
 	startFromApp();
+
+	delay(2500);
 }
 
 

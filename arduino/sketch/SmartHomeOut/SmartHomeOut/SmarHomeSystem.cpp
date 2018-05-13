@@ -22,12 +22,12 @@ void SmartHomeSystem::init()
 	Serial.begin(SERAIL_BAUD_RATE);
 	while (!Serial);
 
-	sensorApp.addSensorTask(&temperatureSensor, 5000, true);
-	sensorApp.addSensorTask(&humiditySensor, 5100, true);
-	sensorApp.addSensorTask(&heatSensor, 5200, true);
-	sensorApp.addSensorTask(&gy30, 5300, true);
-	sensorApp.addSensorTask(&fc28, 5400, true);
-	sensorApp.addSensorTask(&pm25, 5500, true);
+	sensorApp.addSensorTask(&temperatureSensor, 30000, true);
+	sensorApp.addSensorTask(&humiditySensor, 30000, true);
+	sensorApp.addSensorTask(&heatSensor, 30000, true);
+	sensorApp.addSensorTask(&gy30, 60000, true);
+	sensorApp.addSensorTask(&fc28, 60000, true);
+	sensorApp.addSensorTask(&pm25, 60000, true);
 
 	installApp(&zigbeeApp);
 	installApp(&sensorApp);

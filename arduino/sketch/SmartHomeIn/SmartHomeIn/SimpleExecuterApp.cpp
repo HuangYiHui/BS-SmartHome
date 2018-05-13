@@ -3,7 +3,7 @@
 SimpleExecuterApp::SimpleExecuterApp()
 {
 	this->appID = APP_ID_SIMPLE_EXECUTER;
-	this->uploadInterval = 5000;
+	this->uploadInterval = 6000;
 }
 
 SimpleExecuterApp::~SimpleExecuterApp()
@@ -82,6 +82,7 @@ void SimpleExecuterApp::appMsgReceivedCallback(AppMsg& msg)
 		if(executer == NULL)
 			return;
 		executer->openExecuter();
+		uploadExecuterValue(executer);
 		noticeLCDSocketStateChange(executer);
 	}else if(CMD_CLOSE_SIMPLE_EXECUTER == cmd){
 		unsigned char executerID = msg.data[1];
@@ -89,6 +90,7 @@ void SimpleExecuterApp::appMsgReceivedCallback(AppMsg& msg)
 		if(executer == NULL)
 			return;
 		executer->closeExecuter();
+		uploadExecuterValue(executer);
 		noticeLCDSocketStateChange(executer);
 	}else if(CMD_UPLOAD_ALL_DEVICE_VALUE == cmd && msg.len == 1){
 		for(int i=0; i<executerList.size();i++){

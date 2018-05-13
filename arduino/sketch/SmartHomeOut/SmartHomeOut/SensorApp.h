@@ -10,15 +10,13 @@
 
 struct SensorTask
 {
-	SensorDevice* sensor;
-	unsigned int uploadInterval;
-	bool isUploadSensorValue;
-	bool isCirCularlyUploadSensorValue;
+	SensorDevice* sensor;	//传感器
+	unsigned int uploadInterval;	//时间间隔
+	bool isCirCularlyUploadSensorValue;	//是否循环上传
 	struct pt pt;
 
 	SensorTask()
 	{
-		isUploadSensorValue = false;
 		isCirCularlyUploadSensorValue = true;
 		PT_INIT(&pt);
 	}
@@ -34,15 +32,18 @@ class SensorApp : public SampleApp
 public:
 	SensorApp();
 	~SensorApp();
+	//添加传感器任务
 	void addSensorTask(SensorDevice* sensor, unsigned int uploadInterval, bool isCirCularlyUploadSensorValue);
-	void init();
-	void run();
-	void setUploadInterval(unsigned int interval);
-	void appMsgReceivedCallback(AppMsg& msg);
+	void init();	//初始化
+	void run();		//运行
+	void appMsgReceivedCallback(AppMsg& msg);	//应用消息回调
 private:
 	LinkedList<SensorTask*> sensorTaskList;
+	//上传传感器值
 	void uploadSensorValue(SensorDevice* sensor);
+	//运行上传任务
 	int runCirCularlyUploadSensorValueTask(SensorTask* task);
+	SensorTask* findUploadTaskByID(unsigned char sensorID);
 };
 
 #endif

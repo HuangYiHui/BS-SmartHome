@@ -7,8 +7,8 @@ SensorApp::SensorApp()
 
 SensorApp::~SensorApp()
 {
-	while(sensorTaskList.size()>0){
-		SensorTask* sensorTask = sensorTaskList.remove(0);
+	while(sensorValueUploadTaskList.size()>0){
+		SensorTask* sensorTask = sensorValueUploadTaskList.remove(0);
 		delete sensorTask;
 		sensorTask = NULL;
 	}
@@ -21,14 +21,15 @@ void SensorApp::addSensorTask(SensorDevice* sensor, unsigned int uploadInterval,
 		sensorTask->sensor = sensor;
 		sensorTask->uploadInterval = uploadInterval;
 		sensorTask->isCirCularlyUploadSensorValue = isCirCularlyUploadSensorValue;
-		sensorTaskList.add(sensorTask);
+		sensorValueUploadTaskList.add(sensorTask);
 	}
 }
 
 void SensorApp::init()
 {
-	for(int i=0;i<sensorTaskList.size();i++){
-		sensorTaskList.get(i)->sensor->start();
+	for(int i=0;i<sensorValueUploadTaskList.size();i++){
+		sensorValueUploadTaskList.get(i)->sensor->start();
+		PT_INIT(&(sensorValueUploadTaskList.get(i)->pt));
 	}
 }
 
@@ -39,51 +40,47 @@ void SensorApp::appMsgReceivedCallback(AppMsg& msg)
 	
 	unsigned char cmd = msg.data[0];
 	if(CMD_UPLOAD_ALL_DEVICE_VALUE == cmd && msg.len == 1){
-		for(int i=0;i<sensorTaskList.size();i++){
-			uploadSensorValue(sensorTaskList.get(i)->sensor);
+		for(int i=0;i<sensorValueUploadTaskList.size();i++){
+			uploadSensorValue(sensorValueUploadTaskList.get(i)->sensor);
+		}
+	}else if(CMD_START_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd && msg.len == 2){
+		SensorTask* task = findUploadTaskByID(msg.data[1]);
+		if(task != NULL){
+			task->isCirCularlyUploadSensorValue = true;
+		}
+	}else if(CMD_STOP_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd && msg.len == 2){
+		SensorTask* task = findUploadTaskByID(msg.data[1]);
+		if(task != NULL){
+			task->isCirCularlyUploadSensorValue = false;
+		}
+	}else if(CMD_SET_CIRCULARLY_UPLOAD_INTERVAL == cmd && msg.len == 4){
+		SensorTask* task = findUploadTaskByID(msg.data[1]);
+		if(task != NULL){
+			unsigned int interval = Tool::bytesToInt(&(msg.data[2]));
+			if(interval > 0)
+				task->uploadInterval = interval;
+		}
+	}else if(CMD_UPLOAD_SENSOR_VALUE == cmd && msg.len == 2){
+		SensorTask* task = findUploadTaskByID(msg.data[1]);
+		if(task != NULL){
+			uploadSensorValue(task->sensor);
 		}
 	}
+}
 
-	/*
-		if(msg.len < 1)
-			return;
+
+SensorTask* SensorApp::findUploadTaskByID(unsigned char sensorID)
+{
+	if(sensorValueUploadTaskList.size()>0){
+		for(int i=0;i<sensorValueUploadTaskList.size();i++){
+			if(sensorValueUploadTaskList.get(i)->sensor->getSensorID() == sensorID){
+				return sensorValueUploadTaskList.get(i);
+			}
+		}
+	}
 	
-		unsigned char cmd = msg.data[0];
-		unsigned char sensorID;
-		if(CMD_START_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd ||
-			CMD_STOP_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd ||
-			CMD_SET_CIRCULARLY_UPLOAD_INTERVAL == cmd
-		){
-			if(msg.len < 2)
-				return;
-			sensorID = msg.data[1];
-		}
-		
-		SensorTask* task = NULL;
-		for(int i=0;i<sensorTaskList.size();i++){
-			if(sensorTaskList.get(i)->sensor->getSensorID() == sensorID){
-				task = sensorTaskList.get(i);
-				break;
-			}
-		}
-
-		if(task == NULL)
-			return;
-
-		if(CMD_START_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd){
-			task->isCirCularlyUploadSensorValue = true;
-		}else if(CMD_STOP_CIRCULARLY_UPLOAD_SENSOR_VALUE == cmd){
-			task->isCirCularlyUploadSensorValue = false;
-		}else if(CMD_SET_CIRCULARLY_UPLOAD_INTERVAL == cmd){
-			//带2个byte参数，表示unsigned int的interval数值
-			if(msg.len < 4)
-				return;
-			unsigned int value = Tool::bytesToInt(&(msg.data[2]));
-			if(value > 0){
-				task->uploadInterval = value;
-			}
-		}
-		*/
+	return NULL;
+	
 }
 
 void SensorApp::uploadSensorValue(SensorDevice* sensor)
@@ -101,8 +98,8 @@ void SensorApp::uploadSensorValue(SensorDevice* sensor)
 
 void SensorApp::run()
 {
-	for(int i=0;i<sensorTaskList.size();i++){
-		SensorTask* task = sensorTaskList.get(i);
+	for(int i=0;i<sensorValueUploadTaskList.size();i++){
+		SensorTask* task = sensorValueUploadTaskList.get(i);
 
 		if(task->isCirCularlyUploadSensorValue){
 			runCirCularlyUploadSensorValueTask(task);
@@ -110,7 +107,6 @@ void SensorApp::run()
 			PT_INIT(&(task->pt));
 		}
 	}
-
 }
 
 int SensorApp::runCirCularlyUploadSensorValueTask(SensorTask* task)

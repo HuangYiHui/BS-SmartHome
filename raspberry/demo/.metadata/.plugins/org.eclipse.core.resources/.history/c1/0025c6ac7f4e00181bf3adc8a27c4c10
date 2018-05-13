@@ -1,0 +1,45 @@
+package com.test;
+
+import java.net.URISyntaxException;
+
+import org.fusesource.mqtt.client.FutureConnection;
+import org.fusesource.mqtt.client.MQTT;
+
+import bs.pi.gateway.client.mqtt.MQTTClientCfg;
+import bs.pi.gateway.client.mqtt.MQTTMsgSend;
+import bs.pi.gateway.client.mqtt.MQTTReceiver;
+import bs.pi.gateway.client.mqtt.MQTTSender;
+import bs.pi.gateway.main.IConverter;
+import org.fusesource.mqtt.client.Callback;
+
+public class MQTTClient {
+
+	private MQTTClientCfg cfg;
+	private MQTT mqtt;
+	
+	public MQTTClient(String path) throws URISyntaxException{
+		mqtt = new MQTT();
+        mqtt.setHost(cfg.getHost(), cfg.getPort());
+        mqtt.setUserName(cfg.getUsername());
+        mqtt.setPassword(cfg.getPassword());
+	}
+
+	public void start() throws Exception {
+		try {
+			mqtt.callbackConnection().connect(new import org.fusesource.mqtt.client.Callback());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void send(MQTTMsgSend mqttMsgSend) throws Exception{
+		FutureConnection connection = mqtt.futureConnection();
+		connection.connect().await();
+        connection.publish(mqttMsgSend.getTopic(), mqttMsgSend.getMsg(), mqttMsgSend.getQos(), mqttMsgSend.isRetain());
+        connection.disconnect().await();
+	}
+	
+	public void setReceiveListener(org.fusesource.mqtt.client.Listener listener){
+		mqtt.callbackConnection().listener(listener);
+	}
+}

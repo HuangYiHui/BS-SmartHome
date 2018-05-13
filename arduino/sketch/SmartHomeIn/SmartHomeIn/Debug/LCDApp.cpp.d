@@ -29,4 +29,10 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDApp.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDAppCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SimpleExecuterAppCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DHT11Device.h \
- D:\software1\arduino-1.8.5\libraries\DHT11/DHT11.h
+ D:\software1\arduino-1.8.5\libraries\DHT11/DHT11.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-timer.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-sem.h \
+ D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h

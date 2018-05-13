@@ -14,7 +14,6 @@ public class HttpCommandArrivedMsg implements IMsg {
 	
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return IMsg.MSG_HTTP_COMMAND_ARRIVED;
 	}
 
@@ -42,6 +41,4 @@ public class HttpCommandArrivedMsg implements IMsg {
 	public void setParams(HashMap<String, Object> params) {
 		this.params = params;
 	}
-	
-	
 }

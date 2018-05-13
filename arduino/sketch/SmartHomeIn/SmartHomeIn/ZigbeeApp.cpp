@@ -97,37 +97,7 @@ void ZigbeeApp::appMsgReceivedCallback(AppMsg& msg)
 		Tool::byteArrayCopy(msg.data, 0, packet.data, 0, msg.len);
 		zigbee.send(packet);
 	}
-	/*
-	else if(CMD_RSPONSE_TO_GET_EXECUTER_STATUS == cmd){
-		if(msg.len != 7)
-			return;
-		packet.dstAddr[0] = 0x00;
-		packet.dstAddr[1] = 0x00;
-		packet.len = msg.len;
-		packet.data = new unsigned char[msg.len];
-		Tool::byteArrayCopy(msg.data, 0, packet.data, 0, msg.len);
-		zigbee.send(packet);
-	}*/
-
 }
-
-/*
-void ZigbeeApp::responseOnline(unsigned char address0,unsigned char address1)
-{
-	ZBPacketSend packet;
-	packet.dstEndpoint = ZB_PACKET_SEND_DST_ENDPOINT;
-	packet.srcEndpoint = ZB_PACKET_SEND_SRC_ENDPOINT;
-	packet.clusterID[0] = ZB_PACKET_SEND_CLUSTER_ID0;
-	packet.clusterID[1] = ZB_PACKET_SEND_CLUSTER_ID1;
-	packet.options = ZB_PACKET_SEND_OPTIONS;
-	packet.radius = ZB_PACKET_SEND_RADIUS;
-	packet.dstAddr[0] = address0;
-	packet.dstAddr[1] = address1;
-	packet.len = 2;
-	packet.data = new unsigned char[2];
-	packet.data[0] = CMD_RESPONSE_ONLINE % 256;
-	zigbee.send(packet);
-}*/
 
 void ZigbeeApp::receiveZigbeeMsg()
 {
@@ -175,6 +145,7 @@ void ZigbeeApp::receiveZigbeeMsg()
 			msg.data[0] = CMD_UPLOAD_ALL_DEVICE_VALUE;
 			sendMsg(msg, APP_ID_SIMPLE_EXECUTER);
 			sendMsg(msg, APP_ID_IN_SENSOR);
+			sendMsg(msg, APP_ID_DANGER_ALARM);
 		}
 	}
 }

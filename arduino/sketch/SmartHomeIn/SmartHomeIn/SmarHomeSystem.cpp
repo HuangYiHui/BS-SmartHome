@@ -1,7 +1,7 @@
 #include "SmartHomeSystem.h"
 
 SmartHomeSystem::SmartHomeSystem() : 
-	lcd(PIN_LCD_CS, PIN_LCD_RST, PIN_LCD_RS, PIN_LCD_SDA, PIN_LCD_SCK),
+	lcd(PIN_LCD_CS, PIN_LCD_RST, PIN_LCD_RS, PIN_LCD_SDA, PIN_LCD_SCK, PIN_LCD_LED),
 	zigbee(),
 	dht11(PIN_DHT11_DATA),
 	temperatureSensor(dht11),
@@ -31,23 +31,25 @@ void SmartHomeSystem::init()
 	Serial.begin(SERAIL_BAUD_RATE);
 	while (!Serial);
 
-	sensorApp.addSensorTask(&temperatureSensor, 6000, true);
-	sensorApp.addSensorTask(&humiditySensor, 6000, true);
-	sensorApp.addSensorTask(&heatSensor, 6000, true);
-	
+	sensorApp.addSensorTask(&temperatureSensor, 30000, true);
+	sensorApp.addSensorTask(&humiditySensor, 30000, true);
+	sensorApp.addSensorTask(&heatSensor, 30000, true);
+	sensorApp.addSensorTask(&mq2, 6000, true);
+	sensorApp.addSensorTask(&fireSensor, 6000, true);	
+
 	simpleExecuterApp.addExecuter(&socket1);
 	simpleExecuterApp.addExecuter(&socket2);
 	simpleExecuterApp.addExecuter(&socket3);
 
 	installApp(&lcdApp);
 	installApp(&zigbeeApp);
-	installApp(&thhUpdateApp);
 	installApp(&sensorApp);
-
+	
 	installApp(&simpleExecuterApp);
 	installApp(&dangerAlarmApp);
 	installApp(&irRemoteApp);
-
+	installApp(&thhUpdateApp);
+	
 	SampleSystem::init();
 
 //	Serial.print(F("inited memory = "));

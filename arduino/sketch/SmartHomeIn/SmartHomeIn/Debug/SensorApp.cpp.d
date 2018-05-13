@@ -30,4 +30,5 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorApp.cpp.o: \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-timer.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt-sem.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
- D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h
+ D:\software1\arduino-1.8.5\libraries\LinkedList/LinkedList.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDAppCmd.h

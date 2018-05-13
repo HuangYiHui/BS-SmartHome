@@ -22,6 +22,10 @@
 		</list>
 	</section>
 	<section name="NewWizardAction">
+		<item value="net.java.amateras.umleditor.wizard1" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="net.java.amateras.umleditor.category"/>
+		</list>
 	</section>
 	<section name="FileSystemExportWizard">
 		<item value="false" key="WizardFileSystemResourceExportPage1.STORE_OVERWRITE_EXISTING_FILES_ID"/>

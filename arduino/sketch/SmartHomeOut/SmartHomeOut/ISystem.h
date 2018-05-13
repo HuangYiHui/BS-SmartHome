@@ -10,12 +10,11 @@
 class ISystem
 {
 public:
-	virtual ~ISystem(){}
-	virtual void init() = 0;
-	virtual void start() = 0;
-	virtual void stop() = 0;
-	virtual void reset() = 0;
-	virtual void installApp(IApp* app) = 0;
-	virtual void sendAppMsg(AppMsg& msg, unsigned char appID) = 0;
+	virtual void init() = 0;	//初始化
+	virtual void start() = 0;	//开始运行
+	virtual void stop() = 0;	//停止运行
+	virtual void reset() = 0;	//重置系统
+	virtual void installApp(IApp* app) = 0;	//安装应用
+	virtual void sendAppMsg(AppMsg& msg, unsigned char appID) = 0;	//发送应用消息
 };
 #endif

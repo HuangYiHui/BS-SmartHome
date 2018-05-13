@@ -10,7 +10,9 @@ protected:
 
 public:
 	SensorDevice(unsigned char sensorID) : sensorID(sensorID) {}
+	//获取传感器ID
 	unsigned char getSensorID() {return sensorID;}
+	//获取传感器值
 	virtual float getSensorValue() = 0;
 };
 

@@ -16,11 +16,12 @@ import bs.pi.gateway.msg.SendMsgToAppMsg;
 import bs.pi.gateway.msg.SimpleMsg;
 import bs.pi.gateway.msg.UploadSensorValueToHttpServerMsg;
 
+//消息接收与处理为两个线程，采用了消费者模式
 public class MyProcessor implements IProcessor {
 
 	private ArrayList<ISender> senderList;
 	private ArrayList<IReceiver> receiverList;
-	private ArrayList<IMsg> msgList;
+	private ArrayList<IMsg> msgList;	//消息队列
 	private Thread processThread = new Thread(new Runnable() {
 		@Override
 		public void run() {
@@ -41,6 +42,7 @@ public class MyProcessor implements IProcessor {
 		this.senderList = senderList;
 	}
 
+	//消息处理，消息到来的时候放进消息队列，唤醒等待的线程
 	@Override
 	public void handleEvent(IMsg msg) {
 		if(msg != null){
@@ -63,6 +65,7 @@ public class MyProcessor implements IProcessor {
 		processThread.interrupt();
 	}
 	
+	//取出下一条消息
 	private IMsg nextMsg(){
 		IMsg msg = null;
 		synchronized (msgList) {
@@ -80,6 +83,7 @@ public class MyProcessor implements IProcessor {
 		return msg;
 	}
 	
+	//消息处理逻辑
 	private void process(IMsg msg){
 		System.out.println(msg.getName());
 		if(IMsg.MSG_QUERY_ZIGBEE_IS_ONLINE.equals(msg.getName())){
@@ -89,16 +93,27 @@ public class MyProcessor implements IProcessor {
 				responseToZigbeeOnlineQueryMsg.setSrcAddr(queryZigbeeIsOnlineMsg.getSrcAddr());
 				send(ISender.NAME_ZIGBEE_SENDER, responseToZigbeeOnlineQueryMsg);
 			}
+		}else if(IMsg.MSG_UPLAOD_ALL_DEVICE_VALUE.equals(msg.getName())){
+			send(ISender.NAME_ZIGBEE_SENDER, msg);
+		}else if(IMsg.MSG_OUT_SENSOR_VALUES_COMING.equals(msg.getName())){
+			send(ISender.NAME_ZIGBEE_SENDER, msg);
+		}else if(IMsg.MSG_SEND_MSG_TO_APP.equals(msg.getName())){
+			send(ISender.NAME_ZIGBEE_SENDER, msg);
+		}else if(IMsg.MSG_HTTP_COMMAND_ARRIVED.equals(msg.getName())){
+			HttpCommandArrivedMsg httpCommandReceivedMsg = (HttpCommandArrivedMsg) msg;
+			if(httpCommandReceivedMsg.isSuccess()){
+				//删除平台命令
+				send(ISender.NAME_HTTP_SENDER, new SimpleMsg(IMsg.MSG_DELETE_HTTP_COMMAND));
+				send(ISender.NAME_ZIGBEE_SENDER, msg);
+			}
 		}else if(IMsg.MSG_UPLAOD_SENSOR_VALUE_TO_HTTP_SERVER.equals(msg.getName())){
 			send(ISender.NAME_HTTP_SENDER, msg);
 		}else if(IMsg.MSG_UPLAOD_EXECUTER_VALUE_TO_HTTP_SERVER.equals(msg.getName())){
 			send(ISender.NAME_HTTP_SENDER, msg);
-		}else if(IMsg.MSG_SEND_MSG_TO_APP.equals(msg.getName())){
-			send(ISender.NAME_ZIGBEE_SENDER, msg);
+		}else if(IMsg.MSG_RESPONSE_TO_HTTP_SERVER_ALIVE.equals(msg.getName())){
+			send(ISender.NAME_HTTP_SENDER, msg);
 		}else if(IMsg.MSG_OTHER_ZIGBEE_CONNECTED.equals(msg.getName())){
 			//send(ISender.NAME_ZIGBEE_SENDER, msg);
-		}else if(IMsg.MSG_OUT_SENSOR_VALUES_COMING.equals(msg.getName())){
-			send(ISender.NAME_ZIGBEE_SENDER, msg);
 		}else if(IMsg.MSG_GET_HTTP_COMMAND.equals(msg.getName())){
 			if(receiverList != null && receiverList.size()>0){
 				for(IReceiver receiver : receiverList){
@@ -107,20 +122,10 @@ public class MyProcessor implements IProcessor {
 					}
 				}
 			}
-		}else if(IMsg.MSG_HTTP_COMMAND_ARRIVED.equals(msg.getName())){
-			HttpCommandArrivedMsg httpCommandReceivedMsg = (HttpCommandArrivedMsg) msg;
-			if(httpCommandReceivedMsg.isSuccess()){
-				//删除平台命令
-				send(ISender.NAME_HTTP_SENDER, new SimpleMsg(IMsg.MSG_DELETE_HTTP_COMMAND));
-				send(ISender.NAME_ZIGBEE_SENDER, msg);
-			}
-		}else if(IMsg.MSG_UPLAOD_ALL_DEVICE_VALUE.equals(msg.getName())){
-			send(ISender.NAME_ZIGBEE_SENDER, msg);
-		}else if(IMsg.MSG_RESPONSE_TO_HTTP_SERVER_ALIVE.equals(msg.getName())){
-			send(ISender.NAME_HTTP_SENDER, msg);
 		}
 	}
 	
+	//让发送器发送消息
 	private void send(String senderName, IMsg msg){
 		for(ISender sender : senderList){
 			if(senderName.equals(sender.getName())){

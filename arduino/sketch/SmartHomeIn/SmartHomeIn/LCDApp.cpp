@@ -17,12 +17,25 @@ LCDApp::LCDApp(LCDDevice& lcd) : lcd(lcd)
 	isSocket1On = false;
 	isSocket2On = false;
 	isSocket3On = false;
+	isDanger = false;
 }
 
 void LCDApp::init()
 {
 	lcd.start();
 	lcd.setFont(u8g_font_profont11);
+	PT_INIT(&ptDanger);
+	showWelcome();
+}
+
+void LCDApp::showWelcome()
+{
+	lcd.firstPage();
+	do {
+		lcd.drawStr(42, 15, "Welcome");
+		lcd.drawStr(15, 36, ">>> Smar");
+		lcd.drawStr(61, 36, "tHome <<<");
+	}while(lcd.nextPage());
 }
 
 void LCDApp::printFloat(unsigned char x, unsigned char y, float value)
@@ -38,6 +51,8 @@ void LCDApp::printFloat(unsigned char x, unsigned char y, float value)
 
 	lcd.print(abs(value), 1);
 }
+
+
 
 void LCDApp::refreshMainPage()
 {
@@ -125,6 +140,17 @@ void LCDApp::refreshMainPage()
 	} while ( lcd.nextPage() );
 }
 
+void LCDApp::refreshDangerAlarm()
+{
+	lcd.firstPage();
+	do
+	{
+		lcd.drawXBMP(40,8,48,48,dangerIcon);
+
+	} while ( lcd.nextPage() );
+}
+
+
 void LCDApp::appMsgReceivedCallback(AppMsg& msg)
 {
 	if(msg.len < 1)
@@ -178,7 +204,49 @@ void LCDApp::appMsgReceivedCallback(AppMsg& msg)
 			else if(msg.data[2] == FLAG_SOCKET_OFF)
 				isSocket3On = false;
 		}
+	}else if(CMD_NOTICE_IS_DANGER == cmd){
+
+		if(msg.len != 2)
+			return;
+		if(msg.data[1] == FLAG_DANGER){
+			isDanger = true;
+			PT_INIT(&ptDanger);
+			runDangerAlarmTask();
+		}
+		else if(msg.data[1] == FLAG_NO_DANGER){
+			PT_INIT(&ptDanger);
+			isDanger = false;
+		}
 	}
 
-	refreshMainPage();
+	show();
+}
+
+void LCDApp::run()
+{
+	if(isDanger){
+		runDangerAlarmTask();
+	}
+}
+
+void LCDApp::show()
+{
+	if(isDanger){
+		refreshDangerAlarm();
+	}else{
+		lcd.darkScreen();
+		refreshMainPage();
+	}
+}
+
+int LCDApp::runDangerAlarmTask()
+{
+	PT_BEGIN(&ptDanger);
+	while(true){
+		lcd.brightScreen();
+		PT_TIMER_DELAY(&ptDanger, 300);
+		lcd.darkScreen();
+		PT_TIMER_DELAY(&ptDanger, 300);
+	}
+	PT_END(&ptDanger);
 }

@@ -43,6 +43,7 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SmarHomeSystem.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\ZigbeeAppCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DeviceCmd.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDAppCmd.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DangerAlarmAppCmd.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/pt.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc.h \
  D:\software1\arduino-1.8.5\libraries\ProtoThreads/lc-addrlabels.h \

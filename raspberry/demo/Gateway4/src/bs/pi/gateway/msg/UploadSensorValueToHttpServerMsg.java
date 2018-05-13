@@ -13,6 +13,8 @@ public class UploadSensorValueToHttpServerMsg implements IMsg {
 	public final static short SENSOR_ID_SOLID_HUMIDITY 	= 23;
 	public final static short SENSOR_ID_DUST_DENSITY 	= 24;
 	public final static short SENSOR_ID_LIGHT_INTENSITY = 25;
+	public final static short SENSOR_ID_FIRE 			= 37;
+	public final static short SENSOR_ID_HARMFUL_GAS 	= 38;
 	
 	private short sensorID;
 	private float sensorValue;

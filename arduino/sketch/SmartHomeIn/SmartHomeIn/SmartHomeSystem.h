@@ -46,12 +46,11 @@ private:
 	
 	ZigbeeApp zigbeeApp;
 	LCDApp lcdApp;
-	THHUpdateApp thhUpdateApp;
 	SensorApp sensorApp;
 	SimpleExecuterApp simpleExecuterApp;
 	DangerAlarmApp dangerAlarmApp;
 	IRRemoteApp irRemoteApp;
-	
+	THHUpdateApp thhUpdateApp;
 };
 
 #endif

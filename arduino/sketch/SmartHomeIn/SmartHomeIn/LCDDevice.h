@@ -13,7 +13,12 @@ public:
 		unsigned char RST,
 		unsigned char RS,
 		unsigned char SDA,
-		unsigned char SCK);
+		unsigned char SCK, 
+		unsigned char ledPin);
+	void brightScreen();
+	void darkScreen();
 	void start();
+private:
+	unsigned char ledPin;
 };
 #endif

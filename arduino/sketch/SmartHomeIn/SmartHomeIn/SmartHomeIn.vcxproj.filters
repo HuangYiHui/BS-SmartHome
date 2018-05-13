@@ -95,9 +95,6 @@
     <ClInclude Include="THHUpdateApp.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="DeviceCmd.h">
-      <Filter>app\cmd</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="device">

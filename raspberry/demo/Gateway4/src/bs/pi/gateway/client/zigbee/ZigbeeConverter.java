@@ -64,9 +64,9 @@ public class ZigbeeConverter implements IConverter {
 	
 	/******SimpleExecuterApp 命令******/
 	//开启执行器命令，格式："1byte命令头 + 1byte执行器ID
-	private final static byte CMD_OPEN_SIMPLE_EXECUTER = 0x31;
+	private final static byte CMD_OPEN_SIMPLE_EXECUTER = 0x01;
 	//关闭执行器命令，格式：1byte命令头 + 1byte执行器ID
-	private final static byte CMD_CLOSE_SIMPLE_EXECUTER = 0x32;
+	private final static byte CMD_CLOSE_SIMPLE_EXECUTER = 0x02;
 	
 	private byte[] dstAddr1;
 	private byte[] dstAddr2;
@@ -198,9 +198,12 @@ public class ZigbeeConverter implements IConverter {
 				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_DUST_DENSITY);
 			else if(deviceID == SENSOR_ID_LIGHT_INTENSITY)
 				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_LIGHT_INTENSITY);
-			else
+			else if(deviceID == SENSOR_ID_FIRE){
+				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_FIRE);
+			}else if(deviceID == SENSOR_ID_HARMFUL_GAS){
+				msg.setSensorID(UploadSensorValueToHttpServerMsg.SENSOR_ID_HARMFUL_GAS);
+			}else
 				return null;
-			
 			return msg;
 		}else if(UPLOAD_DATA_INDEX_EXECUTER_VALUE == uploadIndex && data.length == 3){
 			byte executerID = data[1];
@@ -283,16 +286,19 @@ public class ZigbeeConverter implements IConverter {
 			return zigbeeMsgSend;
 		}else if(IMsg.MSG_HTTP_COMMAND_ARRIVED.equals(msg.getName())){
 			HttpCommandArrivedMsg httpCmd = (HttpCommandArrivedMsg) msg;
-			if(HttpCommandArrivedMsg.CMD_ON_SWITCH.equals(httpCmd.getCmd())){
+			if(HttpCommandArrivedMsg.CMD_ON_SWITCH.equals(httpCmd.getCmd()) ||
+					HttpCommandArrivedMsg.CMD_OFF_SWITCH.equals(httpCmd.getCmd())){
 				byte[]dstAddr = getDstAddr(APP_ID_SIMPLE_EXECUTER);
 				if(dstAddr == null)
 					return null;
-				
 				zigbeeMsgSend.setDstAddr(dstAddr);
 				byte data[] = new byte[4];
 				data[0] = CMD_SEND_MSG_TO_APP;
 				data[1] = APP_ID_SIMPLE_EXECUTER;
 				data[2] = CMD_OPEN_SIMPLE_EXECUTER;
+				if(HttpCommandArrivedMsg.CMD_OFF_SWITCH.equals(httpCmd.getCmd())){
+					data[2] = CMD_CLOSE_SIMPLE_EXECUTER;
+				}
 				String executerIDStr = (String) httpCmd.getParams().get("sensorId");
 				int sensorID = Integer.parseInt(executerIDStr);
 				if(sensorID == 30)
@@ -302,7 +308,7 @@ public class ZigbeeConverter implements IConverter {
 				else if(sensorID == 35)
 					data[3] = EXECUTER_ID_SOCKET3;
 				
-				zigbeeMsgSend.setData(data); 
+				zigbeeMsgSend.setData(data);
 				return zigbeeMsgSend;
 			}
 		}

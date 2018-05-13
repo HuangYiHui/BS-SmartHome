@@ -24,4 +24,6 @@ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DangerAlarmApp.cpp.o: \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SimpleSensorDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SensorDevice.h \
  D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\IDevice.h \
- D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SimpleExecuterDevice.h
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\SimpleExecuterDevice.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\LCDAppCmd.h \
+ D:\software\Temp\VMBuilds\SmartHomeIn\uno\Debug\DangerAlarmAppCmd.h

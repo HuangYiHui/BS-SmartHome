@@ -7,6 +7,7 @@
 #include "SystemCfg.h"
 #include "ZigbeeAppCmd.h"
 #include "LCDAppCmd.h"
+#include "DangerAlarmAppCmd.h"
 #include "pt.h"
 
 #define ZB_PACKET_SEND_DST_ENDPOINT	0x55
@@ -20,18 +21,17 @@ class ZigbeeApp : public SampleApp
 {
 public:
 	ZigbeeApp(ZigbeeDevice& zigbee);
-	void init();
-	void run();
-	void appMsgReceivedCallback(AppMsg& msg);
+	void init();	//初始化
+	void run();		//运行
+	void appMsgReceivedCallback(AppMsg& msg);	//应用消息回调
 private:
 	ZigbeeDevice& zigbee;
 	struct pt ptQueryIsOnline;
 	bool isOnline;
-	void receiveZigbeeMsg();
-	int runQueryIsOnlineTask();
-	void queryIsZigbeeOnline();
-	void noticeLCDIsOnline(bool isOnline);
-	void responseOnline(unsigned char address0,unsigned char address1);
+	void receiveZigbeeMsg();	//接收zigbee消息
+	int runQueryIsOnlineTask();	//运行查询是否在线任务
+	void queryIsZigbeeOnline();	//运行查询是否
+	void noticeLCDIsOnline(bool isOnline);	//同时LCD是否在线
 };
 
 #endif

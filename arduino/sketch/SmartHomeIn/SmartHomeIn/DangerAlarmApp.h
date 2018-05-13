@@ -5,6 +5,8 @@
 #include "SampleApp.h"
 #include "SimpleSensorDevice.h"
 #include "SimpleExecuterDevice.h"
+#include "LCDAppCmd.h"
+#include "DangerAlarmAppCmd.h"
 
 class DangerAlarmApp : public SampleApp
 {
@@ -13,8 +15,11 @@ public:
 	void init();
 	void run();
 private:
+	bool lastStateDanger;
 	SimpleSensorDevice& fireSensor;
 	SimpleSensorDevice& harmfulGasSensor;
 	SimpleExecuterDevice& alarm;
+	void noticeLCDIsDanger(bool isDanger);
+	void uploadSensorValue(SimpleSensorDevice& sensor);
 };
 #endif
